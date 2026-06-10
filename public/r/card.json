@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "title": "Card",
+  "description": "A card with header, content and footer sections.",
+  "registryDependencies": [
+    "swamimalode07/rare-ui/utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/card.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\n        \"rounded-xl border bg-card text-card-foreground shadow-sm\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cn(\"flex flex-col gap-1.5 p-6\", className)} {...props} />;\n}\n\nfunction CardTitle({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\"font-semibold leading-none tracking-tight\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction CardDescription({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div className={cn(\"text-sm text-muted-foreground\", className)} {...props} />\n  );\n}\n\nfunction CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cn(\"p-6 pt-0\", className)} {...props} />;\n}\n\nfunction CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cn(\"flex items-center p-6 pt-0\", className)} {...props} />;\n}\n\nexport { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
