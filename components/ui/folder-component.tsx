@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { motion } from "motion/react"
 
 const themes = {
@@ -42,26 +42,48 @@ const themes = {
     },
 } as const
 
+const sizeScales = {
+    sm: 0.65,
+    md: 1,
+    lg: 1.35,
+} as const
+
 interface FolderComponentProps {
     color?: "black" | "white" | "blue"
+    size?: "sm" | "md" | "lg"
 }
 
-const FolderComponent = ({ color = "black" }: FolderComponentProps) => {
+const BASE_WIDTH = 321
+const BASE_HEIGHT = 270
+
+const FolderComponent = ({ color = "black", size = "md" }: FolderComponentProps) => {
     const theme = themes[color]
+    const scale = sizeScales[size]
     const [isHovered, setIsHovered] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <div
-            className='relative w-full h-full flex items-center justify-center'
-            style={{ perspective: 800 }}
-        >
+        <div className='relative w-full h-full flex items-center justify-center'>
             <div
-                className='relative cursor-pointer '
-                style={{ width: 321, height: 270, perspective: 800 }}
+                className='relative cursor-pointer select-none'
+                style={{
+                    width: BASE_WIDTH * scale,
+                    height: BASE_HEIGHT * scale,
+                    touchAction: "manipulation",
+                    WebkitTapHighlightColor: "transparent",
+                }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => { setIsHovered(false); setIsOpen(false) }}
                 onClick={() => setIsOpen(o => !o)}
+            >
+            <div
+                className='absolute top-1/2 left-1/2'
+                style={{
+                    width: BASE_WIDTH,
+                    height: BASE_HEIGHT,
+                    transform: `translate(-50%, -50%) scale(${scale})`,
+                    perspective: 800 * scale,
+                }}
             >
             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                 <svg width="321" height="270" viewBox="0 0 321 270" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -158,6 +180,7 @@ const FolderComponent = ({ color = "black" }: FolderComponentProps) => {
                     </defs>
                 </svg>
             </motion.div>
+            </div>
             </div>
         </div>
     )
