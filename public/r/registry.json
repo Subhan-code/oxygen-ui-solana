@@ -17,66 +17,6 @@
       ]
     },
     {
-      "name": "button",
-      "type": "registry:ui",
-      "title": "Button",
-      "description": "A button with variants, sizes and asChild composition.",
-      "dependencies": ["class-variance-authority", "@radix-ui/react-slot"],
-      "registryDependencies": ["swamimalode07/rare-ui/utils"],
-      "files": [
-        {
-          "path": "components/ui/button.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "card",
-      "type": "registry:ui",
-      "title": "Card",
-      "description": "A card with header, content and footer sections.",
-      "registryDependencies": ["swamimalode07/rare-ui/utils"],
-      "files": [
-        {
-          "path": "components/ui/card.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "shimmer-button",
-      "type": "registry:ui",
-      "title": "Shimmer Button",
-      "description": "A pill button with a looping shimmer highlight.",
-      "registryDependencies": ["swamimalode07/rare-ui/utils"],
-      "css": {
-        "@keyframes shimmer": {
-          "100%": {
-            "transform": "translateX(100%)"
-          }
-        }
-      },
-      "files": [
-        {
-          "path": "components/ui/shimmer-button.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "spotlight-card",
-      "type": "registry:ui",
-      "title": "Spotlight Card",
-      "description": "A card with a mouse-tracking spotlight glow.",
-      "registryDependencies": ["swamimalode07/rare-ui/utils"],
-      "files": [
-        {
-          "path": "components/ui/spotlight-card.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "folder-component",
       "type": "registry:ui",
       "title": "Folder Component",
