@@ -1,31 +1,19 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { motion, useAnimate } from "motion/react"
 import { cn } from "@/lib/utils"
-
-const components = [
-  { id: 0, name: "Folder component" },
-  { id: 1, name: "Button component" },
-  { id: 2, name: "Input component" },
-  { id: 3, name: "Select component" },
-  { id: 4, name: "Checkbox component" },
-  { id: 5, name: "Radio component" },
-  { id: 6, name: "Switch component" },
-  { id: 7, name: "Textarea component" },
-  { id: 8, name: "Tooltip component" },
-  { id: 9, name: "Popover component" },
-  { id: 10, name: "Menu component" },
-  { id: 11, name: "Dialog component" },
-  { id: 12, name: "Tooltip component" },
-  { id: 13, name: "Popover component" },
-  { id: 14, name: "Menu component" },
-  { id: 15, name: "Dialog component" },
-  { id: 16, name: "Tooltip component" },
-]
+import { components } from "@/lib/components"
 
 const SidebarList = () => {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const pathname = usePathname()
+  const activeIndex = Math.max(
+    0,
+    components.findIndex((c) => pathname === c.href),
+  )
+
   const [dot, animate] = useAnimate<HTMLSpanElement>()
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
   const prevY = useRef<number | null>(null)
@@ -34,9 +22,8 @@ const SidebarList = () => {
     const el = itemRefs.current[activeIndex]
     if (!el || !dot.current) return
 
-    const toY = el.offsetTop + el.offsetHeight / 2 - 3 // center dot on the item
+    const toY = el.offsetTop + el.offsetHeight / 2 - 3 
 
-    // First placement: snap into position, no hop.
     if (prevY.current === null) {
       animate(dot.current, { x: 0, y: toY }, { duration: 0 })
       prevY.current = toY
@@ -48,14 +35,14 @@ const SidebarList = () => {
     prevY.current = toY
     if (delta === 0) return
 
-    const radius = Math.min(Math.abs(delta) / 2, 8) // how far it bows left
+    const radius = Math.min(Math.abs(delta) / 2, 8) 
     const steps = 20
     const x: number[] = []
     const y: number[] = []
     for (let i = 0; i <= steps; i++) {
       const t = i / steps
-      y.push(fromY + (delta * (1 - Math.cos(Math.PI * t))) / 2) // eased slide
-      x.push(-radius * Math.sin(Math.PI * t)) // out to the left and back
+      y.push(fromY + (delta * (1 - Math.cos(Math.PI * t))) / 2)
+      x.push(-radius * Math.sin(Math.PI * t)) 
     }
 
     animate(dot.current, { x, y }, { duration: 0.25, ease: "easeOut" })
@@ -74,25 +61,25 @@ const SidebarList = () => {
 
         return (
           <li
-            key={component.id}
+            key={component.href}
             ref={(el) => {
               itemRefs.current[i] = el
             }}
           >
-            <motion.button
-              type="button"
-              onClick={() => setActiveIndex(i)}
-              whileHover={{ x: 8}}
-              transition={{ duration: 0 }}
-              className={cn(
-                "flex w-full items-center rounded-lg p-1 text-left text-sm transition-all duration-200",
-                isActive
-                  ? "text-foreground"
-                  : "text-foreground/55",
-              )}
+            <motion.div
+              whileHover={{ x: 8 }}
+              transition={{ type: "spring", stiffness: 500, damping: 32, mass: 0.5 }}
             >
-              {component.name}
-            </motion.button>
+              <Link
+                href={component.href}
+                className={cn(
+                  "flex w-full items-center rounded-lg p-1 text-left text-sm transition-colors duration-200",
+                  isActive ? "text-foreground" : "text-foreground/55",
+                )}
+              >
+                {component.name}
+              </Link>
+            </motion.div>
           </li>
         )
       })}

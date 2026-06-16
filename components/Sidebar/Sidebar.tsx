@@ -4,7 +4,6 @@ import { useState } from "react"
 import { motion } from "motion/react"
 import SidebarList from "./SidebarList"
 
-// w-80 (320px) + left m-4 (16px): how far to slide so the panel clears the edge.
 const PANEL_SHIFT = 336
 
 const OpenIcon = () => (
@@ -29,13 +28,11 @@ const Sidebar = () => {
 
     return (
         <div className="relative">
-            {/* Pinned at the panel's icon spot (m-4 + p-4 = 32px). Never moves — only
-          the icon inside swaps when the panel slides away. */}
             <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
                 aria-label={open ? "Close sidebar" : "Open sidebar"}
-                className="absolute top-4 left-8 z-10 cursor-pointer bg-neutral-800 rounded-lg p-2"
+                className="absolute top-4 left-4 z-10 cursor-pointer bg-neutral-800 rounded-lg p-2"
             >
                 {open ? <OpenIcon /> : <ClosedIcon />}
             </button>
@@ -43,7 +40,7 @@ const Sidebar = () => {
             <motion.div
                 animate={{ x: open ? 0 : -PANEL_SHIFT }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="bg-neutral-900 w-75 h-[calc(100vh-2rem)] m-4 p-4 rounded-2xl"
+                className="bg-neutral-900 w-75 h-[calc(100vh-2rem)] p-4 pl-6 rounded-2xl"
             >
                 <h2 className="mt-18">Components</h2>
                 <div className="mt-4">
