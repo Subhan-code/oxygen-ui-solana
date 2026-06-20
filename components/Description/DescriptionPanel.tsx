@@ -39,10 +39,10 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
   }
 
   return (
-    <div className="absolute right-0 top-0 z-40 h-full">
+    <div className="pointer-events-none absolute right-0 top-0 z-40 h-full">
       {/* Pinned cluster — mirrors the sidebar toggle on the opposite edge.
           Get-code sits to the right of the description toggle. */}
-      <div className="absolute top-4 right-4 z-50 flex items-center gap-2 rounded-2xl bg-neutral-900 p-2 shadow-sm shadow-black">
+      <div className="pointer-events-auto absolute top-4 right-4 z-50 flex items-center gap-2 rounded-2xl bg-neutral-900 p-2 shadow-sm shadow-black">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -68,7 +68,7 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
         initial={false}
         animate={{ x: open ? 0 : PANEL_SHIFT }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="relative flex h-full w-140 flex-col gap-4 overflow-hidden rounded-2xl bg-black p-4 pl-6"
+        className="pointer-events-auto relative flex h-full w-140 flex-col gap-4 overflow-hidden rounded-2xl bg-black p-4 pl-6"
       >
         <div className="mt-18">
           <h2 className="text-lg font-semibold">{item?.name ?? "Component"}</h2>

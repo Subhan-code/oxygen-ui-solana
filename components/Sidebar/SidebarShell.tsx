@@ -14,7 +14,7 @@ const INFO_SPACE = 576 // 560px (w-140) description panel + gap
 // either side's slide animation.
 export default function SidebarShell({ children }: { children: React.ReactNode }) {
   const [navOpen, setNavOpen] = useState(true)
-  const [infoOpen, setInfoOpen] = useState(true)
+  const [infoOpen, setInfoOpen] = useState(false)
 
   return (
     <div className="relative h-full">

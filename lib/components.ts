@@ -26,6 +26,14 @@ export const components: ComponentItem[] = [
       "An animated folder whose cards fan out on hover and lift open on click, with a 3D-tilted flap. Supports color and size (sm/md/lg) props.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/folder-component.tsx`,
   },
+  {
+    name: "Bounce sidebar",
+    href: "/components/bouncesidebar",
+    registry: "bounce-sidebar",
+    description:
+      "A vertical nav whose active marker springs and bounces between items. Pass your own items and dot color; controlled or uncontrolled.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/bounce-sidebar.tsx`,
+  },
   { name: "Button component", href: "/components/buttoncomponent" },
   { name: "Input component", href: "/components/inputcomponent" },
   { name: "Select component", href: "/components/selectcomponent" },
