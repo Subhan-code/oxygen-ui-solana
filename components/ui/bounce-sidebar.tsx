@@ -28,13 +28,21 @@ export function BounceSidebar({
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
   const prevY = useRef<number | null>(null)
 
+
+  const [dotSize, setDotSize] = useState(6)
+  useEffect(() => {
+    const dpr = window.devicePixelRatio || 1
+    setDotSize(Math.round(6 * dpr) / dpr)
+  }, [])
+
   useEffect(() => {
     const el = itemRefs.current[activeIndex]
     if (!el || !dot.current) return
 
-    // Round to a whole pixel so the tiny dot doesn't rest on a sub-pixel
-    // boundary, which anti-aliases it into a fuzzy, non-circular blob.
-    const toY = Math.round(el.offsetTop + el.offsetHeight / 2 - 3)
+
+    const dpr = window.devicePixelRatio || 1
+    const toY =
+      Math.round((el.offsetTop + el.offsetHeight / 2 - dotSize / 2) * dpr) / dpr
 
     if (prevY.current === null) {
       animate(dot.current, { x: 0, y: toY }, { duration: 0 })
@@ -58,7 +66,7 @@ export function BounceSidebar({
     }
 
     animate(dot.current, { x, y }, { duration: 0.25, ease: "easeOut" })
-  }, [activeIndex, animate, dot])
+  }, [activeIndex, animate, dot, dotSize])
 
   const select = (index: number) => {
     if (value === undefined) setInternalValue(index)
@@ -70,8 +78,8 @@ export function BounceSidebar({
       <span
         ref={dot}
         aria-hidden
-        className="absolute left-2 top-0 h-1.5 w-1.5 rounded-full"
-        style={{ backgroundColor: dotColor }}
+        className="absolute left-2 top-0 rounded-full"
+        style={{ width: dotSize, height: dotSize, backgroundColor: dotColor }}
       />
 
       {items.map((item, index) => (
@@ -87,7 +95,7 @@ export function BounceSidebar({
             whileHover={{ x: 8 }}
             transition={{ type: "spring", stiffness: 500, damping: 32, mass: 0.5 }}
             className={cn(
-              "flex w-full items-center rounded-lg p-1 text-left text-sm transition-colors duration-200",
+              "flex w-full cursor-pointer items-center rounded-lg p-1 text-left text-sm transition-colors duration-200",
               index === activeIndex ? "text-foreground" : "text-foreground/55",
             )}
           >
