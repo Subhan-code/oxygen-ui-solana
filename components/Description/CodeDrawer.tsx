@@ -11,15 +11,11 @@ type CodeDrawerProps = {
   item?: ComponentItem
 }
 
-// A full-height bottom sheet that slides up over the description panel with the
-// component's source. Drag the handle/header down to dismiss; the code body
-// scrolls freely.
 export default function CodeDrawer({ open, onClose, item }: CodeDrawerProps) {
   const dragControls = useDragControls()
   const [code, setCode] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
-  // Fetch the source on demand whenever the drawer opens for a component.
   useEffect(() => {
     if (!open || !item?.registry) return
     let cancelled = false
@@ -50,7 +46,6 @@ export default function CodeDrawer({ open, onClose, item }: CodeDrawerProps) {
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className="absolute inset-x-0 bottom-0 z-10 flex h-full flex-col rounded-2xl bg-neutral-900 shadow-2xl shadow-black"
     >
-      {/* Only the handle/header starts a drag, so the code body stays scrollable. */}
       <div
         onPointerDown={(event) => dragControls.start(event)}
         className="shrink-0 cursor-grab touch-none px-4 pb-2 pt-3 active:cursor-grabbing"

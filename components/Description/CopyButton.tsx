@@ -15,7 +15,6 @@ const CopyIcon = () => (
   </svg>
 )
 
-// Copies the given text and briefly confirms with a checkmark.
 const CopyButton = ({ value }: { value: string }) => {
   const [copied, setCopied] = useState(false)
 
@@ -24,9 +23,7 @@ const CopyButton = ({ value }: { value: string }) => {
       await navigator.clipboard.writeText(value)
       setCopied(true)
       setTimeout(() => setCopied(false), 1500)
-    } catch {
-      // Clipboard unavailable (e.g. insecure context) — fail quietly.
-    }
+    } catch {}
   }
 
   return (

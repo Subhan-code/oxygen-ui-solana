@@ -46,7 +46,7 @@ const Sidebar = ({
         initial={false}
         animate={{ x: open ? 0 : -PANEL_SHIFT }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="pointer-events-auto h-full w-75 rounded-2xl bg-neutral-900 p-4 pl-6"
+        className="pointer-events-auto h-full w-75 rounded-2xl bg-[#121212] p-4 pl-6"
       >
         <h2 className="mt-18">Components</h2>
         <div className="mt-4">
