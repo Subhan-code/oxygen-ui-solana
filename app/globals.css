@@ -145,7 +145,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter), Inter, sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-serif);
 
@@ -169,7 +169,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }
 
