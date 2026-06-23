@@ -189,3 +189,12 @@
   background-color: rgb(252 76 1 / 10%);
   color: #fc4c01;
 }
+
+/* Speed up Vaul's default 500ms animation so the drawer feels cohesive */
+[vaul-drawer] {
+  transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+[vaul-overlay] {
+  transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
