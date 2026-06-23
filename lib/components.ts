@@ -3,6 +3,15 @@ export type Dependency = {
   icon?: string;
 };
 
+export type ComponentProp = {
+  name: string;
+  type: string;
+  default?: string;
+  required?: boolean;
+  options?: string[];
+  description: string;
+};
+
 export type ComponentItem = {
   name: string;
   href: string;
@@ -12,6 +21,7 @@ export type ComponentItem = {
   dependencies?: Dependency[];
   interaction?: string;
   usage?: string;
+  props?: ComponentProp[];
 };
 
 export const REGISTRY_HOMEPAGE = "https://github.com/swamimalode07/rare-ui";
@@ -42,10 +52,28 @@ export const components: ComponentItem[] = [
     dependencies: [{ name: "motion" }],
     interaction:
       "Hover to fan the cards out, then click to lift the folder open.",
+    props: [
+      {
+        name: "color",
+        type: '"black" | "white" | "blue"',
+        default: '"black"',
+        options: ["black", "white", "blue"],
+        description:
+          "Color theme of the folder, flap, and cards. Each theme sets matching fills, strokes, and inner shadows.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        default: '"md"',
+        options: ["sm", "md", "lg"],
+        description:
+          "Overall scale of the folder. Maps to 0.65× (sm), 1× (md), and 1.35× (lg).",
+      },
+    ],
     usage: `import { Folder } from "@/components/ui/folder-component",
 
 export function Demo() {
-  return <Folder color="#f5b400" size="md" />
+  return <Folder color="blue" size="md" />
 }`,
   },
   {
@@ -57,6 +85,44 @@ export function Demo() {
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/bounce-sidebar.tsx`,
     dependencies: [{ name: "motion" }],
     interaction: "Click any item to spring the bouncing marker over to it.",
+    props: [
+      {
+        name: "items",
+        type: "string[]",
+        required: true,
+        description: "Labels rendered as the vertical list of nav items.",
+      },
+      {
+        name: "value",
+        type: "number",
+        description:
+          "Active item index for controlled usage. When set, the component won't manage its own state.",
+      },
+      {
+        name: "defaultValue",
+        type: "number",
+        default: "0",
+        description:
+          "Initial active index for uncontrolled usage. Ignored when value is provided.",
+      },
+      {
+        name: "onChange",
+        type: "(index: number) => void",
+        description: "Called with the new index whenever an item is selected.",
+      },
+      {
+        name: "dotColor",
+        type: "string",
+        default: '"#FC4C01"',
+        description:
+          "Any CSS color for the bouncing active marker (hex, rgb, hsl, var).",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Extra classes merged onto the root <ul> element.",
+      },
+    ],
     usage: `import { BounceSidebar } from "@/components/ui/bounce-sidebar"
 
 const items = [

@@ -8,6 +8,7 @@ import { activeComponent, installCommand, PANEL_INFO } from "@/lib/components";
 import CopyButton from "./CopyButton";
 import CodeDrawer from "./CodeDrawer";
 import DependencyPill from "./DependencyPill";
+import PropsTable from "./PropsTable";
 import ThemeToggle from "../ThemeToggle";
 
 const PANEL_SHIFT = 600;
@@ -116,6 +117,16 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
               <p className="text-sm leading-relaxed text-foreground/70">
                 {item.interaction}
               </p>
+            </div>
+          )}
+
+          {item?.props && item.props.length > 0 && (
+            <div className="flex flex-col gap-3">
+              <SectionLabel>Props</SectionLabel>
+              <p className="-mt-1 text-sm leading-relaxed text-foreground/70">
+                Options you can pass to customize this component.
+              </p>
+              <PropsTable props={item.props} />
             </div>
           )}
 
