@@ -14,8 +14,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rareui.swamii.me"),
   title: "Rare UI",
   description: "A shadcn registry of rare components.",
+  openGraph: {
+    title: "Rare UI",
+    description: "A shadcn registry of rare components.",
+    url: "/",
+    siteName: "Rare UI",
+    images: [
+      {
+        url: "/ogimage.png",
+        width: 1200,
+        height: 630,
+        alt: "Rare UI",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rare UI",
+    description: "A shadcn registry of rare components.",
+    images: ["/ogimage.png"],
+  },
 };
 
 export default function RootLayout({
