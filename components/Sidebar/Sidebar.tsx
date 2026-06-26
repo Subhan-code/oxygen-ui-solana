@@ -6,8 +6,6 @@ import { Squircle } from "@squircle-js/react";
 
 const MotionSquircle = motion.create(Squircle);
 
-// 1rem (16px) inset + 300px (w-75) panel = right edge at 316px, so -340px
-// parks the panel fully past the screen's left edge when closed.
 const PANEL_SHIFT = 340;
 
 const OpenIcon = () => (

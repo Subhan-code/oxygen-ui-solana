@@ -3,15 +3,25 @@
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { GripVertical } from "lucide-react";
+import { Squircle } from "@squircle-js/react";
 import { activeComponent, cleanDefault, swatchProp } from "@/lib/components";
 import { usePreviewControl } from "./PreviewControls";
+
+// Squircle isn't a forwardRef component, so `motion.create(Squircle)` can't get
+// the DOM node it needs for drag. Instead we use `asChild` to merge the
+// squircle clip-path onto a real motion.div, which motion can fully control.
+const SQUIRCLE = { cornerRadius: 16, cornerSmoothing: 5 } as const;
+
+// Apple-style hairline: a crisp 0.5px edge, a bright top bevel and a soft dark
+// bottom. Built from inset shadows so it follows the squircle's clip-path
+// (a real CSS `border` gets clipped at the rounded corners).
+const APPLE_BORDER =
+  "inset 0 0 0 0.5px rgba(255,255,255,0.10), inset 0 0.5px 0 rgba(255,255,255,0.16), inset 0 -0.5px 0 rgba(0,0,0,0.30)";
 
 type ColorSwatchesProps = {
   className?: string;
   showLabel?: boolean;
-  /** When true, the palette can be dragged around within `constraintsRef`. */
   draggable?: boolean;
-  /** Element whose bounds the palette is kept inside while dragging. */
   constraintsRef?: React.RefObject<HTMLElement | null>;
 };
 
@@ -73,20 +83,29 @@ export default function ColorSwatches({
 
   if (draggable) {
     return (
-      <motion.div
-        drag
-        dragConstraints={constraintsRef}
-        dragMomentum={false}
-        dragElastic={0}
-        whileDrag={{ scale: 1.03 }}
-        className={`flex items-center gap-2.5 ${className}`}
-      >
-        {swatches}
-      </motion.div>
+      <Squircle asChild {...SQUIRCLE}>
+        <motion.div
+          drag
+          dragConstraints={constraintsRef}
+          dragMomentum={false}
+          dragElastic={0}
+          whileDrag={{ scale: 1.03 }}
+          style={{ boxShadow: APPLE_BORDER }}
+          className={`flex items-center gap-2.5 ${className}`}
+        >
+          {swatches}
+        </motion.div>
+      </Squircle>
     );
   }
 
   return (
-    <div className={`flex items-center gap-2.5 ${className}`}>{swatches}</div>
+    <Squircle
+      {...SQUIRCLE}
+      style={{ boxShadow: APPLE_BORDER }}
+      className={`flex items-center gap-2.5 ${className}`}
+    >
+      {swatches}
+    </Squircle>
   );
 }
