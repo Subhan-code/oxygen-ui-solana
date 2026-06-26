@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
 const themes = {
   black: {
@@ -51,10 +52,10 @@ const sizeScales = {
   lg: 1.35,
 } as const;
 
-interface FolderComponentProps {
+type FolderComponentProps = Omit<React.ComponentProps<"div">, "color"> & {
   color?: "black" | "white" | "blue";
   size?: "sm" | "md" | "lg";
-}
+};
 
 const BASE_WIDTH = 321;
 const BASE_HEIGHT = 270;
@@ -65,6 +66,8 @@ const FLAP_PATH =
 const FolderComponent = ({
   color = "black",
   size = "md",
+  className,
+  ...props
 }: FolderComponentProps) => {
   const theme = themes[color];
   const scale = sizeScales[size];
@@ -72,7 +75,14 @@ const FolderComponent = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div
+      data-slot="folder"
+      className={cn(
+        "relative w-full h-full flex items-center justify-center",
+        className,
+      )}
+      {...props}
+    >
       <div
         className="relative cursor-pointer select-none"
         style={{
@@ -252,12 +262,15 @@ const FolderComponent = ({
 
 export default FolderComponent;
 
+export { FolderComponent as Folder };
+export type { FolderComponentProps };
+
 type Theme = (typeof themes)[keyof typeof themes];
 
 const Card = ({ id, theme }: { id: number; theme: Theme }) => {
   const filterId = `filter0_i_card_${id}`;
   return (
-    <div>
+    <div data-slot="folder-card">
       <svg
         width="164"
         height="214"

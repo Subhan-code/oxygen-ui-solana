@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentProps } from "react";
 import { motion, useAnimate } from "motion/react";
 import { arc } from "motion";
 import { cn } from "@/lib/utils";
 
-export type BounceSidebarProps = {
+export type BounceSidebarProps = Omit<ComponentProps<"ul">, "onChange"> & {
   items: string[];
   value?: number;
   defaultValue?: number;
   onChange?: (index: number) => void;
   dotColor?: string;
-  className?: string;
 };
 
 export function BounceSidebar({
@@ -21,6 +20,7 @@ export function BounceSidebar({
   onChange,
   dotColor = "#FC4C01",
   className,
+  ...props
 }: BounceSidebarProps) {
   const [internalValue, setInternalValue] = useState(defaultValue);
   const activeIndex = value ?? internalValue;
@@ -94,7 +94,11 @@ export function BounceSidebar({
   };
 
   return (
-    <ul className={cn("relative flex flex-col gap-1 pl-6", className)}>
+    <ul
+      data-slot="bounce-sidebar"
+      className={cn("relative flex flex-col gap-1 pl-6", className)}
+      {...props}
+    >
       <span
         ref={dot}
         aria-hidden
@@ -111,6 +115,8 @@ export function BounceSidebar({
         >
           <motion.button
             type="button"
+            data-slot="bounce-sidebar-item"
+            data-active={index === activeIndex}
             onClick={() => select(index)}
             className={cn(
               "flex w-full cursor-pointer items-center rounded-lg p-1 text-left text-sm transition-colors duration-200",
