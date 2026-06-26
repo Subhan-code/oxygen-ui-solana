@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { CodeXml, Maximize, Minimize } from "lucide-react";
 import { activeComponent, installCommand, PANEL_INFO } from "@/lib/components";
-import CopyButton from "./CopyButton";
+import CopyButton from "../CopyButton";
 import CodeDrawer from "./CodeDrawer";
 import DependencyPill from "./DependencyPill";
 import PropsTable from "./PropsTable";
@@ -183,6 +183,11 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
               >
                 {PANEL_INFO.contactEmail}
               </a>
+              <CopyButton
+                value={PANEL_INFO.contactEmail}
+                label="Copy email"
+                className="ml-1 p-1 align-middle"
+              />
             </p>
           </div>
 

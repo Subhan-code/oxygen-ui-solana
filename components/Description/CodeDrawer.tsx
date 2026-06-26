@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useDragControls } from "motion/react";
 import type { ComponentItem } from "@/lib/components";
-import CopyButton from "./CopyButton";
+import CopyButton from "../CopyButton";
 
 type CodeDrawerProps = {
   open: boolean;
