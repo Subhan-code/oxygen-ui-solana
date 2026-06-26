@@ -4,23 +4,52 @@ import { useState, type ComponentProps, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
+const CopyGlyph = () => (
+  <svg viewBox="0 0 24 24" fill="none">
+    <rect
+      x="9"
+      y="9"
+      width="11"
+      height="11"
+      rx="2"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <path
+      d="M5 15V5a2 2 0 0 1 2-2h10"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+const CheckGlyph = () => (
+  <svg viewBox="0 0 24 24" fill="none">
+    <path
+      d="M5 13l4 4L19 7"
+      stroke="#FC4C01"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 type CopyButtonProps = Omit<ComponentProps<"button">, "value"> & {
-  /** Text written to the clipboard when clicked. */
   value: string;
-  /** Accessible label / tooltip. Defaults to "Copy". */
   label?: string;
-  /** Optional content rendered next to the icon (e.g. a "Copy" text label). */
+  idleIcon?: ReactNode;
+  iconClassName?: string;
   children?: ReactNode;
 };
 
-/**
- * Reusable copy-to-clipboard button. The copy glyph crossfades out while the
- * checkmark draws itself in (pathLength), giving a smooth morph between states.
- * Icon-only, it's a perfect square; pass `children` for a labelled pill.
- */
+
 export default function CopyButton({
   value,
   label = "Copy",
+  idleIcon,
+  iconClassName = "size-3.5",
   className,
   children,
   ...props
@@ -34,6 +63,9 @@ export default function CopyButton({
       setTimeout(() => setCopied(false), 1500);
     } catch {}
   };
+
+  const layer =
+    "col-start-1 row-start-1 block h-full w-full [&>svg]:h-full [&>svg]:w-full";
 
   return (
     <button
@@ -50,9 +82,9 @@ export default function CopyButton({
         className,
       )}
     >
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        {/* Copy glyph — blurs + shrinks + fades out once copied. */}
-        <motion.g
+      <span className={cn("grid place-items-center", iconClassName)}>
+        <motion.span
+          className={layer}
           initial={false}
           animate={{
             opacity: copied ? 0 : 1,
@@ -60,27 +92,12 @@ export default function CopyButton({
             filter: copied ? "blur(3px)" : "blur(0px)",
           }}
           transition={{ duration: 0.15, ease: "easeIn" }}
-          style={{ transformOrigin: "center", transformBox: "fill-box" }}
         >
-          <rect
-            x="9"
-            y="9"
-            width="11"
-            height="11"
-            rx="2"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <path
-            d="M5 15V5a2 2 0 0 1 2-2h10"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </motion.g>
+          {idleIcon ?? <CopyGlyph />}
+        </motion.span>
 
-        {/* Check — sharpens out of the blur and pops in once copied. */}
-        <motion.g
+        <motion.span
+          className={layer}
           initial={false}
           animate={{
             opacity: copied ? 1 : 0,
@@ -97,17 +114,10 @@ export default function CopyButton({
               delay: copied ? 0.08 : 0,
             },
           }}
-          style={{ transformOrigin: "center", transformBox: "fill-box" }}
         >
-          <path
-            d="M5 13l4 4L19 7"
-            stroke="#FC4C01"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </motion.g>
-      </svg>
+          <CheckGlyph />
+        </motion.span>
+      </span>
       {children}
     </button>
   );

@@ -10,7 +10,7 @@ import CodeDrawer from "./CodeDrawer";
 import DependencyPill from "./DependencyPill";
 import PropsTable from "./PropsTable";
 import ThemeToggle from "../ThemeToggle";
-import ColorSwatches from "../preview/ColorSwatches";
+import { MailIcon, XIcon } from "./icons";
 
 const PANEL_SHIFT = 600;
 
@@ -123,7 +123,6 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
               <p className="-mt-1 text-sm leading-relaxed text-foreground/70">
                 Options you can pass to customize this component.
               </p>
-              <ColorSwatches showLabel className="rounded-xl bg-muted px-3 py-2.5" />
               <PropsTable props={item.props} />
             </div>
           )}
@@ -176,19 +175,27 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
           <div className="flex flex-col gap-3">
             <SectionLabel>Contact</SectionLabel>
             <p className="text-sm leading-relaxed text-foreground/70">
-              {PANEL_INFO.contactNote}{" "}
-              <a
-                href={`mailto:${PANEL_INFO.contactEmail}`}
-                className="text-foreground underline underline-offset-4"
-              >
-                {PANEL_INFO.contactEmail}
-              </a>
+              {PANEL_INFO.contactNote}
+            </p>
+            <div className="flex items-center gap-2">
               <CopyButton
                 value={PANEL_INFO.contactEmail}
-                label="Copy email"
-                className="ml-1 p-1 align-middle"
+                label={`Copy email (${PANEL_INFO.contactEmail})`}
+                idleIcon={<MailIcon />}
+                iconClassName="size-5"
+                className="size-8 hover:text-foreground"
               />
-            </p>
+              <a
+                href="https://x.com/swamimalode"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="X — @swamimalode"
+                title="@swamimalode"
+                className="inline-flex size-8 items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
+              >
+                <XIcon className="size-5" />
+              </a>
+            </div>
           </div>
 
           <div className="flex flex-col gap-3">
