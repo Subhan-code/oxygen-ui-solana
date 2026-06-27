@@ -7,7 +7,7 @@ import { DescriptionPanel } from "../Description/DescriptionPanel";
 import { PreviewControlsProvider } from "../preview/PreviewControls";
 
 
-const NAV_SPACE = 316;
+const NAV_SPACE = 308;
 const INFO_SPACE = 576;
 
 export default function SidebarShell({

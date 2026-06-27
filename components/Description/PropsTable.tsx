@@ -4,11 +4,6 @@ type PropsTableProps = {
   props: ComponentProp[];
 };
 
-/**
- * API reference for a component, laid out as flex rows (not a <table>):
- * a fixed-width Prop pill, a Type column whose options stack one per line,
- * and a flexible Description with the default.
- */
 export default function PropsTable({ props }: PropsTableProps) {
   return (
     <div className="flex flex-col">
