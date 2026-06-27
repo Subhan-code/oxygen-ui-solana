@@ -5,11 +5,12 @@ import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { CodeXml, Maximize, Minimize } from "lucide-react";
 import { activeComponent, installCommand, PANEL_INFO } from "@/lib/components";
-import CopyButton from "./CopyButton";
+import CopyButton from "../CopyButton";
 import CodeDrawer from "./CodeDrawer";
 import DependencyPill from "./DependencyPill";
 import PropsTable from "./PropsTable";
 import ThemeToggle from "../ThemeToggle";
+import { MailIcon, XIcon } from "./icons";
 
 const PANEL_SHIFT = 600;
 
@@ -47,7 +48,7 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
 
   return (
     <div className="pointer-events-none absolute right-0 top-0 z-40 h-full">
-      <div className="pointer-events-auto absolute top-4 right-4 z-50 flex items-center gap-2 rounded-2xl  bg-muted p-2 shadow-sm">
+      <div className="pointer-events-auto absolute top-4 right-4 z-50 flex items-center gap-2 rounded-2xl border-apple bg-muted p-2 shadow-sm">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -100,11 +101,7 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
                   <DependencyPill
                     key={dep.name}
                     name={dep.name}
-                    icon={
-                      dep.icon ? (
-                        <img src={dep.icon} alt="" className="h-4 w-4" />
-                      ) : undefined
-                    }
+                    icon={dep.icon}
                   />
                 ))}
               </div>
@@ -178,14 +175,27 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
           <div className="flex flex-col gap-3">
             <SectionLabel>Contact</SectionLabel>
             <p className="text-sm leading-relaxed text-foreground/70">
-              {PANEL_INFO.contactNote}{" "}
-              <a
-                href={`mailto:${PANEL_INFO.contactEmail}`}
-                className="text-foreground underline underline-offset-4"
-              >
-                {PANEL_INFO.contactEmail}
-              </a>
+              {PANEL_INFO.contactNote}
             </p>
+            <div className="flex items-center gap-2">
+              <CopyButton
+                value={PANEL_INFO.contactEmail}
+                label={`Copy email (${PANEL_INFO.contactEmail})`}
+                idleIcon={<MailIcon />}
+                iconClassName="size-5"
+                className="size-8 hover:text-foreground"
+              />
+              <a
+                href="https://x.com/swamimalode"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="X — @swamimalode"
+                title="@swamimalode"
+                className="inline-flex size-8 items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
+              >
+                <XIcon className="size-5" />
+              </a>
+            </div>
           </div>
 
           <div className="flex flex-col gap-3">

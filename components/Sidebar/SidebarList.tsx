@@ -60,7 +60,7 @@ const SidebarList = () => {
         const isActive = i === activeIndex;
 
         return (
-          <li
+          <li 
             key={component.href}
             ref={(el) => {
               itemRefs.current[i] = el;
