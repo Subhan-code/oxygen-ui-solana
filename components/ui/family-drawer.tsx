@@ -53,7 +53,7 @@ export default function FamilyDrawer() {
     return (
         <>
             <button
-                className="focus-visible:shadow-focus-ring-button absolute top-1/2 left-1/2 h-[44px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gray-200 bg-white px-4 py-2 font-medium text-black transition-colors hover:bg-[#F9F9F8] md:font-medium"
+                className="focus-visible:shadow-focus-ring-button absolute top-1/2 left-1/2 h-[44px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gray-200 bg-white px-4 py-2 font-medium text-black transition-colors hover:bg-[#F9F9F8] md:font-medium dark:border-none dark:bg-muted dark:shadow-sm dark:text-foreground dark:hover:bg-muted"
                 onClick={() => setIsOpen(true)}
                 style={{ fontFamily: "var(--font-open-runde)" }}
             >
@@ -62,18 +62,18 @@ export default function FamilyDrawer() {
             <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
                 <Drawer.Portal>
                     <Drawer.Overlay
-                        className="fixed inset-0 z-[60] bg-black/30"
+                        className="fixed inset-0 z-[60] bg-black/30 backdrop-blur-xs"
                         onClick={() => setIsOpen(false)}
                     />
                     <Drawer.Content
                         asChild
-                        className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-[361px] overflow-hidden rounded-[36px] bg-[#FEFFFE] outline-hidden md:mx-auto md:w-full"
+                        className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-[361px] overflow-hidden rounded-[36px] bg-[#FEFFFE] outline-hidden md:mx-auto md:w-full dark:bg-popover"
                     >
                         <motion.div animate={{ height: bounds.height }}>
                             <Drawer.Close asChild>
                                 <button
                                     data-vaul-no-drag=""
-                                    className="focus-visible:shadow-focus-ring-button absolute top-7 right-8 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#F7F8F9] text-[#949595] transition-transform focus:scale-95 active:scale-75"
+                                    className="focus-visible:shadow-focus-ring-button absolute top-7 right-8 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#F7F8F9] text-[#949595] transition-transform focus:scale-95 active:scale-75 dark:bg-secondary dark:text-muted-foreground"
                                 >
                                     <CloseIcon />
                                 </button>
@@ -89,7 +89,7 @@ export default function FamilyDrawer() {
                                     exit={{ opacity: 0, scale: 0.96 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     ref={elementRef}
-                                    className="px-6 pt-2.5 pb-8 antialiased"
+                                    className="px-6 pt-2.5 pb-12 antialiased"
                                     style={{ fontFamily: "var(--font-open-runde)" }}
                                 >
                                     {content}
@@ -114,7 +114,7 @@ export function Button({
     return (
         <button
             data-vaul-no-drag=""
-            className="focus-visible:shadow-focus-ring-button flex h-12 w-full items-center gap-[15px] rounded-[16px] bg-[#F7F8F9] px-4 text-[17px] font-semibold text-[#222222] transition-transform focus:scale-95 active:scale-95 md:font-medium"
+            className="focus-visible:shadow-focus-ring-button flex h-12 w-full items-center gap-[15px] rounded-[16px] bg-[#F7F8F9] px-4 text-[17px] font-semibold text-[#222222] transition-transform focus:scale-95 active:scale-95 md:font-medium dark:bg-secondary dark:text-foreground"
             onClick={onClick}
         >
             {children}
@@ -157,7 +157,7 @@ export function Header({
     return (
         <header className="mt-[21px]">
             {icon}
-            <h2 className="mt-2.5 text-[22px] font-semibold text-[#222222] md:font-medium">
+            <h2 className="mt-2.5 text-[22px] font-semibold text-[#222222] md:font-medium dark:text-foreground">
                 {title}
             </h2>
 
@@ -177,7 +177,7 @@ export function Phrase({ setView }: { setView: SetView }) {
                     title="Secret Recovery Phrase"
                     description="Your Secret Recovery Phrase is the key used to back up your wallet. Keep it secret at all times."
                 />
-                <ul className="mt-6 space-y-4 border-t border-[#F5F5F5] pt-6">
+                <ul className="mt-6 space-y-4 border-t border-[#F5F5F5] pt-6 dark:border-border">
                     <li className="flex items-center gap-3 text-[15px] font-semibold text-[#999999] md:font-medium">
                         <ShieldIcon />
                         Keep your Secret Phrase safe
@@ -195,7 +195,7 @@ export function Phrase({ setView }: { setView: SetView }) {
             <div className="mt-7 flex gap-4">
                 <SecondaryButton
                     onClick={() => setView("default")}
-                    className="bg-[#F0F2F4] text-[#222222]"
+                    className="bg-[#F0F2F4] text-[#222222] dark:bg-secondary dark:text-foreground"
                 >
                     Cancel
                 </SecondaryButton>
@@ -221,7 +221,7 @@ export function Key({ setView }: { setView: SetView }) {
                     description="Your Private Key is the key used to back up your wallet. Keep it
 			  secret and secure at all times."
                 />
-                <ul className="mt-6 space-y-4 border-t border-[#F5F5F5] pt-6">
+                <ul className="mt-6 space-y-4 border-t border-[#F5F5F5] pt-6 dark:border-border">
                     <li className="flex items-center gap-3 text-[15px] font-semibold text-[#999999] md:font-medium">
                         <ShieldIcon />
                         Keep your private key safe
@@ -239,7 +239,7 @@ export function Key({ setView }: { setView: SetView }) {
             <div className="mt-7 flex gap-4">
                 <SecondaryButton
                     onClick={() => setView("default")}
-                    className="bg-[#F0F2F4] text-[#222222]"
+                    className="bg-[#F0F2F4] text-[#222222] dark:bg-secondary dark:text-foreground"
                 >
                     Cancel
                 </SecondaryButton>
@@ -267,7 +267,7 @@ export function RemoveWallet({ setView }: { setView: SetView }) {
                 <div className="mt-7 flex gap-4">
                     <SecondaryButton
                         onClick={() => setView("default")}
-                        className="bg-[#F0F2F4] text-[#222222]"
+                        className="bg-[#F0F2F4] text-[#222222] dark:bg-secondary dark:text-foreground"
                     >
                         Cancel
                     </SecondaryButton>
@@ -286,8 +286,8 @@ export function RemoveWallet({ setView }: { setView: SetView }) {
 export function DefaultView({ setView }: { setView: SetView }) {
     return (
         <>
-            <header className="mb-4 flex h-[72px] items-center border-b border-[#F7F7F7] pl-2">
-                <h2 className="text-[19px] font-semibold text-[#222222] md:font-medium">
+            <header className="mb-4 flex h-[72px] items-center border-b border-[#F7F7F7] pl-2 dark:border-border">
+                <h2 className="text-[19px] font-semibold text-[#222222] md:font-medium dark:text-foreground">
                     Options
                 </h2>
             </header>
@@ -309,7 +309,7 @@ export function DefaultView({ setView }: { setView: SetView }) {
                     View Recovery Phase
                 </Button>
                 <button
-                    className="focus-visible:shadow-focus-ring-button flex h-12 w-full items-center gap-[15px] rounded-[16px] bg-[#FFF0F0] px-4 text-[17px] font-semibold text-[#FF3F40] transition-transform focus:scale-95 active:scale-95 md:font-medium"
+                    className="focus-visible:shadow-focus-ring-button flex h-12 w-full items-center gap-[15px] rounded-[16px] bg-[#FFF0F0] px-4 text-[17px] font-semibold text-[#FF3F40] transition-transform focus:scale-95 active:scale-95 md:font-medium dark:bg-destructive/15"
                     onClick={() => {
                         setView("remove");
                     }}
