@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "family drawer",
+  "title": "Family Drawer",
+  "description": "A drawer that opens from the right side of the screen, with a family tree structure inside. It supports color and size (sm/md/lg) props.",
+  "dependencies": [
+    "motion",
+    "vaul"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/family-drawer.tsx",
+      "content": "\"use client\"\r\n\r\nimport {useState} from \"react\"\r\nimport { Drawer } from \"vaul\";\r\n\r\nexport default function FamilyDrawer() {\r\n    const [isOpen, setIsOpen] = useState(false);\r\n\r\n    return (\r\n        <button\r\n         className=\"focus-visible:shadow-focus-ring-button fixed top-1/2 left-1/2 h-[44px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gray-200 bg-white px-6 py-2 font-medium text-black transition-colors hover:bg-[#F9F9F8] md:font-medium\"\r\n\r\n        >\r\n            Try it out\r\n        </button>\r\n    )\r\n}",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
