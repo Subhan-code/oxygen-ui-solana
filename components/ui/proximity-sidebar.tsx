@@ -65,13 +65,19 @@ const Line = ({ marker = false, mouseY, side }: LineProps) => {
   )
 }
 
+type Section = {
+  id: string
+  label: string
+}
+
 type ProximitySidebarProps = {
   side?: Side
-  sections: React.RefObject<HTMLElement>[]
+  sections: Section[]
 }
 
 const ProximitySidebar = ({
   side = "left",
+  sections,
 }: ProximitySidebarProps) => {
   const mouseY = useMotionValue(Infinity)
 
