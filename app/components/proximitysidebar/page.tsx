@@ -1,14 +1,15 @@
 import ProximitySidebar from "@/components/ui/proximity-sidebar";
+import type { ProximitySection } from "@/components/ui/proximity-sidebar";
 
 export default function Page() {
-  const sections = [
-    { id: "hero", label: "Hero" },
-    { id: "features", label: "Features" },
-    { id: "pricing", label: "Pricing" },
-    { id: "testimonials", label: "Testimonials" },
-    { id: "faq", label: "FAQ" },
-    { id: "cta", label: "CTA" },
-    { id: "footer", label: "Footer" },
+  const sections: ProximitySection[] = [
+    { id: "hero", label: "Hero", kind: "title" },
+    { id: "features", label: "Features", kind: "subtitle" },
+    { id: "pricing", label: "Pricing", kind: "section" },
+    { id: "testimonials", label: "Testimonials", kind: "section" },
+    { id: "faq", label: "FAQ", kind: "body" },
+    { id: "cta", label: "CTA", kind: "subtitle" },
+    { id: "footer", label: "Footer", kind: "body" },
   ];
 
   return (
