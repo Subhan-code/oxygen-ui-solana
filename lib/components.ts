@@ -27,6 +27,7 @@ export type ComponentItem = {
   interaction?: string;
   usage?: string;
   props?: ComponentProp[];
+  credits?: string[];
 };
 
 export const REGISTRY_HOMEPAGE = "https://github.com/swamimalode07/rare-ui";
@@ -36,7 +37,7 @@ export const PANEL_INFO = {
   sourceHint:
     "Click the code icon in the top-right corner to view the source code.",
   keepInMind:
-    "Most components here are recreations of great work from around the web. I don't claim to be the original creator — this is my attempt to reverse-engineer, replicate, and often add a few extra features. I've tried to credit everyone; if I missed someone, let me know.",
+    "Most components here are recreations of great work from around the web. I don't claim to be the original creator - this is my attempt to reverse-engineer, replicate, and often add a few extra features. I've tried to credit everyone; if I missed someone, let me know.",
   contactEmail: "swamimalodeofficial@gmail.com",
   contactNote: "Found a bug or issue? Feel free to drop a DM.",
   license: [
@@ -44,6 +45,7 @@ export const PANEL_INFO = {
     "Attribution to Rare UI is appreciated when using a component.",
     "Please don't resell the components as your own kit.",
   ],
+
 } as const;
 
 export const components: ComponentItem[] = [
@@ -96,7 +98,7 @@ export function Demo() {
     description:
       "A vertical nav whose active marker springs and bounces between items. Pass your own items and dot color; controlled or uncontrolled.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/bounce-sidebar.tsx`,
-    dependencies: [{ name: "motion" }],
+    dependencies: [{ name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) }],
     interaction: "Click any item to spring the bouncing marker over to it.",
     props: [
       {
@@ -148,12 +150,17 @@ export function Demo() {
   }`,
   },
   {
-    name:"Proximity Sidebar",
+    name: "Proximity Sidebar",
     href: "/components/proximitysidebar",
     registry: "proximity-sidebar",
-    description:"A vertical nav whose items expand and contract based on proximity to the cursor. Pass your own items and colors; controlled or uncontrolled.",
-    source:`${REGISTRY_HOMEPAGE}/blob/main/components/ui/proximity-sidebar.tsx`,
-    dependencies:[{name:"motion"}],
+    description:
+      "An interactive sidebar with proximity hover effects that appears while scrolling and responds to scroll intensity.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/proximity-sidebar.tsx`,
+    dependencies: [{ name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) }],
+    credits: [
+      "Inspired by devouringdetails.com",
+      
+    ],
   },
   // {
   //   name: "Family drawer",
