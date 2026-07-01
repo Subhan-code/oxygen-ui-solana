@@ -344,7 +344,7 @@ const sections: ProximitySection[] = docs.flatMap((group) => [
 
 export default function Page() {
   return (
-    <div className="flex h-full min-h-0 overflow-hidden bg-secondary text-foreground">
+    <div className="flex h-full min-h-0 overflow-hidden bg-transparent text-foreground">
       <aside className="h-full w-24 shrink-0">
         <ProximitySidebar side="left" sections={sections} />
       </aside>
