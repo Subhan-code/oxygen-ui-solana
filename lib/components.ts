@@ -188,14 +188,14 @@ export function Demo() {
         description: "Additional classes for the outer nav wrapper.",
       },
     ],
-    usage: `import ProximitySidebar from "@/components/ui/proximity-sidebar"
+    usage: `import ProximitySidebar, { type ProximitySection } from "@/components/ui/proximity-sidebar"
 
 const sections = [
   { id: "intro", label: "Introduction", level: 1 },
   { id: "setup", label: "Setup", level: 2 },
   { id: "api", label: "API", kind: "section" },
   { id: "faq", label: "FAQ", kind: "body" },
-]
+] satisfies ProximitySection[]
 
 export function Demo() {
   return (
