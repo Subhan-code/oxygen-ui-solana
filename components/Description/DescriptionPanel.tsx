@@ -172,6 +172,21 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
             </p>
           </div>
 
+          {item?.credits && item.credits.length > 0 && (
+            <div className="flex flex-col gap-3">
+              <SectionLabel>Credits</SectionLabel>
+
+              <ul className="flex flex-col gap-2 text-sm leading-relaxed text-foreground/70">
+                {item.credits.map((credit) => (
+                  <li key={credit} className="flex gap-2">
+                    <span className="text-foreground/40">•</span>
+                    <span>{credit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <div className="flex flex-col gap-3">
             <SectionLabel>Contact</SectionLabel>
             <p className="text-sm leading-relaxed text-foreground/70">

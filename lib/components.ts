@@ -27,6 +27,7 @@ export type ComponentItem = {
   interaction?: string;
   usage?: string;
   props?: ComponentProp[];
+  credits?: string[];
 };
 
 export const REGISTRY_HOMEPAGE = "https://github.com/swamimalode07/rare-ui";
@@ -36,7 +37,7 @@ export const PANEL_INFO = {
   sourceHint:
     "Click the code icon in the top-right corner to view the source code.",
   keepInMind:
-    "Most components here are recreations of great work from around the web. I don't claim to be the original creator — this is my attempt to reverse-engineer, replicate, and often add a few extra features. I've tried to credit everyone; if I missed someone, let me know.",
+    "Most components here are recreations of great work from around the web. I don't claim to be the original creator - this is my attempt to reverse-engineer, replicate, and often add a few extra features. I've tried to credit everyone; if I missed someone, let me know.",
   contactEmail: "swamimalodeofficial@gmail.com",
   contactNote: "Found a bug or issue? Feel free to drop a DM.",
   license: [
@@ -44,6 +45,7 @@ export const PANEL_INFO = {
     "Attribution to Rare UI is appreciated when using a component.",
     "Please don't resell the components as your own kit.",
   ],
+
 } as const;
 
 export const components: ComponentItem[] = [
@@ -96,7 +98,7 @@ export function Demo() {
     description:
       "A vertical nav whose active marker springs and bounces between items. Pass your own items and dot color; controlled or uncontrolled.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/bounce-sidebar.tsx`,
-    dependencies: [{ name: "motion" }],
+    dependencies: [{ name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) }],
     interaction: "Click any item to spring the bouncing marker over to it.",
     props: [
       {
@@ -146,6 +148,69 @@ export function Demo() {
   export function Demo() {
     return <BounceSidebar items={items} dotColor="#FC4C01" />
   }`,
+  },
+  {
+    name: "Proximity Sidebar",
+    href: "/components/proximitysidebar",
+    registry: "proximity-sidebar",
+    description:
+      "An interactive sidebar with proximity hover effects that appears while scrolling and responds to scroll intensity.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/proximity-sidebar.tsx`,
+    dependencies: [{ name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) }],
+    interaction:
+      "Scroll through content to track the current section, then move the pointer near dashes to expand them and click to smooth-scroll to a section.",
+    props: [
+      {
+        name: "sections",
+        type: "Array<{ id: string; label: string; kind?: \"title\" | \"subtitle\" | \"section\" | \"body\"; level?: 1 | 2 | 3 | 4 | 5 | 6 }>",
+        required: true,
+        description:
+          "Ordered section map used for rendering dashes and scroll targeting. Each id must match an element id present in the page.",
+      },
+      {
+        name: "side",
+        type: '"left" | "right"',
+        default: '"left"',
+        options: ["left", "right"],
+        description:
+          "Pins the minimap to the chosen side and flips dash transform origin accordingly.",
+      },
+      {
+        name: "activeOffset",
+        type: "number",
+        default: "0.4",
+        description:
+          "Viewport anchor ratio used to detect the active section while scrolling (0 = top, 1 = bottom).",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Additional classes for the outer nav wrapper.",
+      },
+    ],
+    usage: `import ProximitySidebar from "@/components/ui/proximity-sidebar"
+
+const sections = [
+  { id: "intro", label: "Introduction", level: 1 },
+  { id: "setup", label: "Setup", level: 2 },
+  { id: "api", label: "API", kind: "section" },
+  { id: "faq", label: "FAQ", kind: "body" },
+]
+
+export function Demo() {
+  return (
+    <aside className="sticky top-20 h-[70vh]">
+      <ProximitySidebar
+        sections={sections}
+        side="left"
+        activeOffset={0.4}
+      />
+    </aside>
+  )
+}`,
+    credits: [
+      "Inspired by devouringdetails.com",
+    ],
   },
   // {
   //   name: "Family drawer",
