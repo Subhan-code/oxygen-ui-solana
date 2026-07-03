@@ -14,9 +14,9 @@ const TICK_PATH = 'M7.959 20.513L1.592 12.872L3.128 11.592L8.041 17.487L20.947 3
 
 const OPEN_GAP = 8
 const CORNER_RADIUS = 12
-const GAP_SPRING = { stiffness: 200, damping: 16, mass: 1 }
-const ICON_SPRING = { stiffness: 200, damping: 20 }
-const WIDTH_SPRING = { stiffness: 250, damping: 23 }
+const GAP_SPRING = { stiffness: 200, damping: 28, mass: 1 }
+const ICON_SPRING = { stiffness: 200, damping: 28 }
+const WIDTH_SPRING = { stiffness: 250, damping: 31 }
 const SWAY_SPRING = { stiffness: 200, damping: 24 }
 const ERROR_SPRING = { stiffness: 700, damping: 9 }
 
@@ -212,8 +212,6 @@ function DurationPicker({
     const innerPadRight = useTransform(gap, (v) => `${3 + 9 * openness(v)}px`)
     const innerPadLeft = useTransform(gap, (v) => `${9 * openness(v)}px`)
     const gapVelocity = useVelocity(gap)
-    const scaleX = useTransform(gapVelocity, [-70, 0, 70], [0.93, 1, 1.07], { clamp: true })
-    const scaleY = useTransform(scaleX, (v) => 2 - v)
     const swayXRaw = useTransform(gapVelocity, [-70, 0, 70], [-3, 0, 3], { clamp: true })
     const swayX = useSpring(swayXRaw, SWAY_SPRING)
     const iconProgress = useSpring(defaultEditing ? 1 : 0, ICON_SPRING)
@@ -254,7 +252,6 @@ function DurationPicker({
             data-slot="duration-picker"
             data-editing={isEditing || undefined}
             data-disabled={disabled || undefined}
-            style={{ scaleX, scaleY }}
             className={cn('flex flex-row items-center justify-center text-card-foreground', disabled && 'opacity-50', className)}
             {...props}
         >
