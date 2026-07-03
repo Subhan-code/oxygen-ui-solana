@@ -212,6 +212,13 @@ export function Demo() {
       "Inspired by devouringdetails.com",
     ],
   },
+  {
+    name: "Duration Picker",
+    href: "/components/durationpicker",
+    registry: "duration-picker",
+    description:"A customizable duration picker component.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/duration-picker.tsx`,
+  }
   // {
   //   name: "Family drawer",
   //   href: "/components/familydrawer",
