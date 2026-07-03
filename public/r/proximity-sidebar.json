@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "proximity-sidebar",
   "title": "Proximity Sidebar",
-  "description": "A vertical nav whose active marker springs and bounces between items, with a configurable dot color.",
+  "description": "A dash-style scroll sidebar whose items expand as the pointer approaches.",
   "dependencies": [
     "motion"
   ],

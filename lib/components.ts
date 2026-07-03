@@ -307,7 +307,9 @@ export function Demo() {
           "Extra classes merged onto the root. Every inner part also carries a data-slot attribute (duration-picker, -segment, -input, -toggle) plus data-editing / data-disabled states, so you can restyle from CSS alone.",
       },
     ],
-    usage: `import DurationPicker, { type DurationValue } from "@/components/ui/duration-picker"
+    usage: `"use client"
+
+import DurationPicker, { type DurationValue } from "@/components/ui/duration-picker"
 import { useState } from "react"
 
 export function Demo() {
@@ -316,14 +318,14 @@ export function Demo() {
   return (
     <DurationPicker
       value={duration}
-      onChange={setDuration}          // fires while typing
-      onConfirm={(d) => save(d)}      // fires when the tick is clicked
+      onChange={setDuration}                     // fires while typing
+      onConfirm={(d) => console.log("saved", d)} // fires when the tick is clicked
     />
   )
 }
 
 // Zero-config: it also works fully uncontrolled
-// <DurationPicker onConfirm={(d) => save(d)} />`,
+// <DurationPicker onConfirm={(d) => console.log("saved", d)} />`,
   }
   // {
   //   name: "Family drawer",

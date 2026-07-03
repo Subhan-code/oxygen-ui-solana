@@ -34,7 +34,7 @@
       "name": "bounce-sidebar",
       "type": "registry:ui",
       "title": "Bounce Sidebar",
-      "description": "A vertical nav whose active marker springs and bounces between items, with a configurable dot color.",
+      "description": "A vertical navigation list with a bouncy, spring-animated active indicator.",
       "dependencies": ["motion"],
       "registryDependencies": ["utils"],
       "files": [
@@ -62,12 +62,26 @@
       "name": "proximity-sidebar",
       "type": "registry:ui",
       "title": "Proximity Sidebar",
-      "description": "A vertical nav whose active marker springs and bounces between items, with a configurable dot color.",
+      "description": "A dash-style scroll sidebar whose items expand as the pointer approaches.",
       "dependencies": ["motion"],
       "registryDependencies": ["utils"],
       "files": [
         {
           "path": "components/ui/proximity-sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "duration-picker",
+      "type": "registry:ui",
+      "title": "Duration Picker",
+      "description": "A gooey, spring-animated picker for entering a duration in hours and minutes.",
+      "dependencies": ["motion", "figma-squircle", "flubber", "react-use-measure", "@radix-ui/react-slot"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/duration-picker.tsx",
           "type": "registry:ui"
         }
       ]

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "bounce-sidebar",
   "title": "Bounce Sidebar",
-  "description": "A vertical nav whose active marker springs and bounces between items, with a configurable dot color.",
+  "description": "A vertical navigation list with a bouncy, spring-animated active indicator.",
   "dependencies": [
     "motion"
   ],
