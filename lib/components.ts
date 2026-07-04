@@ -332,7 +332,7 @@ export function Demo() {
     href: "/components/fluidorb",
     registry: "fluid-orb",
     description:
-      "A WebGL fluid orb with fixed white, light-blue and dark-blue bands and big soft patches that slosh around like liquid in a tilting glass, inspired by ChatGPT's voice mode.",
+      "An animated WebGL orb with drifting fluid shading, inspired by ChatGPT's voice mode.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/fluid-orb.tsx`,
     interaction:
       "Ambient — the color patches drift left, right, up, down and diagonally on their own, blending and reforming with no interaction required. Honors prefers-reduced-motion by holding a still frame.",
@@ -371,6 +371,9 @@ export function Demo() {
 export function Demo() {
   return <FluidOrb size={280} color="#F75001" />
 }`,
+    credits: [
+      "Inspired by chatgpt.com",
+    ],
   }
   // {
   //   name: "Family drawer",
@@ -389,9 +392,23 @@ export function Demo() {
   // },
 ];
 
-export function installCommand(item: ComponentItem): string | null {
+export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
+
+const PM_EXECUTORS: Record<PackageManager, string> = {
+  npm: "npx",
+  pnpm: "pnpm dlx",
+  yarn: "yarn dlx",
+  bun: "bunx --bun",
+};
+
+export const PACKAGE_MANAGERS = Object.keys(PM_EXECUTORS) as PackageManager[];
+
+export function installCommand(
+  item: ComponentItem,
+  pm: PackageManager = "npm",
+): string | null {
   if (!item.registry) return null;
-  return `npx shadcn@latest add ${REGISTRY_REPO}/${item.registry}`;
+  return `${PM_EXECUTORS[pm]} shadcn@latest add ${REGISTRY_REPO}/${item.registry}`;
 }
 
 export function activeComponent(pathname: string): ComponentItem | undefined {

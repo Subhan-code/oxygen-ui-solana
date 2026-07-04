@@ -175,6 +175,11 @@
   }
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: gray transparent;
+}
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

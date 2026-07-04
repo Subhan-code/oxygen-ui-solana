@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { CodeXml, Maximize, Minimize } from "lucide-react";
-import { activeComponent, installCommand, PANEL_INFO } from "@/lib/components";
+import { activeComponent, PANEL_INFO } from "@/lib/components";
 import CopyButton from "../CopyButton";
 import CodeDrawer from "./CodeDrawer";
+import InstallCommand from "./InstallCommand";
 import DependencyPill from "./DependencyPill";
 import PropsTable from "./PropsTable";
 import ThemeToggle from "../ThemeToggle";
@@ -30,7 +31,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
   const pathname = usePathname();
   const item = activeComponent(pathname);
-  const command = item ? installCommand(item) : null;
 
   const [codeOpen, setCodeOpen] = useState(false);
   useEffect(() => {
@@ -127,18 +127,10 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
             </div>
           )}
 
-          {command && (
+          {item?.registry && (
             <div className="flex flex-col gap-3">
               <SectionLabel>Installation</SectionLabel>
-              <span className="w-fit rounded-md bg-muted px-2.5 py-1 text-[11px] font-medium text-foreground/60">
-                Rare UI · trusted shadcn registry
-              </span>
-              <div className="flex items-center gap-2 rounded-lg bg-muted p-2 pl-3">
-                <code className="flex-1 overflow-x-auto whitespace-nowrap text-xs text-foreground/80">
-                  {command}
-                </code>
-                <CopyButton value={command} />
-              </div>
+              <InstallCommand item={item} />
             </div>
           )}
 
