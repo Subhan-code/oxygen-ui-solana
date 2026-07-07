@@ -85,6 +85,19 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "fluid-orb",
+      "type": "registry:ui",
+      "title": "Fluid Orb",
+      "description": "An animated WebGL orb with drifting fluid shading. Supports size and color props.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/fluid-orb.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
