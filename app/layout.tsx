@@ -48,7 +48,7 @@ const openRunde = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rareui.swamii.me"),
+  metadataBase: new URL("https://rareui.com"),
   title: "Rare UI",
   description: "A shadcn registry of rare components.",
   openGraph: {
@@ -100,7 +100,7 @@ export default function RootLayout({
 
           <div className="hidden flex-1 flex-col md:flex">{children}</div>
           <Databuddy
-            clientId="6714ae32-d16e-4158-bb10-4998f3ff7729"
+            clientId={process.env.NEXT_PUBLIC_DATABUDDY_CLIENT_ID!}
             trackHashChanges={true}
             trackAttributes={true}
             trackOutgoingLinks={true}
