@@ -1,4 +1,5 @@
 import GooeyNavbar from "@/components/GooeyNavbar";
+import HeroCta from "@/components/HeroCta";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
           A collection of rare, animated components. Browse them in action
           below and install any item straight from GitHub with the shadcn CLI.
         </p>
+        <HeroCta />
       </div>
       <DemoSection />
     </>
