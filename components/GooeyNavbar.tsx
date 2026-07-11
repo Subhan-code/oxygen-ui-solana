@@ -57,9 +57,9 @@ export default function GooeyNavbar() {
             href="/"
             className={cn(pill, "flex h-12 items-center gap-2 px-4")}
           >
-            <span className="font-[family-name:var(--font-open-runde)] text-lg font-bold text-white">
+            {/* <span className="font-[family-name:var(--font-open-runde)] text-lg font-bold text-white">
               R
-            </span>
+            </span> */}
             <span className="font-[family-name:var(--font-open-runde)] text-sm font-semibold text-white">
               Rare UI
             </span>

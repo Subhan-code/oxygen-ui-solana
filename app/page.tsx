@@ -4,17 +4,26 @@ import HeroCta from "@/components/HeroCta";
 export default function Home() {
   return (
     <>
-      <div className="mx-auto flex min-h-svh w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pb-32 pt-24 text-center sm:gap-4 sm:px-6">
-        <GooeyNavbar />
-        <h1 className="max-w-4xl text-balance text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          Tasteful Components, Made to Stand Out.
-        </h1>
-        <p className="max-w-xl text-balance text-base text-muted-foreground sm:text-lg">
-          A collection of rare, animated components. Browse them in action
-          below and install any item straight from GitHub with the shadcn CLI.
-        </p>
-        <HeroCta />
-      </div>
+      <section className="relative flex min-h-svh w-full items-center justify-center overflow-hidden">
+        <img
+          src="/assets/landing/herobg.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 size-full object-cover"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-white to-transparent dark:from-black" />
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pb-32 pt-24 text-center sm:gap-4 sm:px-6">
+          <GooeyNavbar />
+          <h1 className="max-w-4xl text-balance dark:text-white text-black text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            Tasteful Components, Made to Stand Out.
+          </h1>
+          <p className="max-w-xl text-balance text-base text-muted-foreground sm:text-lg">
+            A collection of rare, animated components. Browse them in action
+            below and install any item straight from GitHub with the shadcn CLI.
+          </p>
+          <HeroCta />
+        </div>
+      </section>
       <DemoSection />
     </>
   );

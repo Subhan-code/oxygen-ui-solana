@@ -63,7 +63,6 @@ export default function HeroCta() {
       >
         <StretchSquircleBg
           hovered={hovered === "pill"}
-          className="drop-shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
           bgClassName="bg-neutral-900"
         />
         <CopyButton
@@ -88,7 +87,6 @@ export default function HeroCta() {
       >
         <StretchSquircleBg
           hovered={hovered === "cta"}
-          className="drop-shadow-[0_8px_24px_rgba(252,76,1,0.35)]"
           bgClassName="bg-[#FC4C01] transition-colors duration-150 ease-out group-hover:bg-[#e64500]"
         />
         <Link
