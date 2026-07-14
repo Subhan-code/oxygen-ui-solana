@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import HeroCta from "@/components/HeroCta";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
   return (

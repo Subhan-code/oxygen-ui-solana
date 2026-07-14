@@ -1,12 +1,8 @@
-import DurationPicker from '@/components/ui/duration-picker'
-import React from 'react'
+import { componentPageMetadata } from "@/lib/seo";
+import Demo from "./demo";
 
-const DurationPickerPage = () => {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen rounded-2xl">
-      <DurationPicker />
-    </div>
-  )
+export const metadata = componentPageMetadata("/components/durationpicker");
+
+export default function Page() {
+  return <Demo />;
 }
-
-export default DurationPickerPage

@@ -3,6 +3,8 @@ import { Inter, Geist_Mono, Cal_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Databuddy } from '@databuddy/sdk/react';
+import { SITE_URL } from "@/lib/site";
+import { SITE_KEYWORDS } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -48,9 +50,13 @@ const openRunde = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rareui.com"),
-  title: "Rare UI",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Rare UI — Rare Animated React Components",
+    template: "%s | Rare UI",
+  },
   description: "A shadcn registry of rare components.",
+  keywords: SITE_KEYWORDS,
   openGraph: {
     title: "Rare UI",
     description: "A shadcn registry of rare components.",
