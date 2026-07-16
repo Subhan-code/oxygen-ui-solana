@@ -60,6 +60,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <BackersSection />
       <DemoSection />
     </>
   );
@@ -67,6 +68,78 @@ export default function Home() {
 
 const X_URL = "https://x.com/swamimalode";
 const GITHUB_URL = "https://github.com/swamimalode07/rare-ui";
+const SPONSOR_URL = "https://github.com/sponsors/swamimalode07";
+
+function SponsorSlot() {
+  return (
+    <a
+      href={SPONSOR_URL}
+      target="_blank"
+      rel="noreferrer"
+      className="group relative flex h-24 w-full items-center justify-center sm:h-32"
+    >
+      <span className="flex items-center gap-2.5 text-muted-foreground/70 transition-[opacity,transform] duration-150 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:scale-[0.98] group-hover:opacity-0">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          xmlns="http://www.w3.org/2000/svg"
+          className="size-4"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        <span className="text-sm font-medium">Your logo here</span>
+      </span>
+      <span className="absolute inset-0 flex translate-y-0.5 items-center justify-center gap-2 opacity-0 transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="font-runde text-sm font-semibold">
+          Take this slot
+        </span>
+        <span aria-hidden="true" className="text-[#FC4C01]">
+          &#10084;
+        </span>
+      </span>
+    </a>
+  );
+}
+
+function BackersSection() {
+  return (
+    <section className="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 py-24 text-center">
+      <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl">
+        Rare UI is backed and supported by the finest
+      </h2>
+      <div className="relative w-full border-y border-border">
+        <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 bg-background px-4 text-[11px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+          Backed by
+        </span>
+        <div className="grid w-full grid-cols-1 divide-y divide-border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <a
+            href="https://www.databuddy.cc"
+            target="_blank"
+            rel="noreferrer"
+            className="flex h-24 items-center justify-center sm:h-32"
+          >
+            <img
+              src="/logos/databuddydark.svg"
+              alt="Databuddy"
+              className="h-10 w-auto dark:hidden sm:h-12"
+            />
+            <img
+              src="/logos/databuddywhite.svg"
+              alt="Databuddy"
+              className="hidden h-10 w-auto dark:block sm:h-12"
+            />
+          </a>
+          <SponsorSlot />
+          <SponsorSlot />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function DemoSection() {
   return (
