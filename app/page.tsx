@@ -27,6 +27,28 @@ export default function Home() {
             <div>
               <GooeyNavbar />
             </div>
+            <div className="flex items-center gap-2 rounded-full bg-white/35 py-1.5 pl-4 pr-3.5 backdrop-blur-xl dark:bg-neutral-950/30">
+              <span className="font-runde text-sm font-medium text-black dark:text-white">
+                Backed by
+              </span>
+              <a
+                href="https://www.databuddy.cc"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Databuddy"
+              >
+                <img
+                  src="/logos/databuddydark.svg"
+                  alt="Databuddy"
+                  className="h-4.5 w-auto dark:hidden"
+                />
+                <img
+                  src="/logos/databuddywhite.svg"
+                  alt="Databuddy"
+                  className="hidden h-4.5 w-auto dark:block"
+                />
+              </a>
+            </div>
             <h1 className="max-w-4xl text-balance dark:text-white font-runde text-black text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               Tasteful Components, Made to Stand Out.
             </h1>
