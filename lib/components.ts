@@ -444,6 +444,83 @@ export function Demo() {
 // <ScrollProgress sections={sections} />`,
   },
   {
+    name: "Gravity Letters",
+    href: "/components/gravityletters",
+    registry: "gravity-letters",
+    description:
+      "A click-to-drop field where each click releases a random letter or number that falls, lands with a squash, and piles up into rolling hills.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/gravity-letters.tsx`,
+    interaction:
+      "Click or tap anywhere to drop a random glyph from that point. It falls with gravity, glides off steep spots toward lower ground, and lands with a soft squash — so repeated clicks grow rounded hills instead of towers. Set maxGlyphs to recycle old glyphs; when they fade out, anything left floating falls back down. Honors prefers-reduced-motion by placing glyphs directly on the pile.",
+    props: [
+      {
+        name: "type",
+        type: '"letters" | "numbers" | "both"',
+        default: '"letters"',
+        options: ["letters", "numbers", "both"],
+        description:
+          "What falls on click — a random letter, a random digit, or a random pick from both pools.",
+      },
+      {
+        name: "gravity",
+        type: "number",
+        default: "800",
+        description:
+          "Downward acceleration in px/s². Lower it for a floaty, moon-like fall; raise it for a heavy thud.",
+      },
+      {
+        name: "size",
+        type: "number",
+        default: "28",
+        description:
+          "Base font size in pixels. Each glyph randomizes around it (0.7×–1.3×) so the pile looks organic.",
+      },
+      {
+        name: "color",
+        type: "string",
+        default: '"currentColor"',
+        options: ["#1A73F2", "#FF3B30", "#F75001", "#34C759"],
+        control: "swatch",
+        optionColors: {
+          "#1A73F2": "#1A73F2",
+          "#FF3B30": "#FF3B30",
+          "#F75001": "#F75001",
+          "#34C759": "#34C759",
+        },
+        description:
+          "Any CSS color for the glyphs. Defaults to currentColor so they inherit the surrounding text color and follow your theme.",
+      },
+      {
+        name: "maxGlyphs",
+        type: "number",
+        default: "Infinity",
+        description:
+          "Optional cap on glyphs kept in the field. Unlimited by default — pass a number and once it's exceeded the oldest glyphs fade out, one per new drop.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description:
+          'Extra classes merged onto the root element (data-slot="gravity-letters") — use it to size the field.',
+      },
+    ],
+    usage: `import GravityLetters from "@/components/ui/gravity-letters"
+
+export function Demo() {
+  return (
+    <GravityLetters type="letters" className="h-96 w-full rounded-3xl border">
+      {/* anything you render inside stays clickable-through */}
+      <p className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
+        Click anywhere
+      </p>
+    </GravityLetters>
+  )
+}
+
+// Digits instead:
+// <GravityLetters type="numbers" />`,
+  },
+  {
     name: "Code Block",
     href: "/components/codeblock",
     registry: "code-block",

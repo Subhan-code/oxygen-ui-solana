@@ -114,6 +114,19 @@
       ]
     },
     {
+      "name": "gravity-letters",
+      "type": "registry:ui",
+      "title": "Gravity Letters",
+      "description": "A click-to-drop field where each click releases a random letter or number that falls, lands with a squash, and piles up into rolling hills.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/gravity-letters.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "code-block",
       "type": "registry:ui",
       "title": "Code Block",
