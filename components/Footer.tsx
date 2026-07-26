@@ -48,33 +48,25 @@ export default function Footer() {
       <div className="relative flex min-h-[85svh] flex-col px-6 sm:px-10">
         <div className="h-px w-full bg-white/10" />
 
-        <div className="grid grid-cols-1 gap-8 py-8 sm:grid-cols-3">
-          <Link href="/" className="flex h-fit w-fit items-center gap-2">
-            <img src="/logos/Rareui.svg" alt="" className="h-5 w-5" />
-            <span className="font-runde text-base font-semibold">Rare UI</span>
+        <div className="flex flex-wrap items-center justify-between gap-6 py-8">
+          <Link href="/" className="flex h-fit w-fit items-center gap-2.5">
+            <img src="/logos/Rareui.svg" alt="" className="h-8 w-8" />
+            <span className="font-runde text-2xl font-bold tracking-tight">
+              Rare UI
+            </span>
           </Link>
 
-          <nav className="flex flex-col gap-1">
+          <nav className="flex flex-wrap items-center gap-x-7 gap-y-2">
             {LINKS.map((link) => (
               <NavLink key={link.label} {...link} />
             ))}
           </nav>
-
-          <p className="max-w-xs text-sm text-white/50 sm:justify-self-end sm:text-right">
-            A collection of rare, ready-to-use components and animations for
-            your next project.
-          </p>
         </div>
 
-        <div className="h-px w-full bg-white/10" />
-
         <div className="flex flex-1 items-center py-16">
-          <Link
-            href="/components"
-            className="font-runde text-[clamp(3rem,12.5vw,10.5rem)] font-bold leading-[0.85] tracking-tight"
-          >
-            Browse Components
-          </Link>
+          <h2 className="font-runde text-[clamp(3rem,12.5vw,10.5rem)] font-bold leading-[0.92] tracking-tight">
+            Tasteful Components
+          </h2>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 pb-8 text-xs text-white/50">
