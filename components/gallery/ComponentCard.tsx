@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { ComponentItem } from "@/lib/components";
+import { cn } from "@/lib/utils";
 import PreviewFallback from "./PreviewFallback";
 import PreviewVideo from "./PreviewVideo";
 
@@ -22,7 +23,17 @@ const ArrowIcon = () => (
   </svg>
 );
 
-export default function ComponentCard({ item }: { item: ComponentItem }) {
+export default function ComponentCard({
+  item,
+  large = false,
+  autoPlay = false,
+  className,
+}: {
+  item: ComponentItem;
+  large?: boolean;
+  autoPlay?: boolean;
+  className?: string;
+}) {
   const [active, setActive] = useState(false);
 
   return (
@@ -32,15 +43,26 @@ export default function ComponentCard({ item }: { item: ComponentItem }) {
       onMouseLeave={() => setActive(false)}
       onFocus={() => setActive(true)}
       onBlur={() => setActive(false)}
-      className="group flex flex-col rounded-[32px] border border-black/[0.04] bg-[#F5F5F7] p-2 transition-colors duration-200 ease-out dark:border-transparent dark:border-apple dark:bg-[#121212] dark:hover:bg-muted"
+      className={cn(
+        "group flex flex-col rounded-[32px] border border-black/[0.04] bg-[#F5F5F7] p-2 transition-colors duration-200 ease-out dark:border-transparent dark:border-apple dark:bg-[#121212] dark:hover:bg-muted",
+        large && "lg:h-full",
+        className,
+      )}
       style={{ cornerShape: "squircle" } as React.CSSProperties}
     >
       <div
-        className="relative aspect-4/3 w-full overflow-hidden rounded-3xl border border-black/[0.06] bg-white dark:border-neutral-500/15 dark:bg-neutral-950"
+        className={cn(
+          "relative aspect-4/3 w-full overflow-hidden rounded-3xl border border-black/[0.06] bg-white dark:border-neutral-500/15 dark:bg-neutral-950",
+          large && "lg:aspect-auto lg:flex-1",
+        )}
         style={{ cornerShape: "squircle" } as React.CSSProperties}
       >
         {item.preview ? (
-          <PreviewVideo src={item.preview} playing={active} />
+          <PreviewVideo
+            src={item.preview}
+            playing={active}
+            autoPlay={autoPlay}
+          />
         ) : (
           <PreviewFallback />
         )}

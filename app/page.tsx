@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import { fetchStarCount } from "@/lib/github";
 import HeroCta from "@/components/HeroCta";
+import ComponentsShowcase from "@/components/ComponentsShowcase";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -66,8 +67,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      <ComponentsShowcase />
       <BackersSection />
-      <DemoSection />
+      {/* <DemoSection /> */}
       <Footer />
     </>
   );

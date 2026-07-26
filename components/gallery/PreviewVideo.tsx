@@ -5,17 +5,35 @@ import { useReducedMotion } from "motion/react";
 
 export default function PreviewVideo({
   src,
-  playing,
+  playing = false,
+  autoPlay = false,
 }: {
   src: string;
-  playing: boolean;
+  playing?: boolean;
+  autoPlay?: boolean;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const video = ref.current;
-    if (!video || reduceMotion) return;
+    if (!video || reduceMotion || !autoPlay) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [autoPlay, reduceMotion]);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || reduceMotion || autoPlay) return;
 
     if (playing) {
       video.play().catch(() => {});
@@ -24,7 +42,7 @@ export default function PreviewVideo({
 
     video.pause();
     video.currentTime = 0;
-  }, [playing, reduceMotion]);
+  }, [playing, autoPlay, reduceMotion]);
 
   return (
     <video

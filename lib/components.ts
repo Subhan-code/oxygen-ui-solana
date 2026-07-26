@@ -24,6 +24,7 @@ export type ComponentItem = {
   registry?: string;
   source?: string;
   preview?: string;
+  featured?: boolean;
   dependencies?: Dependency[];
   interaction?: string;
   usage?: string;
@@ -58,6 +59,7 @@ export const components: ComponentItem[] = [
       "An animated folder whose cards fan out on hover and lift open on click, with a 3D-tilted flap. Supports color and size (sm/md/lg) props.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/folder-component.tsx`,
     preview: "/componentdemos/foldercomponent.mp4",
+    featured: true,
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
     ],
@@ -224,6 +226,7 @@ export function Demo() {
       "A gooey, spring-animated picker for entering a duration in hours and minutes.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/duration-picker.tsx`,
     preview: "/componentdemos/durationpicker.mp4",
+    featured: true,
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
       { name: "figma-squircle" },
@@ -340,6 +343,7 @@ export function Demo() {
       "An animated WebGL orb with drifting fluid shading, inspired by ChatGPT's voice mode.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/fluid-orb.tsx`,
     preview: "/componentdemos/fluidorb.mp4",
+    featured: true,
     interaction:
       "Ambient — the color patches drift left, right, up, down and diagonally on their own, blending and reforming with no interaction required. Honors prefers-reduced-motion by holding a still frame.",
     props: [
@@ -566,6 +570,7 @@ export function Demo() {
       "A playful gravity field where letters, numbers, emoji, or any components you pass fall and pile up like real objects.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/gravity-letters.tsx`,
     preview: "/componentdemos/gravityletters.mp4",
+    featured: true,
     interaction:
       "Click or tap anywhere to drop a glyph, or press and hold to pour a steady stream. Glyphs tumble as they fall, bounce softly when they land, and pile up into rounded hills. On phones, tilt the device to spill the pile toward the low side. Honors prefers-reduced-motion.",
     props: [
@@ -672,6 +677,7 @@ export function Demo() {
       "A one-time-code input whose characters roll into place behind a caret that slides from slot to slot.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/otp-input.tsx`,
     preview: "/componentdemos/otpinput.mp4",
+    featured: true,
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
     ],
