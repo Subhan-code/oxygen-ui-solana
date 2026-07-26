@@ -23,6 +23,7 @@ export type ComponentItem = {
   description?: string;
   registry?: string;
   source?: string;
+  preview?: string;
   dependencies?: Dependency[];
   interaction?: string;
   usage?: string;
@@ -56,6 +57,7 @@ export const components: ComponentItem[] = [
     description:
       "An animated folder whose cards fan out on hover and lift open on click, with a 3D-tilted flap. Supports color and size (sm/md/lg) props.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/folder-component.tsx`,
+    preview: "/componentdemos/foldercomponent.mp4",
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
     ],
@@ -156,6 +158,7 @@ export function Demo() {
     description:
       "An interactive sidebar with proximity hover effects that appears while scrolling and responds to scroll intensity.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/proximity-sidebar.tsx`,
+    preview: "/componentdemos/proximitysidebar.mp4",
     dependencies: [{ name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) }],
     interaction:
       "Scroll through content to track the current section, then move the pointer near dashes to expand them and click to smooth-scroll to a section.",
@@ -219,6 +222,7 @@ export function Demo() {
     description:
       "A gooey, spring-animated picker for entering a duration in hours and minutes.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/duration-picker.tsx`,
+    preview: "/componentdemos/durationpicker.mp4",
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
       { name: "figma-squircle" },
@@ -334,6 +338,7 @@ export function Demo() {
     description:
       "An animated WebGL orb with drifting fluid shading, inspired by ChatGPT's voice mode.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/fluid-orb.tsx`,
+    preview: "/componentdemos/fluidorb.mp4",
     interaction:
       "Ambient — the color patches drift left, right, up, down and diagonally on their own, blending and reforming with no interaction required. Honors prefers-reduced-motion by holding a still frame.",
     props: [
@@ -557,6 +562,7 @@ export function Demo() {
     description:
       "A playful gravity field where letters, numbers, emoji, or any components you pass fall and pile up like real objects.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/gravity-letters.tsx`,
+    preview: "/componentdemos/gravityletters.mp4",
     interaction:
       "Click or tap anywhere to drop a glyph, or press and hold to pour a steady stream. Glyphs tumble as they fall, bounce softly when they land, and pile up into rounded hills. On phones, tilt the device to spill the pile toward the low side. Honors prefers-reduced-motion.",
     props: [
