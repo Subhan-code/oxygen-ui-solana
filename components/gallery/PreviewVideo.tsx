@@ -3,7 +3,13 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 
-export default function PreviewVideo({ src }: { src: string }) {
+export default function PreviewVideo({
+  src,
+  playing,
+}: {
+  src: string;
+  playing: boolean;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
 
@@ -11,17 +17,14 @@ export default function PreviewVideo({ src }: { src: string }) {
     const video = ref.current;
     if (!video || reduceMotion) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {});
-        else video.pause();
-      },
-      { threshold: 0.2 },
-    );
+    if (playing) {
+      video.play().catch(() => {});
+      return;
+    }
 
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, [reduceMotion]);
+    video.pause();
+    video.currentTime = 0;
+  }, [playing, reduceMotion]);
 
   return (
     <video

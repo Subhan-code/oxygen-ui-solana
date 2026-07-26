@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import type { ComponentItem } from "@/lib/components";
 import PreviewFallback from "./PreviewFallback";
@@ -12,7 +15,7 @@ const ArrowIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     xmlns="http://www.w3.org/2000/svg"
-    className="h-3.5 w-3.5"
+    className="h-5 w-5"
     aria-hidden="true"
   >
     <path d="M7 17 17 7M8 7h9v9" />
@@ -20,9 +23,15 @@ const ArrowIcon = () => (
 );
 
 export default function ComponentCard({ item }: { item: ComponentItem }) {
+  const [active, setActive] = useState(false);
+
   return (
     <Link
       href={item.href}
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onFocus={() => setActive(true)}
+      onBlur={() => setActive(false)}
       className="group flex flex-col rounded-[32px] border border-black/[0.04] bg-[#F5F5F7] p-2 transition-colors duration-200 ease-out dark:border-transparent dark:border-apple dark:bg-[#121212] dark:hover:bg-muted"
       style={{ cornerShape: "squircle" } as React.CSSProperties}
     >
@@ -30,7 +39,11 @@ export default function ComponentCard({ item }: { item: ComponentItem }) {
         className="relative aspect-4/3 w-full overflow-hidden rounded-3xl border border-black/[0.06] bg-white dark:border-neutral-500/15 dark:bg-neutral-950"
         style={{ cornerShape: "squircle" } as React.CSSProperties}
       >
-        {item.preview ? <PreviewVideo src={item.preview} /> : <PreviewFallback />}
+        {item.preview ? (
+          <PreviewVideo src={item.preview} playing={active} />
+        ) : (
+          <PreviewFallback />
+        )}
       </div>
 
       <div className="flex items-center justify-between gap-3 px-3 pb-1 pt-2">
@@ -44,7 +57,7 @@ export default function ComponentCard({ item }: { item: ComponentItem }) {
             </p>
           )} */}
         </div>
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white text-[#FC4C01] shadow-[0_1px_2px_rgba(0,0,0,0.06)] transition-colors duration-200 ease-out group-hover:bg-[#FC4C01] group-hover:text-white dark:bg-background dark:shadow-none">
+        <span className="flex shrink-0 items-center justify-center text-[#FC4C01]">
           <ArrowIcon />
         </span>
       </div>

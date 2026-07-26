@@ -100,6 +100,7 @@ export function Demo() {
     description:
       "A vertical navigation list with a bouncy, spring-animated active indicator.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/bounce-sidebar.tsx`,
+    preview: "/componentdemos/bouncesidebar.mp4",
     dependencies: [{ name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) }],
     interaction: "Click any item to spring the bouncing marker over to it.",
     props: [
@@ -387,6 +388,7 @@ export function Demo() {
     description:
       "A scroll progress pill that tracks reading position and expands into a squircle menu of sections you can jump to.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/scroll-progress.tsx`,
+    preview: "/componentdemos/scrollprogress.mp4",
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
     ],
@@ -455,6 +457,7 @@ export function Demo() {
     description:
       "A clean code block that builds its entire theme from a single accent color. Pass code and a hex, it does the rest.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/code-block.tsx`,
+    preview: "/componentdemos/codeblock.mp4",
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
       { name: "prism-react-renderer" },
@@ -668,6 +671,7 @@ export function Demo() {
     description:
       "A one-time-code input whose characters roll into place behind a caret that slides from slot to slot.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/otp-input.tsx`,
+    preview: "/componentdemos/otpinput.mp4",
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
     ],
