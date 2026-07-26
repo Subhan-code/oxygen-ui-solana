@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import { fetchStarCount } from "@/lib/github";
 import HeroCta from "@/components/HeroCta";
@@ -35,23 +36,24 @@ export default async function Home() {
               <span className="font-runde text-sm font-medium text-black dark:text-white">
                 Backed by
               </span>
-              <a
-                href="https://www.databuddy.cc"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Databuddy"
-              >
-                <img
-                  src="/logos/databuddydark.svg"
-                  alt="Databuddy"
-                  className="h-4.5 w-auto dark:hidden"
-                />
-                <img
-                  src="/logos/databuddywhite.svg"
-                  alt="Databuddy"
-                  className="hidden h-4.5 w-auto dark:block"
-                />
-              </a>
+              {BACKERS.map((backer, index) => (
+                <Fragment key={backer.name}>
+                  {index > 0 && (
+                    <span
+                      aria-hidden="true"
+                      className="h-3.5 w-px bg-black/20 dark:bg-white/20"
+                    />
+                  )}
+                  <a
+                    href={backer.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={backer.pillNudge}
+                  >
+                    <BackerLogo backer={backer} className={backer.pillHeight} />
+                  </a>
+                </Fragment>
+              ))}
             </div>
             <h1 className="max-w-4xl text-balance dark:text-white font-runde text-black text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               Tasteful Components, Made to Stand Out.
@@ -74,6 +76,60 @@ export default async function Home() {
 const X_URL = "https://x.com/swamimalode";
 const GITHUB_URL = "https://github.com/swamimalode07/rare-ui";
 const SPONSOR_URL = "https://github.com/sponsors/swamimalode07";
+
+type Backer = {
+  name: string;
+  href: string;
+  lightSrc: string;
+  darkSrc: string;
+  pillHeight: string;
+  cardHeight: string;
+  pillNudge?: string;
+};
+
+// mintlify's wordmark has a far larger x-height and sits higher in its artboard, so it needs its own size and baseline nudge
+const BACKERS: Backer[] = [
+  {
+    name: "Databuddy",
+    href: "https://www.databuddy.cc",
+    lightSrc: "/logos/databuddydark.svg",
+    darkSrc: "/logos/databuddywhite.svg",
+    pillHeight: "h-4.5",
+    cardHeight: "h-10 sm:h-12",
+  },
+  {
+    name: "Mintlify",
+    href: "https://mintlify.com",
+    lightSrc: "/logos/mintlifydark.png",
+    darkSrc: "/logos/mintlifylight.png",
+    pillHeight: "h-3.5",
+    cardHeight: "h-8 sm:h-9.5",
+    pillNudge: "translate-y-[2px]",
+  },
+];
+
+function BackerLogo({
+  backer,
+  className,
+}: {
+  backer: Backer;
+  className: string;
+}) {
+  return (
+    <>
+      <img
+        src={backer.lightSrc}
+        alt={backer.name}
+        className={`${className} w-auto dark:hidden`}
+      />
+      <img
+        src={backer.darkSrc}
+        alt={backer.name}
+        className={`hidden w-auto dark:block ${className}`}
+      />
+    </>
+  );
+}
 
 function SponsorSlot() {
   return (
@@ -123,24 +179,20 @@ function BackersSection() {
         Rare UI is backed and supported by the finest
       </h2>
       <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
-        <a
-          href="https://www.databuddy.cc"
-          target="_blank"
-          rel="noreferrer"
-          className="flex h-24 items-center justify-center rounded-3xl bg-card/60 transition-colors duration-150 ease-out hover:bg-card dark:bg-muted/60 dark:hover:bg-muted sm:h-32"
-        >
-          <img
-            src="/logos/databuddydark.svg"
-            alt="Databuddy"
-            className="h-10 w-auto dark:hidden sm:h-12"
-          />
-          <img
-            src="/logos/databuddywhite.svg"
-            alt="Databuddy"
-            className="hidden h-10 w-auto dark:block sm:h-12"
-          />
-        </a>
-        <SponsorSlot />
+        {BACKERS.map((backer) => (
+          <a
+            key={backer.name}
+            href={backer.href}
+            target="_blank"
+            rel="noreferrer"
+            className="flex h-24 items-center justify-center rounded-3xl bg-card/60 px-6 transition-colors duration-150 ease-out hover:bg-card dark:bg-muted/60 dark:hover:bg-muted sm:h-32"
+          >
+            <BackerLogo
+              backer={backer}
+              className={`${backer.cardHeight} max-w-full object-contain`}
+            />
+          </a>
+        ))}
         <SponsorSlot />
       </div>
     </section>
