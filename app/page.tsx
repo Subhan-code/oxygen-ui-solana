@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Fragment } from "react";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import { fetchStarCount } from "@/lib/github";
 import HeroCta from "@/components/HeroCta";
+import HeroIntro from "@/components/HeroIntro";
 import ComponentsShowcase from "@/components/ComponentsShowcase";
 import Footer from "@/components/Footer";
 
@@ -19,51 +19,26 @@ export default async function Home() {
     <>
       <section className="relative w-full p-1.5 md:p-2.5">
         <div
-          className="relative flex min-h-[calc(100svh-0.75rem)] w-full items-center justify-center overflow-hidden rounded-[45px] md:min-h-[calc(100svh-1.25rem)]"
+          className="relative flex min-h-[calc(100svh-0.75rem)] w-full items-center justify-center overflow-hidden rounded-[45px] border border-black/[0.04] bg-[#F5F5F7] dark:border-transparent dark:border-apple dark:bg-[#121212] md:min-h-[calc(100svh-1.25rem)]"
           style={{ cornerShape: "squircle" } as React.CSSProperties}
         >
+          <GooeyNavbar stars={stars} />
+
           <img
-            src="/assets/landing/herobg.webp"
+            src="/logos/Rareui.svg"
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 size-full rounded-[inherit] object-cover"
+            className="pointer-events-none absolute left-1/2 top-[68%] w-[min(88vw,860px)] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.05] [filter:brightness(0)] dark:opacity-[0.07] dark:[filter:brightness(0)_invert(1)]"
           />
-          <div className="pointer-events-none absolute inset-0 rounded-[inherit] bg-linear-to-t from-background from-6% to-transparent" />
-          <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pb-32 pt-24 text-center sm:gap-4 sm:px-6">
-            <div>
-              <GooeyNavbar stars={stars} />
-            </div>
-            <div className="flex items-center gap-2 rounded-full bg-white/35 py-1.5 pl-4 pr-3.5 backdrop-blur-xl dark:bg-neutral-950/30">
-              <span className="font-runde text-sm font-medium text-black dark:text-white">
-                Backed by
-              </span>
-              {BACKERS.map((backer, index) => (
-                <Fragment key={backer.name}>
-                  {index > 0 && (
-                    <span
-                      aria-hidden="true"
-                      className="h-3.5 w-px bg-black/20 dark:bg-white/20"
-                    />
-                  )}
-                  <a
-                    href={backer.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={backer.pillNudge}
-                  >
-                    <BackerLogo backer={backer} className={backer.pillHeight} />
-                  </a>
-                </Fragment>
-              ))}
-            </div>
-            <h1 className="max-w-4xl text-balance dark:text-white font-runde text-black text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Tasteful Components, Made to Stand Out.
-            </h1>
-            <p className="max-w-xl font-medium text-black/80 dark:text-white/80 sm:text-lg">
-              A collection of rare, animated components. Browse them in action
-              below and install any component with shadcn CLI.
-            </p>
-            <HeroCta />
+          <div className="pointer-events-none absolute inset-0 hidden rounded-[inherit] bg-[radial-gradient(120%_75%_at_50%_-5%,rgba(255,255,255,0.07),transparent_60%)] dark:block" />
+
+          <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pt-20 text-center sm:gap-4 sm:px-6">
+            <HeroIntro
+              headline="Tasteful Components, Made to Stand Out."
+              sub="A collection of rare, animated components. Browse them in action below and install any component with shadcn CLI."
+            >
+              <HeroCta />
+            </HeroIntro>
           </div>
         </div>
       </section>
@@ -84,19 +59,16 @@ type Backer = {
   href: string;
   lightSrc: string;
   darkSrc: string;
-  pillHeight: string;
   cardHeight: string;
-  pillNudge?: string;
 };
 
-// mintlify's wordmark has a far larger x-height and sits higher in its artboard, so it needs its own size and baseline nudge
+// mintlify's wordmark has a far larger x-height and sits higher in its artboard, so it needs its own size
 const BACKERS: Backer[] = [
   {
     name: "Databuddy",
     href: "https://www.databuddy.cc",
     lightSrc: "/logos/databuddydark.svg",
     darkSrc: "/logos/databuddywhite.svg",
-    pillHeight: "h-4.5",
     cardHeight: "h-10 sm:h-12",
   },
   {
@@ -104,9 +76,7 @@ const BACKERS: Backer[] = [
     href: "https://mintlify.com",
     lightSrc: "/logos/mintlifydark.png",
     darkSrc: "/logos/mintlifylight.png",
-    pillHeight: "h-3.5",
     cardHeight: "h-8 sm:h-9.5",
-    pillNudge: "translate-y-[2px]",
   },
 ];
 
