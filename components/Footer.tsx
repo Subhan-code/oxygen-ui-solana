@@ -19,10 +19,13 @@ const UTILITY_LINKS = [
   { label: "robots.txt", href: "/robots.txt" },
 ];
 
-const HOVER = "transition-colors duration-150 ease-out hover:text-white";
+const HOVER =
+  "transition-colors duration-150 ease-out hover:text-black dark:hover:text-white";
+
+const MUTED = "text-black/50 dark:text-white/50";
 
 function NavLink({ label, href, external }: FooterLink) {
-  const className = `w-fit text-lg text-white/50 ${HOVER}`;
+  const className = `w-fit text-lg ${MUTED} ${HOVER}`;
 
   if (external) {
     return (
@@ -41,12 +44,17 @@ function NavLink({ label, href, external }: FooterLink) {
 
 export default function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden bg-black text-white">
+    <footer className="relative w-full overflow-hidden bg-white text-black dark:bg-black dark:text-white">
       <FluidWave />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-linear-to-b from-white to-transparent dark:from-black" />
 
+<<<<<<< Updated upstream
       <div className="relative flex min-h-[85svh] flex-col px-6 sm:px-10">
         <div className="h-px w-full bg-white/10" />
+=======
+      <div className="relative mx-auto flex min-h-[85svh] w-full max-w-[96rem] flex-col px-6 pt-24 sm:px-10">
+        <div className="h-px w-full bg-black/10 dark:bg-white/10" />
+>>>>>>> Stashed changes
 
         <div className="flex flex-wrap items-center justify-between gap-6 py-8">
           <Link href="/" className="flex h-fit w-fit items-center gap-2.5">
@@ -69,13 +77,18 @@ export default function Footer() {
           </h2>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-8 text-xs text-white/50">
+        <div
+          className={`flex flex-wrap items-center justify-between gap-3 pb-8 text-xs ${MUTED}`}
+        >
           <span>Rare UI &copy; {new Date().getFullYear()}</span>
           <span className="flex items-center gap-2.5">
             {UTILITY_LINKS.map((link, index) => (
               <Fragment key={link.href}>
                 {index > 0 && (
-                  <span aria-hidden="true" className="text-white/25">
+                  <span
+                    aria-hidden="true"
+                    className="text-black/25 dark:text-white/25"
+                  >
                     &middot;
                   </span>
                 )}

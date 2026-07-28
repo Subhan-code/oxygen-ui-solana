@@ -68,10 +68,10 @@ void main() {
   // subtracting height tapers every tongue to a tip
   float e = clamp(f * 2.4 - uv.y * 2.3, 0.0, 1.0);
 
-  vec3 col = mix(vec3(0.0), u_color * 0.3, smoothstep(0.06, 0.5, e));
-  col = mix(col, u_color, smoothstep(0.5, 0.96, e));
+  // transparent so the footer background shows through in either theme; premultiplied to match the canvas compositor
+  float alpha = 0.3 * smoothstep(0.06, 0.5, e) + 0.7 * smoothstep(0.5, 0.96, e);
 
-  gl_FragColor = vec4(col, 1.0);
+  gl_FragColor = vec4(u_color * alpha, alpha);
 }
 `;
 
@@ -82,7 +82,7 @@ export default function FluidWave({ color = "#FC4C01" }: { color?: string }) {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext("webgl", { antialias: false, alpha: false });
+    const gl = canvas.getContext("webgl", { antialias: false, alpha: true });
     if (!gl) return;
 
     const compiled = createProgram(gl, VERT, FRAG);
