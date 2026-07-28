@@ -7,8 +7,6 @@ const spring = { type: "spring", stiffness: 300, damping: 22 } as const;
 
 const WORD_STEP = 0.045;
 
-// no opacity in here on purpose: motion serializes the hidden state into the ssr markup, so fading from
-// zero would leave the headline and the cta invisible if the bundle never runs
 const rise = {
   hidden: { y: 18, filter: "blur(10px)" },
   shown: { y: 0, filter: "blur(0px)" },

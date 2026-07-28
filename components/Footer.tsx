@@ -45,7 +45,7 @@ export default function Footer() {
       <FluidWave />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black to-transparent" />
 
-      <div className="relative flex min-h-[85svh] flex-col px-6 sm:px-10">
+      <div className="relative mx-auto flex min-h-[85svh] w-full max-w-[96rem] flex-col px-6 pt-24 sm:px-10">
         <div className="h-px w-full bg-white/10" />
 
         <div className="flex flex-wrap items-center justify-between gap-6 py-8">
