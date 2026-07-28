@@ -19,7 +19,7 @@ export default async function Home() {
     <>
       <section className="relative w-full p-1.5 md:p-2.5">
         <div
-          className="relative flex min-h-[calc(100svh-0.75rem)] w-full items-center justify-center overflow-hidden rounded-[45px] border border-black/[0.04] bg-[#F5F5F7] dark:border-transparent dark:border-apple dark:bg-[#121212] md:min-h-[calc(100svh-1.25rem)]"
+          className="relative flex min-h-[min(100svh_-_0.75rem,60rem)] w-full items-center justify-center overflow-hidden rounded-[45px] border border-black/[0.04] bg-[#F5F5F7] dark:border-transparent dark:border-apple dark:bg-[#121212] md:min-h-[min(100svh_-_1.25rem,60rem)]"
           style={{ cornerShape: "squircle" } as React.CSSProperties}
         >
           <GooeyNavbar stars={stars} />
@@ -142,7 +142,7 @@ function BackersSection() {
   return (
     <section
       id="sponsors"
-      className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-col items-center gap-12 px-6 py-24 text-center"
+      className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-col items-center gap-12 px-6 py-24 text-center md:py-32"
     >
       <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl">
         Rare UI is backed and supported by the finest
