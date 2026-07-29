@@ -49,6 +49,44 @@ export function componentPageMetadata(href: string): Metadata {
   };
 }
 
+export function componentJsonLd(href: string) {
+  const item = components.find((c) => c.href === href);
+  if (!item) return null;
+
+  const url = `${SITE_URL}${item.href}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Components",
+            item: `${SITE_URL}/components`,
+          },
+          { "@type": "ListItem", position: 3, name: item.name, item: url },
+        ],
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        name: item.name,
+        description: item.description,
+        url,
+        codeRepository: item.source ?? SITE_REPO,
+        programmingLanguage: "TypeScript",
+        runtimePlatform: "React",
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        license: "https://opensource.org/licenses/MIT",
+        author: { "@id": `${SITE_URL}/#organization` },
+      },
+    ],
+  };
+}
+
 export function siteJsonLd() {
   return {
     "@context": "https://schema.org",

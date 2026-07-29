@@ -1,11 +1,12 @@
-"use client";
+import type { Metadata } from "next";
+import Demo from "./demo";
 
-import FamilyDrawer from "@/components/ui/family-drawer";
+// unreleased: its entry in lib/components.ts is still commented out, so keep it out of the index
+export const metadata: Metadata = {
+  title: "Family Drawer",
+  robots: { index: false, follow: false },
+};
 
-export default function FamilyDrawerPage() {
-  return (
-    <div className="relative h-full w-full">
-      <FamilyDrawer />
-    </div>
-  );
+export default function Page() {
+  return <Demo />;
 }

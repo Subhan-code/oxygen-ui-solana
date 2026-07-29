@@ -16,11 +16,17 @@ type DescriptionContentProps = {
   className?: string;
 };
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({
+  as: Tag = "p",
+  children,
+}: {
+  as?: "p" | "h1" | "h2";
+  children: React.ReactNode;
+}) {
   return (
-    <p className="text-xs font-medium uppercase tracking-normal text-foreground/40">
+    <Tag className="text-xs font-medium uppercase tracking-normal text-foreground/40">
       {children}
-    </p>
+    </Tag>
   );
 }
 
@@ -32,7 +38,7 @@ export default function DescriptionContent({
   return (
     <div className={cn("flex flex-col gap-12 text-left", className)}>
       <div className="flex flex-col gap-4">
-        <SectionLabel>{item?.name ?? "Component"}</SectionLabel>
+        <SectionLabel as="h1">{item?.name ?? "Component"}</SectionLabel>
         <p className="text-2xl font-semibold leading-relaxed font-sans text-foreground/90">
           {item?.description ?? "This component is not available yet."}
         </p>
@@ -40,7 +46,7 @@ export default function DescriptionContent({
 
       {item?.dependencies && item.dependencies.length > 0 && (
         <div className="flex flex-col gap-3">
-          <SectionLabel>Dependencies</SectionLabel>
+          <SectionLabel as="h2">Dependencies</SectionLabel>
           <div className="flex flex-wrap gap-2">
             {item.dependencies.map((dep) => (
               <DependencyPill key={dep.name} name={dep.name} icon={dep.icon} />
@@ -51,7 +57,7 @@ export default function DescriptionContent({
 
       {item?.interaction && (
         <div className="flex flex-col gap-3">
-          <SectionLabel>Interaction Type</SectionLabel>
+          <SectionLabel as="h2">Interaction Type</SectionLabel>
           <p className="text-sm leading-relaxed text-foreground/70">
             {item.interaction}
           </p>
@@ -60,7 +66,7 @@ export default function DescriptionContent({
 
       {item?.props && item.props.length > 0 && (
         <div className="flex flex-col gap-3">
-          <SectionLabel>Props</SectionLabel>
+          <SectionLabel as="h2">Props</SectionLabel>
           <p className="-mt-1 text-sm leading-relaxed text-foreground/70">
             Options you can pass to customize this component.
           </p>
@@ -70,21 +76,21 @@ export default function DescriptionContent({
 
       {item?.registry && (
         <div className="flex flex-col gap-3">
-          <SectionLabel>Installation</SectionLabel>
+          <SectionLabel as="h2">Installation</SectionLabel>
           <InstallCommand item={item} />
         </div>
       )}
 
       {item?.usage && (
         <div className="flex flex-col gap-3">
-          <SectionLabel>How to use</SectionLabel>
+          <SectionLabel as="h2">How to use</SectionLabel>
           <PanelCode code={item.usage} className="rounded-lg p-4" />
         </div>
       )}
 
       {item?.registry && showSourceHint && (
         <div className="flex flex-col gap-3">
-          <SectionLabel>Source Code</SectionLabel>
+          <SectionLabel as="h2">Source Code</SectionLabel>
           <p className="text-sm leading-relaxed text-foreground/70">
             {PANEL_INFO.sourceHint}
           </p>
@@ -92,7 +98,7 @@ export default function DescriptionContent({
       )}
 
       <div className="flex flex-col gap-3">
-        <SectionLabel>Keep in mind</SectionLabel>
+        <SectionLabel as="h2">Keep in mind</SectionLabel>
         <p className="text-sm leading-relaxed text-foreground/70">
           {PANEL_INFO.keepInMind}
         </p>
@@ -100,7 +106,7 @@ export default function DescriptionContent({
 
       {item?.credits && item.credits.length > 0 && (
         <div className="flex flex-col gap-3">
-          <SectionLabel>Credits</SectionLabel>
+          <SectionLabel as="h2">Credits</SectionLabel>
 
           <ul className="flex flex-col gap-2 text-sm leading-relaxed text-foreground/70">
             {item.credits.map((credit) => (
@@ -114,7 +120,7 @@ export default function DescriptionContent({
       )}
 
       <div className="flex flex-col gap-3">
-        <SectionLabel>Contact</SectionLabel>
+        <SectionLabel as="h2">Contact</SectionLabel>
         <p className="text-sm leading-relaxed text-foreground/70">
           {PANEL_INFO.contactNote}
         </p>
@@ -144,7 +150,7 @@ export default function DescriptionContent({
       </div>
 
       <div className="flex flex-col gap-3">
-        <SectionLabel>License &amp; Usage</SectionLabel>
+        <SectionLabel as="h2">License &amp; Usage</SectionLabel>
         <ul className="flex flex-col gap-2 text-sm leading-relaxed text-foreground/70">
           {PANEL_INFO.license.map((line) => (
             <li key={line} className="flex gap-2">
