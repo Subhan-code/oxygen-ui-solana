@@ -4,12 +4,12 @@ import ComponentCard from "@/components/gallery/ComponentCard";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import { components } from "@/lib/components";
 import { fetchStarCount } from "@/lib/github";
-import { SITE_KEYWORDS } from "@/lib/seo";
+import { SITE_KEYWORDS, componentsJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Components",
   description:
-    "Browse every Rare UI component in action, then install any of them with the shadcn CLI.",
+    "Browse every Rare UI (RareUI) component in action — rare animated React components built with Tailwind CSS and Motion. Install any of them with the shadcn CLI.",
   keywords: SITE_KEYWORDS,
   alternates: {
     canonical: "/components",
@@ -21,6 +21,10 @@ export default async function ComponentsIndexPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(componentsJsonLd()) }}
+      />
       <GooeyNavbar stars={stars} />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-16 pt-32 sm:px-6 md:pt-40">

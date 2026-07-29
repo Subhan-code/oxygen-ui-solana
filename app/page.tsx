@@ -35,7 +35,7 @@ export default async function Home() {
           <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pb-20 pt-28 text-center sm:gap-4 sm:px-6">
             <HeroIntro
               headline="Tasteful Components, Made to Stand Out."
-              sub="A collection of rare, animated components. Browse them in action below and install any component with shadcn CLI."
+              sub="Rare UI is a free, open-source collection of rare animated React components. Browse them in action below and install any component with the shadcn CLI."
             >
               <HeroCta />
             </HeroIntro>
