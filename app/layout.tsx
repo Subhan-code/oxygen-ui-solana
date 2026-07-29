@@ -67,10 +67,11 @@ export const metadata: Metadata = {
     siteName: "Rare UI",
     images: [
       {
-        url: "/ogimage.png",
-        width: 1200,
-        height: 630,
+        url: "/ogimage.webp",
+        width: 2400,
+        height: 1260,
         alt: "Rare UI",
+        type: "image/webp",
       },
     ],
     type: "website",
@@ -79,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rare UI",
     description: "A shadcn registry of rare components.",
-    images: ["/ogimage.png"],
+    images: ["/ogimage.webp"],
   },
 };
 
