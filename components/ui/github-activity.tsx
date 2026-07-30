@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import {
   AnimatePresence,
   motion,
@@ -27,7 +28,12 @@ export type RepoContribution = {
 const DEFAULT_ACCENT = "#39d353";
 const DEFAULT_CELL_SIZE = 11;
 const DEFAULT_LABEL = "Top contributions in:";
+const DEFAULT_MONTHS = 12;
+const WEEKS_PER_MONTH = 365.25 / 12 / 7;
 const STACK_LIMIT = 3;
+
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const SPRING = { type: "spring", bounce: 0.2, duration: 0.62 } as const;
@@ -35,9 +41,41 @@ const HEADER_SPRING = { ...SPRING, bounce: 0.45 } as const;
 const ROW_SPRING = { ...SPRING, bounce: 0.26, delay: 0.08 } as const;
 const ROW_OFFSET = 16;
 const CELL_FADE = { duration: 0.2, ease: EASE_OUT } as const;
+const TOOLTIP_FADE = { duration: 0.14, ease: EASE_OUT } as const;
+const TOOLTIP_EDGE = 8;
 const COLUMN_STAGGER = 0.012;
 
 const LEVELS = [0, 1, 2, 3, 4] as const;
+
+const MONTH_NAMES = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+function toMonthLabels(weeks: Contribution[][]) {
+  let previous = "";
+  return weeks.map((week, index) => {
+    const date = week[0]?.date;
+    if (!date) return null;
+
+    const month = date.slice(5, 7);
+    const changed = month !== previous;
+    previous = month;
+
+    if (!changed || index > weeks.length - 3) return null;
+    return MONTH_NAMES[Number(month) - 1] ?? null;
+  });
+}
 
 const LEVEL_OPACITY: Record<ContributionLevel, number> = {
   0: 0,
@@ -48,6 +86,117 @@ const LEVEL_OPACITY: Record<ContributionLevel, number> = {
 };
 
 type LevelStyle = { backgroundColor: string; opacity: number };
+
+type HoveredDay = { day: Contribution; x: number; y: number };
+
+const DATE_FORMAT = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+
+function describeDay({ count, date }: Contribution) {
+  const noun = count === 1 ? "contribution" : "contributions";
+  return `${count} ${noun} on ${DATE_FORMAT.format(new Date(`${date}T00:00:00`))}`;
+}
+
+const CALENDAR_API = "https://github-contributions-api.jogruber.de/v4";
+const EVENTS_API = "https://api.github.com/users";
+
+type ApiDay = { date: string; count: number; level: number };
+type PushEvent = {
+  type: string;
+  repo?: { name: string };
+  payload?: { commits?: unknown[] };
+};
+
+async function fetchCalendar(login: string) {
+  const res = await fetch(`${CALENDAR_API}/${login}?y=last`);
+  if (!res.ok) return null;
+
+  const days: ApiDay[] = (await res.json())?.contributions ?? [];
+  if (!days.length) return null;
+
+  // columns are weeks, so the first day has to be a sunday or every column shears
+  const start = days.findIndex(
+    (day) => new Date(`${day.date}T00:00:00Z`).getUTCDay() === 0,
+  );
+
+  return days.slice(start < 0 ? 0 : start).map<Contribution>((day) => ({
+    date: day.date,
+    count: day.count,
+    level: Math.min(4, Math.max(0, day.level)) as ContributionLevel,
+  }));
+}
+
+async function fetchRepos(login: string): Promise<RepoContribution[]> {
+  const res = await fetch(`${EVENTS_API}/${login}/events/public?per_page=100`);
+  if (!res.ok) return [];
+
+  const events: PushEvent[] = await res.json();
+  const counts = new Map<string, number>();
+
+  for (const event of events) {
+    if (event.type !== "PushEvent" || !event.repo) continue;
+    const commits = event.payload?.commits?.length ?? 1;
+    counts.set(event.repo.name, (counts.get(event.repo.name) ?? 0) + commits);
+  }
+
+  return [...counts.entries()]
+    .sort(([, a], [, b]) => b - a)
+    .slice(0, STACK_LIMIT)
+    .map(([fullName, count]) => {
+      const [owner, name] = fullName.split("/");
+      return {
+        name,
+        count,
+        href: `https://github.com/${fullName}`,
+        // github has no repo logo, only an owner avatar, so own repos use the initial
+        logo:
+          owner.toLowerCase() === login.toLowerCase() ? undefined : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={`https://github.com/${owner}.png?size=64`} alt="" />
+          ),
+      };
+    });
+}
+
+function useGitHubUser(login?: string) {
+  const [data, setData] = React.useState<{
+    contributions: Contribution[];
+    repos: RepoContribution[];
+  }>();
+
+  React.useEffect(() => {
+    if (!login) return;
+    let active = true;
+
+    Promise.all([fetchCalendar(login), fetchRepos(login)])
+      .then(([contributions, repos]) => {
+        if (active && contributions) setData({ contributions, repos });
+      })
+      .catch(() => {});
+
+    return () => {
+      active = false;
+    };
+  }, [login]);
+
+  return data;
+}
+
+function emptyDays(weeks: number): Contribution[] {
+  const today = new Date();
+  return Array.from({ length: weeks * 7 }, (_, i) => {
+    const date = new Date(today);
+    date.setDate(date.getDate() - (weeks * 7 - 1 - i));
+    return {
+      date: date.toISOString().slice(0, 10),
+      count: 0,
+      level: 0 as ContributionLevel,
+    };
+  });
+}
 
 function toScale(accent: string | string[]): LevelStyle[] {
   if (typeof accent === "string") {
@@ -72,53 +221,163 @@ function toWeeks(contributions: Contribution[]) {
   return weeks;
 }
 
+function useFittedColumns(cellSize: number, gap: number) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [columns, setColumns] = React.useState<number>();
+
+  useIsoLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const measure = () =>
+      setColumns(
+        Math.max(1, Math.floor((el.clientWidth + gap) / (cellSize + gap))),
+      );
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [cellSize, gap]);
+
+  return [ref, columns] as const;
+}
+
+const Tooltip = ({
+  hovered,
+  reduceMotion,
+}: {
+  hovered: HoveredDay;
+  reduceMotion: boolean | null;
+}) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [left, setLeft] = React.useState(hovered.x);
+
+  useIsoLayoutEffect(() => {
+    const half = (ref.current?.offsetWidth ?? 0) / 2;
+    const edge = TOOLTIP_EDGE + half;
+    setLeft(Math.min(Math.max(hovered.x, edge), window.innerWidth - edge));
+  }, [hovered]);
+
+  return createPortal(
+    <div
+      className="pointer-events-none fixed z-50"
+      style={{
+        left,
+        top: hovered.y,
+        transform: "translate(-50%, calc(-100% - 8px))",
+      }}
+    >
+      <motion.div
+        ref={ref}
+        className="whitespace-nowrap rounded-lg bg-foreground px-2 py-1 text-[11px] font-medium text-background shadow-md"
+        initial={reduceMotion ? false : { opacity: 0, scale: 0.94 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.94 }}
+        transition={reduceMotion ? { duration: 0 } : TOOLTIP_FADE}
+      >
+        {describeDay(hovered.day)}
+      </motion.div>
+    </div>,
+    document.body,
+  );
+};
+
 const ContributionGrid = ({
   contributions,
   scale,
   cellSize,
+  months,
+  showMonths,
   label,
   reduceMotion,
 }: {
   contributions: Contribution[];
   scale: LevelStyle[];
   cellSize: number;
+  months: number;
+  showMonths: boolean;
   label: string;
   reduceMotion: boolean | null;
 }) => {
   const weeks = React.useMemo(() => toWeeks(contributions), [contributions]);
   const gap = Math.max(2, Math.round(cellSize / 4));
+  const [ref, columns] = useFittedColumns(cellSize, gap);
+  const [hovered, setHovered] = React.useState<HoveredDay>();
+
+  const cap = Math.min(weeks.length, Math.ceil(months * WEEKS_PER_MONTH));
+  const visible = weeks.slice(-Math.min(cap, columns ?? cap));
+
+  const hover = (day: Contribution) => (event: React.PointerEvent) => {
+    const cell = event.currentTarget.getBoundingClientRect();
+    setHovered({ day, x: cell.left + cell.width / 2, y: cell.top });
+  };
 
   return (
     <div
+      ref={ref}
       data-slot="github-activity-grid"
       role="img"
       aria-label={label}
-      className="flex overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      style={{ gap }}
+      className="relative"
     >
-      {weeks.map((week, weekIndex) => (
-        <div key={weekIndex} className="flex flex-col" style={{ gap }}>
-          {week.map((day) => (
-            <motion.div
-              key={day.date}
-              title={`${day.count} on ${day.date}`}
-              className="shrink-0 rounded-[3px] bg-foreground/[0.08]"
-              style={{ width: cellSize, height: cellSize }}
-              initial={reduceMotion ? false : { opacity: 0, scale: 0.4 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                ...CELL_FADE,
-                delay: reduceMotion ? 0 : weekIndex * COLUMN_STAGGER,
-              }}
+      {showMonths && (
+        <div className="flex justify-center" style={{ gap, marginBottom: gap }}>
+          {toMonthLabels(visible).map((month, index) => (
+            <div
+              key={index}
+              className="relative h-3 shrink-0"
+              style={{ width: cellSize }}
             >
-              <div
-                className="h-full w-full rounded-[3px]"
-                style={scale[day.level] ?? scale[0]}
-              />
-            </motion.div>
+              {month && (
+                <span className="absolute left-0 top-0 text-[10px] leading-none text-foreground/40">
+                  {month}
+                </span>
+              )}
+            </div>
           ))}
         </div>
-      ))}
+      )}
+
+      <div
+        className="flex justify-center overflow-hidden"
+        style={{ gap }}
+        onPointerLeave={() => setHovered(undefined)}
+      >
+        {visible.map((week, weekIndex) => (
+          <div key={weekIndex} className="flex flex-col" style={{ gap }}>
+            {week.map((day) => (
+              <motion.div
+                key={day.date}
+                onPointerEnter={hover(day)}
+                className="shrink-0 rounded-[3px] bg-foreground/[0.08]"
+                style={{ width: cellSize, height: cellSize }}
+                initial={reduceMotion ? false : { opacity: 0, scale: 0.4 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  ...CELL_FADE,
+                  delay: reduceMotion ? 0 : weekIndex * COLUMN_STAGGER,
+                }}
+              >
+                <div
+                  className="h-full w-full rounded-[3px]"
+                  style={scale[day.level] ?? scale[0]}
+                />
+              </motion.div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {hovered && (
+          <Tooltip
+            key="tooltip"
+            hovered={hovered}
+            reduceMotion={reduceMotion}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -138,7 +397,7 @@ const Avatar = ({
     layoutId={layoutId}
     transition={transition}
     className={cn(
-      "grid size-7 shrink-0 place-items-center overflow-hidden rounded-full bg-foreground/10 text-[11px] font-medium uppercase text-foreground/70 ring-2 ring-background",
+      "grid size-7 shrink-0 place-items-center overflow-hidden rounded-full bg-neutral-200 text-[11px] font-medium uppercase text-foreground/70 ring-2 ring-background dark:bg-neutral-800",
       "[&_img]:size-full [&_img]:object-cover [&_svg]:size-full",
       className,
     )}
@@ -206,11 +465,14 @@ const Chevron = ({
 );
 
 export type GitHubActivityProps = React.ComponentProps<"div"> & {
+  username?: string;
   contributions?: Contribution[];
   repos?: RepoContribution[];
   year?: number;
   accent?: string | string[];
   cellSize?: number;
+  months?: number;
+  showMonths?: boolean;
   label?: string;
   defaultOpen?: boolean;
   open?: boolean;
@@ -219,11 +481,14 @@ export type GitHubActivityProps = React.ComponentProps<"div"> & {
 
 const GitHubActivity = ({
   className,
-  contributions = [],
-  repos = [],
+  username,
+  contributions: contributionsProp = [],
+  repos: reposProp = [],
   year,
   accent = DEFAULT_ACCENT,
   cellSize = DEFAULT_CELL_SIZE,
+  months = DEFAULT_MONTHS,
+  showMonths = false,
   label = DEFAULT_LABEL,
   defaultOpen = false,
   open: openProp,
@@ -239,6 +504,18 @@ const GitHubActivity = ({
     if (openProp === undefined) setOpenState(!open);
     onOpenChange?.(!open);
   };
+
+  const needsFetch = !contributionsProp.length || !reposProp.length;
+  const fetched = useGitHubUser(needsFetch ? username : undefined);
+  const placeholder = React.useMemo(
+    () => (username ? emptyDays(Math.ceil(months * WEEKS_PER_MONTH)) : []),
+    [username, months],
+  );
+
+  const contributions = contributionsProp.length
+    ? contributionsProp
+    : (fetched?.contributions ?? placeholder);
+  const repos = reposProp.length ? reposProp : (fetched?.repos ?? []);
 
   const scale = React.useMemo(() => toScale(accent), [accent]);
   const transition = reduceMotion ? { duration: 0 } : SPRING;
@@ -279,6 +556,8 @@ const GitHubActivity = ({
         contributions={contributions}
         scale={scale}
         cellSize={cellSize}
+        months={months}
+        showMonths={showMonths}
         label={heading}
         reduceMotion={reduceMotion}
       />

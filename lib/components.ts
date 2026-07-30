@@ -797,12 +797,17 @@ export function Demo() {
       "Cells sweep in column by column on mount. The footer shows the top repository avatars stacked; click the chevron and the panel springs open over the grid, the logos flying out of the stack into their rows while the names and counts kick up and left. Closing runs the same path in reverse.",
     props: [
       {
+        name: "username",
+        type: "string",
+        description:
+          "A GitHub handle. The component fetches that user's last year of contributions and their top repositories on its own, no token or API key. Anything you pass through contributions or repos wins over the fetch.",
+      },
+      {
         name: "contributions",
         type: "Contribution[]",
         default: "[]",
-        required: true,
         description:
-          "Days to plot, oldest first. Each entry needs a date, a count, and a level from 0 to 4 that picks the shade.",
+          "Days to plot, oldest first. Each entry needs a date, a count, and a level from 0 to 4 that picks the shade. Use this instead of username to supply your own data.",
       },
       {
         name: "repos",
@@ -830,6 +835,20 @@ export function Demo() {
         default: "11",
         description:
           "Cell width and height in pixels. The gap between cells scales with it.",
+      },
+      {
+        name: "months",
+        type: "number",
+        default: "12",
+        description:
+          "Upper limit on how much history to show. The grid measures its own width and drops the oldest columns that don't fit, so a narrow card shows only the most recent months and a wide one fills up to this many.",
+      },
+      {
+        name: "showMonths",
+        type: "boolean",
+        default: "false",
+        description:
+          "Adds a row of month names above the grid, one at each month boundary.",
       },
       {
         name: "label",
@@ -864,18 +883,13 @@ export function Demo() {
     usage: `import GitHubActivity from "@/components/ui/github-activity"
 
 export function Demo() {
-  return (
-    <GitHubActivity
-      contributions={contributions}
-      repos={[{ name: "Zero mail", count: 412, logo: <ZeroIcon /> }]}
-      accent="#39d353"
-    />
-  )
+  return <GitHubActivity username="swamimalode07" />
 }
 
-// or pick every shade yourself
+// or pass everything yourself
 <GitHubActivity
   contributions={contributions}
+  repos={[{ name: "Zero mail", count: 412, logo: <ZeroIcon /> }]}
   accent={["#0e4429", "#006d32", "#26a641", "#39d353"]}
 />`,
   },
