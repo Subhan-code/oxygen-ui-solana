@@ -26,6 +26,7 @@ export type RepoContribution = {
 
 const DEFAULT_ACCENT = "#39d353";
 const DEFAULT_CELL_SIZE = 11;
+const DEFAULT_LABEL = "Top contributions in:";
 const STACK_LIMIT = 3;
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
@@ -36,6 +37,8 @@ const ROW_OFFSET = 16;
 const CELL_FADE = { duration: 0.2, ease: EASE_OUT } as const;
 const COLUMN_STAGGER = 0.012;
 
+const LEVELS = [0, 1, 2, 3, 4] as const;
+
 const LEVEL_OPACITY: Record<ContributionLevel, number> = {
   0: 0,
   1: 0.3,
@@ -43,6 +46,23 @@ const LEVEL_OPACITY: Record<ContributionLevel, number> = {
   3: 0.76,
   4: 1,
 };
+
+type LevelStyle = { backgroundColor: string; opacity: number };
+
+function toScale(accent: string | string[]): LevelStyle[] {
+  if (typeof accent === "string") {
+    return LEVELS.map((level) => ({
+      backgroundColor: accent,
+      opacity: LEVEL_OPACITY[level],
+    }));
+  }
+
+  const colors = accent.length > 4 ? accent : ["transparent", ...accent];
+  return LEVELS.map((level) => {
+    const color = colors[level] ?? colors.at(-1) ?? "transparent";
+    return { backgroundColor: color, opacity: color === "transparent" ? 0 : 1 };
+  });
+}
 
 function toWeeks(contributions: Contribution[]) {
   const weeks: Contribution[][] = [];
@@ -54,13 +74,13 @@ function toWeeks(contributions: Contribution[]) {
 
 const ContributionGrid = ({
   contributions,
-  accent,
+  scale,
   cellSize,
   label,
   reduceMotion,
 }: {
   contributions: Contribution[];
-  accent: string;
+  scale: LevelStyle[];
   cellSize: number;
   label: string;
   reduceMotion: boolean | null;
@@ -93,10 +113,7 @@ const ContributionGrid = ({
             >
               <div
                 className="h-full w-full rounded-[3px]"
-                style={{
-                  backgroundColor: accent,
-                  opacity: LEVEL_OPACITY[day.level],
-                }}
+                style={scale[day.level] ?? scale[0]}
               />
             </motion.div>
           ))}
@@ -192,9 +209,12 @@ export type GitHubActivityProps = React.ComponentProps<"div"> & {
   contributions?: Contribution[];
   repos?: RepoContribution[];
   year?: number;
-  accent?: string;
+  accent?: string | string[];
   cellSize?: number;
+  label?: string;
   defaultOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
 const GitHubActivity = ({
@@ -204,12 +224,23 @@ const GitHubActivity = ({
   year,
   accent = DEFAULT_ACCENT,
   cellSize = DEFAULT_CELL_SIZE,
+  label = DEFAULT_LABEL,
   defaultOpen = false,
+  open: openProp,
+  onOpenChange,
   ...props
 }: GitHubActivityProps) => {
   const reduceMotion = useReducedMotion();
   const uid = React.useId();
-  const [open, setOpen] = React.useState(defaultOpen);
+  const [openState, setOpenState] = React.useState(defaultOpen);
+
+  const open = openProp ?? openState;
+  const toggle = () => {
+    if (openProp === undefined) setOpenState(!open);
+    onOpenChange?.(!open);
+  };
+
+  const scale = React.useMemo(() => toScale(accent), [accent]);
   const transition = reduceMotion ? { duration: 0 } : SPRING;
   const headerTransition = reduceMotion ? { duration: 0 } : HEADER_SPRING;
   const rowTransition = reduceMotion ? { duration: 0 } : ROW_SPRING;
@@ -240,11 +271,13 @@ const GitHubActivity = ({
       )}
       {...props}
     >
-      <p className="mb-4 text-base font-medium text-foreground px-1.5">{heading}</p>
+      <p className="mb-4 text-base font-medium text-foreground px-1.5">
+        {heading}
+      </p>
 
       <ContributionGrid
         contributions={contributions}
-        accent={accent}
+        scale={scale}
         cellSize={cellSize}
         label={heading}
         reduceMotion={reduceMotion}
@@ -268,9 +301,7 @@ const GitHubActivity = ({
             transition={headerTransition}
             className="flex items-center justify-between gap-3 py-3 px-4"
           >
-            <span className="truncate text-sm text-foreground">
-              Top contributions in:
-            </span>
+            <span className="truncate text-sm text-foreground">{label}</span>
 
             <div className="flex items-center gap-3">
               {!open && (
@@ -289,7 +320,7 @@ const GitHubActivity = ({
 
               <button
                 type="button"
-                onClick={() => setOpen((v) => !v)}
+                onClick={toggle}
                 aria-expanded={open}
                 aria-controls={`${uid}-panel`}
                 aria-label={

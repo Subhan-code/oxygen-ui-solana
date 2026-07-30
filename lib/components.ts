@@ -819,10 +819,10 @@ export function Demo() {
       },
       {
         name: "accent",
-        type: "string",
+        type: "string | string[]",
         default: '"#39d353"',
         description:
-          "Any CSS color for the filled cells. Levels 1 to 4 render it at 30%, 52%, 76%, and 100% opacity.",
+          "One CSS color drives the whole scale: levels 1 to 4 render it at 30%, 52%, 76%, and 100% opacity. Pass an array to pick the colors yourself, four entries for levels 1 to 4, or five to set the empty cell too.",
       },
       {
         name: "cellSize",
@@ -832,10 +832,28 @@ export function Demo() {
           "Cell width and height in pixels. The gap between cells scales with it.",
       },
       {
+        name: "label",
+        type: "string",
+        default: '"Top contributions in:"',
+        description: "Text shown in the footer bar next to the avatars.",
+      },
+      {
         name: "defaultOpen",
         type: "boolean",
         default: "false",
-        description: "Starts with the repository panel expanded.",
+        description:
+          "Starts with the repository panel expanded. Ignored when open is set.",
+      },
+      {
+        name: "open",
+        type: "boolean",
+        description:
+          "Panel state for controlled usage. When set, the component stops managing its own state.",
+      },
+      {
+        name: "onOpenChange",
+        type: "(open: boolean) => void",
+        description: "Fires with the next state whenever the chevron is clicked.",
       },
       {
         name: "className",
@@ -850,9 +868,16 @@ export function Demo() {
     <GitHubActivity
       contributions={contributions}
       repos={[{ name: "Zero mail", count: 412, logo: <ZeroIcon /> }]}
+      accent="#39d353"
     />
   )
-}`,
+}
+
+// or pick every shade yourself
+<GitHubActivity
+  contributions={contributions}
+  accent={["#0e4429", "#006d32", "#26a641", "#39d353"]}
+/>`,
   },
   // {
   //   name: "Family drawer",
