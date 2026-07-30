@@ -782,7 +782,78 @@ export function Demo() {
     />
   )
 }`,
-  }
+  },
+  {
+    name: "GitHub activity",
+    href: "/components/githubactivity",
+    registry: "github-activity",
+    description:
+      "A contribution heatmap with a footer panel that expands over the grid to rank your top repositories.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/github-activity.tsx`,
+    dependencies: [
+      { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
+    ],
+    interaction:
+      "Cells sweep in column by column on mount. The footer shows the top repository avatars stacked; click the chevron and the panel springs open over the grid, the logos flying out of the stack into their rows while the names and counts kick up and left. Closing runs the same path in reverse.",
+    props: [
+      {
+        name: "contributions",
+        type: "Contribution[]",
+        default: "[]",
+        required: true,
+        description:
+          "Days to plot, oldest first. Each entry needs a date, a count, and a level from 0 to 4 that picks the shade.",
+      },
+      {
+        name: "repos",
+        type: "RepoContribution[]",
+        default: "[]",
+        description:
+          "Repositories for the footer, highest first, each with a name and count plus an optional logo node and href. The first three fill the collapsed stack, a repo with no logo falls back to its first letter, and an empty array drops the footer.",
+      },
+      {
+        name: "year",
+        type: "number",
+        description:
+          "Year shown in the heading. Defaults to the year of the last contribution.",
+      },
+      {
+        name: "accent",
+        type: "string",
+        default: '"#39d353"',
+        description:
+          "Any CSS color for the filled cells. Levels 1 to 4 render it at 30%, 52%, 76%, and 100% opacity.",
+      },
+      {
+        name: "cellSize",
+        type: "number",
+        default: "11",
+        description:
+          "Cell width and height in pixels. The gap between cells scales with it.",
+      },
+      {
+        name: "defaultOpen",
+        type: "boolean",
+        default: "false",
+        description: "Starts with the repository panel expanded.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Extra classes for the card that wraps the grid.",
+      },
+    ],
+    usage: `import GitHubActivity from "@/components/ui/github-activity"
+
+export function Demo() {
+  return (
+    <GitHubActivity
+      contributions={contributions}
+      repos={[{ name: "Zero mail", count: 412, logo: <ZeroIcon /> }]}
+    />
+  )
+}`,
+  },
   // {
   //   name: "Family drawer",
   //   href: "/components/familydrawer",

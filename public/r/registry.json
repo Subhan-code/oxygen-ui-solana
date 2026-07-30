@@ -153,6 +153,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "github-activity",
+      "type": "registry:ui",
+      "title": "GitHub Activity",
+      "description": "A contribution heatmap with a footer panel that expands over the grid to rank your top repositories.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/github-activity.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
