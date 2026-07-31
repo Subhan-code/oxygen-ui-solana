@@ -31,6 +31,10 @@ const DEFAULT_LABEL = "Top contributions in:";
 const DEFAULT_MONTHS = 12;
 const WEEKS_PER_MONTH = 365.25 / 12 / 7;
 const STACK_LIMIT = 3;
+const CARD_PADDING = 32;
+const MIN_CARD_WIDTH = 320;
+
+const gapFor = (cellSize: number) => Math.max(2, Math.round(cellSize / 4));
 
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
@@ -301,7 +305,7 @@ const ContributionGrid = ({
   reduceMotion: boolean | null;
 }) => {
   const weeks = React.useMemo(() => toWeeks(contributions), [contributions]);
-  const gap = Math.max(2, Math.round(cellSize / 4));
+  const gap = gapFor(cellSize);
   const [ref, columns] = useFittedColumns(cellSize, gap);
   const [hovered, setHovered] = React.useState<HoveredDay>();
 
@@ -493,6 +497,7 @@ const GitHubActivity = ({
   defaultOpen = false,
   open: openProp,
   onOpenChange,
+  style,
   ...props
 }: GitHubActivityProps) => {
   const reduceMotion = useReducedMotion();
@@ -538,14 +543,25 @@ const GitHubActivity = ({
   const displayYear = year ?? (Number.isFinite(parsedYear) ? parsedYear : null);
   const heading = `${total} contributions${displayYear ? ` in ${displayYear}` : ""}`;
 
+  const gap = gapFor(cellSize);
+  const columns = Math.min(
+    Math.ceil(contributions.length / 7),
+    Math.ceil(months * WEEKS_PER_MONTH),
+  );
+  const width = Math.max(
+    MIN_CARD_WIDTH,
+    columns * (cellSize + gap) - gap + CARD_PADDING,
+  );
+
   return (
     <div
       data-slot="github-activity"
       className={cn(
-        "relative w-full max-w-md overflow-hidden rounded-[28px] bg-white p-4 dark:bg-black",
+        "relative max-w-full overflow-hidden rounded-[28px] bg-white p-4 dark:bg-black",
         repos.length > 0 && "pb-[76px]",
         className,
       )}
+      style={{ width, ...style }}
       {...props}
     >
       <p className="mb-4 text-base font-medium text-foreground px-1.5">

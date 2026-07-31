@@ -158,7 +158,7 @@
       "name": "github-activity",
       "type": "registry:ui",
       "title": "GitHub Activity",
-      "description": "A contribution heatmap with a footer panel that expands over the grid to rank your top repositories.",
+      "description": "A contribution heatmap that fills any width, ranking your top repositories beside the grid on wide cards and in an expanding footer panel on narrow ones.",
       "dependencies": ["motion"],
       "registryDependencies": ["utils"],
       "files": [
