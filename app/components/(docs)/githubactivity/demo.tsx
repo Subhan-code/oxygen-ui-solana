@@ -155,7 +155,13 @@ const repos: RepoContribution[] = [
 export default function GitHubActivityDemo() {
   return (
     <div className="flex h-full items-center justify-center p-6">
-      <GitHubActivity contributions={contributions} repos={repos} className="max-w-md" year={2025} showMonths={true}/>
+      <GitHubActivity
+        contributions={contributions}
+        repos={repos}
+        className="max-w-md"
+        year={2025}
+        showMonths={true}
+      />
     </div>
   );
 }

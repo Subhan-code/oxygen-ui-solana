@@ -31,10 +31,15 @@ const DEFAULT_LABEL = "Top contributions in:";
 const DEFAULT_MONTHS = 12;
 const WEEKS_PER_MONTH = 365.25 / 12 / 7;
 const STACK_LIMIT = 3;
-const CARD_PADDING = 32;
 const MIN_CARD_WIDTH = 320;
+const MIN_LABEL_WEEKS = 3;
+// the p-4 on the card, both sides; the width math below has to add it back
+const CARD_PADDING = 32;
 
 const gapFor = (cellSize: number) => Math.max(2, Math.round(cellSize / 4));
+// never zero: weeks.slice(-0) would hand back the whole history instead of nothing
+const weeksFor = (months: number) =>
+  Math.max(1, Math.ceil(months * WEEKS_PER_MONTH));
 
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
@@ -69,18 +74,20 @@ const MONTH_NAMES = [
 ];
 
 function toMonthLabels(weeks: Contribution[][]) {
-  let previous = "";
-  return weeks.map((week, index) => {
-    const date = week[0]?.date;
-    if (!date) return null;
+  const labels: (string | null)[] = weeks.map(() => null);
+  const monthAt = (index: number) => weeks[index]?.[0]?.date.slice(5, 7);
 
-    const month = date.slice(5, 7);
-    const changed = month !== previous;
-    previous = month;
+  let start = 0;
+  for (let i = 1; i <= weeks.length; i++) {
+    if (i < weeks.length && monthAt(i) === monthAt(start)) continue;
+    // a shorter run is narrower than the label itself, so it would sit under the next month
+    if (i - start >= MIN_LABEL_WEEKS) {
+      labels[start] = MONTH_NAMES[Number(monthAt(start)) - 1] ?? null;
+    }
+    start = i;
+  }
 
-    if (!changed || index > weeks.length - 3) return null;
-    return MONTH_NAMES[Number(month) - 1] ?? null;
-  });
+  return labels;
 }
 
 const LEVEL_OPACITY: Record<ContributionLevel, number> = {
@@ -311,7 +318,7 @@ const ContributionGrid = ({
   const [ref, columns] = useFittedColumns(cellSize, gap);
   const [hovered, setHovered] = React.useState<HoveredDay>();
 
-  const cap = Math.min(weeks.length, Math.ceil(months * WEEKS_PER_MONTH));
+  const cap = Math.min(weeks.length, weeksFor(months));
   const visible = weeks.slice(-Math.min(cap, columns ?? cap));
   const sweepEnd = (visible.length - 1) * COLUMN_STAGGER + CELL_FADE.duration;
 
@@ -529,7 +536,7 @@ const GitHubActivity = ({
   const needsFetch = !contributionsProp.length || !reposProp.length;
   const fetched = useGitHubUser(needsFetch ? username : undefined);
   const placeholder = React.useMemo(
-    () => (username ? emptyDays(Math.ceil(months * WEEKS_PER_MONTH)) : []),
+    () => (username ? emptyDays(weeksFor(months)) : []),
     [username, months],
   );
 
@@ -562,7 +569,7 @@ const GitHubActivity = ({
   const gap = gapFor(cellSize);
   const columns = Math.min(
     Math.ceil(contributions.length / 7),
-    Math.ceil(months * WEEKS_PER_MONTH),
+    weeksFor(months),
   );
   const width = Math.max(
     MIN_CARD_WIDTH,
@@ -617,11 +624,11 @@ const GitHubActivity = ({
             <div className="flex items-center gap-3">
               {!open && (
                 <div className="flex items-center">
-                  {repos.slice(0, STACK_LIMIT).map((repo) => (
+                  {repos.slice(0, STACK_LIMIT).map((repo, index) => (
                     <Avatar
-                      key={repo.name}
+                      key={index}
                       repo={repo}
-                      layoutId={`${uid}-${repo.name}`}
+                      layoutId={`${uid}-${index}`}
                       transition={transition}
                       className="-ml-2 first:ml-0"
                     />
@@ -653,11 +660,11 @@ const GitHubActivity = ({
                 transition={rowTransition}
                 className="px-0.5 pb-1"
               >
-                {repos.map((repo) => (
-                  <li key={repo.name}>
+                {repos.map((repo, index) => (
+                  <li key={index}>
                     <RepoRow
                       repo={repo}
-                      layoutId={`${uid}-${repo.name}`}
+                      layoutId={`${uid}-${index}`}
                       transition={transition}
                     />
                   </li>

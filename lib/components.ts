@@ -794,7 +794,7 @@ export function Demo() {
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
     ],
     interaction:
-      "Cells sweep in column by column on mount. The footer shows the top repository avatars stacked; click the chevron and the panel springs open over the grid, the logos flying out of the stack into their rows while the names and counts kick up and left. Closing runs the same path in reverse.",
+      "Cells sweep in column by column on mount, and the month names resolve out of a blur once the last column lands. The footer shows the top repository avatars stacked; click the chevron and the panel springs open over the grid, the logos flying out of the stack into their rows while the names and counts kick up and left. Closing runs the same path in reverse.",
     props: [
       {
         name: "username",
@@ -841,14 +841,14 @@ export function Demo() {
         type: "number",
         default: "12",
         description:
-          "Upper limit on how much history to show. The grid measures its own width and drops the oldest columns that don't fit, so a narrow card shows only the most recent months and a wide one fills up to this many.",
+          "How much history to show. The card sizes itself to fit this many months, so a larger number renders a wider grid. If that width doesn't fit the space it's given, the oldest columns drop off.",
       },
       {
         name: "showMonths",
         type: "boolean",
         default: "false",
         description:
-          "Adds a row of month names above the grid, one at each month boundary.",
+          "Adds a row of month names above the grid. A month is named only when it holds at least three columns, so a partial month at either edge stays blank.",
       },
       {
         name: "label",
