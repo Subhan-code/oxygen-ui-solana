@@ -790,6 +790,7 @@ export function Demo() {
     description:
       "A contribution heatmap with a footer panel that expands over the grid to rank your top repositories.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/github-activity.tsx`,
+    preview: "/componentdemos/githubgraphcomponentblack.mp4",
     dependencies: [
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
     ],
