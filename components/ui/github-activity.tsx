@@ -48,6 +48,8 @@ const CELL_FADE = { duration: 0.2, ease: EASE_OUT } as const;
 const TOOLTIP_FADE = { duration: 0.14, ease: EASE_OUT } as const;
 const TOOLTIP_EDGE = 8;
 const COLUMN_STAGGER = 0.012;
+const LABEL_BLUR = 6;
+const LABEL_REVEAL = { duration: 0.45, ease: EASE_OUT } as const;
 
 const LEVELS = [0, 1, 2, 3, 4] as const;
 
@@ -311,6 +313,7 @@ const ContributionGrid = ({
 
   const cap = Math.min(weeks.length, Math.ceil(months * WEEKS_PER_MONTH));
   const visible = weeks.slice(-Math.min(cap, columns ?? cap));
+  const sweepEnd = (visible.length - 1) * COLUMN_STAGGER + CELL_FADE.duration;
 
   const hover = (day: Contribution) => (event: React.PointerEvent) => {
     const cell = event.currentTarget.getBoundingClientRect();
@@ -326,7 +329,20 @@ const ContributionGrid = ({
       className="relative"
     >
       {showMonths && (
-        <div className="flex justify-center" style={{ gap, marginBottom: gap }}>
+        <motion.div
+          className="flex justify-center"
+          style={{ gap, marginBottom: gap }}
+          initial={
+            reduceMotion
+              ? false
+              : { opacity: 0, filter: `blur(${LABEL_BLUR}px)` }
+          }
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{
+            ...LABEL_REVEAL,
+            delay: reduceMotion ? 0 : sweepEnd,
+          }}
+        >
           {toMonthLabels(visible).map((month, index) => (
             <div
               key={index}
@@ -340,7 +356,7 @@ const ContributionGrid = ({
               )}
             </div>
           ))}
-        </div>
+        </motion.div>
       )}
 
       <div
