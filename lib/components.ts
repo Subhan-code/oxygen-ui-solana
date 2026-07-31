@@ -782,7 +782,110 @@ export function Demo() {
     />
   )
 }`,
-  }
+  },
+  {
+    name: "GitHub activity",
+    href: "/components/githubactivity",
+    registry: "github-activity",
+    description:
+      "A contribution heatmap with a footer panel that expands over the grid to rank your top repositories.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/github-activity.tsx`,
+    dependencies: [
+      { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
+    ],
+    interaction:
+      "Click the chevron to expand the top repositories over the grid, and again to collapse them back into the stack. Hover any cell for its count and date.",
+    props: [
+      {
+        name: "username",
+        type: "string",
+        description: "The GitHub username you want the data for.",
+      },
+      {
+        name: "contributions",
+        type: "Contribution[]",
+        default: "[]",
+        description: "Your own contribution data, instead of a username.",
+      },
+      {
+        name: "repos",
+        type: "RepoContribution[]",
+        default: "[]",
+        description: "The repositories listed in the footer, highest first.",
+      },
+      {
+        name: "year",
+        type: "number",
+        description:
+          "Year shown in the heading. Defaults to the year of the last contribution.",
+      },
+      {
+        name: "accent",
+        type: "string | string[]",
+        default: '"#39d353"',
+        description: "The color of the contribution squares.",
+      },
+      {
+        name: "cellSize",
+        type: "number",
+        default: "11",
+        description: "Size of each day square in pixels.",
+      },
+      {
+        name: "months",
+        type: "number",
+        default: "12",
+        description: "How many months of history to show.",
+      },
+      {
+        name: "showMonths",
+        type: "boolean",
+        default: "false",
+        description: "Adds a row of month names above the grid.",
+      },
+      {
+        name: "label",
+        type: "string",
+        default: '"Top contributions in:"',
+        description: "Text shown in the footer next to the avatars.",
+      },
+      {
+        name: "defaultOpen",
+        type: "boolean",
+        default: "false",
+        description:
+          "Starts with the repository panel open. Ignored when open is set.",
+      },
+      {
+        name: "open",
+        type: "boolean",
+        description:
+          "Panel state for controlled usage. When set, the component stops managing its own state.",
+      },
+      {
+        name: "onOpenChange",
+        type: "(open: boolean) => void",
+        description: "Called with the next state when the chevron is clicked.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Extra classes for the card that wraps the grid.",
+      },
+    ],
+    usage: `import GitHubActivity from "@/components/ui/github-activity"
+
+export function Demo() {
+  return <GitHubActivity username="swamimalode07" />
+}
+
+// or pass everything yourself
+<GitHubActivity
+  contributions={contributions}
+  repos={[{ name: "Zero mail", count: 412, logo: <ZeroIcon /> }]}
+  accent={["#0e4429", "#006d32", "#26a641", "#39d353"]}
+/>`,
+  },
   // {
   //   name: "Family drawer",
   //   href: "/components/familydrawer",
