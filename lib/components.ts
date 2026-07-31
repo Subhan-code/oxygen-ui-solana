@@ -794,27 +794,24 @@ export function Demo() {
       { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
     ],
     interaction:
-      "Cells sweep in column by column on mount, and the month names resolve out of a blur once the last column lands. The footer shows the top repository avatars stacked; click the chevron and the panel springs open over the grid, the logos flying out of the stack into their rows while the names and counts kick up and left. Closing runs the same path in reverse.",
+      "Click the chevron to expand the top repositories over the grid, and again to collapse them back into the stack. Hover any cell for its count and date.",
     props: [
       {
         name: "username",
         type: "string",
-        description:
-          "A GitHub handle. The component fetches that user's last year of contributions and their top repositories on its own, no token or API key. Anything you pass through contributions or repos wins over the fetch.",
+        description: "The GitHub username you want the data for.",
       },
       {
         name: "contributions",
         type: "Contribution[]",
         default: "[]",
-        description:
-          "Days to plot, oldest first. Each entry needs a date, a count, and a level from 0 to 4 that picks the shade. Use this instead of username to supply your own data.",
+        description: "Your own contribution data, instead of a username.",
       },
       {
         name: "repos",
         type: "RepoContribution[]",
         default: "[]",
-        description:
-          "Repositories for the footer, highest first, each with a name and count plus an optional logo node and href. The first three fill the collapsed stack, a repo with no logo falls back to its first letter, and an empty array drops the footer.",
+        description: "The repositories listed in the footer, highest first.",
       },
       {
         name: "year",
@@ -826,42 +823,38 @@ export function Demo() {
         name: "accent",
         type: "string | string[]",
         default: '"#39d353"',
-        description:
-          "One CSS color drives the whole scale: levels 1 to 4 render it at 30%, 52%, 76%, and 100% opacity. Pass an array to pick the colors yourself, four entries for levels 1 to 4, or five to set the empty cell too.",
+        description: "The color of the contribution squares.",
       },
       {
         name: "cellSize",
         type: "number",
         default: "11",
-        description:
-          "Cell width and height in pixels. The gap between cells scales with it.",
+        description: "Size of each day square in pixels.",
       },
       {
         name: "months",
         type: "number",
         default: "12",
-        description:
-          "How much history to show. The card sizes itself to fit this many months, so a larger number renders a wider grid. If that width doesn't fit the space it's given, the oldest columns drop off.",
+        description: "How many months of history to show.",
       },
       {
         name: "showMonths",
         type: "boolean",
         default: "false",
-        description:
-          "Adds a row of month names above the grid. A month is named only when it holds at least three columns, so a partial month at either edge stays blank.",
+        description: "Adds a row of month names above the grid.",
       },
       {
         name: "label",
         type: "string",
         default: '"Top contributions in:"',
-        description: "Text shown in the footer bar next to the avatars.",
+        description: "Text shown in the footer next to the avatars.",
       },
       {
         name: "defaultOpen",
         type: "boolean",
         default: "false",
         description:
-          "Starts with the repository panel expanded. Ignored when open is set.",
+          "Starts with the repository panel open. Ignored when open is set.",
       },
       {
         name: "open",
@@ -872,7 +865,7 @@ export function Demo() {
       {
         name: "onOpenChange",
         type: "(open: boolean) => void",
-        description: "Fires with the next state whenever the chevron is clicked.",
+        description: "Called with the next state when the chevron is clicked.",
       },
       {
         name: "className",
