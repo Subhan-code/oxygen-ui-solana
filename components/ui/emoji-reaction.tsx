@@ -23,8 +23,6 @@ const DEFAULT_EMOJI_DATA: EmojiData = {
 const DEFAULT_EMOJIS = Object.keys(DEFAULT_EMOJI_DATA.emojis);
 
 const SURFACE = "bg-[#F4F4F9] dark:bg-[#262626]";
-const SHADOW =
-  "shadow-[0_2px_2px_rgb(0_0_0/0.10),0_5px_5px_-3px_rgb(0_0_0/0.24)] dark:shadow-[0_2px_2px_rgb(0_0_0/0.35),0_5px_5px_-3px_rgb(0_0_0/0.55)]";
 
 const BURST_COUNT = 5;
 const HOLD_INTERVAL = 550;
@@ -32,8 +30,8 @@ const MAX_PARTICLES = 60;
 const RISE = 450;
 const LAUNCH_SPREAD = 6;
 const CLIMB_SPREAD = 78;
-// decelerates to a stop, the dissolve over the back half covers the slow down
-const EASE = [0.25, 0.55, 0.4, 1] as const;
+// soft ease out, roughly 65% of the distance by the halfway point so it keeps moving
+const EASE = [0.4, 0.3, 0.5, 1] as const;
 const SWAY = [0, 0.3, 0.65, 1];
 
 const SIZES = {
@@ -131,7 +129,7 @@ function makeParticles(
       scale: rand(0.78, 1.05),
       blurRatio: rand(0.18, 0.3),
       fadeAt: rand(0.55, 0.88),
-      duration: rand(2, 2.4),
+      duration: rand(1.4, 1.8),
       delay: i * 0.25,
     };
   });
@@ -159,7 +157,7 @@ const BurstEmoji = memo(function BurstEmoji({
       initial={{
         x: particle.x,
         y: 0,
-        scale: 0.72,
+        scale: 0.6,
         opacity: 0,
         rotate: 0,
         filter: "blur(0px)",
@@ -168,7 +166,12 @@ const BurstEmoji = memo(function BurstEmoji({
         // shares the parent ease with y, any override here bends the path sideways
         x: particle.x + particle.drift,
         y: -particle.travel,
-        scale: [0.72, particle.scale, particle.scale * 0.75],
+        scale: [
+          0.6,
+          particle.scale * 1.15,
+          particle.scale,
+          particle.scale * 0.75,
+        ],
         rotate: [0, particle.tilt, -particle.tilt * 0.65, particle.tilt * 0.35],
         opacity: [0, 1, 1, 0],
         filter: [
@@ -183,7 +186,7 @@ const BurstEmoji = memo(function BurstEmoji({
         ease: EASE,
         // inherit, a per value transition replaces the parent one without it
         rotate: { inherit: true, times: SWAY, ease: "easeInOut" },
-        scale: { inherit: true, times: [0, 0.12, 1] },
+        scale: { inherit: true, times: [0, 0.1, 0.22, 1], ease: "easeOut" },
         opacity: {
           inherit: true,
           times: [0, 0.03, particle.fadeAt, 1],
@@ -333,7 +336,6 @@ export function EmojiReaction({
                 className={cn(
                   "relative flex items-center rounded-full",
                   SURFACE,
-                  SHADOW,
                   s.pill,
                 )}
               >
