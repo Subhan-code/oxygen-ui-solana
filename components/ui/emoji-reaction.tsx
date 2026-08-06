@@ -283,6 +283,11 @@ export function EmojiReaction({
   const hold = useRef<number | null>(null);
   const justOpened = useRef(false);
 
+  // stable, an inline callback detaches every commit and is null when placeBar runs
+  const setTriggerRef = useCallback((node: HTMLElement | null) => {
+    triggerRef.current = node;
+  }, []);
+
   const stopHold = useCallback(() => {
     if (hold.current === null) return;
     window.clearInterval(hold.current);
@@ -551,9 +556,7 @@ export function EmojiReaction({
         </AnimatePresence>
 
         <Trigger
-          ref={(node: HTMLElement | null) => {
-            triggerRef.current = node;
-          }}
+          ref={setTriggerRef}
           type={asChild ? undefined : "button"}
           aria-haspopup="true"
           aria-expanded={open}
