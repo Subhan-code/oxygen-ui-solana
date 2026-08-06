@@ -173,6 +173,25 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "emoji-reaction",
+      "type": "registry:ui",
+      "title": "Emoji Reaction",
+      "description": "A tapback-style reaction button that opens a bar of Apple emoji and sends copies of your pick floating up out of it.",
+      "dependencies": [
+        "motion",
+        "react-apple-emojis",
+        "lucide-react",
+        "@radix-ui/react-slot"
+      ],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/emoji-reaction.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
