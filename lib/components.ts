@@ -927,7 +927,7 @@ export function Demo() {
       { name: "lucide-react" },
     ],
     interaction:
-      "Click the button to pop the emoji bar open, then hover an emoji to lift it. Pick one and 5 copies stream up off it, drifting apart, shrinking, and blurring out of focus as they climb. The bar stays open so you can keep reacting. While it's open the button turns into a cross; click that, click outside, or press Escape to close. The button then shows your last pick.",
+      "Click the button to pop the emoji bar open, then hover an emoji to lift it. Pick one and 5 copies stream up off it, drifting apart, shrinking, and blurring out of focus as they climb. Hold the emoji down to keep them coming. The bar stays open so you can keep reacting. While it's open the button turns into a cross; click that, click outside, or press Escape to close. The button then shows your last pick.",
     props: [
       {
         name: "emojis",
@@ -945,7 +945,8 @@ export function Demo() {
       {
         name: "onReact",
         type: "(name: string) => void",
-        description: "Called with the emoji name every time one is picked.",
+        description:
+          "Called with the emoji name every time one is picked, including each repeat while it's held down.",
       },
       {
         name: "size",

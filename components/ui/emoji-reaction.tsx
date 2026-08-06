@@ -3,7 +3,7 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import type { ComponentProps } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { SmilePlus, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Emoji, EmojiProvider, type EmojiData } from "react-apple-emojis";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,13 @@ const DEFAULT_EMOJI_DATA: EmojiData = {
 
 const DEFAULT_EMOJIS = Object.keys(DEFAULT_EMOJI_DATA.emojis);
 
+const SURFACE = "bg-[#F4F4F9] dark:bg-[#262626]";
+const SHADOW =
+  "shadow-[0_2px_2px_rgb(0_0_0/0.10),0_5px_5px_-3px_rgb(0_0_0/0.24)] dark:shadow-[0_2px_2px_rgb(0_0_0/0.35),0_5px_5px_-3px_rgb(0_0_0/0.55)]";
+
 const BURST_COUNT = 5;
+const HOLD_INTERVAL = 550;
+const MAX_PARTICLES = 60;
 const RISE = 450;
 const LAUNCH_SPREAD = 6;
 const CLIMB_SPREAD = 78;
@@ -69,6 +75,33 @@ type Particle = {
   duration: number;
   delay: number;
 };
+
+function SmileIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden className={className}>
+      <path
+        d="M21 12a9 9 0 1 1-9-9"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <circle cx="8.9" cy="10" r="1.35" fill="currentColor" />
+      <circle cx="15.1" cy="10" r="1.35" fill="currentColor" />
+      <path
+        d="M8 13.9a4.7 4.7 0 0 0 8 0"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M19 2.5v5M21.5 5h-5"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
@@ -197,12 +230,20 @@ export function EmojiReaction({
   const rootRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const seed = useRef(0);
+  const hold = useRef<number | null>(null);
+
+  const stopHold = useCallback(() => {
+    if (hold.current === null) return;
+    window.clearInterval(hold.current);
+    hold.current = null;
+  }, []);
 
   // closing unmounts the copies mid flight, so their completion never fires
   const close = useCallback(() => {
+    stopHold();
     setOpen(false);
     setParticles([]);
-  }, []);
+  }, [stopHold]);
 
   useEffect(() => {
     if (!open) return;
@@ -230,13 +271,25 @@ export function EmojiReaction({
       const bar = barRef.current?.getBoundingClientRect();
       if (reduced || !bar) return;
       seed.current += BURST_COUNT;
-      setParticles((prev) => [
-        ...prev,
-        ...makeParticles(name, seed.current, from, bar),
-      ]);
+      setParticles((prev) =>
+        [...prev, ...makeParticles(name, seed.current, from, bar)].slice(
+          -MAX_PARTICLES,
+        ),
+      );
     },
     [onReact, reduced],
   );
+
+  const startHold = useCallback(
+    (name: string, from: DOMRect) => {
+      react(name, from);
+      stopHold();
+      hold.current = window.setInterval(() => react(name, from), HOLD_INTERVAL);
+    },
+    [react, stopHold],
+  );
+
+  useEffect(() => stopHold, [stopHold]);
 
   const settle = useCallback((id: number) => {
     setParticles((prev) => prev.filter((particle) => particle.id !== id));
@@ -278,7 +331,9 @@ export function EmojiReaction({
                 role="menu"
                 aria-label="Pick a reaction"
                 className={cn(
-                  "relative flex items-center rounded-full bg-card shadow-lg ring-1 ring-black/5 dark:ring-white/10",
+                  "relative flex items-center rounded-full",
+                  SURFACE,
+                  SHADOW,
                   s.pill,
                 )}
               >
@@ -290,7 +345,18 @@ export function EmojiReaction({
                     type="button"
                     role="menuitem"
                     aria-label={label(name)}
+                    onPointerDown={(event) =>
+                      startHold(
+                        name,
+                        event.currentTarget.getBoundingClientRect(),
+                      )
+                    }
+                    onPointerUp={stopHold}
+                    onPointerLeave={stopHold}
+                    onPointerCancel={stopHold}
+                    // detail is 0 only for keyboard, pointer already fired above
                     onClick={(event) =>
+                      event.detail === 0 &&
                       react(name, event.currentTarget.getBoundingClientRect())
                     }
                     className="relative z-10 rounded-full p-1 outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -316,13 +382,23 @@ export function EmojiReaction({
                 ))}
               </div>
 
-              <span className="absolute -bottom-1 left-1/2 size-3 -translate-x-1/2 rounded-full bg-card shadow-lg ring-1 ring-black/5 dark:ring-white/10" />
-              <span className="absolute -bottom-4 left-1/2 size-1.5 translate-x-1 rounded-full bg-card ring-1 ring-black/5 dark:ring-white/10" />
+              <span
+                className={cn(
+                  "absolute -bottom-1 left-1/2 size-3 -translate-x-1/2 rounded-full",
+                  SURFACE,
+                )}
+              />
+              <span
+                className={cn(
+                  "absolute -bottom-4 left-1/2 size-1.5 translate-x-1 rounded-full",
+                  SURFACE,
+                )}
+              />
             </motion.div>
           )}
         </AnimatePresence>
 
-        <motion.button
+        <button
           type="button"
           aria-haspopup="true"
           aria-expanded={open}
@@ -334,43 +410,26 @@ export function EmojiReaction({
                 : "Add a reaction"
           }
           onClick={() => (open ? close() : setOpen(true))}
-          whileTap={{ scale: 0.9 }}
           className={cn(
-            "relative z-10 grid place-items-center rounded-full bg-card text-foreground/60 ring-1 ring-black/5 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:ring-white/10",
+            "relative z-10 grid place-items-center rounded-full text-foreground/60 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            SURFACE,
             s.trigger,
           )}
         >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={open ? "close" : (last ?? "idle")}
-              className="grid place-items-center"
-              initial={
-                reduced ? false : { scale: 0.4, opacity: 0, rotate: -90 }
-              }
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
-              exit={
-                reduced
-                  ? { opacity: 0 }
-                  : { scale: 0.4, opacity: 0, rotate: 90 }
-              }
-              transition={{ type: "spring", stiffness: 600, damping: 26 }}
-            >
-              {open ? (
-                <X className={s.icon} strokeWidth={2} />
-              ) : last ? (
-                <Emoji
-                  name={last}
-                  width={s.emoji * 0.72}
-                  height={s.emoji * 0.72}
-                  draggable={false}
-                  className="max-w-none"
-                />
-              ) : (
-                <SmilePlus className={s.icon} strokeWidth={1.75} />
-              )}
-            </motion.span>
-          </AnimatePresence>
-        </motion.button>
+          {open ? (
+            <X className={s.icon} strokeWidth={2} />
+          ) : last ? (
+            <Emoji
+              name={last}
+              width={s.emoji * 0.72}
+              height={s.emoji * 0.72}
+              draggable={false}
+              className="max-w-none"
+            />
+          ) : (
+            <SmileIcon className={s.icon} />
+          )}
+        </button>
       </div>
     </EmojiProvider>
   );
