@@ -916,7 +916,7 @@ export function Demo() {
     href: "/components/emojireaction",
     registry: "emoji-reaction",
     description:
-      "A tapback-style reaction button that opens a bar of Apple emoji and throws the one you pick up the screen.",
+      "A tapback-style reaction button that opens a bar of Apple emoji and sends copies of your pick floating up out of it.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/emoji-reaction.tsx`,
     dependencies: [
       {
@@ -927,7 +927,7 @@ export function Demo() {
       { name: "lucide-react" },
     ],
     interaction:
-      "Click the button to pop the emoji bar open, then hover an emoji to lift it. Pick one and 4 copies fly up off it, each on its own path, fading as they climb. The bar stays open so you can keep reacting. While it's open the button turns into a cross; click that, click outside, or press Escape to close. The button then shows your last pick.",
+      "Click the button to pop the emoji bar open, then hover an emoji to lift it. Pick one and 5 copies stream up off it, drifting apart, shrinking, and blurring out of focus as they climb. The bar stays open so you can keep reacting. While it's open the button turns into a cross; click that, click outside, or press Escape to close. The button then shows your last pick.",
     props: [
       {
         name: "emojis",

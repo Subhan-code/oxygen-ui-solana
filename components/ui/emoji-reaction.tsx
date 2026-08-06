@@ -22,14 +22,12 @@ const DEFAULT_EMOJI_DATA: EmojiData = {
 
 const DEFAULT_EMOJIS = Object.keys(DEFAULT_EMOJI_DATA.emojis);
 
-// order is fixed, consecutive copies must launch on opposite sides to stay apart
-const LANES = [-1, 1, -0.42, 0.42];
-const BURST_COUNT = LANES.length;
+const BURST_COUNT = 5;
 const RISE = 450;
-const LAUNCH_SPREAD = 16;
-const CLIMB_SPREAD = 58;
-// near linear, a front-loaded curve makes the copies stall instead of climbing
-const EASE = [0.25, 0.4, 0.45, 1] as const;
+const LAUNCH_SPREAD = 6;
+const CLIMB_SPREAD = 78;
+// decelerates to a stop, the dissolve over the back half covers the slow down
+const EASE = [0.25, 0.55, 0.4, 1] as const;
 const SWAY = [0, 0.3, 0.65, 1];
 
 const SIZES = {
@@ -63,10 +61,11 @@ type Particle = {
   originY: number;
   x: number;
   drift: number;
-  sway: number;
   tilt: number;
   travel: number;
   scale: number;
+  blurRatio: number;
+  fadeAt: number;
   duration: number;
   delay: number;
 };
@@ -83,24 +82,24 @@ function makeParticles(
 ): Particle[] {
   const originX = from.left + from.width / 2 - bar.left;
   const originY = from.top + from.height / 2 - bar.top;
-  const mirror = Math.random() < 0.5 ? -1 : 1;
 
-  return LANES.map((lane, i) => {
-    const offset = lane * mirror;
-    const dir = offset < 0 ? -1 : 1;
+  return Array.from({ length: BURST_COUNT }, (_, i) => {
+    const lane = rand(-1, 1);
+    const dir = lane < 0 ? -1 : 1;
     return {
       id: seed + i,
       name,
       originX,
       originY,
-      x: offset * LAUNCH_SPREAD + rand(-3, 3),
-      drift: offset * (CLIMB_SPREAD - LAUNCH_SPREAD),
-      sway: rand(9, 16) * dir,
-      tilt: rand(4, 8) * dir,
-      travel: RISE * rand(0.88, 1),
-      scale: rand(0.72, 1.05),
-      duration: rand(2, 2.3),
-      delay: i * 0.3,
+      x: lane * LAUNCH_SPREAD,
+      drift: lane * CLIMB_SPREAD,
+      tilt: rand(1, 4) * dir,
+      travel: RISE * rand(0.86, 1),
+      scale: rand(0.78, 1.05),
+      blurRatio: rand(0.18, 0.3),
+      fadeAt: rand(0.55, 0.88),
+      duration: rand(2, 2.4),
+      delay: i * 0.25,
     };
   });
 }
@@ -124,27 +123,41 @@ const BurstEmoji = memo(function BurstEmoji({
         marginLeft: -size / 2,
         marginTop: -size / 2,
       }}
-      initial={{ x: particle.x, y: 0, scale: 0.72, opacity: 0, rotate: 0 }}
+      initial={{
+        x: particle.x,
+        y: 0,
+        scale: 0.72,
+        opacity: 0,
+        rotate: 0,
+        filter: "blur(0px)",
+      }}
       animate={{
-        x: [
-          particle.x,
-          particle.x + particle.drift * 0.3 + particle.sway,
-          particle.x + particle.drift * 0.65 - particle.sway * 0.65,
-          particle.x + particle.drift + particle.sway * 0.35,
-        ],
+        // shares the parent ease with y, any override here bends the path sideways
+        x: particle.x + particle.drift,
         y: -particle.travel,
-        scale: particle.scale,
+        scale: [0.72, particle.scale, particle.scale * 0.75],
         rotate: [0, particle.tilt, -particle.tilt * 0.65, particle.tilt * 0.35],
         opacity: [0, 1, 1, 0],
+        filter: [
+          "blur(0px)",
+          "blur(0px)",
+          `blur(${particle.blurRatio * size}px)`,
+        ],
       }}
       transition={{
         duration: particle.duration,
         delay: particle.delay,
         ease: EASE,
         // inherit, a per value transition replaces the parent one without it
-        x: { inherit: true, times: SWAY, ease: "easeInOut" },
         rotate: { inherit: true, times: SWAY, ease: "easeInOut" },
-        opacity: { inherit: true, times: [0, 0.03, 0.68, 1], ease: "linear" },
+        scale: { inherit: true, times: [0, 0.12, 1] },
+        opacity: {
+          inherit: true,
+          times: [0, 0.03, particle.fadeAt, 1],
+          ease: "linear",
+        },
+        // no ease override, blur has to track the climb curve or it lags the rise
+        filter: { inherit: true, times: [0, 0.12, 1] },
       }}
       onAnimationComplete={() => onDone(particle.id)}
     >
