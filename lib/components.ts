@@ -47,7 +47,6 @@ export const PANEL_INFO = {
     "Attribution to Rare UI is appreciated when using a component.",
     "Please don't resell the components as your own kit.",
   ],
-
 } as const;
 
 export const components: ComponentItem[] = [
@@ -61,7 +60,10 @@ export const components: ComponentItem[] = [
     preview: "/componentdemos/foldercomponent.mp4",
     featured: true,
     dependencies: [
-      { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
     ],
     interaction:
       "Hover to fan the cards out, then click to lift the folder open.",
@@ -103,7 +105,12 @@ export function Demo() {
       "A vertical navigation list with a bouncy, spring-animated active indicator.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/bounce-sidebar.tsx`,
     preview: "/componentdemos/bouncesidebar.mp4",
-    dependencies: [{ name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) }],
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
     interaction: "Click any item to spring the bouncing marker over to it.",
     props: [
       {
@@ -162,13 +169,18 @@ export function Demo() {
       "An interactive sidebar with proximity hover effects that appears while scrolling and responds to scroll intensity.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/proximity-sidebar.tsx`,
     preview: "/componentdemos/proximitysidebar.mp4",
-    dependencies: [{ name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) }],
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
     interaction:
       "Scroll through content to track the current section, then move the pointer near dashes to expand them and click to smooth-scroll to a section.",
     props: [
       {
         name: "sections",
-        type: "Array<{ id: string; label: string; kind?: \"title\" | \"subtitle\" | \"section\" | \"body\"; level?: 1 | 2 | 3 | 4 | 5 | 6 }>",
+        type: 'Array<{ id: string; label: string; kind?: "title" | "subtitle" | "section" | "body"; level?: 1 | 2 | 3 | 4 | 5 | 6 }>',
         required: true,
         description:
           "Ordered section map used for rendering dashes and scroll targeting. Each id must match an element id present in the page.",
@@ -214,9 +226,7 @@ export function Demo() {
     </aside>
   )
 }`,
-    credits: [
-      "Inspired by devouringdetails.com",
-    ],
+    credits: ["Inspired by devouringdetails.com"],
   },
   {
     name: "Duration Picker",
@@ -228,7 +238,10 @@ export function Demo() {
     preview: "/componentdemos/durationpicker.mp4",
     featured: true,
     dependencies: [
-      { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
       { name: "figma-squircle" },
       { name: "flubber" },
       { name: "react-use-measure" },
@@ -373,7 +386,7 @@ export function Demo() {
         name: "className",
         type: "string",
         description:
-          "Extra classes merged onto the root element (data-slot=\"fluid-orb\").",
+          'Extra classes merged onto the root element (data-slot="fluid-orb").',
       },
     ],
     usage: `import FluidOrb from "@/components/ui/fluid-orb"
@@ -381,9 +394,7 @@ export function Demo() {
 export function Demo() {
   return <FluidOrb size={280} color="#F75001" />
 }`,
-    credits: [
-      "Inspired by chatgpt.com",
-    ],
+    credits: ["Inspired by chatgpt.com"],
   },
   {
     name: "Scroll Progress",
@@ -394,7 +405,10 @@ export function Demo() {
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/scroll-progress.tsx`,
     preview: "/componentdemos/scrollprogress.mp4",
     dependencies: [
-      { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
     ],
     interaction:
       "Scroll to fill the ring and watch the active section label crossfade in. Click the pill to morph it into a squircle menu, then tap any section to smooth-scroll there. Click outside or press Escape to close.",
@@ -463,7 +477,10 @@ export function Demo() {
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/code-block.tsx`,
     preview: "/componentdemos/codeblock.mp4",
     dependencies: [
-      { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
       { name: "prism-react-renderer" },
     ],
     interaction:
@@ -647,7 +664,8 @@ export function Demo() {
       {
         name: "className",
         type: "string",
-        description: "Extra classes for the root element. Use it to size the field.",
+        description:
+          "Extra classes for the root element. Use it to size the field.",
       },
     ],
     usage: `import GravityLetters from "@/components/ui/gravity-letters"
@@ -679,7 +697,10 @@ export function Demo() {
     preview: "/componentdemos/otpinput.mp4",
     featured: true,
     dependencies: [
-      { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
     ],
     interaction:
       "Type to fill each slot and move to the next one. Backspace clears a slot in place, then steps back on the next press. Arrow keys move between slots, and a caret slides along with you. Pasting a code, or letting the phone autofill one from a text message, drops it straight in. Set the status to turn the slots green, or shake them red on a wrong code.",
@@ -792,7 +813,10 @@ export function Demo() {
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/github-activity.tsx`,
     preview: "/componentdemos/githubgraphcomponentblack.mp4",
     dependencies: [
-      { name: "motion", icon: createElement(MotionIcon, { className: "h-4 w-4" }) },
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
     ],
     interaction:
       "Click the chevron to expand the top repositories over the grid, and again to collapse them back into the stack. Hover any cell for its count and date.",
@@ -886,6 +910,61 @@ export function Demo() {
   repos={[{ name: "Zero mail", count: 412, logo: <ZeroIcon /> }]}
   accent={["#0e4429", "#006d32", "#26a641", "#39d353"]}
 />`,
+  },
+  {
+    name: "Emoji reaction",
+    href: "/components/emojireaction",
+    registry: "emoji-reaction",
+    description:
+      "A tapback-style reaction button that opens a bar of Apple emoji and throws the one you pick up the screen.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/emoji-reaction.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+      { name: "react-apple-emojis" },
+      { name: "lucide-react" },
+    ],
+    interaction:
+      "Click the button to pop the emoji bar open, then hover an emoji to lift it. Pick one and 4 copies fly up off it, each on its own path, fading as they climb. The bar stays open so you can keep reacting. While it's open the button turns into a cross; click that, click outside, or press Escape to close. The button then shows your last pick.",
+    props: [
+      {
+        name: "emojis",
+        type: "string[]",
+        default: "5 default faces",
+        description:
+          "Apple emoji names shown in the bar, hyphenated as on Emojipedia. Anything beyond the five defaults needs emojiData too.",
+      },
+      {
+        name: "emojiData",
+        type: "EmojiData",
+        description:
+          "Emoji name to image map passed to EmojiProvider. Defaults to the five bundled faces; pass react-apple-emojis/src/data.json for the full set.",
+      },
+      {
+        name: "onReact",
+        type: "(name: string) => void",
+        description: "Called with the emoji name every time one is picked.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        default: '"md"',
+        options: ["sm", "md", "lg"],
+        description: "Scale of the button, the bar, and the emoji that fly up.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Extra classes merged onto the root element.",
+      },
+    ],
+    usage: `import { EmojiReaction } from "@/components/ui/emoji-reaction"
+
+export function Demo() {
+  return <EmojiReaction onReact={(name) => console.log(name)} />
+}`,
   },
   // {
   //   name: "Family drawer",
