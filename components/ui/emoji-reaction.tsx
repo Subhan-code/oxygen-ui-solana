@@ -1,7 +1,8 @@
 "use client";
 
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import type { ComponentProps } from "react";
+import type { ComponentProps, KeyboardEvent } from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { X } from "lucide-react";
 import { Emoji, EmojiProvider, type EmojiData } from "react-apple-emojis";
@@ -34,6 +35,9 @@ const CLIMB_SPREAD = 78;
 const EASE = [0.4, 0.3, 0.5, 1] as const;
 const SWAY = [0, 0.3, 0.65, 1];
 
+const GAP = 16;
+const EDGE = 8;
+
 const SIZES = {
   sm: {
     trigger: "size-8",
@@ -57,6 +61,10 @@ const SIZES = {
     burst: 42,
   },
 } as const;
+
+type Align = "left" | "center" | "right";
+
+type Placement = { side: "top" | "bottom"; shift: number; tailX: number };
 
 type Particle = {
   id: number;
@@ -104,6 +112,32 @@ function SmileIcon({ className }: { className?: string }) {
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
 const label = (name: string) => name.replaceAll("-", " ");
+
+function getPlacement(
+  trigger: DOMRect,
+  width: number,
+  height: number,
+  align: Align,
+): Placement {
+  const anchored =
+    align === "left"
+      ? trigger.left
+      : align === "right"
+        ? trigger.right - width
+        : trigger.left + trigger.width / 2 - width / 2;
+
+  const overhangLeft = EDGE - anchored;
+  const overhangRight = anchored + width - (window.innerWidth - EDGE);
+  const shift =
+    overhangLeft > 0 ? overhangLeft : overhangRight > 0 ? -overhangRight : 0;
+
+  return {
+    side: trigger.top - height - GAP < EDGE ? "bottom" : "top",
+    shift,
+    // keeps the tail over the trigger whatever the alignment and shift are
+    tailX: trigger.left + trigger.width / 2 - (anchored + shift),
+  };
+}
 
 function makeParticles(
   name: string,
@@ -213,6 +247,8 @@ export type EmojiReactionProps = ComponentProps<"div"> & {
   emojiData?: EmojiData;
   onReact?: (name: string) => void;
   size?: keyof typeof SIZES;
+  align?: Align;
+  asChild?: boolean;
 };
 
 export function EmojiReaction({
@@ -220,7 +256,10 @@ export function EmojiReaction({
   emojiData = DEFAULT_EMOJI_DATA,
   onReact,
   size = "md",
+  align = "center",
+  asChild = false,
   className,
+  children,
   ...props
 }: EmojiReactionProps) {
   const s = SIZES[size];
@@ -229,11 +268,20 @@ export function EmojiReaction({
   const [open, setOpen] = useState(false);
   const [last, setLast] = useState<string | null>(null);
   const [particles, setParticles] = useState<Particle[]>([]);
+  const [placement, setPlacement] = useState<Placement>({
+    side: "top",
+    shift: 0,
+    tailX: 0,
+  });
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const rootRef = useRef<HTMLDivElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const seed = useRef(0);
   const hold = useRef<number | null>(null);
+  const justOpened = useRef(false);
 
   const stopHold = useCallback(() => {
     if (hold.current === null) return;
@@ -248,14 +296,34 @@ export function EmojiReaction({
     setParticles([]);
   }, [stopHold]);
 
+  // a ref callback, not an effect, so measuring cannot cascade an extra render pass
+  const placeBar = useCallback(
+    (node: HTMLDivElement | null) => {
+      barRef.current = node;
+      const trigger = triggerRef.current;
+      if (!node || !trigger) return;
+      setPlacement(
+        getPlacement(
+          trigger.getBoundingClientRect(),
+          node.offsetWidth,
+          node.offsetHeight,
+          align,
+        ),
+      );
+    },
+    [align],
+  );
+
   useEffect(() => {
     if (!open) return;
 
-    const onPointerDown = (event: PointerEvent) => {
+    const onPointerDown = (event: globalThis.PointerEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) close();
     };
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") close();
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      close();
+      triggerRef.current?.focus();
     };
 
     document.addEventListener("pointerdown", onPointerDown);
@@ -265,6 +333,10 @@ export function EmojiReaction({
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [open, close]);
+
+  useEffect(() => {
+    if (open) itemRefs.current[0]?.focus();
+  }, [open]);
 
   const react = useCallback(
     (name: string, from: DOMRect) => {
@@ -298,6 +370,51 @@ export function EmojiReaction({
     setParticles((prev) => prev.filter((particle) => particle.id !== id));
   }, []);
 
+  // press the trigger and drag along the bar, releasing over an emoji picks it
+  const onTriggerPointerDown = useCallback(() => {
+    if (open) return;
+    setOpen(true);
+    justOpened.current = true;
+
+    const up = (event: globalThis.PointerEvent) => {
+      document.removeEventListener("pointerup", up);
+
+      const target = document.elementFromPoint(
+        event.clientX,
+        event.clientY,
+      ) as HTMLElement | null;
+
+      const picked = target?.closest<HTMLElement>("[data-emoji]");
+      if (picked?.dataset.emoji) {
+        react(picked.dataset.emoji, picked.getBoundingClientRect());
+      }
+
+      // releasing off the trigger fires no click, so nothing else would clear the guard
+      if (!triggerRef.current?.contains(target)) justOpened.current = false;
+    };
+
+    document.addEventListener("pointerup", up);
+  }, [open, react]);
+
+  const onMenuKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      const count = emojis.length;
+      let next = activeIndex;
+
+      if (event.key === "ArrowRight") next = (activeIndex + 1) % count;
+      else if (event.key === "ArrowLeft")
+        next = (activeIndex - 1 + count) % count;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = count - 1;
+      else return;
+
+      event.preventDefault();
+      setActiveIndex(next);
+      itemRefs.current[next]?.focus();
+    },
+    [activeIndex, emojis.length],
+  );
+
   const burst = particles.map((particle) => (
     <BurstEmoji
       key={particle.id}
@@ -306,6 +423,18 @@ export function EmojiReaction({
       onDone={settle}
     />
   ));
+
+  const Trigger = asChild ? Slot : "button";
+
+  const top = placement.side === "top";
+  const anchor =
+    align === "left" ? "left-0" : align === "right" ? "right-0" : "left-1/2";
+  const centering = align === "center" ? "-50%" : 0;
+  // right anchored bars pin their right edge, so a left margin cannot move them
+  const nudge =
+    align === "right"
+      ? { marginRight: -placement.shift }
+      : { marginLeft: placement.shift };
 
   return (
     <EmojiProvider data={emojiData}>
@@ -318,21 +447,32 @@ export function EmojiReaction({
         <AnimatePresence>
           {open && (
             <motion.div
-              className="absolute bottom-full left-1/2 z-30 mb-4"
-              initial={{ opacity: 0, y: 10, scale: 0.85, x: "-50%" }}
-              animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
-              exit={{ opacity: 0, y: 6, scale: 0.9, x: "-50%" }}
+              className={cn(
+                "absolute z-30",
+                anchor,
+                top ? "bottom-full mb-4" : "top-full mt-4",
+              )}
+              initial={{
+                opacity: 0,
+                y: top ? 10 : -10,
+                scale: 0.85,
+                x: centering,
+              }}
+              animate={{ opacity: 1, y: 0, scale: 1, x: centering }}
+              exit={{ opacity: 0, y: top ? 6 : -6, scale: 0.9, x: centering }}
               transition={
                 reduced
                   ? { duration: 0.15 }
                   : { type: "spring", stiffness: 520, damping: 30 }
               }
-              style={{ originY: 1 }}
+              style={{ originY: top ? 1 : 0, ...nudge }}
             >
               <div
-                ref={barRef}
+                ref={placeBar}
                 role="menu"
                 aria-label="Pick a reaction"
+                aria-orientation="horizontal"
+                onKeyDown={onMenuKeyDown}
                 className={cn(
                   "relative flex items-center rounded-full",
                   SURFACE,
@@ -343,10 +483,16 @@ export function EmojiReaction({
 
                 {emojis.map((name, i) => (
                   <motion.button
-                    key={name}
+                    key={`${name}-${i}`}
+                    ref={(node) => {
+                      itemRefs.current[i] = node;
+                    }}
                     type="button"
                     role="menuitem"
+                    tabIndex={i === activeIndex ? 0 : -1}
+                    data-emoji={name}
                     aria-label={label(name)}
+                    onFocus={() => setActiveIndex(i)}
                     onPointerDown={(event) =>
                       startHold(
                         name,
@@ -366,8 +512,8 @@ export function EmojiReaction({
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{
                       type: "spring",
-                      stiffness: 600,
-                      damping: 22,
+                      stiffness: 800,
+                      damping: 25,
                       delay: reduced ? 0 : 0.04 + i * 0.035,
                     }}
                     whileHover={reduced ? undefined : { scale: 1.28, y: -4 }}
@@ -386,22 +532,29 @@ export function EmojiReaction({
 
               <span
                 className={cn(
-                  "absolute -bottom-1 left-1/2 size-3 -translate-x-1/2 rounded-full",
+                  "absolute size-3 -translate-x-1/2 rounded-full",
                   SURFACE,
+                  top ? "-bottom-1" : "-top-1",
                 )}
+                style={{ left: placement.tailX }}
               />
               <span
                 className={cn(
-                  "absolute -bottom-4 left-1/2 size-1.5 translate-x-1 rounded-full",
+                  "absolute size-1.5 -translate-x-1/2 rounded-full",
                   SURFACE,
+                  top ? "-bottom-4" : "-top-4",
                 )}
+                style={{ left: placement.tailX + 6 }}
               />
             </motion.div>
           )}
         </AnimatePresence>
 
-        <button
-          type="button"
+        <Trigger
+          ref={(node: HTMLElement | null) => {
+            triggerRef.current = node;
+          }}
+          type={asChild ? undefined : "button"}
           aria-haspopup="true"
           aria-expanded={open}
           aria-label={
@@ -411,14 +564,28 @@ export function EmojiReaction({
                 ? `Reacted ${label(last)}`
                 : "Add a reaction"
           }
-          onClick={() => (open ? close() : setOpen(true))}
-          className={cn(
-            "relative z-10 grid place-items-center rounded-full text-foreground/60 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-            SURFACE,
-            s.trigger,
-          )}
+          onPointerDown={onTriggerPointerDown}
+          onClick={() => {
+            if (justOpened.current) {
+              justOpened.current = false;
+              return;
+            }
+            if (open) close();
+            else setOpen(true);
+          }}
+          className={
+            asChild
+              ? undefined
+              : cn(
+                  "relative z-10 grid place-items-center rounded-full text-foreground/60 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  SURFACE,
+                  s.trigger,
+                )
+          }
         >
-          {open ? (
+          {asChild ? (
+            children
+          ) : open ? (
             <X className={s.icon} strokeWidth={2} />
           ) : last ? (
             <Emoji
@@ -431,7 +598,7 @@ export function EmojiReaction({
           ) : (
             <SmileIcon className={s.icon} />
           )}
-        </button>
+        </Trigger>
       </div>
     </EmojiProvider>
   );

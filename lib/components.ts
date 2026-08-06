@@ -925,9 +925,10 @@ export function Demo() {
       },
       { name: "react-apple-emojis" },
       { name: "lucide-react" },
+      { name: "@radix-ui/react-slot" },
     ],
     interaction:
-      "Click the button to pop the emoji bar open, then hover an emoji to lift it. Pick one and 5 copies stream up off it, drifting apart, shrinking, and blurring out of focus as they climb. Hold the emoji down to keep them coming. The bar stays open so you can keep reacting. While it's open the button turns into a cross; click that, click outside, or press Escape to close. The button then shows your last pick.",
+      "Click the button to pop the emoji bar open, or press and drag straight onto an emoji to pick it in one gesture. Hover an emoji to lift it. Pick one and 5 copies stream up off it, drifting apart, shrinking, and blurring out of focus as they climb. Hold the emoji down to keep them coming. The bar flips below the button when there's no room above, and arrow keys move along it. While it's open the button turns into a cross; click that, click outside, or press Escape to close. The button then shows your last pick.",
     props: [
       {
         name: "emojis",
@@ -956,6 +957,21 @@ export function Demo() {
         description: "Scale of the button, the bar, and the emoji that fly up.",
       },
       {
+        name: "align",
+        type: '"left" | "center" | "right"',
+        default: '"center"',
+        options: ["left", "center", "right"],
+        description:
+          "Which edge of the bar lines up with the trigger. It still shifts inward when it would run off screen.",
+      },
+      {
+        name: "asChild",
+        type: "boolean",
+        default: "false",
+        description:
+          "Uses your own child as the trigger instead of the built-in button, so the bar can hang off a message, card, or image.",
+      },
+      {
         name: "className",
         type: "string",
         description: "Extra classes merged onto the root element.",
@@ -965,7 +981,12 @@ export function Demo() {
 
 export function Demo() {
   return <EmojiReaction onReact={(name) => console.log(name)} />
-}`,
+}
+
+// or hang the bar off your own element
+<EmojiReaction asChild>
+  <button className="rounded-2xl bg-card p-4">Nice work</button>
+</EmojiReaction>`,
   },
   // {
   //   name: "Family drawer",
