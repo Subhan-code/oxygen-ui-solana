@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useStarCount } from "@/lib/use-star-count";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -51,6 +52,7 @@ const pill = "rounded-full border-apple bg-neutral-900";
 
 export default function GooeyNavbar({ stars }: { stars?: number | null }) {
   const pathname = usePathname();
+  const liveStars = useStarCount(stars);
   const [scrolled, setScrolled] = useState(false);
   const [starHovered, setStarHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -248,9 +250,9 @@ export default function GooeyNavbar({ stars }: { stars?: number | null }) {
               </motion.span>
             </span>
 
-            {stars != null && (
+            {liveStars != null && (
               <span className="pr-4 font-runde text-sm font-medium tabular-nums text-white/80">
-                {stars}
+                {liveStars}
               </span>
             )}
           </a>
