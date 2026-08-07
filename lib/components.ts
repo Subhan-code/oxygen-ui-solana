@@ -918,6 +918,7 @@ export function Demo() {
     description:
       "A tapback-style reaction button that opens a bar of Apple emoji and sends copies of your pick floating up out of it.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/emoji-reaction.tsx`,
+    preview: "/componentdemos/emojireaction.mp4",
     dependencies: [
       {
         name: "motion",
