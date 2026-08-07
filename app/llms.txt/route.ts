@@ -34,7 +34,7 @@ export function GET() {
     "Install any component into a React / Next.js project:",
     "",
     "```",
-    "npx shadcn add swamimalode07/rare-ui/<component-name>",
+    "npx shadcn@latest add swamimalode07/rare-ui/<component-name>",
     "```",
     "",
     `Source code for all components: ${REGISTRY_HOMEPAGE}`,

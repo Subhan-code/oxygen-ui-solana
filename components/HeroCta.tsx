@@ -9,7 +9,7 @@ import CopyButton from "@/components/CopyButton";
 import { REGISTRY_REPO } from "@/lib/components";
 import { cn } from "@/lib/utils";
 
-const INSTALL_COMMAND = `npx shadcn add ${REGISTRY_REPO}/fluid-orb`;
+const INSTALL_COMMAND = `npx shadcn@latest add ${REGISTRY_REPO}/fluid-orb`;
 
 const spring = { type: "spring", stiffness: 300, damping: 22 } as const;
 
@@ -72,7 +72,7 @@ export default function HeroCta() {
           className="relative h-12 max-w-full flex-row-reverse gap-2 pl-4 pr-4 text-white/50 hover:text-white sm:pl-5"
         >
           <code className="overflow-x-auto whitespace-nowrap font-mono text-xs font-semibold text-white sm:text-sm">
-            npx shadcn add {REGISTRY_REPO}
+            npx shadcn@latest add {REGISTRY_REPO}
             <span className="font-normal text-white/50">/fluid-orb</span>
           </code>
         </CopyButton>

@@ -1,8 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "family drawer",
+  "name": "family-drawer",
   "title": "Family Drawer",
-  "description": "A drawer that opens from the right side of the screen, with a family tree structure inside. It supports color and size (sm/md/lg) props.",
+  "description": "A bottom drawer with smooth, morphing transitions between stacked views, inspired by the Family app. Built on Vaul.",
   "dependencies": [
     "motion",
     "vaul"

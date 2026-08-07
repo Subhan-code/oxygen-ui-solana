@@ -26,13 +26,13 @@ Rare UI is a shadcn registry built with Next.js, Tailwind CSS, and TypeScript. E
 Install any component with the shadcn CLI:
 
 ```bash
-npx shadcn add swamimalode07/rare-ui/{component-name}
+npx shadcn@latest add swamimalode07/rare-ui/{component-name}
 ```
 
 For example:
 
 ```bash
-npx shadcn add swamimalode07/rare-ui/fluid-orb
+npx shadcn@latest add swamimalode07/rare-ui/fluid-orb
 ```
 
 Browse every component, with live previews and props, at [rareui.com/components](https://rareui.com/components).
