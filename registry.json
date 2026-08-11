@@ -426,6 +426,90 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "solana-identity-card",
+      "type": "registry:ui",
+      "title": "Solana Identity Card",
+      "description": "A Solana wallet identity card displaying domain name, cluster, balance, and one-click copy.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/solana-identity-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "solana-token-card",
+      "type": "registry:ui",
+      "title": "Solana Token Card",
+      "description": "A token balance and portfolio card with hide/reveal toggle and SPL token metrics.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/solana-token-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "solana-transaction-status",
+      "type": "registry:ui",
+      "title": "Solana Transaction Status",
+      "description": "A transaction activity status banner displaying signature, slot number, and state.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/solana-transaction-status.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "solana-network-health",
+      "type": "registry:ui",
+      "title": "Solana Network Health",
+      "description": "A Solana RPC cluster health monitor displaying ping latency, TPS throughput, and epoch progress.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/solana-network-health.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "solana-nft-card",
+      "type": "registry:ui",
+      "title": "Solana NFT Card",
+      "description": "A Solana NFT asset showcase card featuring floor price, rarity rank, and trait attributes.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/solana-nft-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "solana-swap-card",
+      "type": "registry:ui",
+      "title": "Solana Swap Card",
+      "description": "A Solana token swap interface with token selection, rate calculation, and flip animation.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/solana-swap-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

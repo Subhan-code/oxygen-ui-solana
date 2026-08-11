@@ -917,6 +917,96 @@ export function Demo() {
   return <TextStatesSwap />
 }`,
   },
+  {
+    name: "Solana identity card",
+    href: "/components/solanaidentitycard",
+    registry: "solana-identity-card",
+    description:
+      "A Solana wallet identity card displaying domain name, cluster, balance, and one-click copy.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/solana-identity-card.tsx`,
+    interaction:
+      "Click the copy button to copy the wallet address or view on Solscan.",
+    usage: `import { SolanaIdentityCard } from "@/components/ui/solana-identity-card"
+
+export function Demo() {
+  return <SolanaIdentityCard address="7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU" domain="alex.sol" balanceSol={24.85} />
+}`,
+  },
+  {
+    name: "Solana token card",
+    href: "/components/solanatokencard",
+    registry: "solana-token-card",
+    description:
+      "A token balance and portfolio card with hide/reveal toggle and SPL token metrics.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/solana-token-card.tsx`,
+    interaction:
+      "Click the eye icon to toggle portfolio balance visibility.",
+    usage: `import { SolanaTokenCard } from "@/components/ui/solana-token-card"
+
+export function Demo() {
+  return <SolanaTokenCard portfolioName="Mainnet Vault" />
+}`,
+  },
+  {
+    name: "Solana transaction status",
+    href: "/components/solanatransactionstatus",
+    registry: "solana-transaction-status",
+    description:
+      "A transaction activity status banner displaying signature, slot number, and state.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/solana-transaction-status.tsx`,
+    interaction:
+      "Click the signature link to open Solscan transaction details.",
+    usage: `import { SolanaTransactionStatus } from "@/components/ui/solana-transaction-status"
+
+export function Demo() {
+  return <SolanaTransactionStatus status="finalized" amountSol={1.5} />
+}`,
+  },
+  {
+    name: "Solana network health",
+    href: "/components/solananetworkhealth",
+    registry: "solana-network-health",
+    description:
+      "A Solana RPC cluster health monitor displaying ping latency, TPS throughput, and epoch progress.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/solana-network-health.tsx`,
+    interaction:
+      "Use the cluster dropdown to switch between mainnet-beta, devnet, and testnet.",
+    usage: `import { SolanaNetworkHealth } from "@/components/ui/solana-network-health"
+
+export function Demo() {
+  return <SolanaNetworkHealth tps={2840} pingMs={18} />
+}`,
+  },
+  {
+    name: "Solana NFT card",
+    href: "/components/solananftcard",
+    registry: "solana-nft-card",
+    description:
+      "A Solana NFT asset showcase card featuring floor price, rarity rank, and trait attributes.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/solana-nft-card.tsx`,
+    interaction:
+      "Click the Attributes button to toggle trait percentage breakdowns.",
+    usage: `import { SolanaNftCard } from "@/components/ui/solana-nft-card"
+
+export function Demo() {
+  return <SolanaNftCard name="Mad Lad #4821" floorPriceSol={142.5} />
+}`,
+  },
+  {
+    name: "Solana swap card",
+    href: "/components/solanaswapcard",
+    registry: "solana-swap-card",
+    description:
+      "A Solana token swap interface with token selection, rate calculation, and flip animation.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/solana-swap-card.tsx`,
+    interaction:
+      "Click the flip button to swap pay and receive tokens or change input amounts.",
+    usage: `import { SolanaSwapCard } from "@/components/ui/solana-swap-card"
+
+export function Demo() {
+  return <SolanaSwapCard defaultPayToken="SOL" defaultReceiveToken="USDC" />
+}`,
+  },
 ];
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
