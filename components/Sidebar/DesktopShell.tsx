@@ -13,7 +13,7 @@ export default function DesktopShell({
 }: {
   children: React.ReactNode;
 }) {
-  const [navOpen, setNavOpen] = useState(true);
+  const [navOpen, setNavOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
 
   return (
