@@ -41,14 +41,14 @@ const Sidebar = ({
 
   return (
     <div className="pointer-events-none absolute left-0 top-0 z-40 h-full">
-      {/* Top Header Controls: Transparent Sidebar Toggle Button + Breadcrumb Path */}
-      <div className="pointer-events-auto absolute top-4 left-4 z-50 flex items-center gap-3 rounded-2xl border border-border/40 bg-background/50 backdrop-blur-md p-1.5 shadow-xs">
+      {/* Top Header Controls: Independent Free-Floating Toggle Button & Breadcrumb Path */}
+      <div className="pointer-events-auto absolute top-4 left-4 z-50 flex items-center gap-3">
         <button
           ref={buttonRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close sidebar" : "Open sidebar"}
-          className="cursor-pointer rounded-xl bg-transparent p-2 text-foreground transition-colors hover:bg-muted/50"
+          className="cursor-pointer bg-transparent p-1 text-foreground transition-all hover:opacity-80"
         >
           <SidebarToggleIcon
             isOpen={open}
