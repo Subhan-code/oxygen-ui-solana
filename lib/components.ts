@@ -1027,6 +1027,31 @@ export function Demo() {
   )
 }`,
   },
+  {
+    name: "Blur shimmer text",
+    href: "/components/blurshimmertext",
+    registry: "blur-shimmer-text",
+    description:
+      "A character-staggered text reveal that loops through multiple phrases with a blur sweep effect.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/blur-shimmer-text.tsx`,
+    interaction:
+      "Phrases blur and reveal character-by-character on a timed looping interval.",
+    usage: `import { BlurShimmerText } from "@/components/ui/blur-shimmer-text"
+
+export function Demo() {
+  return (
+    <BlurShimmerText
+      interval={2.5}
+      blur={6}
+      texts={[
+        "Open-Source Solana UI Library",
+        "Craft Premium Solana Frontends",
+        "Composable Web3 React Primitives",
+      ]}
+    />
+  )
+}`,
+  },
 ];
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";

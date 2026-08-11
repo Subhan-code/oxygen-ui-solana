@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { BlurShimmerText } from "@/components/ui/blur-shimmer-text";
 
 const spring = { type: "spring", stiffness: 300, damping: 22 } as const;
 
@@ -27,10 +28,32 @@ export default function HeroIntro({
 
   return (
     <>
-      <motion.h1
+      <motion.div
         initial={reduceMotion ? false : rise.hidden}
         animate={rise.shown}
         transition={step(0)}
+        className="mb-1 flex items-center justify-center"
+      >
+        <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-1.5 text-xs font-semibold shadow-xs backdrop-blur-md dark:border-white/15 dark:bg-white/10">
+          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+          <BlurShimmerText
+            interval={2.5}
+            blur={6}
+            texts={[
+              "Open-Source Solana UI Library",
+              "Craft Premium Solana Frontends",
+              "Solana Foundation Grant Recipient",
+              "Composable Web3 React Primitives",
+            ]}
+            className="font-mono text-xs text-zinc-900 dark:text-white"
+          />
+        </div>
+      </motion.div>
+
+      <motion.h1
+        initial={reduceMotion ? false : rise.hidden}
+        animate={rise.shown}
+        transition={step(1)}
         className="max-w-4xl text-balance font-runde text-4xl font-bold tracking-tight text-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
       >
         {headline}

@@ -524,6 +524,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "blur-shimmer-text",
+      "type": "registry:ui",
+      "title": "Blur Shimmer Text",
+      "description": "A character-staggered text reveal that loops through multiple phrases with a blur sweep effect.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/blur-shimmer-text.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
