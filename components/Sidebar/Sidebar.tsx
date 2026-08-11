@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 import SidebarList from "./SidebarList";
 import SidebarToggleIcon from "./SidebarToggleIcon";
 import BreadcrumbPath from "./BreadcrumbPath";
-import { Squircle } from "@squircle-js/react";
 
 const PANEL_SHIFT = 340;
 
@@ -61,20 +60,15 @@ const Sidebar = ({
         <BreadcrumbPath onToggleSidebar={() => setOpen((v) => !v)} />
       </div>
 
-      <Squircle asChild cornerRadius={23} cornerSmoothing={1}>
-        <motion.div
-          ref={containerRef}
-          initial={false}
-          animate={{ x: open ? 0 : -PANEL_SHIFT }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="pointer-events-auto flex h-full w-75 flex-col overflow-y-auto bg-card p-4 pl-6"
-        >
-          <h2 className="mt-20 shrink-0 font-bold text-lg">Components</h2>
-          <div className="mt-4 pb-16">
-            <SidebarList onNavigate={() => setOpen(false)} />
-          </div>
-        </motion.div>
-      </Squircle>
+      <motion.div
+        ref={containerRef}
+        initial={false}
+        animate={{ x: open ? 0 : -PANEL_SHIFT }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="pointer-events-auto bg-[#111] text-white relative flex h-full w-[320px] flex-col overflow-y-auto overflow-x-clip rounded-3xl pl-4 pr-2 text-[15px] tracking-tight border border-white/10 shadow-2xl no-scrollbar"
+      >
+        <SidebarList onNavigate={() => setOpen(false)} />
+      </motion.div>
     </div>
   );
 };

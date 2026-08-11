@@ -4,7 +4,6 @@ import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { components } from "@/lib/components";
-import { ArrowUpDown } from "lucide-react";
 import {
   motion,
   useMotionValue,
@@ -15,9 +14,9 @@ import {
 
 const RADIUS = 45;
 const BASE_WIDTH = 32;
-const MAX_WIDTH = 64;
+const MAX_WIDTH = 55;
 
-function ProximityItem({
+function ProximityScaleItem({
   component,
   index,
   isActive,
@@ -46,7 +45,7 @@ function ProximityItem({
     { clamp: true }
   );
 
-  const width = useSpring(targetWidth, {
+  const proxWidth = useSpring(targetWidth, {
     stiffness: 350,
     damping: 30,
     mass: 0.6,
@@ -57,24 +56,21 @@ function ProximityItem({
       ref={ref}
       href={component.href}
       onClick={onNavigate}
-      className="group relative flex h-4.5 cursor-pointer items-center gap-2.5"
+      className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px]"
     >
       <motion.span
-        className={`inline-block h-[1.5px] rounded-full transition-colors duration-150 ${
-          isActive
-            ? "bg-sky-500"
-            : "bg-muted-foreground/30 group-hover:bg-sky-500"
+        className={`inline-block h-[1px] transition-colors duration-150 ${
+          isActive ? "bg-sky-500" : "bg-white/20 group-hover:bg-sky-500"
         }`}
         style={{
-          width,
-          transformOrigin: "left center",
+          width: isActive ? 55 : proxWidth,
         }}
       />
       <span
-        className={`whitespace-nowrap transition-all ease-out font-mono text-[11px] ${
+        className={`whitespace-nowrap transition-all ease-out ${
           isActive
-            ? "text-sky-500 font-semibold opacity-100"
-            : "opacity-50 text-foreground/80 group-hover:text-sky-500 group-hover:opacity-100"
+            ? "text-sky-500 opacity-100 font-medium"
+            : "opacity-40 text-white group-hover:text-sky-500 group-hover:opacity-100"
         }`}
       >
         {numStr} {component.name}
@@ -85,46 +81,91 @@ function ProximityItem({
 
 const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
   const pathname = usePathname();
-  const [sortedReverse, setSortedReverse] = useState(false);
+  const [sortMode, setSortMode] = useState<"id" | "reverse">("id");
   const mouseY = useMotionValue(Infinity);
 
-  const displayList = sortedReverse ? [...components].reverse() : components;
+  const displayList =
+    sortMode === "reverse" ? [...components].reverse() : components;
 
   return (
     <div
-      className="relative flex flex-col gap-0.5 pb-8 pt-1 w-full select-none text-xs"
+      className="relative flex h-fit flex-col gap-2 pb-[15vh] pt-[16vh] w-full pr-3 select-none text-[15px] tracking-tight"
       onPointerMove={(e) => mouseY.set(e.clientY)}
       onPointerLeave={() => mouseY.set(Infinity)}
     >
-      <div className="mb-2 flex items-center justify-between px-1">
+      {/* Sort button */}
+      <div className="mb-8 flex items-center justify-between">
         <button
           type="button"
-          onClick={() => setSortedReverse((v) => !v)}
-          className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground cursor-pointer text-xs font-mono"
+          onClick={() =>
+            setSortMode((prev) => (prev === "id" ? "reverse" : "id"))
+          }
+          className="flex items-center justify-center gap-2 transition-colors text-white/50 hover:text-white/80 text-sm cursor-pointer"
         >
-          <span>{sortedReverse ? "Sorted Desc" : "Sorted by Id"}</span>
-          <ArrowUpDown className="h-3.5 w-3.5 opacity-70" />
+          {sortMode === "id" ? "Sorted by Id" : "Sorted Desc"}
+          <svg
+            className={`transition-transform duration-300 ${
+              sortMode === "reverse" ? "rotate-180" : "rotate-0"
+            }`}
+            width="20"
+            height="20"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.2168 11.2812L8.3418 8.15625L11.4668 11.2812"
+              stroke="currentColor"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M5.2168 6.90625L8.3418 3.78125L11.4668 6.90625"
+              stroke="currentColor"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
-        <span className="text-[11px] font-mono text-muted-foreground/60">
-          {components.length} components
+      </div>
+
+      {/* All Components header */}
+      <div className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px]">
+        <span className="bg-white inline-block h-[1px] w-[32px]" />
+        <span className="whitespace-nowrap transition-all ease-out opacity-100 text-white font-medium">
+          All Components
         </span>
       </div>
 
-      {displayList.map((component) => {
+      {/* Gap lines */}
+      <span className="bg-white/20 block h-[1px] w-[32px]" />
+      <span className="bg-white/20 block h-[1px] w-[32px]" />
+
+      {/* Component items */}
+      {displayList.map((component, idx) => {
         const originalIndex = components.findIndex(
           (c) => c.href === component.href
         );
         const isActive = pathname === component.href;
 
         return (
-          <ProximityItem
-            key={component.href}
-            component={component}
-            index={originalIndex}
-            isActive={isActive}
-            mouseY={mouseY}
-            onNavigate={onNavigate}
-          />
+          <React.Fragment key={component.href}>
+            <ProximityScaleItem
+              component={component}
+              index={originalIndex}
+              isActive={isActive}
+              mouseY={mouseY}
+              onNavigate={onNavigate}
+            />
+            {idx < displayList.length - 1 && (
+              <>
+                <span className="bg-white/20 block h-[1px] w-[32px]" />
+                <span className="bg-white/20 block h-[1px] w-[32px]" />
+              </>
+            )}
+          </React.Fragment>
         );
       })}
     </div>
