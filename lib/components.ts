@@ -1007,6 +1007,26 @@ export function Demo() {
   return <SolanaSwapCard defaultPayToken="SOL" defaultReceiveToken="USDC" />
 }`,
   },
+  {
+    name: "Hero text transition",
+    href: "/components/herotexttransition",
+    registry: "hero-text-transition",
+    description:
+      "A spring-driven, staggered blur-and-rise entrance transition for hero headlines and subtitles.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/hero-text-transition.tsx`,
+    interaction:
+      "Headline, subtext, and call-to-action elements animate in sequence on component mount.",
+    usage: `import { HeroTextTransition } from "@/components/ui/hero-text-transition"
+
+export function Demo() {
+  return (
+    <HeroTextTransition
+      headline="Craft Premium Solana Frontends in Minutes."
+      sub="Oxygen UI is an open-source React component library built for Solana applications."
+    />
+  )
+}`,
+  },
 ];
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";

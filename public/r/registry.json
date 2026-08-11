@@ -510,6 +510,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "hero-text-transition",
+      "type": "registry:ui",
+      "title": "Hero Text Transition",
+      "description": "A spring-driven, staggered blur-and-rise entrance transition for hero headlines and subtitles.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/hero-text-transition.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
