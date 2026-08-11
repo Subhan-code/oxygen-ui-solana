@@ -73,11 +73,11 @@ export default function ComponentCard({
           <h3 className="font-runde text-base font-semibold tracking-tight">
             {item.name}
           </h3>
-          {/* {item.description && (
-            <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+          {item.description && (
+            <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
               {item.description}
             </p>
-          )} */}
+          )}
         </div>
         <span className="flex shrink-0 items-center justify-center text-[#0066FF]">
           <ArrowIcon />
