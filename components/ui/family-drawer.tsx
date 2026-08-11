@@ -32,12 +32,14 @@ export default function FamilyDrawer() {
         const MIN_DURATION = 0.15;
         const MAX_DURATION = 0.27;
 
+        // eslint-disable-next-line react-hooks/refs
         if (!previousHeightRef.current) {
             previousHeightRef.current = bounds.height;
             return MIN_DURATION;
         }
 
         const heightDifference = Math.abs(
+            // eslint-disable-next-line react-hooks/refs
             bounds.height - previousHeightRef.current,
         );
         previousHeightRef.current = bounds.height;

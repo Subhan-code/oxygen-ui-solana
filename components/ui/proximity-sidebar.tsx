@@ -286,6 +286,7 @@ const ProximitySidebar = ({
       {}
     )
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDetectedKinds(kinds)
   }, [sectionIds, sections])
 

@@ -84,6 +84,7 @@ const ScrollProgress = ({
   const prevLabel = React.useRef(label)
   if (label !== prevLabel.current) {
     prevLabel.current = label
+    // eslint-disable-next-line react-hooks/refs
     labelVersion.current += 1
   }
 
@@ -339,6 +340,7 @@ const ScrollProgress = ({
                   <AnimatePresence initial={false}>
                     {label && (
                       <motion.span
+                        // eslint-disable-next-line react-hooks/refs
                         key={labelVersion.current}
                         data-slot="scroll-progress-label"
                         className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap text-sm font-medium leading-none text-foreground"
