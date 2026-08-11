@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { motion } from "motion/react";
 import SidebarList from "./SidebarList";
 import SidebarToggleIcon from "./SidebarToggleIcon";
@@ -17,6 +17,14 @@ const Sidebar = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const handleToggle = useCallback(() => {
+    setOpen((v) => !v);
+  }, [setOpen]);
+
+  const handleNavigateClose = useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
 
   useEffect(() => {
     if (!open) return;
@@ -46,28 +54,28 @@ const Sidebar = ({
         <button
           ref={buttonRef}
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={handleToggle}
           aria-label={open ? "Close sidebar" : "Open sidebar"}
-          className="cursor-pointer bg-transparent p-1 text-foreground transition-all hover:opacity-80"
+          className="cursor-pointer bg-transparent p-1 text-foreground transition-transform active:scale-95 hover:opacity-80"
         >
           <SidebarToggleIcon
             isOpen={open}
             strokeWidth={1.8}
-            className="h-7 w-7 text-foreground"
+            className="h-[22px] w-[22px] text-foreground"
           />
         </button>
 
-        <BreadcrumbPath onToggleSidebar={() => setOpen((v) => !v)} />
+        <BreadcrumbPath onToggleSidebar={handleToggle} />
       </div>
 
       <motion.div
         ref={containerRef}
         initial={false}
         animate={{ x: open ? 0 : -PANEL_SHIFT }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="pointer-events-auto bg-[#111] text-white relative flex h-full w-[320px] flex-col overflow-y-auto overflow-x-clip rounded-3xl pl-4 pr-2 text-[15px] tracking-tight border border-white/10 shadow-2xl no-scrollbar"
+        transition={{ type: "spring", stiffness: 320, damping: 32 }}
+        className="pointer-events-auto bg-white text-zinc-900 border-zinc-200/80 dark:bg-[#111] dark:text-white dark:border-white/10 relative flex h-full w-[320px] flex-col overflow-y-auto overflow-x-clip rounded-3xl pl-4 pr-2 text-[15px] tracking-tight border shadow-2xl no-scrollbar will-change-transform"
       >
-        <SidebarList onNavigate={() => setOpen(false)} />
+        <SidebarList onNavigate={handleNavigateClose} />
       </motion.div>
     </div>
   );

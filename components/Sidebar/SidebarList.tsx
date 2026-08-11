@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback, memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { components } from "@/lib/components";
@@ -16,7 +16,7 @@ const RADIUS = 45;
 const BASE_WIDTH = 32;
 const MAX_WIDTH = 55;
 
-function ProximityScaleItem({
+const ProximityScaleItem = memo(function ProximityScaleItem({
   component,
   index,
   isActive,
@@ -60,7 +60,9 @@ function ProximityScaleItem({
     >
       <motion.span
         className={`inline-block h-[1px] transition-colors duration-150 ${
-          isActive ? "bg-sky-500" : "bg-white/20 group-hover:bg-sky-500"
+          isActive
+            ? "bg-sky-500"
+            : "bg-zinc-300 dark:bg-white/20 group-hover:bg-sky-500"
         }`}
         style={{
           width: isActive ? 55 : proxWidth,
@@ -70,19 +72,30 @@ function ProximityScaleItem({
         className={`whitespace-nowrap transition-all ease-out ${
           isActive
             ? "text-sky-500 opacity-100 font-medium"
-            : "opacity-40 text-white group-hover:text-sky-500 group-hover:opacity-100"
+            : "opacity-60 text-zinc-700 dark:text-white group-hover:text-sky-500 group-hover:opacity-100"
         }`}
       >
         {numStr} {component.name}
       </span>
     </Link>
   );
-}
+});
 
 const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
   const pathname = usePathname();
   const [sortMode, setSortMode] = useState<"id" | "reverse">("id");
   const mouseY = useMotionValue(Infinity);
+
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      mouseY.set(e.clientY);
+    },
+    [mouseY]
+  );
+
+  const handlePointerLeave = useCallback(() => {
+    mouseY.set(Infinity);
+  }, [mouseY]);
 
   const displayList =
     sortMode === "reverse" ? [...components].reverse() : components;
@@ -90,8 +103,8 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
   return (
     <div
       className="relative flex h-fit flex-col gap-2 pb-[15vh] pt-[16vh] w-full pr-3 select-none text-[15px] tracking-tight"
-      onPointerMove={(e) => mouseY.set(e.clientY)}
-      onPointerLeave={() => mouseY.set(Infinity)}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
     >
       {/* Sort button */}
       <div className="mb-8 flex items-center justify-between">
@@ -100,7 +113,7 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
           onClick={() =>
             setSortMode((prev) => (prev === "id" ? "reverse" : "id"))
           }
-          className="flex items-center justify-center gap-2 transition-colors text-white/50 hover:text-white/80 text-sm cursor-pointer"
+          className="flex items-center justify-center gap-2 transition-colors text-zinc-500 hover:text-zinc-900 dark:text-white/50 dark:hover:text-white/80 text-sm cursor-pointer"
         >
           {sortMode === "id" ? "Sorted by Id" : "Sorted Desc"}
           <svg
@@ -133,15 +146,15 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
 
       {/* All Components header */}
       <div className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px]">
-        <span className="bg-white inline-block h-[1px] w-[32px]" />
-        <span className="whitespace-nowrap transition-all ease-out opacity-100 text-white font-medium">
+        <span className="bg-zinc-900 dark:bg-white inline-block h-[1px] w-[32px]" />
+        <span className="whitespace-nowrap transition-all ease-out opacity-100 text-zinc-900 dark:text-white font-medium">
           All Components
         </span>
       </div>
 
       {/* Gap lines */}
-      <span className="bg-white/20 block h-[1px] w-[32px]" />
-      <span className="bg-white/20 block h-[1px] w-[32px]" />
+      <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
+      <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
 
       {/* Component items */}
       {displayList.map((component, idx) => {
@@ -161,8 +174,8 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
             />
             {idx < displayList.length - 1 && (
               <>
-                <span className="bg-white/20 block h-[1px] w-[32px]" />
-                <span className="bg-white/20 block h-[1px] w-[32px]" />
+                <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
+                <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
               </>
             )}
           </React.Fragment>

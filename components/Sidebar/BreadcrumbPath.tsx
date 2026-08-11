@@ -44,7 +44,7 @@ function MagneticBreadcrumbTab({
     <div
       ref={ref}
       data-slot={dataSlot}
-      className={`relative inline-flex items-center justify-center cursor-pointer px-2.5 py-1 rounded-lg transition-colors text-sm ${
+      className={`relative inline-flex items-center justify-center cursor-pointer px-2.5 py-1 rounded-lg transition-colors text-sm whitespace-nowrap shrink-0 ${
         className || ""
       }`}
       onMouseMove={handleMouseMove}
@@ -65,7 +65,7 @@ function MagneticBreadcrumbTab({
 
   if (href) {
     return (
-      <Link href={href} data-slot={dataSlot}>
+      <Link href={href} data-slot={dataSlot} className="shrink-0">
         {innerContent}
       </Link>
     );
@@ -84,12 +84,19 @@ export default function BreadcrumbPath({
   const currentTitle = item ? item.name : "Overview";
 
   return (
-    <nav aria-label="breadcrumb" data-slot="breadcrumb">
+    <nav
+      aria-label="breadcrumb"
+      data-slot="breadcrumb"
+      className="hidden sm:block select-none"
+    >
       <ol
         data-slot="breadcrumb-list"
-        className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5 select-none"
+        className="text-muted-foreground flex flex-nowrap whitespace-nowrap items-center gap-1.5 text-sm sm:gap-2 select-none overflow-hidden max-w-full"
       >
-        <li data-slot="breadcrumb-item" className="inline-flex items-center gap-1.5">
+        <li
+          data-slot="breadcrumb-item"
+          className="inline-flex items-center gap-1.5 shrink-0"
+        >
           <MagneticBreadcrumbTab
             onClick={onToggleSidebar}
             dataSlot="breadcrumb-link"
@@ -102,11 +109,14 @@ export default function BreadcrumbPath({
           data-slot="breadcrumb-separator"
           role="presentation"
           aria-hidden="true"
-          className="[&>svg]:size-3.5 text-muted-foreground/60"
+          className="[&>svg]:size-3.5 text-muted-foreground/60 shrink-0 select-none"
         >
           /
         </li>
-        <li data-slot="breadcrumb-item" className="inline-flex items-center gap-1.5">
+        <li
+          data-slot="breadcrumb-item"
+          className="inline-flex items-center gap-1.5 shrink-0"
+        >
           <MagneticBreadcrumbTab
             dataSlot="breadcrumb-page"
             className="text-foreground text-sm font-medium"
