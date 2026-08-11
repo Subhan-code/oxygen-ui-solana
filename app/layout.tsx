@@ -93,7 +93,7 @@ export const metadata: Metadata = {
         url: "/ogimage.webp",
         width: 2400,
         height: 1260,
-        alt: "Oxygen-UI — animated React components",
+        alt: "Oxygen UI: Open-source Solana UI library",
         type: "image/webp",
       },
     ],

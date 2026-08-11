@@ -68,7 +68,7 @@ export default function Footer() {
 
         <div className="flex flex-1 items-center py-16">
           <h2 className="font-runde text-[clamp(3rem,12.5vw,10.5rem)] font-bold leading-[0.92] tracking-tight">
-            Tasteful Components
+            Solana UI Primitives
           </h2>
         </div>
 

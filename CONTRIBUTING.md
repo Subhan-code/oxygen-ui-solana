@@ -1,6 +1,6 @@
 # Contributing to Oxygen-UI
 
-Oxygen-UI is a [shadcn registry](https://ui.shadcn.com/docs/registry). Every component in this repo can be installed into any project with a single command:
+Oxygen UI is an open-source Solana UI library and [shadcn registry](https://ui.shadcn.com/docs/registry). Every component in this repo can be installed into any Solana project with a single command:
 
 ```bash
 npx shadcn@latest add Subhan-code/oxygen_ui/<component-name>

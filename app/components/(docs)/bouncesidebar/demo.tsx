@@ -143,7 +143,7 @@ export default function BounceSidebarPage() {
             custom={order++}
             className="mt-2 text-lg text-foreground/40"
           >
-            From Oxygen-UI, the free component encyclopedia
+            From Oxygen UI, the open-source Solana component library
           </motion.p>
 
           {sections.map((section, index) => (

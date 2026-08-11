@@ -39,13 +39,13 @@ export const PANEL_INFO = {
   sourceHint:
     "Click the code icon in the top-right corner to view the source code.",
   keepInMind:
-    "Most components here are recreations of great work from around the web. I don't claim to be the original creator - this is my attempt to reverse-engineer, replicate, and often add a few extra features. I've tried to credit everyone; if I missed someone, let me know.",
+    "Oxygen UI provides composable primitives tailored for Solana applications, including account interfaces, token balance cards, transaction status states, and network metrics. Built for performance and seamless dApp integration.",
   contactEmail: "swamimalodeofficial@gmail.com",
   contactNote: "Found a bug or issue? Feel free to drop a DM.",
   license: [
-    "Free to use and modify in both personal and commercial projects.",
-    "Attribution to Oxygen-UI is appreciated when using a component.",
-    "Please don't resell the components as your own kit.",
+    "Free to use and modify in both personal and commercial Solana dApps.",
+    "Attribution to Oxygen UI is appreciated when using a component.",
+    "Please do not resell the components as standalone paid kits.",
   ],
 } as const;
 

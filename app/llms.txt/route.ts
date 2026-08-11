@@ -29,7 +29,7 @@ export function GET() {
   const body = [
     "# Oxygen-UI",
     "",
-    "> A shadcn registry of animated React components — frosted-glass, springy, Apple-flavored UI built with Tailwind CSS and Motion (Framer Motion). Every component is free to use and installable with one command via the shadcn CLI.",
+    "> An open-source Solana UI library and shadcn registry of React components and frontend primitives: providing account interfaces, token displays, transaction status flows, and network-aware UI states for Solana dApps.",
     "",
     "Install any component into a React / Next.js project:",
     "",

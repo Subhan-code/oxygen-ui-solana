@@ -34,8 +34,8 @@ export default async function Home() {
 
           <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pb-20 pt-28 text-center sm:gap-4 sm:px-6">
             <HeroIntro
-              headline="Tasteful Components, Made to Stand Out."
-              sub="Oxygen-UI is a free, open-source collection of animated React components. Browse them in action below and install any component with the shadcn CLI."
+              headline="Composable UI Primitives for Solana Developers."
+              sub="Oxygen UI is an open-source React component library built for Solana applications. Integrate wallet account interfaces, token displays, transaction status flows, and network states seamlessly."
             >
               <HeroCta />
             </HeroIntro>
@@ -145,7 +145,7 @@ function BackersSection() {
       className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-col items-center gap-12 px-6 py-24 text-center md:py-32"
     >
       <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl">
-        Oxygen-UI is backed and supported by the finest
+        Supported by Solana Foundation India Grants and ecosystem backers
       </h2>
       <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
         {BACKERS.map((backer) => (

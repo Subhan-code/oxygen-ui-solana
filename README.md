@@ -6,20 +6,21 @@
 
 # Oxygen-UI
 
-**A shadcn registry of ready-to-use components and animations.**
+**An open-source Solana UI library and component registry for web3 developers.**
 
+<img src="https://img.shields.io/badge/Solana-000000?logo=solana&logoColor=00FFA3" alt="Solana" />
 <img src="https://img.shields.io/badge/Next.js-0a0a0a?logo=nextdotjs&logoColor=0066FF" alt="Next.js" />
 <img src="https://img.shields.io/badge/Tailwind_CSS-0a0a0a?logo=tailwindcss&logoColor=0066FF" alt="Tailwind CSS" />
 <img src="https://img.shields.io/badge/TypeScript-0a0a0a?logo=typescript&logoColor=0066FF" alt="TypeScript" />
 <img src="https://img.shields.io/badge/shadcn-registry-0066FF?labelColor=0a0a0a" alt="shadcn registry" />
 
-[**oxygenui.com**](https://oxygenui.com) &nbsp;&middot;&nbsp; [Components](https://oxygenui.com/components) &nbsp;&middot;&nbsp; [Follow on X](https://x.com/swamimalode)
+[**oxygenui.com**](https://oxygenui.com) &nbsp;&middot;&nbsp; [Components](https://oxygenui.com/components) &nbsp;&middot;&nbsp; [Follow on X](https://x.com/SubhanHQ)
 
 </div>
 
 <br />
 
-Oxygen-UI is a shadcn registry built with Next.js, Tailwind CSS, and TypeScript. Every component is animated with Motion, honors `prefers-reduced-motion`, and installs straight into your codebase. You own the code: no package to depend on, restyle anything.
+Oxygen UI is an open-source Solana UI library providing reusable React components and frontend primitives. Supported by the Solana Foundation India Grants program ($7,000 USDG), Oxygen UI reduces repeated frontend development across Solana dApps by giving developers accessible account interfaces, token displays, transaction status flows, and network states.
 
 ## Quick start
 

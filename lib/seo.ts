@@ -12,6 +12,15 @@ export const SITE_KEYWORDS = [
   "oxygenui",
   "oxygen ui",
   "oxygen ui components",
+  "solana ui library",
+  "solana react components",
+  "solana dapp ui",
+  "solana ui primitives",
+  "solana developer tooling",
+  "solana foundation grant",
+  "web3 frontend components",
+  "solana token component",
+  "solana wallet ui",
   "react components",
   "next.js components",
   "shadcn registry",
@@ -33,7 +42,7 @@ export function componentPageMetadata(href: string): Metadata {
   const name = item.name.toLowerCase();
 
   return {
-    title: `${item.name} — Animated React Component`,
+    title: `${item.name}: Solana React Component`,
     description: item.description,
     keywords: [
       name,
