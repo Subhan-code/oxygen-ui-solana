@@ -4,13 +4,13 @@ import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { activeComponent } from "@/lib/components";
-import { ChevronRight } from "lucide-react";
 
 interface MagneticTabProps {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string;
   className?: string;
+  dataSlot?: string;
 }
 
 function MagneticBreadcrumbTab({
@@ -18,6 +18,7 @@ function MagneticBreadcrumbTab({
   onClick,
   href,
   className,
+  dataSlot,
 }: MagneticTabProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hoverPosition, setHoverPosition] = useState({
@@ -39,10 +40,11 @@ function MagneticBreadcrumbTab({
     setHoverPosition({ x: 0, y: 0, opacity: 0 });
   };
 
-  const content = (
+  const innerContent = (
     <div
       ref={ref}
-      className={`relative flex h-8 items-center justify-center cursor-pointer px-2.5 py-1 rounded-md text-xs font-medium text-muted-foreground transition-colors hover:text-foreground ${
+      data-slot={dataSlot}
+      className={`relative inline-flex items-center justify-center cursor-pointer px-2.5 py-1 rounded-lg transition-colors text-sm ${
         className || ""
       }`}
       onMouseMove={handleMouseMove}
@@ -51,7 +53,7 @@ function MagneticBreadcrumbTab({
     >
       <span className="relative z-10">{children}</span>
       <div
-        className="absolute inset-0 z-0 rounded-md bg-muted/80 backdrop-blur-xs transition-opacity"
+        className="absolute inset-0 z-0 rounded-lg bg-accent/80 backdrop-blur-xs transition-opacity pointer-events-none"
         aria-hidden="true"
         style={{
           transform: `translate(${hoverPosition.x}px, ${hoverPosition.y}px)`,
@@ -62,10 +64,14 @@ function MagneticBreadcrumbTab({
   );
 
   if (href) {
-    return <Link href={href}>{content}</Link>;
+    return (
+      <Link href={href} data-slot={dataSlot}>
+        {innerContent}
+      </Link>
+    );
   }
 
-  return content;
+  return innerContent;
 }
 
 export default function BreadcrumbPath({
@@ -75,22 +81,40 @@ export default function BreadcrumbPath({
 }) {
   const pathname = usePathname();
   const item = activeComponent(pathname);
+  const currentTitle = item ? item.name : "Overview";
 
   return (
-    <div className="flex items-center gap-1 font-mono text-xs select-none">
-      <MagneticBreadcrumbTab onClick={onToggleSidebar}>
-        Components
-      </MagneticBreadcrumbTab>
-      <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/40 shrink-0" />
-      {item ? (
-        <MagneticBreadcrumbTab className="text-foreground font-semibold">
-          {item.name}
-        </MagneticBreadcrumbTab>
-      ) : (
-        <MagneticBreadcrumbTab className="text-foreground font-semibold">
-          Overview
-        </MagneticBreadcrumbTab>
-      )}
-    </div>
+    <nav aria-label="breadcrumb" data-slot="breadcrumb">
+      <ol
+        data-slot="breadcrumb-list"
+        className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5 select-none"
+      >
+        <li data-slot="breadcrumb-item" className="inline-flex items-center gap-1.5">
+          <MagneticBreadcrumbTab
+            onClick={onToggleSidebar}
+            dataSlot="breadcrumb-link"
+            className="text-foreground/60 hover:text-foreground hover:bg-accent"
+          >
+            Components
+          </MagneticBreadcrumbTab>
+        </li>
+        <li
+          data-slot="breadcrumb-separator"
+          role="presentation"
+          aria-hidden="true"
+          className="[&>svg]:size-3.5 text-muted-foreground/60"
+        >
+          /
+        </li>
+        <li data-slot="breadcrumb-item" className="inline-flex items-center gap-1.5">
+          <MagneticBreadcrumbTab
+            dataSlot="breadcrumb-page"
+            className="text-foreground text-sm font-medium"
+          >
+            {currentTitle}
+          </MagneticBreadcrumbTab>
+        </li>
+      </ol>
+    </nav>
   );
 }
