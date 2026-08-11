@@ -25,7 +25,7 @@ export default async function Home() {
           <GooeyNavbar stars={stars} />
 
           <img
-            src="/logos/Rareui.svg"
+            src="/logos/Oxygenui.svg"
             alt=""
             aria-hidden="true"
             className="pointer-events-none absolute left-1/2 top-[68%] w-[860px] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.05] [filter:brightness(0)] dark:opacity-[0.07] dark:[filter:brightness(0)_invert(1)]"
@@ -35,7 +35,7 @@ export default async function Home() {
           <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pb-20 pt-28 text-center sm:gap-4 sm:px-6">
             <HeroIntro
               headline="Tasteful Components, Made to Stand Out."
-              sub="Rare UI is a free, open-source collection of rare animated React components. Browse them in action below and install any component with the shadcn CLI."
+              sub="Oxygen-UI is a free, open-source collection of animated React components. Browse them in action below and install any component with the shadcn CLI."
             >
               <HeroCta />
             </HeroIntro>
@@ -49,7 +49,7 @@ export default async function Home() {
   );
 }
 
-const SPONSOR_URL = "https://github.com/sponsors/swamimalode07";
+const SPONSOR_URL = "https://github.com/Subhan-code/oxygen_ui";
 
 type Backer = {
   name: string;
@@ -130,7 +130,7 @@ function SponsorSlot() {
             className="col-start-1 row-start-1 translate-y-full opacity-0 transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none"
           >
             <span className="font-runde font-semibold">Take this slot</span>{" "}
-            <span className="text-[#FC4C01]">&#10084;</span>
+            <span className="text-[#0066FF]">&#10084;</span>
           </span>
         </span>
       </span>
@@ -145,7 +145,7 @@ function BackersSection() {
       className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-col items-center gap-12 px-6 py-24 text-center md:py-32"
     >
       <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl">
-        Rare UI is backed and supported by the finest
+        Oxygen-UI is backed and supported by the finest
       </h2>
       <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
         {BACKERS.map((backer) => (

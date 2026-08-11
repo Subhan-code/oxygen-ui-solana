@@ -12,13 +12,13 @@ export default function ViewAllCard({
     <Link
       href="/components"
       className={cn(
-        "group relative flex min-h-45 flex-col justify-between overflow-hidden rounded-[32px] bg-[#FC4C01] p-6 text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-colors duration-200 ease-out hover:bg-[#e04300]",
+        "group relative flex min-h-45 flex-col justify-between overflow-hidden rounded-[32px] bg-[#0066FF] p-6 text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-colors duration-200 ease-out hover:bg-[#0052CC]",
         className,
       )}
       style={{ cornerShape: "squircle" } as React.CSSProperties}
     >
       <img
-        src="/logos/Rareui.svg"
+        src="/logos/Oxygenui.svg"
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-20 -right-20 h-80 w-80 opacity-25 [filter:brightness(0)_invert(1)]"

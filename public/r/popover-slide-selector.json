@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover-slide-selector",
+  "title": "Popover Slide Selector",
+  "description": "A follower popover menu that reveals a horizontal avatar list on click.",
+  "dependencies": [
+    "motion",
+    "@radix-ui/react-icons",
+    "@radix-ui/react-popover"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/popover-slide-selector.tsx",
+      "content": "\"use client\";\n\nimport { Cross1Icon } from '@radix-ui/react-icons';\nimport { Variants, motion } from 'framer-motion';\nimport { useState } from 'react';\nimport {\n  Popover,\n  PopoverTrigger,\n  PopoverContent,\n  PopoverClose,\n  PopoverArrow,\n} from '@radix-ui/react-popover';\n\nconst transition = {\n  duration: 0.3,\n  ease: [0.32, 0.72, 0, 1] as const,\n};\n\nconst variants = {\n  open: {\n    opacity: 1,\n    scale: 1,\n    filter: 'blur(0px)',\n    height: 112,\n  },\n  closed: {\n    opacity: 0.6,\n    scale: 0,\n    filter: 'blur(2px)',\n    height: 0,\n  },\n} as Variants;\n\nconst childVariants = {\n  open: { opacity: 1, scale: 1 },\n  closed: { opacity: 1, scale: 1 },\n};\n\nconst LAST_10_GITHUB_FOLLOWERS = [\n  'achris2',\n  '609529897',\n  'AbhirajSinha179',\n  'jbreite',\n  'rafunderscore',\n  'RJohnPaul',\n  'DarkInventor',\n  'TechSon1c',\n  'laoqin2024',\n];\n\nexport function PopoverSlideSelector() {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <div className=\"flex h-[180px] w-full flex-col items-center justify-start overflow-hidden p-4\">\n      <div className=\"flex flex-col items-center justify-start\">\n        <Popover onOpenChange={setIsOpen}>\n          <PopoverTrigger asChild>\n            <button className=\"mb-2 rounded-md bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white shadow-xs dark:bg-white dark:text-zinc-900\">\n              <span>411</span>\n              <span className=\"ml-1 opacity-80\">Followers</span>\n            </button>\n          </PopoverTrigger>\n          <PopoverContent\n            data-side=\"bottom\"\n            side=\"bottom\"\n            sideOffset={12}\n            forceMount\n          >\n            <motion.div\n              className=\"data-[state=closed]:animate-hide w-[290px] rounded-xl bg-zinc-900 py-3 text-white shadow-xl dark:bg-white dark:text-zinc-900\"\n              initial=\"closed\"\n              animate={isOpen ? 'open' : 'closed'}\n              variants={variants}\n              transition={transition}\n              style={{\n                transformOrigin: 'top',\n              }}\n            >\n              <PopoverArrow className=\"fill-zinc-900 dark:fill-white\" />\n              <div className=\"mb-2 flex items-center justify-between px-3\">\n                <div className=\"text-xs font-semibold uppercase tracking-wider opacity-75\">\n                  Last Followers\n                </div>\n                <PopoverClose asChild>\n                  <button type=\"button\" aria-label=\"Close popover\">\n                    <Cross1Icon className=\"h-3.5 w-3.5 opacity-80 hover:opacity-100\" />\n                  </button>\n                </PopoverClose>\n              </div>\n              <div className=\"flex gap-4 overflow-x-auto px-3 pb-1\">\n                {LAST_10_GITHUB_FOLLOWERS.map((item, index) => {\n                  return (\n                    <motion.button\n                      key={index}\n                      className=\"group flex flex-col items-center\"\n                      variants={childVariants}\n                      transition={transition}\n                    >\n                      <img\n                        src={`https://avatars.githubusercontent.com/${item}`}\n                        className=\"h-10 w-10 rounded-full transition-transform group-active:scale-95\"\n                        alt={item}\n                      />\n                      <span className=\"mt-1 w-12 truncate text-[11px] opacity-75 group-hover:opacity-100\">\n                        {item}\n                      </span>\n                    </motion.button>\n                  );\n                })}\n              </div>\n            </motion.div>\n          </PopoverContent>\n        </Popover>\n      </div>\n    </div>\n  );\n}\n\nexport default PopoverSlideSelector;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

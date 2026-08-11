@@ -2,8 +2,8 @@ import { Fragment } from "react";
 import Link from "next/link";
 import FluidWave from "./FluidWave";
 
-const GITHUB_URL = "https://github.com/swamimalode07/rare-ui";
-const X_URL = "https://x.com/swamimalode";
+const GITHUB_URL = "https://github.com/Subhan-code/oxygen_ui";
+const X_URL = "https://x.com/SubhanHQ";
 
 type FooterLink = { label: string; href: string; external?: boolean };
 
@@ -53,9 +53,9 @@ export default function Footer() {
 
         <div className="flex flex-wrap items-center justify-between gap-6 py-8">
           <Link href="/" className="flex h-fit w-fit items-center gap-2.5">
-            <img src="/logos/Rareui.svg" alt="" className="h-8 w-8" />
+            <img src="/logos/Oxygenui.svg" alt="" className="h-8 w-8" />
             <span className="font-runde text-2xl font-bold tracking-tight">
-              Rare UI
+              Oxygen-UI
             </span>
           </Link>
 
@@ -75,7 +75,7 @@ export default function Footer() {
         <div
           className={`flex flex-wrap items-center justify-between gap-3 pb-8 text-xs ${MUTED}`}
         >
-          <span>Rare UI &copy; {new Date().getFullYear()}</span>
+          <span>Oxygen-UI &copy; {new Date().getFullYear()}</span>
           <span className="flex items-center gap-2.5">
             {UTILITY_LINKS.map((link, index) => (
               <Fragment key={link.href}>

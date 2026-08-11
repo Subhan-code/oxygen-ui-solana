@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-typing-effect",
+  "title": "Text Typing Effect",
+  "description": "A type-writer style text effect with a smooth fade sequence.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/text-typing-effect.tsx",
+      "content": "\"use client\";\n\nimport { useState, useEffect } from \"react\";\n\nconst useTypingEffect = (\n  text: string,\n  duration: number,\n  isTypeByLetter = false\n) => {\n  const [currentPosition, setCurrentPosition] = useState(0);\n  const items = isTypeByLetter ? text.split(\"\") : text.split(\" \");\n\n  useEffect(() => {\n    setCurrentPosition(0);\n  }, [text]);\n\n  useEffect(() => {\n    if (currentPosition >= items.length) return;\n\n    const intervalId = setInterval(() => {\n      setCurrentPosition((prevPosition) => prevPosition + 1);\n    }, duration);\n\n    return () => {\n      clearInterval(intervalId);\n    };\n  }, [currentPosition, items, duration]);\n\n  return items.slice(0, currentPosition).join(isTypeByLetter ? \"\" : \" \");\n};\n\nconst texts = [\n  \"This is a simple text typing effect in React\",\n  \"This effect is created using React Hooks\",\n  \"We can use this effect to create a typing effect for your portfolio\",\n  \"We can also use this effect to create a typing effect for your resume\",\n  \"or for your blog\",\n  \"or for your landing page\",\n  \"let's go\",\n];\n\nconst TIME_TO_FADE = 300;\nconst TIME_INTERVAL = 3000;\nconst TIME_PER_LETTER = 100;\n\nexport const TextTypingEffectWithTextsFadeOut = () => {\n  const [textIndex, setTextIndex] = useState(0);\n  const [fadeText, setFadeText] = useState(true);\n  const [fadeCircle, setFadeCircle] = useState(true);\n  const textToShow = useTypingEffect(texts[textIndex], TIME_PER_LETTER, false);\n\n  const timeToTypeText = texts[textIndex].split(\" \").length * TIME_PER_LETTER;\n\n  useEffect(() => {\n    const circleTimeout = setTimeout(() => {\n      setFadeCircle(false);\n    }, timeToTypeText + 1000);\n\n    const textTimeout = setTimeout(() => {\n      setFadeText(false);\n\n      setTimeout(() => {\n        setTextIndex((prevIndex) =>\n          prevIndex >= texts.length - 1 ? 0 : prevIndex + 1\n        );\n        setFadeCircle(true);\n        setFadeText(true);\n      }, TIME_TO_FADE);\n    }, TIME_INTERVAL);\n\n    return () => {\n      clearTimeout(circleTimeout);\n      clearTimeout(textTimeout);\n    };\n  }, [textIndex, timeToTypeText]);\n\n  return (\n    <div\n      className={`inline-block font-medium text-lg text-black transition-all duration-300 dark:text-white ${\n        fadeText ? \"opacity-100 translate-y-0\" : \"translate-y-2 opacity-0\"\n      }`}\n      key={textIndex}\n    >\n      <span>\n        {textToShow}\n        <span\n          className={`ml-2 inline-block h-2.5 w-2.5 rounded-full bg-black transition-transform duration-300 dark:bg-white ${\n            fadeCircle ? \"scale-100 opacity-100\" : \"scale-0 opacity-0\"\n          }`}\n        />\n      </span>\n    </div>\n  );\n};\n\nexport default TextTypingEffectWithTextsFadeOut;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

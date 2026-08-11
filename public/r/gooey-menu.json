@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gooey-menu",
+  "title": "Gooey Menu",
+  "description": "A floating action menu with a fluid gooey SVG filter expansion.",
+  "dependencies": [
+    "@radix-ui/react-icons"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/gooey-menu.tsx",
+      "content": "\"use client\";\n\nimport { PlusIcon, GearIcon, HeartIcon, Share1Icon, PersonIcon } from \"@radix-ui/react-icons\";\nimport { useState } from \"react\";\n\nexport default function GooeyMenu() {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <div className=\"relative flex h-[350px] w-full items-center justify-center\">\n      <div\n        className=\"relative flex items-center justify-center\"\n        style={{\n          filter: \"url(#gooey-filter)\",\n        }}\n      >\n        <button\n          type=\"button\"\n          aria-label=\"Gear action\"\n          className={`absolute flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-white transition-all duration-500 dark:bg-zinc-100 dark:text-zinc-900 ${\n            isOpen ? \"-translate-y-16 scale-100 opacity-100\" : \"translate-y-0 scale-75 opacity-0\"\n          }`}\n          onClick={() => setIsOpen(false)}\n        >\n          <GearIcon className=\"h-5 w-5\" />\n        </button>\n\n        <button\n          type=\"button\"\n          aria-label=\"Heart action\"\n          className={`absolute flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-white transition-all duration-500 dark:bg-zinc-100 dark:text-zinc-900 ${\n            isOpen ? \"-translate-x-16 scale-100 opacity-100\" : \"translate-x-0 scale-75 opacity-0\"\n          }`}\n          onClick={() => setIsOpen(false)}\n        >\n          <HeartIcon className=\"h-5 w-5\" />\n        </button>\n\n        <button\n          type=\"button\"\n          aria-label=\"Share action\"\n          className={`absolute flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-white transition-all duration-500 dark:bg-zinc-100 dark:text-zinc-900 ${\n            isOpen ? \"translate-x-16 scale-100 opacity-100\" : \"translate-x-0 scale-75 opacity-0\"\n          }`}\n          onClick={() => setIsOpen(false)}\n        >\n          <Share1Icon className=\"h-5 w-5\" />\n        </button>\n\n        <button\n          type=\"button\"\n          aria-label=\"Profile action\"\n          className={`absolute flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-white transition-all duration-500 dark:bg-zinc-100 dark:text-zinc-900 ${\n            isOpen ? \"translate-y-16 scale-100 opacity-100\" : \"translate-y-0 scale-75 opacity-0\"\n          }`}\n          onClick={() => setIsOpen(false)}\n        >\n          <PersonIcon className=\"h-5 w-5\" />\n        </button>\n\n        <button\n          type=\"button\"\n          aria-label=\"Toggle menu\"\n          className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-zinc-900 text-white transition-transform duration-300 dark:bg-zinc-100 dark:text-zinc-900 ${\n            isOpen ? \"rotate-45 scale-105\" : \"rotate-0 scale-100\"\n          }`}\n          onClick={() => setIsOpen(!isOpen)}\n        >\n          <PlusIcon className=\"h-6 w-6\" />\n        </button>\n      </div>\n\n      <svg className=\"hidden\" aria-hidden=\"true\">\n        <defs>\n          <filter id=\"gooey-filter\">\n            <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"10\" result=\"blur\" />\n            <feColorMatrix\n              in=\"blur\"\n              mode=\"matrix\"\n              values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9\"\n              result=\"gooey\"\n            />\n            <feComposite in=\"SourceGraphic\" in2=\"gooey\" operator=\"atop\" />\n          </filter>\n        </defs>\n      </svg>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

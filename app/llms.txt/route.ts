@@ -27,14 +27,14 @@ export function GET() {
   });
 
   const body = [
-    "# Rare UI",
+    "# Oxygen-UI",
     "",
-    "> A shadcn registry of rare, animated React components — frosted-glass, springy, Apple-flavored UI built with Tailwind CSS and Motion (Framer Motion). Every component is free to use and installable with one command via the shadcn CLI.",
+    "> A shadcn registry of animated React components — frosted-glass, springy, Apple-flavored UI built with Tailwind CSS and Motion (Framer Motion). Every component is free to use and installable with one command via the shadcn CLI.",
     "",
     "Install any component into a React / Next.js project:",
     "",
     "```",
-    "npx shadcn@latest add swamimalode07/rare-ui/<component-name>",
+    "npx shadcn@latest add Subhan-code/oxygen_ui/<component-name>",
     "```",
     "",
     `Source code for all components: ${REGISTRY_HOMEPAGE}`,

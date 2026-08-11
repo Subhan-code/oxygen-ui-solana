@@ -30,7 +30,7 @@ export default function PropsTable({ props }: PropsTableProps) {
           <div className="border-b border-border/40 py-4 pl-1 pr-4">
             <code className="inline-flex items-center whitespace-nowrap rounded-md bg-muted px-2 py-1 font-mono text-xs text-foreground/75">
               {prop.name}
-              {prop.required && <span className="text-[#FC4C01]">*</span>}
+              {prop.required && <span className="text-[#0066FF]">*</span>}
             </code>
           </div>
 

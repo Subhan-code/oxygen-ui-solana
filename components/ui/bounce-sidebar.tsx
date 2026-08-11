@@ -26,7 +26,7 @@ export function BounceSidebar({
   value,
   defaultValue = 0,
   onChange,
-  dotColor = "#FC4C01",
+  dotColor = "#0066FF",
   className,
   ...props
 }: BounceSidebarProps) {

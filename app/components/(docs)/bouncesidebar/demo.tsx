@@ -118,7 +118,7 @@ export default function BounceSidebarPage() {
           items={sections.map((s) => s.title)}
           value={active}
           onChange={goTo}
-          dotColor="#FC4C01"
+          dotColor="#0066FF"
         />
       </aside>
 
@@ -136,14 +136,14 @@ export default function BounceSidebarPage() {
             custom={order++}
             className="text-5xl font-medium tracking-wider font-cal text-foreground"
           >
-            Rare UI
+            Oxygen-UI
           </motion.h1>
           <motion.p
             variants={fadeUp}
             custom={order++}
             className="mt-2 text-lg text-foreground/40"
           >
-            From Rare UI, the free component encyclopedia
+            From Oxygen-UI, the free component encyclopedia
           </motion.p>
 
           {sections.map((section, index) => (

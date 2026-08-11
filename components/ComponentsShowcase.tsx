@@ -10,7 +10,7 @@ export default function ComponentsShowcase() {
     <section className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-6 md:py-32">
       <header className="flex flex-col items-center gap-3 text-center">
         <h2 className="max-w-2xl text-balance font-runde text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-          {components.length}+ rare and unique components
+          {components.length}+ components
         </h2>
         <p className="max-w-lg text-balance text-sm font-medium text-muted-foreground sm:text-base">
           Just one file for each component. Add it with the shadcn CLI, using

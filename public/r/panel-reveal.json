@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "panel-reveal",
+  "title": "Panel Reveal",
+  "description": "A panel reveal effect featuring vertical translation and blur transition.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/panel-reveal.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\n\nexport default function PanelReveal() {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <div className=\"flex h-[320px] w-full flex-col items-center justify-center gap-4 p-4\">\n      <button\n        type=\"button\"\n        onClick={() => setIsOpen(!isOpen)}\n        className=\"rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition-transform active:scale-95 dark:bg-white dark:text-zinc-900\"\n      >\n        {isOpen ? \"Close Panel\" : \"Open Panel\"}\n      </button>\n\n      <div className=\"relative h-[200px] w-full max-w-sm overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900\">\n        <div className=\"t-panel-slide\" data-open={isOpen}>\n          <div className=\"rounded-xl bg-white p-4 shadow-md dark:bg-zinc-950\">\n            <h4 className=\"text-base font-semibold text-zinc-900 dark:text-white\">\n              Panel Reveal\n            </h4>\n            <p className=\"mt-1 text-xs text-zinc-500 dark:text-zinc-400\">\n              Cross-blur & vertical slide transition based on Transitions.dev physics.\n            </p>\n          </div>\n        </div>\n      </div>\n\n      <style jsx>{`\n        .t-panel-slide {\n          --panel-open-dur: 400ms;\n          --panel-close-dur: 350ms;\n          --panel-translate-y: 93px;\n          --panel-blur: 2px;\n          --panel-ease: cubic-bezier(0.22, 1, 0.36, 1);\n          transform: translateY(var(--panel-translate-y));\n          opacity: 0;\n          filter: blur(var(--panel-blur));\n          pointer-events: none;\n          transition:\n            transform var(--panel-close-dur) var(--panel-ease),\n            opacity var(--panel-close-dur) var(--panel-ease),\n            filter var(--panel-close-dur) var(--panel-ease);\n          will-change: transform, opacity, filter;\n        }\n        .t-panel-slide[data-open=\"true\"] {\n          transform: translateY(0);\n          opacity: 1;\n          filter: blur(0);\n          pointer-events: auto;\n          transition:\n            transform var(--panel-open-dur) var(--panel-ease),\n            opacity var(--panel-open-dur) var(--panel-ease),\n            filter var(--panel-open-dur) var(--panel-ease);\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .t-panel-slide {\n            transition: none !important;\n          }\n        }\n      `}</style>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

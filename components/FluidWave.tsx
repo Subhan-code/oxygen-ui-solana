@@ -75,7 +75,7 @@ void main() {
 }
 `;
 
-export default function FluidWave({ color = "#FC4C01" }: { color?: string }) {
+export default function FluidWave({ color = "#0066FF" }: { color?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {

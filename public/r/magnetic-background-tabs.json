@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "magnetic-background-tabs",
+  "title": "Magnetic Background Tabs",
+  "description": "A navigation tab bar with a magnetic hover spotlight effect.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/magnetic-background-tabs.tsx",
+      "content": "\"use client\";\n\nimport React, { useRef, useState } from \"react\";\n\nconst MagneticBackgroundTab = ({\n  item,\n}: {\n  item: { id: number; text: string };\n}) => {\n  const ref = useRef<HTMLButtonElement>(null);\n\n  const [hoverPosition, setHoverPosition] = useState({\n    x: 0,\n    y: 0,\n    opacity: 0,\n  });\n\n  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {\n    const { clientX, clientY, currentTarget } = e;\n    const { left, top, width, height } = currentTarget.getBoundingClientRect();\n    const x = (clientX - left - width / 2) * 0.15;\n    const y = (clientY - top - height / 2) * 0.15;\n\n    setHoverPosition({ x, y, opacity: 1 });\n  };\n\n  const onMouseOut = () => {\n    setHoverPosition({ x: 0, y: 0, opacity: 0 });\n  };\n\n  return (\n    <button\n      ref={ref}\n      className=\"relative flex h-9 items-center justify-center\"\n      onMouseMove={handleMouseMove}\n      onMouseLeave={onMouseOut}\n      type=\"button\"\n    >\n      <span className=\"relative z-10 px-4 py-2 text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100\">\n        {item.text}\n      </span>\n      <div\n        className=\"absolute bottom-0 left-0 z-0 h-full w-full rounded-[4px] bg-zinc-200/80 transition-opacity dark:bg-zinc-800/80\"\n        aria-hidden=\"true\"\n        style={{\n          transform: `translate(${hoverPosition.x}px, ${hoverPosition.y}px)`,\n          opacity: hoverPosition.opacity,\n        }}\n      />\n    </button>\n  );\n};\n\nconst defaultTabs = [\n  { id: 1, text: \"Home\" },\n  { id: 2, text: \"Blog\" },\n  { id: 3, text: \"Projects\" },\n];\n\nexport default function MagneticBackgroundTabs() {\n  return (\n    <div className=\"flex flex-row items-center gap-1\">\n      {defaultTabs.map((item) => (\n        <MagneticBackgroundTab key={item.id} item={item} />\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

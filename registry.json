@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "rare-ui",
-  "homepage": "https://github.com/swamimalode07/rare-ui",
+  "name": "oxygen-ui",
+  "homepage": "https://github.com/Subhan-code/oxygen_ui",
   "items": [
     {
       "name": "utils",
@@ -13,20 +13,6 @@
         {
           "path": "lib/utils.ts",
           "type": "registry:lib"
-        }
-      ]
-    },
-    {
-      "name": "folder-component",
-      "type": "registry:ui",
-      "title": "Folder Component",
-      "description": "An animated folder whose cards fan out on hover and lift open on click, with a 3D-tilted flap. Supports color and size (sm/md/lg) props.",
-      "dependencies": ["motion"],
-      "registryDependencies": ["utils"],
-      "files": [
-        {
-          "path": "components/ui/folder-component.tsx",
-          "type": "registry:ui"
         }
       ]
     },
@@ -73,39 +59,6 @@
       ]
     },
     {
-      "name": "duration-picker",
-      "type": "registry:ui",
-      "title": "Duration Picker",
-      "description": "A gooey, spring-animated picker for entering a duration in hours and minutes.",
-      "dependencies": [
-        "motion",
-        "figma-squircle",
-        "flubber",
-        "react-use-measure",
-        "@radix-ui/react-slot"
-      ],
-      "registryDependencies": ["utils"],
-      "files": [
-        {
-          "path": "components/ui/duration-picker.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "fluid-orb",
-      "type": "registry:ui",
-      "title": "Fluid Orb",
-      "description": "An animated WebGL orb with drifting fluid shading. Supports size and color props.",
-      "registryDependencies": ["utils"],
-      "files": [
-        {
-          "path": "components/ui/fluid-orb.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "scroll-progress",
       "type": "registry:ui",
       "title": "Scroll Progress",
@@ -120,20 +73,6 @@
       ]
     },
     {
-      "name": "code-block",
-      "type": "registry:ui",
-      "title": "Code Block",
-      "description": "A clean code block that builds its entire theme from a single accent color. Pass code and a hex, it does the rest.",
-      "dependencies": ["motion", "prism-react-renderer", "lucide-react"],
-      "registryDependencies": ["utils"],
-      "files": [
-        {
-          "path": "components/ui/code-block.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "otp-input",
       "type": "registry:ui",
       "title": "OTP Input",
@@ -143,19 +82,6 @@
       "files": [
         {
           "path": "components/ui/otp-input.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "gravity-letters",
-      "type": "registry:ui",
-      "title": "Gravity Letters",
-      "description": "A playful gravity field where letters, numbers, emoji, or any components you pass fall and pile up like real objects.",
-      "registryDependencies": ["utils"],
-      "files": [
-        {
-          "path": "components/ui/gravity-letters.tsx",
           "type": "registry:ui"
         }
       ]
@@ -189,6 +115,328 @@
       "files": [
         {
           "path": "components/ui/emoji-reaction.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-morph-message",
+      "type": "registry:ui",
+      "title": "Input Morph Message",
+      "description": "An input bar that morphs its text content into a message bubble when submitted.",
+      "dependencies": ["motion", "@radix-ui/react-icons"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/input-morph-message.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "gooey-menu",
+      "type": "registry:ui",
+      "title": "Gooey Menu",
+      "description": "A floating action menu with a fluid gooey SVG filter expansion.",
+      "dependencies": ["@radix-ui/react-icons"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/gooey-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "run-stats-stacks",
+      "type": "registry:ui",
+      "title": "Run Stats Stacks",
+      "description": "A 3D stacked list of activity cards that unfolds into a vertical view on tap.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/run-stats-stacks.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover-slide-selector",
+      "type": "registry:ui",
+      "title": "Popover Slide Selector",
+      "description": "A follower popover menu that reveals a horizontal avatar list on click.",
+      "dependencies": ["motion", "@radix-ui/react-icons", "@radix-ui/react-popover"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/popover-slide-selector.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "family-popover-menu",
+      "type": "registry:ui",
+      "title": "Family Popover Menu",
+      "description": "A circular trigger button that expands into a smooth menu card.",
+      "dependencies": ["motion", "@radix-ui/react-icons"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/family-popover-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "underlay-action-sheet",
+      "type": "registry:ui",
+      "title": "Underlay Action Sheet",
+      "description": "An iOS-inspired underlay action sheet with drag-to-resize gesture physics.",
+      "dependencies": ["motion", "@radix-ui/react-icons"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/underlay-action-sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button-gooey",
+      "type": "registry:ui",
+      "title": "Button Gooey",
+      "description": "A call to action button with a gooey trailing arrow bubble on hover.",
+      "dependencies": ["@radix-ui/react-icons"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/button-gooey.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "magnetic-background-tabs",
+      "type": "registry:ui",
+      "title": "Magnetic Background Tabs",
+      "description": "A navigation tab bar with a magnetic hover spotlight effect.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/magnetic-background-tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "text-typing-effect",
+      "type": "registry:ui",
+      "title": "Text Typing Effect",
+      "description": "A type-writer style text effect with a smooth fade sequence.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/text-typing-effect.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button-ripple-effect",
+      "type": "registry:ui",
+      "title": "Button Ripple Effect",
+      "description": "A click ripple animation originating from pointer coordinates.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/button-ripple-effect.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-border-spotlight",
+      "type": "registry:ui",
+      "title": "Input Border Spotlight",
+      "description": "An input container with a radial cursor-tracking spotlight border glow.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/input-border-spotlight.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "panel-reveal",
+      "type": "registry:ui",
+      "title": "Panel Reveal",
+      "description": "A panel reveal effect featuring vertical translation and blur transition.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/panel-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "modal-transition",
+      "type": "registry:ui",
+      "title": "Modal Transition",
+      "description": "A modal dialog transition with scale and opacity interpolation.",
+      "dependencies": ["@radix-ui/react-icons"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/modal-transition.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "page-side-by-side",
+      "type": "registry:ui",
+      "title": "Page Side by Side",
+      "description": "A page view transition with directional sliding and blur effects.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/page-side-by-side.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-clear-dissolve",
+      "type": "registry:ui",
+      "title": "Input Clear Dissolve",
+      "description": "An input field clear action with dissolving text flight animation.",
+      "dependencies": ["@radix-ui/react-icons"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/input-clear-dissolve.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton-reveal",
+      "type": "registry:ui",
+      "title": "Skeleton Reveal",
+      "description": "A skeleton placeholder loading shimmer that cross-fades into content.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/skeleton-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "error-state-shake",
+      "type": "registry:ui",
+      "title": "Error State Shake",
+      "description": "An input validation error animation with multi-segment keyframe shake.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/error-state-shake.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spinning-counter",
+      "type": "registry:ui",
+      "title": "Spinning Counter",
+      "description": "A mechanical reel counter with vertical digit column rolling.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/spinning-counter.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spring-toggle",
+      "type": "registry:ui",
+      "title": "Spring Toggle",
+      "description": "A switch toggle button with spring overshoot keyframe physics.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/spring-toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "success-check",
+      "type": "registry:ui",
+      "title": "Success Check",
+      "description": "A success checkmark icon with rotation, scale, blur, and stroke drawing animation.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/success-check.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "notification-badge",
+      "type": "registry:ui",
+      "title": "Notification Badge",
+      "description": "An animated notification count badge that pops and slides into trigger position.",
+      "dependencies": ["@radix-ui/react-icons"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "text-states-swap",
+      "type": "registry:ui",
+      "title": "Text States Swap",
+      "description": "A text transition effect for action state labels.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/text-states-swap.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "transitions",
+      "type": "registry:ui",
+      "title": "Transitions.dev",
+      "description": "A collection of 27 CSS and Motion transitions for web applications.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/transitions/TransitionsShowcase.tsx",
           "type": "registry:ui"
         }
       ]

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "run-stats-stacks",
+  "title": "Run Stats Stacks",
+  "description": "A 3D stacked list of activity cards that unfolds into a vertical view on tap.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/run-stats-stacks.tsx",
+      "content": "\"use client\";\n\nimport { motion } from \"framer-motion\";\nimport { useState } from \"react\";\n\nconst runs = [\n  {\n    distance: 10.29,\n    pace: \"5:14 /km\",\n    time: \"53m 49s\",\n  },\n  {\n    distance: 12.75,\n    pace: \"5:30 /km\",\n    time: \"01h 10m\",\n  },\n  {\n    distance: 8.43,\n    pace: \"5:00 /km\",\n    time: \"42m 15s\",\n  },\n  {\n    distance: 15.62,\n    pace: \"5:20 /km\",\n    time: \"01h 23m\",\n  },\n];\n\nconst label = {\n  distance: \"Distance\",\n  pace: \"Pace\",\n  time: \"Time\",\n};\n\nconst CARD_HEIGHT = 70;\nconst GAP = 8;\n\nexport default function RunStatsStacks() {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <div className=\"flex h-[600px] w-full flex-col items-center justify-center overflow-hidden\">\n      <div\n        className=\"relative flex h-full w-full flex-col items-center justify-center\"\n        style={{\n          perspective: \"1000px\",\n        }}\n      >\n        {runs.map((run, i) => {\n          return (\n            <motion.div\n              className=\"absolute w-[250px] rounded-3xl border-t border-neutral-50 bg-neutral-200 bg-opacity-80 px-3 py-3 backdrop-blur-2xl dark:border-neutral-50/20 dark:bg-neutral-800\"\n              key={i}\n              animate={isOpen ? \"open\" : \"closed\"}\n              style={{\n                height: CARD_HEIGHT,\n              }}\n              variants={{\n                open: {\n                  y: i * (CARD_HEIGHT + GAP),\n                  z: 0,\n                  // add movement\n                  top: `16%`,\n                },\n                closed: {\n                  y: i * 10,\n                  z: i * 40,\n                  top: `50%`,\n                },\n              }}\n              transition={{\n                type: \"spring\",\n                stiffness: 200,\n                damping: 30,\n              }}\n              onClick={() => {\n                setIsOpen(!isOpen);\n              }}\n            >\n              <div className=\"flex justify-between text-[15px]\">\n                {Object.keys(label).map((key) => {\n                  return (\n                    <div\n                      className=\"pointer-events-none flex flex-col\"\n                      key={key}\n                    >\n                      <span className=\"text-neutral-950/50 dark:text-neutral-50/50\">\n                        {label[key as keyof typeof label]}\n                      </span>\n                      <span className=\"text-neutral-950 dark:text-neutral-50\">\n                        {run[key as keyof typeof run]}\n                      </span>\n                    </div>\n                  );\n                })}\n              </div>\n            </motion.div>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

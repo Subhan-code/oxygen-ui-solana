@@ -79,7 +79,7 @@ export default function ComponentCard({
             </p>
           )} */}
         </div>
-        <span className="flex shrink-0 items-center justify-center text-[#FC4C01]">
+        <span className="flex shrink-0 items-center justify-center text-[#0066FF]">
           <ArrowIcon />
         </span>
       </div>

@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import registry from "@/registry.json";
 
-// Serves the raw source of a registry component, e.g. /api/source?name=folder-component
+// Serves the raw source of a registry component, e.g. /api/source?name=bounce-sidebar
 export async function GET(request: Request) {
   const name = new URL(request.url).searchParams.get("name");
   if (!name) return new Response("Missing 'name' query.", { status: 400 });

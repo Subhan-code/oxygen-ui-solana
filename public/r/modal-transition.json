@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "modal-transition",
+  "title": "Modal Transition",
+  "description": "A modal dialog transition with scale and opacity interpolation.",
+  "dependencies": [
+    "@radix-ui/react-icons"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/modal-transition.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Cross1Icon } from \"@radix-ui/react-icons\";\n\nexport default function ModalTransition() {\n  const [modalState, setModalState] = useState<\"closed\" | \"is-open\" | \"is-closing\">(\"closed\");\n\n  const openModal = () => {\n    setModalState(\"is-open\");\n  };\n\n  const closeModal = () => {\n    setModalState(\"is-closing\");\n    setTimeout(() => {\n      setModalState(\"closed\");\n    }, 150);\n  };\n\n  return (\n    <div className=\"flex h-[320px] w-full flex-col items-center justify-center p-4\">\n      <button\n        type=\"button\"\n        onClick={openModal}\n        className=\"rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white shadow-md transition-transform active:scale-95 dark:bg-white dark:text-zinc-900\"\n      >\n        Open Modal\n      </button>\n\n      {modalState !== \"closed\" && (\n        <div className=\"fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-xs\">\n          <div className={`t-modal ${modalState} w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl dark:bg-zinc-900`}>\n            <div className=\"flex items-center justify-between pb-3\">\n              <h3 className=\"text-base font-semibold text-zinc-900 dark:text-white\">\n                Transitions.dev Modal\n              </h3>\n              <button\n                type=\"button\"\n                onClick={closeModal}\n                className=\"rounded-full p-1 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800\"\n              >\n                <Cross1Icon className=\"h-4 w-4\" />\n              </button>\n            </div>\n            <p className=\"text-sm text-zinc-600 dark:text-zinc-400\">\n              Smooth scale and fade cubic-bezier modal transition with reduced motion support.\n            </p>\n            <div className=\"mt-6 flex justify-end\">\n              <button\n                type=\"button\"\n                onClick={closeModal}\n                className=\"rounded-lg bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-white dark:bg-white dark:text-zinc-900\"\n              >\n                Done\n              </button>\n            </div>\n          </div>\n        </div>\n      )}\n\n      <style jsx>{`\n        .t-modal {\n          --modal-open-dur: 250ms;\n          --modal-close-dur: 150ms;\n          --modal-scale: 0.96;\n          --modal-scale-close: 0.96;\n          --modal-ease: cubic-bezier(0.22, 1, 0.36, 1);\n          transform-origin: center;\n          transform: scale(var(--modal-scale));\n          opacity: 0;\n          pointer-events: none;\n          transition:\n            transform var(--modal-open-dur) var(--modal-ease),\n            opacity var(--modal-open-dur) var(--modal-ease);\n          will-change: transform, opacity;\n        }\n        .t-modal.is-open {\n          transform: scale(1);\n          opacity: 1;\n          pointer-events: auto;\n        }\n        .t-modal.is-closing {\n          transform: scale(var(--modal-scale-close));\n          opacity: 0;\n          pointer-events: none;\n          transition:\n            transform var(--modal-close-dur) var(--modal-ease),\n            opacity var(--modal-close-dur) var(--modal-ease);\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .t-modal {\n            transition: none !important;\n          }\n        }\n      `}</style>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinning-counter",
+  "title": "Spinning Counter",
+  "description": "A mechanical reel counter with vertical digit column rolling.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/spinning-counter.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\n\nexport default function SpinningCounter() {\n  const [count, setCount] = useState(1284);\n\n  const increment = () => setCount((c) => c + 1);\n  const decrement = () => setCount((c) => Math.max(0, c - 1));\n  const random = () => setCount(Math.floor(1000 + Math.random() * 9000));\n\n  const digits = String(count).padStart(4, \"0\").split(\"\");\n\n  return (\n    <div className=\"flex h-[260px] w-full flex-col items-center justify-center gap-6 p-4\">\n      <div className=\"t-reel flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-6 py-4 text-3xl font-bold tracking-tight text-zinc-900 shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:text-white\">\n        {digits.map((digit, index) => {\n          const digitNum = parseInt(digit, 10);\n          return (\n            <div key={index} className=\"t-reel-col relative mx-0.5 h-[36px] w-[24px] overflow-hidden\">\n              <div\n                className=\"t-reel-strip transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]\"\n                style={{\n                  transform: `translateY(-${digitNum * 36}px)`,\n                }}\n              >\n                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (\n                  <div key={num} className=\"t-reel-digit flex h-[36px] items-center justify-center\">\n                    {num}\n                  </div>\n                ))}\n              </div>\n            </div>\n          );\n        })}\n      </div>\n\n      <div className=\"flex items-center gap-2\">\n        <button\n          type=\"button\"\n          onClick={decrement}\n          className=\"rounded-lg bg-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-800 hover:bg-zinc-300 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700\"\n        >\n          - 1\n        </button>\n        <button\n          type=\"button\"\n          onClick={increment}\n          className=\"rounded-lg bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100\"\n        >\n          + 1\n        </button>\n        <button\n          type=\"button\"\n          onClick={random}\n          className=\"rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-500\"\n        >\n          Random\n        </button>\n      </div>\n\n      <style jsx>{`\n        .t-reel-col {\n          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);\n          mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);\n        }\n      `}</style>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

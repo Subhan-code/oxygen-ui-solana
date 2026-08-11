@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-states-swap",
+  "title": "Text States Swap",
+  "description": "A text transition effect for action state labels.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/text-states-swap.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\n\nconst states = [\"Processing...\", \"Saving changes...\", \"Syncing data...\", \"Completed!\"];\n\nexport default function TextStatesSwap() {\n  const [index, setIndex] = useState(0);\n  const [animClass, setAnimClass] = useState(\"\");\n\n  const nextState = () => {\n    setAnimClass(\"is-exit\");\n    setTimeout(() => {\n      setIndex((prev) => (prev + 1) % states.length);\n      setAnimClass(\"is-enter-start\");\n      requestAnimationFrame(() => {\n        setAnimClass(\"\");\n      });\n    }, 150);\n  };\n\n  return (\n    <div className=\"flex h-[200px] w-full flex-col items-center justify-center gap-4 p-4\">\n      <button\n        type=\"button\"\n        onClick={nextState}\n        className=\"rounded-xl bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-transform active:scale-95 dark:bg-white dark:text-zinc-900\"\n      >\n        <span className={`t-text-swap ${animClass}`}>{states[index]}</span>\n      </button>\n\n      <style jsx>{`\n        .t-text-swap {\n          display: inline-block;\n          transform: translateY(0);\n          filter: blur(0);\n          opacity: 1;\n          transition:\n            transform 150ms ease-in-out,\n            filter 150ms ease-in-out,\n            opacity 150ms ease-in-out;\n          will-change: transform, filter, opacity;\n        }\n        .t-text-swap.is-exit {\n          transform: translateY(-4px);\n          filter: blur(2px);\n          opacity: 0;\n        }\n        .t-text-swap.is-enter-start {\n          transform: translateY(4px);\n          filter: blur(2px);\n          opacity: 0;\n          transition: none;\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .t-text-swap { transition: none !important; }\n        }\n      `}</style>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

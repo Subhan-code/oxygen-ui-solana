@@ -1,9 +1,9 @@
-# Contributing to Rare UI
+# Contributing to Oxygen-UI
 
-Rare UI is a [shadcn registry](https://ui.shadcn.com/docs/registry). Every component in this repo can be installed into any project with a single command:
+Oxygen-UI is a [shadcn registry](https://ui.shadcn.com/docs/registry). Every component in this repo can be installed into any project with a single command:
 
 ```bash
-npx shadcn@latest add swamimalode07/rare-ui/<component-name>
+npx shadcn@latest add Subhan-code/oxygen_ui/<component-name>
 ```
 
 This guide walks through adding a new component, from the first file to a working install command.
@@ -31,7 +31,7 @@ Conventions:
 
 - Use the `cn()` helper from `@/lib/utils` for class merging.
 - Style with Tailwind utilities and the theme tokens defined in `app/globals.css` (`bg-primary`, `text-muted-foreground`, `border`, etc.) so the component adapts to any consumer's theme. Avoid hard-coded colors where a token exists.
-- Add `"use client"` at the top **only** if the component uses state, effects, event handlers, or browser APIs (see `spotlight-card.tsx` for an example). Leave it out otherwise (see `button.tsx`).
+- Add `"use client"` at the top **only** if the component uses state, effects, event handlers, or browser APIs.
 - Export named exports, not default exports:
 
 ```tsx
@@ -65,7 +65,7 @@ Add an entry to the `items` array in `registry.json` at the repo root. This is w
   "type": "registry:ui",
   "title": "Glow Badge",
   "description": "A badge with a soft glow.",
-  "registryDependencies": ["swamimalode07/rare-ui/utils"],
+  "registryDependencies": ["Subhan-code/oxygen_ui/utils"],
   "files": [
     {
       "path": "components/ui/glow-badge.tsx",
@@ -77,14 +77,14 @@ Add an entry to the `items` array in `registry.json` at the repo root. This is w
 
 Field reference:
 
-| Field                   | What it does                                                                                                                                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `name`                  | The install name: `npx shadcn add swamimalode07/rare-ui/glow-badge`                                                                                                                                          |
-| `title` / `description` | Shown in `shadcn search` and `shadcn view`                                                                                                                                                                   |
-| `dependencies`          | npm packages your component imports (e.g. `"framer-motion"`). The CLI installs them in the consumer's project automatically.                                                                                 |
-| `registryDependencies`  | Other registry items your component imports, as full addresses. Almost always includes `swamimalode07/rare-ui/utils` (for `cn`). If your component renders our `Button`, add `swamimalode07/rare-ui/button`. |
-| `files`                 | The files that ship with the item. Multi-file components (component + hook) just add more entries.                                                                                                           |
-| `css`                   | Extra CSS to inject into the consumer's stylesheet — used for keyframes. See the `shimmer-button` item in `registry.json` for an example.                                                                    |
+| Field                   | What it does                                                                                                                                                                                                   |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                  | The install name: `npx shadcn add Subhan-code/oxygen_ui/glow-badge`                                                                                                                                          |
+| `title` / `description` | Shown in `shadcn search` and `shadcn view`                                                                                                                                                                     |
+| `dependencies`          | npm packages your component imports (e.g. `"framer-motion"`). The CLI installs them in the consumer's project automatically.                                                                                   |
+| `registryDependencies`  | Other registry items your component imports, as full addresses. Almost always includes `Subhan-code/oxygen_ui/utils` (for `cn`). If your component renders our `Button`, add `Subhan-code/oxygen_ui/button`. |
+| `files`                 | The files that ship with the item. Multi-file components (component + hook) just add more entries.                                                                                                             |
+| `css`                   | Extra CSS to inject into the consumer's stylesheet — used for keyframes. See the `shimmer-button` item in `registry.json` for an example.                                                                      |
 
 **Important:** if your component needs custom keyframes or CSS that isn't a Tailwind utility, you must do both:
 
@@ -124,7 +124,7 @@ git push
 The GitHub repository **is** the registry — there is no separate publish step. As soon as the commit is on the default branch, the component is installable:
 
 ```bash
-npx shadcn@latest add swamimalode07/rare-ui/glow-badge
+npx shadcn@latest add Subhan-code/oxygen_ui/glow-badge
 ```
 
 ## Step 6: Verify the install
@@ -133,13 +133,13 @@ Confirm the live registry resolves:
 
 ```bash
 # validate the whole registry
-npx shadcn@latest registry validate swamimalode07/rare-ui
+npx shadcn@latest registry validate Subhan-code/oxygen_ui
 
 # inspect the item payload the CLI will deliver
-npx shadcn@latest view swamimalode07/rare-ui/glow-badge
+npx shadcn@latest view Subhan-code/oxygen_ui/glow-badge
 
 # dry-run an install in any other project
-npx shadcn@latest add swamimalode07/rare-ui/glow-badge --dry-run
+npx shadcn@latest add Subhan-code/oxygen_ui/glow-badge --dry-run
 ```
 
 ## Checklist

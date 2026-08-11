@@ -73,7 +73,7 @@ export default function HeroCta() {
         >
           <code className="overflow-x-auto whitespace-nowrap font-mono text-xs font-semibold text-white sm:text-sm">
             npx shadcn@latest add {REGISTRY_REPO}
-            <span className="font-normal text-white/50">/fluid-orb</span>
+            <span className="font-normal text-white/50">/bounce-sidebar</span>
           </code>
         </CopyButton>
       </motion.div>
@@ -88,7 +88,7 @@ export default function HeroCta() {
       >
         <StretchSquircleBg
           hovered={hovered === "cta"}
-          bgClassName="bg-[#FC4C01] transition-colors duration-150 ease-out group-hover:bg-[#e64500]"
+          bgClassName="bg-[#0066FF] transition-colors duration-150 ease-out group-hover:bg-[#0052CC]"
         />
         <Link
           href="/components"

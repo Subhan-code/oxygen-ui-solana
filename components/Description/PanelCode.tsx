@@ -1,6 +1,5 @@
 "use client";
 
-import CodeBlock from "@/components/ui/code-block";
 import { useIsMobile } from "@/lib/use-media-query";
 import { cn } from "@/lib/utils";
 
@@ -11,11 +10,8 @@ type PanelCodeProps = {
   className?: string;
 };
 
-// shared code surface for the panel + drawer
 export default function PanelCode({
   code,
-  language = "tsx",
-  showLineNumbers = false,
   className,
 }: PanelCodeProps) {
   const isMobile = useIsMobile();
@@ -23,19 +19,15 @@ export default function PanelCode({
   return (
     <div
       className={cn(
-        "flex overflow-hidden",
-        !isMobile && "rounded-xl bg-muted p-3",
+        "flex overflow-hidden overflow-x-auto",
+        !isMobile && "rounded-xl bg-muted p-4",
         className,
-        isMobile && "p-0",
+        isMobile && "p-2",
       )}
     >
-      <CodeBlock
-        code={code}
-        language={language}
-        showFrame={isMobile}
-        showLineNumbers={showLineNumbers}
-        className="min-h-0 w-full flex-1"
-      />
+      <pre className="min-h-0 w-full flex-1 font-mono text-xs text-foreground whitespace-pre">
+        <code>{code}</code>
+      </pre>
     </div>
   );
 }

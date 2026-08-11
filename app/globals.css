@@ -71,13 +71,13 @@
   --secondary-foreground: oklch(1.0000 0 0);
   --muted: #171717;
   --muted-foreground: oklch(0.7155 0 0);
-  --accent: oklch(0.6617 0.2215 36.9340);
+  --accent: oklch(0.58 0.23 258);
   --accent-foreground: oklch(1.0000 0 0);
   --destructive: oklch(0.6368 0.2078 25.3313);
   --destructive-foreground: oklch(1.0000 0 0);
   --border: oklch(0.3715 0 0);
   --input: oklch(0.3715 0 0);
-  --ring: oklch(0.6617 0.2215 36.9340);
+  --ring: oklch(0.58 0.23 258);
   --chart-1: oklch(0.7137 0.1434 254.6240);
   --chart-2: oklch(0.6231 0.1880 259.8145);
   --chart-3: oklch(0.5461 0.2152 262.8809);
@@ -87,10 +87,10 @@
   --sidebar-foreground: oklch(0.9219 0 0);
   --sidebar-primary: oklch(0 0 0);
   --sidebar-primary-foreground: oklch(1.0000 0 0);
-  --sidebar-accent: oklch(0.6617 0.2215 36.9340);
+  --sidebar-accent: oklch(0.58 0.23 258);
   --sidebar-accent-foreground: oklch(1.0000 0 0);
   --sidebar-border: oklch(0.3715 0 0);
-  --sidebar-ring: oklch(0.6617 0.2215 36.9340);
+  --sidebar-ring: oklch(0.58 0.23 258);
   --font-sans: Inter, sans-serif;
   --font-serif: Source Serif 4, serif;
   --font-mono: JetBrains Mono, monospace;
@@ -202,8 +202,8 @@ html {
 }
 
 ::selection {
-  background-color: rgb(252 76 1 / 10%);
-  color: #fc4c01;
+  background-color: rgb(0 102 255 / 10%);
+  color: #0066ff;
 }
 
 [vaul-drawer] {

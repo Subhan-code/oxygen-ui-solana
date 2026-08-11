@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono, Cal_Sans } from "next/font/google";
+import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Databuddy } from '@databuddy/sdk/react';
@@ -17,15 +17,14 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const geistMono = JetBrains_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
-const calSans = Cal_Sans({
+const calSans = Plus_Jakarta_Sans({
   variable: "--font-cal-sans",
   subsets: ["latin"],
-  weight: "400",
 });
 
 const openRunde = localFont({
@@ -63,8 +62,8 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
   applicationName: SITE_NAME,
-  authors: [{ name: "Swami Malode", url: "https://github.com/swamimalode07" }],
-  creator: "Swami Malode",
+  authors: [{ name: "Syed Subhan", url: "https://x.com/SubhanHQ" }],
+  creator: "Syed Subhan",
   publisher: SITE_NAME,
   alternates: {
     canonical: "/",
@@ -81,7 +80,7 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/logos/Rareui.svg", type: "image/svg+xml" }],
+    icon: [{ url: "/logos/Oxygenui.svg", type: "image/svg+xml" }],
   },
   openGraph: {
     title: SITE_TAGLINE,
@@ -94,7 +93,7 @@ export const metadata: Metadata = {
         url: "/ogimage.webp",
         width: 2400,
         height: 1260,
-        alt: "Rare UI — rare animated React components",
+        alt: "Oxygen-UI — animated React components",
         type: "image/webp",
       },
     ],

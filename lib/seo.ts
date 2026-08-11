@@ -9,9 +9,9 @@ import {
 } from "@/lib/site";
 
 export const SITE_KEYWORDS = [
-  "rareui",
-  "rare ui",
-  "rare ui components",
+  "oxygenui",
+  "oxygen ui",
+  "oxygen ui components",
   "react components",
   "next.js components",
   "shadcn registry",
@@ -97,7 +97,7 @@ export function siteJsonLd() {
         name: SITE_NAME,
         alternateName: SITE_ALT_NAMES,
         url: SITE_URL,
-        logo: `${SITE_URL}/logos/Rareui.svg`,
+        logo: `${SITE_URL}/logos/Oxygenui.svg`,
         sameAs: [SITE_REPO],
       },
       {

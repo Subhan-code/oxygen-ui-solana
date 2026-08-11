@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-morph-message",
+  "title": "Input Morph Message",
+  "description": "An input bar that morphs its text content into a message bubble when submitted.",
+  "dependencies": [
+    "motion",
+    "@radix-ui/react-icons"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/input-morph-message.tsx",
+      "content": "\"use client\";\n\nimport { PlusIcon } from '@radix-ui/react-icons';\nimport { AnimatePresence, motion } from 'framer-motion';\nimport { useState } from 'react';\n\nconst transitionDebug = {\n  duration: 0.2,\n  ease: 'easeOut',\n} as const;\n\nexport default function InputMorphMessage() {\n  const [messages, setMessages] = useState<\n    {\n      id: number;\n      text: string;\n    }[]\n  >([]);\n  const [newMessage, setNewMessage] = useState<string>('');\n\n  const handleSubmit = (e: { preventDefault: () => void }) => {\n    e.preventDefault();\n\n    if (newMessage.trim()) {\n      const timestamp = new Date().getTime();\n      setMessages([...messages, { id: timestamp, text: newMessage }]);\n      setNewMessage('');\n    }\n  };\n\n  return (\n    <div className=\"flex h-[300px] flex-col items-end justify-end pb-4\">\n      <AnimatePresence mode=\"wait\">\n        {messages.map((message) => (\n          <motion.div\n            key={message.id}\n            layout=\"position\"\n            className=\"z-10 mt-2 max-w-[250px] rounded-2xl bg-gray-200 wrap-break-word dark:bg-black\"\n            layoutId={`container-[${messages.length - 1}]`}\n            transition={transitionDebug}\n          >\n            <div className=\"px-3 py-2 text-[15px] leading-[15px] text-gray-900 dark:text-gray-100\">\n              {message.text}\n            </div>\n          </motion.div>\n        ))}\n      </AnimatePresence>\n      <div className=\"mt-4 flex w-full\">\n        <form onSubmit={handleSubmit} className=\"flex w-full\">\n          <input\n            type=\"text\"\n            onChange={(e) => setNewMessage(e.target.value)}\n            value={newMessage}\n            className=\"relative h-9 w-[250px] grow rounded-full border border-gray-200 bg-white px-3 text-[15px] outline-hidden placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-blue-500/20 focus-visible:ring-offset-1 dark:border-black/60 dark:bg-black dark:text-gray-50 dark:placeholder-gray-500 dark:focus-visible:ring-blue-500/20 dark:focus-visible:ring-offset-1 dark:focus-visible:ring-offset-gray-700\"\n            placeholder=\"Type your message\"\n          />\n          <motion.div\n            key={messages.length}\n            layout=\"position\"\n            className=\"pointer-events-none absolute z-10 flex h-9 w-[250px] items-center overflow-hidden rounded-full bg-gray-200 wrap-break-word [word-break:break-word] dark:bg-black\"\n            layoutId={`container-[${messages.length}]`}\n            transition={transitionDebug}\n            initial={{ opacity: 0.6, zIndex: -1 }}\n            animate={{ opacity: 0.6, zIndex: -1 }}\n            exit={{ opacity: 1, zIndex: 1 }}\n          >\n            <div className=\"px-3 py-2 text-[15px] leading-[15px] text-gray-900 dark:text-gray-50\">\n              {newMessage}\n            </div>\n          </motion.div>\n          <button\n            type=\"submit\"\n            className=\"ml-2 flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 dark:bg-black\"\n          >\n            <PlusIcon className=\"h-5 w-5 text-gray-600 dark:text-gray-50\" />\n          </button>\n        </form>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

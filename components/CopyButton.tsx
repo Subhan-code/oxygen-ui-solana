@@ -22,7 +22,7 @@ const CheckGlyph = () => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
-    stroke="#FC4C01"
+    stroke="#0066FF"
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"

@@ -32,8 +32,8 @@ export type ComponentItem = {
   credits?: string[];
 };
 
-export const REGISTRY_HOMEPAGE = "https://github.com/swamimalode07/rare-ui";
-export const REGISTRY_REPO = "swamimalode07/rare-ui";
+export const REGISTRY_HOMEPAGE = "https://github.com/Subhan-code/oxygen_ui";
+export const REGISTRY_REPO = "Subhan-code/oxygen_ui";
 
 export const PANEL_INFO = {
   sourceHint:
@@ -44,59 +44,12 @@ export const PANEL_INFO = {
   contactNote: "Found a bug or issue? Feel free to drop a DM.",
   license: [
     "Free to use and modify in both personal and commercial projects.",
-    "Attribution to Rare UI is appreciated when using a component.",
+    "Attribution to Oxygen-UI is appreciated when using a component.",
     "Please don't resell the components as your own kit.",
   ],
 } as const;
 
 export const components: ComponentItem[] = [
-  {
-    name: "Folder component",
-    href: "/components/foldercomponent",
-    registry: "folder-component",
-    description:
-      "An animated folder whose cards fan out on hover and lift open on click, with a 3D-tilted flap. Supports color and size (sm/md/lg) props.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/folder-component.tsx`,
-    preview: "/componentdemos/foldercomponent.mp4",
-    featured: true,
-    dependencies: [
-      {
-        name: "motion",
-        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
-      },
-    ],
-    interaction:
-      "Hover to fan the cards out, then click to lift the folder open.",
-    props: [
-      {
-        name: "color",
-        type: '"black" | "white" | "blue"',
-        default: '"black"',
-        options: ["black", "white", "blue"],
-        control: "swatch",
-        optionColors: {
-          black: "#000000",
-          white: "#ffffff",
-          blue: "#50B1FD",
-        },
-        description:
-          "Color theme of the folder, flap, and cards. Each theme sets matching fills, strokes, and inner shadows.",
-      },
-      {
-        name: "size",
-        type: '"sm" | "md" | "lg"',
-        default: '"md"',
-        options: ["sm", "md", "lg"],
-        description:
-          "Overall scale of the folder. Maps to 0.65× (sm), 1× (md), and 1.35× (lg).",
-      },
-    ],
-    usage: `import { Folder } from "@/components/ui/folder-component",
-
-export function Demo() {
-  return <Folder color="blue" size="md" />
-}`,
-  },
   {
     name: "Bounce sidebar",
     href: "/components/bouncesidebar",
@@ -140,7 +93,7 @@ export function Demo() {
       {
         name: "dotColor",
         type: "string",
-        default: '"#FC4C01"',
+        default: '"#0066FF"',
         description:
           "Any CSS color for the bouncing active marker (hex, rgb, hsl, var).",
       },
@@ -158,7 +111,7 @@ export function Demo() {
   ]
   
   export function Demo() {
-    return <BounceSidebar items={items} dotColor="#FC4C01" />
+    return <BounceSidebar items={items} dotColor="#0066FF" />
   }`,
   },
   {
@@ -228,174 +181,7 @@ export function Demo() {
 }`,
     credits: ["Inspired by devouringdetails.com"],
   },
-  {
-    name: "Duration Picker",
-    href: "/components/durationpicker",
-    registry: "duration-picker",
-    description:
-      "A gooey, spring-animated picker for entering a duration in hours and minutes.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/duration-picker.tsx`,
-    preview: "/componentdemos/durationpicker.mp4",
-    featured: true,
-    dependencies: [
-      {
-        name: "motion",
-        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
-      },
-      { name: "figma-squircle" },
-      { name: "flubber" },
-      { name: "react-use-measure" },
-      { name: "@radix-ui/react-slot" },
-    ],
-    interaction:
-      "Click the pen to spring the segments apart and start editing — the hours field is focused for you. Type your values; anything past the ceiling (24 hr / 60 min by default) clamps to the max and shakes so you know it was corrected. Click the tick to confirm and watch the pill merge back into one piece.",
-    props: [
-      {
-        name: "value",
-        type: "{ hours: number; minutes: number }",
-        description:
-          "Controlled value. Pair with onChange and the picker will mirror whatever you pass in. Leave it out to let the component manage its own state.",
-      },
-      {
-        name: "defaultValue",
-        type: "{ hours: number; minutes: number }",
-        default: "{ hours: 0, minutes: 0 }",
-        description:
-          "Starting value for uncontrolled usage. Ignored when value is provided.",
-      },
-      {
-        name: "onChange",
-        type: "(value: DurationValue) => void",
-        description:
-          "Fires on every keystroke with the current clamped value — listen here if you want to react while the user types.",
-      },
-      {
-        name: "onConfirm",
-        type: "(value: DurationValue) => void",
-        description:
-          "Fires once with the final value when the tick is clicked. This is usually the one you want for saving.",
-      },
-      {
-        name: "onEditingChange",
-        type: "(editing: boolean) => void",
-        description:
-          "Notifies you when the picker enters or leaves edit mode — handy for blocking navigation or dimming surrounding UI while open.",
-      },
-      {
-        name: "defaultEditing",
-        type: "boolean",
-        default: "false",
-        description: "Render the picker already open in edit mode.",
-      },
-      {
-        name: "maxHours",
-        type: "number",
-        default: "24",
-        description:
-          "Ceiling for the hours field. Typing past it clamps to this value and shakes the input.",
-      },
-      {
-        name: "maxMinutes",
-        type: "number",
-        default: "60",
-        description:
-          "Ceiling for the minutes field. Same clamp-and-shake behavior as maxHours.",
-      },
-      {
-        name: "hoursLabel",
-        type: "string",
-        default: '"Hr."',
-        description:
-          "Text rendered after the hours field — swap it for a translation or a terser 'h'.",
-      },
-      {
-        name: "minutesLabel",
-        type: "string",
-        default: '"Min."',
-        description: "Text rendered after the minutes field.",
-      },
-      {
-        name: "disabled",
-        type: "boolean",
-        default: "false",
-        description:
-          "Dims the control and blocks entering edit mode. Standard form-field behavior.",
-      },
-      {
-        name: "className",
-        type: "string",
-        description:
-          "Extra classes merged onto the root. Every inner part also carries a data-slot attribute (duration-picker, -segment, -input, -toggle) plus data-editing / data-disabled states, so you can restyle from CSS alone.",
-      },
-    ],
-    usage: `"use client"
 
-import DurationPicker, { type DurationValue } from "@/components/ui/duration-picker"
-import { useState } from "react"
-
-export function Demo() {
-  const [duration, setDuration] = useState<DurationValue>({ hours: 1, minutes: 30 })
-
-  return (
-    <DurationPicker
-      value={duration}
-      onChange={setDuration}                     // fires while typing
-      onConfirm={(d) => console.log("saved", d)} // fires when the tick is clicked
-    />
-  )
-}
-
-// Zero-config: it also works fully uncontrolled
-// <DurationPicker onConfirm={(d) => console.log("saved", d)} />`,
-  },
-  {
-    name: "Fluid Orb",
-    href: "/components/fluidorb",
-    registry: "fluid-orb",
-    description:
-      "An animated WebGL orb with drifting fluid shading, inspired by ChatGPT's voice mode.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/fluid-orb.tsx`,
-    preview: "/componentdemos/fluidorb.mp4",
-    featured: true,
-    interaction:
-      "Ambient — the color patches drift left, right, up, down and diagonally on their own, blending and reforming with no interaction required. Honors prefers-reduced-motion by holding a still frame.",
-    props: [
-      {
-        name: "color",
-        type: "string",
-        default: '"#1A73F2"',
-        options: ["#1A73F2", "#FF3B30", "#F75001", "#34C759"],
-        control: "swatch",
-        optionColors: {
-          "#1A73F2": "#1A73F2",
-          "#FF3B30": "#FF3B30",
-          "#F75001": "#F75001",
-          "#34C759": "#34C759",
-        },
-        description:
-          "Any hex color for the fluid. The middle and bottom bands are derived from it (a pale tint and the full color), while the top stays white. Defaults to the original blue.",
-      },
-      {
-        name: "size",
-        type: "number",
-        default: "240",
-        description:
-          "Diameter of the orb in pixels. Also drives the canvas resolution (clamped to 2x device pixel ratio).",
-      },
-      {
-        name: "className",
-        type: "string",
-        description:
-          'Extra classes merged onto the root element (data-slot="fluid-orb").',
-      },
-    ],
-    usage: `import FluidOrb from "@/components/ui/fluid-orb"
-
-export function Demo() {
-  return <FluidOrb size={280} color="#F75001" />
-}`,
-    credits: ["Inspired by chatgpt.com"],
-  },
   {
     name: "Scroll Progress",
     href: "/components/scrollprogressindicator",
@@ -468,225 +254,7 @@ export function Demo() {
 // Tracks the window with no container ref:
 // <ScrollProgress sections={sections} />`,
   },
-  {
-    name: "Code Block",
-    href: "/components/codeblock",
-    registry: "code-block",
-    description:
-      "A clean code block that builds its entire theme from a single accent color. Pass code and a hex, it does the rest.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/code-block.tsx`,
-    preview: "/componentdemos/codeblock.mp4",
-    dependencies: [
-      {
-        name: "motion",
-        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
-      },
-      { name: "prism-react-renderer" },
-    ],
-    interaction:
-      "Pick an accent swatch to re-shade the whole block from that color. Hit the copy button to see it spring into a check.",
-    props: [
-      {
-        name: "code",
-        type: "string",
-        required: true,
-        description: "The source code to render.",
-      },
-      {
-        name: "language",
-        type: "string",
-        default: '"tsx"',
-        description:
-          'Prism language id, e.g. "tsx", "css", "json", "bash". Also shown as the tag in the header.',
-      },
-      {
-        name: "accent",
-        type: "string",
-        default: '"#F75001"',
-        options: ["#F75001", "#1A73F2", "#FF3B30", "#34C759"],
-        control: "swatch",
-        optionColors: {
-          "#F75001": "#F75001",
-          "#1A73F2": "#1A73F2",
-          "#FF3B30": "#FF3B30",
-          "#34C759": "#34C759",
-        },
-        description:
-          "Any hex color. The whole theme is shades of it: the darkest shade is the background, tokens are tints of the accent, and the lightest text is always white.",
-      },
-      {
-        name: "mode",
-        type: '"auto" | "dark" | "light"',
-        default: '"auto"',
-        description:
-          "Color scheme. Auto follows the page theme (html dark/light class, data-theme, or OS preference). Pass dark or light to pin a palette: dark puts light tints of the accent on a dark surface, light flips the ramp.",
-      },
-      {
-        name: "filename",
-        type: "string",
-        description:
-          "Filename or path shown on the left of the header. Falls back to the language id when omitted.",
-      },
-      {
-        name: "showFrame",
-        type: "boolean",
-        default: "true",
-        description:
-          "Toggles the outer layout — background, border, rounded corners, and header. Turn off to render nothing but the highlighted code.",
-      },
-      {
-        name: "showHeader",
-        type: "boolean",
-        default: "true",
-        description:
-          "Toggles the header bar. When hidden, the copy button floats over the top-right corner instead. Ignored when showFrame is off.",
-      },
-      {
-        name: "showLineNumbers",
-        type: "boolean",
-        default: "true",
-        description: "Toggles the line-number gutter.",
-      },
-      {
-        name: "showCopyButton",
-        type: "boolean",
-        default: "true",
-        description: "Toggles the copy-to-clipboard button.",
-      },
-      {
-        name: "highlightLines",
-        type: "number[]",
-        description:
-          "Optional 1-based line numbers to highlight with a soft accent wash. Off when omitted.",
-      },
-      {
-        name: "className",
-        type: "string",
-        description:
-          'Extra classes merged onto the root element (data-slot="code-block") — use it for width and max-height.',
-      },
-    ],
-    usage: `import CodeBlock from "@/components/ui/code-block"
 
-export function Demo() {
-  return (
-    <CodeBlock
-      code={\`const greet = (name: string) => \\\`Hello, \\\${name}!\\\`\`}
-      language="ts"
-      accent="#F75001"
-      filename="greet.ts"
-    />
-  )
-}`,
-  },
-  {
-    name: "Gravity Letters",
-    href: "/components/gravityletters",
-    registry: "gravity-letters",
-    description:
-      "A playful gravity field where letters, numbers, emoji, or any components you pass fall and pile up like real objects.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/gravity-letters.tsx`,
-    preview: "/componentdemos/gravityletters.mp4",
-    featured: true,
-    interaction:
-      "Click or tap anywhere to drop a glyph, or press and hold to pour a steady stream. Glyphs tumble as they fall, bounce softly when they land, and pile up into rounded hills. On phones, tilt the device to spill the pile toward the low side. Honors prefers-reduced-motion.",
-    props: [
-      {
-        name: "type",
-        type: '"letters" | "numbers" | "both"',
-        default: '"letters"',
-        options: ["letters", "numbers", "both"],
-        description:
-          "Which pool to draw from: letters, digits, or both. Ignored when items is set.",
-      },
-      {
-        name: "items",
-        type: "React.ReactNode[]",
-        description:
-          "Your own drop pool: emoji, icons, or any components. Each drop picks a random entry. Overrides type.",
-      },
-      {
-        name: "gravity",
-        type: "number",
-        default: "800",
-        description:
-          "Downward acceleration in px/s². Lower is floatier, higher is heavier.",
-      },
-      {
-        name: "size",
-        type: "number",
-        default: "28",
-        description:
-          "Base glyph size in pixels. Each drop varies slightly around it.",
-      },
-      {
-        name: "color",
-        type: "string",
-        default: '"currentColor"',
-        options: [
-          "#1A73F2",
-          "#5856D6",
-          "#AF52DE",
-          "#FF2D92",
-          "#FF3B30",
-          "#F75001",
-          "#FFB800",
-          "#34C759",
-        ],
-        control: "swatch",
-        optionColors: {
-          "#1A73F2": "#1A73F2",
-          "#5856D6": "#5856D6",
-          "#AF52DE": "#AF52DE",
-          "#FF2D92": "#FF2D92",
-          "#FF3B30": "#FF3B30",
-          "#F75001": "#F75001",
-          "#FFB800": "#FFB800",
-          "#34C759": "#34C759",
-        },
-        description:
-          "Glyph color. Defaults to currentColor so it follows your theme.",
-      },
-      {
-        name: "maxGlyphs",
-        type: "number",
-        default: "Infinity",
-        description:
-          "Max glyphs kept in the field; past the cap the oldest fade out. Unlimited by default.",
-      },
-      {
-        name: "deviceTilt",
-        type: "boolean",
-        default: "true",
-        description:
-          "Tilting a phone spills the pile toward the low side. iOS asks for motion permission on the first tap.",
-      },
-      {
-        name: "className",
-        type: "string",
-        description:
-          "Extra classes for the root element. Use it to size the field.",
-      },
-    ],
-    usage: `import GravityLetters from "@/components/ui/gravity-letters"
-
-export function Demo() {
-  return (
-    <GravityLetters type="letters" className="h-96 w-full rounded-3xl border">
-      {/* anything you render inside stays clickable-through */}
-      <p className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
-        Click anywhere
-      </p>
-    </GravityLetters>
-  )
-}
-
-// Digits instead:
-// <GravityLetters type="numbers" />
-
-// Or drop your own content: emoji, icons, any component:
-// <GravityLetters items={["🍎", "🍊", "🍇", <Sparkles key="s" className="size-7" />]} />`,
-  },
   {
     name: "OTP Input",
     href: "/components/otpinput",
@@ -901,7 +469,7 @@ export function Demo() {
     usage: `import GitHubActivity from "@/components/ui/github-activity"
 
 export function Demo() {
-  return <GitHubActivity username="swamimalode07" />
+  return <GitHubActivity username="Subhan-code" />
 }
 
 // or pass everything yourself
@@ -989,21 +557,381 @@ export function Demo() {
   <button className="rounded-2xl bg-card p-4">Nice work</button>
 </EmojiReaction>`,
   },
-  // {
-  //   name: "Family drawer",
-  //   href: "/components/familydrawer",
-  //   registry: "family drawer",
-  //   description:
-  //     "A bottom drawer with smooth, morphing transitions between stacked views, inspired by the Family app. Built on Vaul.",
-  //   source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/family-drawer.tsx`,
-  //   dependencies: [{ name: "motion" }, { name: "vaul" }],
-  //   interaction: "Click the trigger to open the drawer and step between views.",
-  //   usage: `import FamilyDrawer from "@/components/ui/family-drawer"
+  {
+    name: "Input morph message",
+    href: "/components/inputmorphmessage",
+    registry: "input-morph-message",
+    description:
+      "An input bar that morphs its text content into a message bubble when submitted.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/input-morph-message.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Type a message into the input field and press enter or click the plus button to send it.",
+    usage: `import InputMorphMessage from "@/components/ui/input-morph-message"
 
-  // export function Demo() {
-  //   return <FamilyDrawer />
-  // }`,
-  // },
+export function Demo() {
+  return <InputMorphMessage />
+}`,
+  },
+  {
+    name: "Gooey menu",
+    href: "/components/gooeymenu",
+    registry: "gooey-menu",
+    description:
+      "A floating action menu with a fluid gooey SVG filter expansion.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/gooey-menu.tsx`,
+    interaction:
+      "Click the plus button to expand or collapse the menu items with a gooey spring animation.",
+    usage: `import GooeyMenu from "@/components/ui/gooey-menu"
+
+export function Demo() {
+  return <GooeyMenu />
+}`,
+  },
+  {
+    name: "Run stats stacks",
+    href: "/components/runstatsstacks",
+    registry: "run-stats-stacks",
+    description:
+      "A 3D stacked list of activity cards that unfolds into a vertical view on tap.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/run-stats-stacks.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Click the stacked cards to expand or collapse the run statistics list.",
+    usage: `import RunStatsStacks from "@/components/ui/run-stats-stacks"
+
+export function Demo() {
+  return <RunStatsStacks />
+}`,
+  },
+  {
+    name: "Popover slide selector",
+    href: "/components/popoverslideselector",
+    registry: "popover-slide-selector",
+    description:
+      "A follower popover menu that reveals a horizontal avatar list on click.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/popover-slide-selector.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Click the followers button to open the popover and scroll horizontally through avatars.",
+    usage: `import PopoverSlideSelector from "@/components/ui/popover-slide-selector"
+
+export function Demo() {
+  return <PopoverSlideSelector />
+}`,
+  },
+  {
+    name: "Family popover menu",
+    href: "/components/familypopovermenu",
+    registry: "family-popover-menu",
+    description:
+      "A circular trigger button that expands into a smooth menu card.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/family-popover-menu.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Click the plus icon button to expand the menu list, or click outside to dismiss it.",
+    usage: `import FamilyPopoverMenu from "@/components/ui/family-popover-menu"
+
+export function Demo() {
+  return <FamilyPopoverMenu />
+}`,
+  },
+  {
+    name: "Underlay action sheet",
+    href: "/components/underlayactionsheet",
+    registry: "underlay-action-sheet",
+    description:
+      "An iOS-inspired underlay action sheet with drag-to-resize gesture physics.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/underlay-action-sheet.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Drag the sheet handle up or down to expand or collapse the action sheet.",
+    usage: `import UnderlayActionSheet from "@/components/ui/underlay-action-sheet"
+
+export function Demo() {
+  return <UnderlayActionSheet />
+}`,
+  },
+  {
+    name: "Button gooey",
+    href: "/components/buttongooy",
+    registry: "button-gooey",
+    description:
+      "A call to action button with a gooey trailing arrow bubble on hover.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/button-gooey.tsx`,
+    interaction:
+      "Hover over the button to animate the arrow bubble.",
+    usage: `import ButtonGooey from "@/components/ui/button-gooey"
+
+export function Demo() {
+  return <ButtonGooey />
+}`,
+  },
+  {
+    name: "Magnetic background tabs",
+    href: "/components/magneticbackgroundtabs",
+    registry: "magnetic-background-tabs",
+    description:
+      "A navigation tab bar with a magnetic hover spotlight effect.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/magnetic-background-tabs.tsx`,
+    interaction:
+      "Hover over the tab items to see the background follow cursor movement.",
+    usage: `import MagneticBackgroundTabs from "@/components/ui/magnetic-background-tabs"
+
+export function Demo() {
+  return <MagneticBackgroundTabs />
+}`,
+  },
+  {
+    name: "Text typing effect",
+    href: "/components/texttypingeffect",
+    registry: "text-typing-effect",
+    description:
+      "A type-writer style text effect with a smooth fade sequence.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/text-typing-effect.tsx`,
+    interaction:
+      "Watch the text type word by word and transition smoothly between phrases.",
+    usage: `import TextTypingEffectWithTextsFadeOut from "@/components/ui/text-typing-effect"
+
+export function Demo() {
+  return <TextTypingEffectWithTextsFadeOut />
+}`,
+  },
+  {
+    name: "Button ripple effect",
+    href: "/components/buttonrippleeffect",
+    registry: "button-ripple-effect",
+    description:
+      "A click ripple animation originating from pointer coordinates.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/button-ripple-effect.tsx`,
+    interaction:
+      "Click anywhere on the button to emit an expanding material ripple wave.",
+    usage: `import ButtonRippleEffect from "@/components/ui/button-ripple-effect"
+
+export function Demo() {
+  return <ButtonRippleEffect />
+}`,
+  },
+  {
+    name: "Input border spotlight",
+    href: "/components/inputborderspotlight",
+    registry: "input-border-spotlight",
+    description:
+      "An input container with a radial cursor-tracking spotlight border glow.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/input-border-spotlight.tsx`,
+    interaction:
+      "Move your mouse over the input or focus inside to reveal the glowing spotlight border.",
+    usage: `import InputBorderSpotlight from "@/components/ui/input-border-spotlight"
+
+export function Demo() {
+  return <InputBorderSpotlight />
+}`,
+  },
+  {
+    name: "Panel reveal",
+    href: "/components/panelreveal",
+    registry: "panel-reveal",
+    description:
+      "A panel reveal effect featuring vertical translation and blur transition.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/panel-reveal.tsx`,
+    interaction:
+      "Click the button to reveal or collapse the panel with cross-blur interpolation.",
+    usage: `import PanelReveal from "@/components/ui/panel-reveal"
+
+export function Demo() {
+  return <PanelReveal />
+}`,
+  },
+  {
+    name: "Modal transition",
+    href: "/components/modaltransition",
+    registry: "modal-transition",
+    description:
+      "A modal dialog transition with scale and opacity interpolation.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/modal-transition.tsx`,
+    interaction:
+      "Click the open button to animate the modal overlay and dialog frame into place.",
+    usage: `import ModalTransition from "@/components/ui/modal-transition"
+
+export function Demo() {
+  return <ModalTransition />
+}`,
+  },
+  {
+    name: "Page side by side",
+    href: "/components/pagesidebyside",
+    registry: "page-side-by-side",
+    description:
+      "A page view transition with directional sliding and blur effects.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/page-side-by-side.tsx`,
+    interaction:
+      "Switch tabs to view side-by-side section transitions.",
+    usage: `import PageSideBySide from "@/components/ui/page-side-by-side"
+
+export function Demo() {
+  return <PageSideBySide />
+}`,
+  },
+  {
+    name: "Input clear dissolve",
+    href: "/components/inputcleardissolve",
+    registry: "input-clear-dissolve",
+    description:
+      "An input field clear action with dissolving text flight animation.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/input-clear-dissolve.tsx`,
+    interaction:
+      "Type text into the input and click the clear button to watch text dissolve upward.",
+    usage: `import InputClearDissolve from "@/components/ui/input-clear-dissolve"
+
+export function Demo() {
+  return <InputClearDissolve />
+}`,
+  },
+  {
+    name: "Skeleton reveal",
+    href: "/components/skeletonreveal",
+    registry: "skeleton-reveal",
+    description:
+      "A skeleton placeholder loading shimmer that cross-fades into content.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/skeleton-reveal.tsx`,
+    interaction:
+      "Click the reveal button to cross-fade from skeleton pulse to loaded profile card.",
+    usage: `import SkeletonReveal from "@/components/ui/skeleton-reveal"
+
+export function Demo() {
+  return <SkeletonReveal />
+}`,
+  },
+  {
+    name: "Error state shake",
+    href: "/components/errorstateshake",
+    registry: "error-state-shake",
+    description:
+      "An input validation error animation with multi-segment keyframe shake.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/error-state-shake.tsx`,
+    interaction:
+      "Submit an invalid input string to trigger the keyframe shake and error toast message.",
+    usage: `import ErrorStateShake from "@/components/ui/error-state-shake"
+
+export function Demo() {
+  return <ErrorStateShake />
+}`,
+  },
+  {
+    name: "Spinning counter",
+    href: "/components/spinningcounter",
+    registry: "spinning-counter",
+    description:
+      "A mechanical reel counter with vertical digit column rolling.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/spinning-counter.tsx`,
+    interaction:
+      "Click the increment, decrement, or random buttons to roll the numeric columns.",
+    usage: `import SpinningCounter from "@/components/ui/spinning-counter"
+
+export function Demo() {
+  return <SpinningCounter />
+}`,
+  },
+  {
+    name: "Spring toggle",
+    href: "/components/springtoggle",
+    registry: "spring-toggle",
+    description:
+      "A switch toggle button with spring overshoot keyframe physics.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/spring-toggle.tsx`,
+    interaction:
+      "Click the switch to trigger the spring thumb bounce animation.",
+    usage: `import SpringToggle from "@/components/ui/spring-toggle"
+
+export function Demo() {
+  return <SpringToggle />
+}`,
+  },
+  {
+    name: "Success check",
+    href: "/components/successcheck",
+    registry: "success-check",
+    description:
+      "A success checkmark icon with rotation, scale, blur, and stroke drawing animation.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/success-check.tsx`,
+    interaction:
+      "Click replay to trigger the checkmark entrance animation.",
+    usage: `import SuccessCheck from "@/components/ui/success-check"
+
+export function Demo() {
+  return <SuccessCheck />
+}`,
+  },
+  {
+    name: "Notification badge",
+    href: "/components/notificationbadge",
+    registry: "notification-badge",
+    description:
+      "An animated notification count badge that pops and slides into trigger position.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/notification-badge.tsx`,
+    interaction:
+      "Click the bell button to toggle the pop and scale badge animation.",
+    usage: `import NotificationBadge from "@/components/ui/notification-badge"
+
+export function Demo() {
+  return <NotificationBadge />
+}`,
+  },
+  {
+    name: "Text states swap",
+    href: "/components/textstatesswap",
+    registry: "text-states-swap",
+    description:
+      "A text transition effect for action state labels.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/text-states-swap.tsx`,
+    interaction:
+      "Click the action button to sequence text label swaps.",
+    usage: `import TextStatesSwap from "@/components/ui/text-states-swap"
+
+export function Demo() {
+  return <TextStatesSwap />
+}`,
+  },
+  {
+    name: "Transitions.dev",
+    href: "/components/transitions",
+    registry: "transitions",
+    description:
+      "A collection of 27 CSS and Motion transitions for web applications.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/transitions/TransitionsShowcase.tsx`,
+    interaction:
+      "Filter transitions by category, search by name, interact with live previews, and copy CSS snippets.",
+    usage: `import TransitionsShowcase from "@/components/transitions/TransitionsShowcase"
+
+export function Demo() {
+  return <TransitionsShowcase />
+}`,
+  },
 ];
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";

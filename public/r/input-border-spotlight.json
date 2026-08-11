@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-border-spotlight",
+  "title": "Input Border Spotlight",
+  "description": "An input container with a radial cursor-tracking spotlight border glow.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/input-border-spotlight.tsx",
+      "content": "\"use client\";\n\nimport React, { useRef, useState } from \"react\";\n\nexport default function InputBorderSpotlight() {\n  const divRef = useRef<HTMLDivElement>(null);\n  const [isFocused, setIsFocused] = useState(false);\n  const [position, setPosition] = useState({ x: 0, y: 0 });\n  const [opacity, setOpacity] = useState(0);\n\n  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {\n    if (!divRef.current || isFocused) return;\n\n    const div = divRef.current;\n    const rect = div.getBoundingClientRect();\n\n    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });\n  };\n\n  const handleFocus = () => {\n    setIsFocused(true);\n    setOpacity(1);\n  };\n\n  const handleBlur = () => {\n    setIsFocused(false);\n    setOpacity(0);\n  };\n\n  const handleMouseEnter = () => {\n    setOpacity(1);\n  };\n\n  const handleMouseLeave = () => {\n    if (!isFocused) {\n      setOpacity(0);\n    }\n  };\n\n  return (\n    <div className=\"flex h-[200px] w-full items-center justify-center p-4\">\n      <div\n        ref={divRef}\n        onMouseMove={handleMouseMove}\n        onMouseEnter={handleMouseEnter}\n        onMouseLeave={handleMouseLeave}\n        className=\"relative w-full max-w-sm overflow-hidden rounded-xl border border-zinc-200 bg-white p-[1.5px] shadow-xs dark:border-zinc-800 dark:bg-zinc-900\"\n      >\n        <div\n          className=\"pointer-events-none absolute -inset-px transition-opacity duration-300\"\n          style={{\n            opacity,\n            background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(59, 130, 246, 0.5), transparent 80%)`,\n          }}\n        />\n        <input\n          type=\"text\"\n          onFocus={handleFocus}\n          onBlur={handleBlur}\n          placeholder=\"Hover or focus for spotlight border...\"\n          className=\"relative w-full rounded-[10px] bg-white px-4 py-2.5 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-500\"\n        />\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

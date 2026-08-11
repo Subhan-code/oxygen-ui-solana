@@ -12,7 +12,7 @@ const LINKS = [
   { label: "Sponsors", href: "/#sponsors" },
 ];
 
-const GITHUB_URL = "https://github.com/swamimalode07/rare-ui";
+const GITHUB_URL = "https://github.com/Subhan-code/oxygen_ui";
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg
@@ -71,8 +71,8 @@ export default function Navbar() {
             "gap-2 px-4 font-[family-name:var(--font-open-runde)] text-sm font-semibold text-foreground",
           )}
         >
-          <img src="/logos/Rareui.svg" alt="" className="h-5 w-5" />
-          Rare UI
+          <img src="/logos/Oxygenui.svg" alt="" className="h-5 w-5" />
+          Oxygen-UI
         </Link>
 
         <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2">
