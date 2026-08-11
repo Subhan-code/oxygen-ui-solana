@@ -426,20 +426,6 @@
           "type": "registry:ui"
         }
       ]
-    },
-    {
-      "name": "transitions",
-      "type": "registry:ui",
-      "title": "Transitions.dev",
-      "description": "A collection of 27 CSS and Motion transitions for web applications.",
-      "dependencies": [],
-      "registryDependencies": ["utils"],
-      "files": [
-        {
-          "path": "components/transitions/TransitionsShowcase.tsx",
-          "type": "registry:ui"
-        }
-      ]
     }
   ]
 }

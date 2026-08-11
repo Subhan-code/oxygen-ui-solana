@@ -917,21 +917,6 @@ export function Demo() {
   return <TextStatesSwap />
 }`,
   },
-  {
-    name: "Transitions.dev",
-    href: "/components/transitions",
-    registry: "transitions",
-    description:
-      "A collection of 27 CSS and Motion transitions for web applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/transitions/TransitionsShowcase.tsx`,
-    interaction:
-      "Filter transitions by category, search by name, interact with live previews, and copy CSS snippets.",
-    usage: `import TransitionsShowcase from "@/components/transitions/TransitionsShowcase"
-
-export function Demo() {
-  return <TransitionsShowcase />
-}`,
-  },
 ];
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
