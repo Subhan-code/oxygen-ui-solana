@@ -34,7 +34,7 @@ export default async function Home() {
 
           <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pb-20 pt-28 text-center sm:gap-4 sm:px-6">
             <HeroIntro
-              headline="Composable UI Primitives for Solana Developers."
+              headline="Craft Premium Solana Frontends in Minutes."
               sub="Oxygen UI is an open-source React component library built for Solana applications. Integrate wallet account interfaces, token displays, transaction status flows, and network states seamlessly."
             >
               <HeroCta />
