@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
-import { CodeXml, Maximize, Minimize } from "lucide-react";
+import { CodeXml, Maximize, Minimize, RotateCw } from "lucide-react";
 import { activeComponent } from "@/lib/components";
 import CodeDrawer from "./CodeDrawer";
 import DescriptionContent from "./DescriptionContent";
@@ -50,6 +50,17 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
             ) : (
               <Minimize className="h-5 w-5" />
             )}
+          </button>
+        </Tooltip>
+
+        <Tooltip label="Reload page">
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            aria-label="Reload page"
+            className="cursor-pointer rounded-full bg-popover p-1"
+          >
+            <RotateCw className="h-5 w-5" />
           </button>
         </Tooltip>
 
