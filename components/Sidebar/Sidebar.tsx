@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import SidebarList from "./SidebarList";
-import { ClosedIcon, OpenIcon } from "./icons";
+import SidebarToggleIcon from "./SidebarToggleIcon";
 import { Squircle } from "@squircle-js/react";
 
 const PANEL_SHIFT = 340;
@@ -22,7 +22,7 @@ const Sidebar = ({
         aria-label={open ? "Close sidebar" : "Open sidebar"}
         className="pointer-events-auto absolute top-4 left-4 z-50 cursor-pointer rounded-lg bg-popover p-2"
       >
-        {open ? <OpenIcon /> : <ClosedIcon />}
+        <SidebarToggleIcon isOpen={open} className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
       </button>
 
       <Squircle asChild cornerRadius={23} cornerSmoothing={1}>
