@@ -1260,8 +1260,398 @@ export function Demo() {
     />
   )
 }`,
+  {
+    name: "Crypto wallet main",
+    href: "/components/cryptowalletmain",
+    registry: "crypto-wallet-main",
+    description: "A mobile crypto wallet main balance screen with account switcher and SPL token balances.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-wallet-main.tsx`,
+    interaction: "Tap top navigation pills or switch active Solana accounts.",
+    usage: `import { CryptoWalletMain } from "@/components/ui/crypto-wallet-main"
+
+export function Demo() {
+  return <CryptoWalletMain />
+}`,
+  },
+  {
+    name: "Crypto wallet drawer",
+    href: "/components/cryptowalletdrawer",
+    registry: "crypto-wallet-drawer",
+    description: "A dark slide-out wallet menu drawer displaying verified domain identity and network options.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-wallet-drawer.tsx`,
+    interaction: "Click menu items to navigate wallet features or close the drawer.",
+    usage: `import { CryptoWalletDrawer } from "@/components/ui/crypto-wallet-drawer"
+
+export function Demo() {
+  return <CryptoWalletDrawer />
+}`,
+  },
+  {
+    name: "Crypto wallet menu sheet",
+    href: "/components/cryptowalletmenusheet",
+    registry: "crypto-wallet-menu-sheet",
+    description: "A light navigation menu sheet featuring search bar and Web3 ecosystem links.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-wallet-menu-sheet.tsx`,
+    interaction: "Click Connect Wallet or search Solana ecosystem resources.",
+    usage: `import { CryptoWalletMenuSheet } from "@/components/ui/crypto-wallet-menu-sheet"
+
+export function Demo() {
+  return <CryptoWalletMenuSheet />
+}`,
+  },
+  {
+    name: "Crypto wallet settings",
+    href: "/components/cryptowalletsettings",
+    registry: "crypto-wallet-settings",
+    description: "A dark wallet settings overlay with account management, RPC options, and developer settings.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-wallet-settings.tsx`,
+    interaction: "Type in the search bar or tap settings rows to inspect configuration.",
+    usage: `import { CryptoWalletSettings } from "@/components/ui/crypto-wallet-settings"
+
+export function Demo() {
+  return <CryptoWalletSettings />
+}`,
+  },
+  {
+    name: "Crypto explore news",
+    href: "/components/cryptoexplorenews",
+    registry: "crypto-explore-news",
+    description: "A market explore card featuring search input, watchlist assets, and ecosystem news feed.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-explore-news.tsx`,
+    interaction: "Search news items or tap watchlist tokens to inspect market updates.",
+    usage: `import { CryptoExploreNews } from "@/components/ui/crypto-explore-news"
+
+export function Demo() {
+  return <CryptoExploreNews />
+}`,
+  },
+  {
+    name: "Crypto explore categories",
+    href: "/components/cryptoexplorecategories",
+    registry: "crypto-explore-categories",
+    description: "An explore categories hub with category pills, trending SPL tokens list, and oracle footnotes.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-explore-categories.tsx`,
+    interaction: "Switch category pills to filter market rankings.",
+    usage: `import { CryptoExploreCategories } from "@/components/ui/crypto-explore-categories"
+
+export function Demo() {
+  return <CryptoExploreCategories />
+}`,
+  },
+  {
+    name: "Crypto user profile card",
+    href: "/components/cryptouserprofilecard",
+    registry: "crypto-user-profile-card",
+    description: "A user profile card displaying domain handle, trade volume metrics, and follower statistics.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-user-profile-card.tsx`,
+    interaction: "Click Manage Profile or Share Profile buttons.",
+    usage: `import { CryptoUserProfileCard } from "@/components/ui/crypto-user-profile-card"
+
+export function Demo() {
+  return <CryptoUserProfileCard />
+}`,
+  },
+  {
+    name: "Crypto cookie banner dialog",
+    href: "/components/cryptocookiebannerdialog",
+    registry: "crypto-cookie-banner-dialog",
+    description: "A floating purple cookie policy consent dialog with customizable action pills.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-cookie-banner-dialog.tsx`,
+    interaction: "Click Accept All or Reject Non-Essential buttons.",
+    usage: `import { CryptoCookieBannerDialog } from "@/components/ui/crypto-cookie-banner-dialog"
+
+export function Demo() {
+  return <CryptoCookieBannerDialog />
+}`,
+  },
+  {
+    name: "Crypto cookie banner sheet",
+    href: "/components/cryptocookiebannersheet",
+    registry: "crypto-cookie-banner-sheet",
+    description: "A privacy consent banner featuring header PDF link and cookie permission buttons.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-cookie-banner-sheet.tsx`,
+    interaction: "Click Allow Cookies or Decline Optional to set consent preferences.",
+    usage: `import { CryptoCookieBannerSheet } from "@/components/ui/crypto-cookie-banner-sheet"
+
+export function Demo() {
+  return <CryptoCookieBannerSheet />
+}`,
+  },
+  {
+    name: "Crypto swap box",
+    href: "/components/cryptoswapbox",
+    registry: "crypto-swap-box",
+    description: "A token swap card with pay and receive input fields and instant token swap flip.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-swap-box.tsx`,
+    interaction: "Click the arrow button to swap pay and receive tokens.",
+    usage: `import { CryptoSwapBox } from "@/components/ui/crypto-swap-box"
+
+export function Demo() {
+  return <CryptoSwapBox />
+}`,
+  },
+  {
+    name: "Crypto prediction candidate card",
+    href: "/components/cryptopredictioncandidatecard",
+    registry: "crypto-prediction-candidate-card",
+    description: "A prediction market event card with YES and NO pool odds breakdown and total volume.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-prediction-candidate-card.tsx`,
+    interaction: "Review market odds percentages and total pool liquidity.",
+    usage: `import { CryptoPredictionCandidateCard } from "@/components/ui/crypto-prediction-candidate-card"
+
+export function Demo() {
+  return <CryptoPredictionCandidateCard />
+}`,
+  },
+  {
+    name: "Crypto prediction quick grid",
+    href: "/components/cryptopredictionquickgrid",
+    registry: "crypto-prediction-quick-grid",
+    description: "A 5-minute quick prediction markets grid featuring countdown timers and higher or lower tiles.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-prediction-quick-grid.tsx`,
+    interaction: "Tap HIGHER or LOWER buttons on 5-minute market tiles.",
+    usage: `import { CryptoPredictionQuickGrid } from "@/components/ui/crypto-prediction-quick-grid"
+
+export function Demo() {
+  return <CryptoPredictionQuickGrid />
+}`,
+  },
+  {
+    name: "Crypto prediction tab selector",
+    href: "/components/cryptopredictiontabselector",
+    registry: "crypto-prediction-tab-selector",
+    description: "A horizontal category pill selector for prediction market categories.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-prediction-tab-selector.tsx`,
+    interaction: "Click category pills to filter prediction market views.",
+    usage: `import { CryptoPredictionTabSelector } from "@/components/ui/crypto-prediction-tab-selector"
+
+export function Demo() {
+  return <CryptoPredictionTabSelector />
+}`,
+  },
+  {
+    name: "Crypto prediction search bar",
+    href: "/components/cryptopredictionsearchbar",
+    registry: "crypto-prediction-search-bar",
+    description: "A search header bar with filter controls for prediction markets.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-prediction-search-bar.tsx`,
+    interaction: "Type in the input to filter active prediction markets.",
+    usage: `import { CryptoPredictionSearchBar } from "@/components/ui/crypto-prediction-search-bar"
+
+export function Demo() {
+  return <CryptoPredictionSearchBar />
+}`,
+  },
+  {
+    name: "Crypto prediction odds row",
+    href: "/components/cryptopredictionoddsrow",
+    registry: "crypto-prediction-odds-row",
+    description: "A market candidate odds row with progress bar indicator and vote button.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-prediction-odds-row.tsx`,
+    interaction: "Click the Vote button to place a vote.",
+    usage: `import { CryptoPredictionOddsRow } from "@/components/ui/crypto-prediction-odds-row"
+
+export function Demo() {
+  return <CryptoPredictionOddsRow />
+}`,
+  },
+  {
+    name: "Crypto project progress bar",
+    href: "/components/cryptoprojectprogressbar",
+    registry: "crypto-project-progress-bar",
+    description: "A project milestone progress card with dual segmented progress meters and epoch momentum.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-project-progress-bar.tsx`,
+    interaction: "Inspect staked SOL targets and milestone completion rates.",
+    usage: `import { CryptoProjectProgressBar } from "@/components/ui/crypto-project-progress-bar"
+
+export function Demo() {
+  return <CryptoProjectProgressBar />
+}`,
+  },
+  {
+    name: "Crypto up down options card",
+    href: "/components/cryptoupdownoptionscard",
+    registry: "crypto-up-down-options-card",
+    description: "A live binary options market card with glowing SVG sparkline and target price threshold.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-up-down-options-card.tsx`,
+    interaction: "Click SOL Higher or SOL Lower buttons before the countdown expires.",
+    usage: `import { CryptoUpDownOptionsCard } from "@/components/ui/crypto-up-down-options-card"
+
+export function Demo() {
+  return <CryptoUpDownOptionsCard />
+}`,
+  },
+  {
+    name: "Crypto up down target line",
+    href: "/components/cryptoupdowntargetline",
+    registry: "crypto-up-down-target-line",
+    description: "A binary options chart component highlighting target threshold level and payout multiplier.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-up-down-target-line.tsx`,
+    interaction: "View current price level relative to target threshold.",
+    usage: `import { CryptoUpDownTargetLine } from "@/components/ui/crypto-up-down-target-line"
+
+export function Demo() {
+  return <CryptoUpDownTargetLine />
+}`,
+  },
+  {
+    name: "Crypto up down upcoming carousel",
+    href: "/components/cryptoupdownupcomingcarousel",
+    registry: "crypto-up-down-upcoming-carousel",
+    description: "An upcoming binary options rounds carousel displaying round IDs and start times.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-up-down-upcoming-carousel.tsx`,
+    interaction: "Scroll horizontally to inspect upcoming option rounds.",
+    usage: `import { CryptoUpDownUpcomingCarousel } from "@/components/ui/crypto-up-down-upcoming-carousel"
+
+export function Demo() {
+  return <CryptoUpDownUpcomingCarousel />
+}`,
+  },
+  {
+    name: "Crypto progress ring green",
+    href: "/components/cryptoprogressringgreen",
+    registry: "crypto-progress-ring-green",
+    description: "A glowing green circular SVG progress ring card displaying percentage metrics.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-progress-ring-green.tsx`,
+    interaction: "Animated SVG progress ring completes on mount.",
+    usage: `import { CryptoProgressRingGreen } from "@/components/ui/crypto-progress-ring-green"
+
+export function Demo() {
+  return <CryptoProgressRingGreen />
+}`,
+  },
+  {
+    name: "Crypto progress ring red",
+    href: "/components/cryptoprogressringred",
+    registry: "crypto-progress-ring-red",
+    description: "A glowing red circular SVG progress ring card displaying warning alert status.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-progress-ring-red.tsx`,
+    interaction: "Displays critical liquidity warning state.",
+    usage: `import { CryptoProgressRingRed } from "@/components/ui/crypto-progress-ring-red"
+
+export function Demo() {
+  return <CryptoProgressRingRed />
+}`,
+  },
+  {
+    name: "Crypto speed dial action menu",
+    href: "/components/cryptospeeddialactionmenu",
+    registry: "crypto-speed-dial-action-menu",
+    description: "A radial speed dial quick action menu unfolding action buttons.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-speed-dial-action-menu.tsx`,
+    interaction: "Click the plus button to unfold radial quick action icons.",
+    usage: `import { CryptoSpeedDialActionMenu } from "@/components/ui/crypto-speed-dial-action-menu"
+
+export function Demo() {
+  return <CryptoSpeedDialActionMenu />
+}`,
+  },
+  {
+    name: "Crypto sales candlestick chart",
+    href: "/components/cryptosalescandlestickchart",
+    registry: "crypto-sales-candlestick-chart",
+    description: "A sales analytics card featuring candlestick sparkline bars with green glow.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-sales-candlestick-chart.tsx`,
+    interaction: "Candlestick bars animate entrance on load.",
+    usage: `import { CryptoSalesCandlestickChart } from "@/components/ui/crypto-sales-candlestick-chart"
+
+export function Demo() {
+  return <CryptoSalesCandlestickChart />
+}`,
+  },
+  {
+    name: "Crypto sales segmented bars",
+    href: "/components/cryptosalessegmentedbars",
+    registry: "crypto-sales-segmented-bars",
+    description: "A sales analytics card featuring segmented horizontal status level bars.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-sales-segmented-bars.tsx`,
+    interaction: "Segmented bars render multi-tier status levels.",
+    usage: `import { CryptoSalesSegmentedBars } from "@/components/ui/crypto-sales-segmented-bars"
+
+export function Demo() {
+  return <CryptoSalesSegmentedBars />
+}`,
+  },
+  {
+    name: "Crypto sales vertical graph",
+    href: "/components/cryptosalesverticalgraph",
+    registry: "crypto-sales-vertical-graph",
+    description: "A sales analytics card featuring vertical bar graph with top glow tips.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-sales-vertical-graph.tsx`,
+    interaction: "Vertical bars rise with staggered animation.",
+    usage: `import { CryptoSalesVerticalGraph } from "@/components/ui/crypto-sales-vertical-graph"
+
+export function Demo() {
+  return <CryptoSalesVerticalGraph />
+}`,
+  },
+  {
+    name: "Crypto TVL analytics chart",
+    href: "/components/cryptotvlanalyticschart",
+    registry: "crypto-tvl-analytics-chart",
+    description: "A tactical TVL analytics card featuring crosshair line chart tooltip and timeframe tabs.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-tvl-analytics-chart.tsx`,
+    interaction: "Hover over line chart points to inspect TVL data.",
+    usage: `import { CryptoTvlAnalyticsChart } from "@/components/ui/crypto-tvl-analytics-chart"
+
+export function Demo() {
+  return <CryptoTvlAnalyticsChart />
+}`,
+  },
+  {
+    name: "Crypto TVL sparkbar widget",
+    href: "/components/cryptotvlsparkbarwidget",
+    registry: "crypto-tvl-sparkbar-widget",
+    description: "A mini transactions sparkbar widget with soundwave bar graph.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-tvl-sparkbar-widget.tsx`,
+    interaction: "Displays transaction volume growth and soundwave bars.",
+    usage: `import { CryptoTvlSparkbarWidget } from "@/components/ui/crypto-tvl-sparkbar-widget"
+
+export function Demo() {
+  return <CryptoTvlSparkbarWidget />
+}`,
+  },
+  {
+    name: "Crypto trader leaderboard card",
+    href: "/components/cryptotraderleaderboardcard",
+    registry: "crypto-trader-leaderboard-card",
+    description: "A trader leaderboard and trending dApp directory featuring rank badges and follow toggles.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-trader-leaderboard-card.tsx`,
+    interaction: "Click Follow buttons to toggle trader follow state.",
+    usage: `import { CryptoTraderLeaderboardCard } from "@/components/ui/crypto-trader-leaderboard-card"
+
+export function Demo() {
+  return <CryptoTraderLeaderboardCard />
+}`,
+  },
+  {
+    name: "Crypto trading terminal workspace",
+    href: "/components/cryptotradingterminalworkspace",
+    registry: "crypto-trading-terminal-workspace",
+    description: "A dark trading terminal workspace with swap module, balance chart, and multi-wallet asset cards.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-trading-terminal-workspace.tsx`,
+    interaction: "Switch timeframe tabs or test token swap inputs.",
+    usage: `import { CryptoTradingTerminalWorkspace } from "@/components/ui/crypto-trading-terminal-workspace"
+
+export function Demo() {
+  return <CryptoTradingTerminalWorkspace />
+}`,
+  },
+  {
+    name: "Crypto token details screen",
+    href: "/components/cryptotokendetailsscreen",
+    registry: "crypto-token-details-screen",
+    description: "A token detail view displaying live price line chart, position holdings, and live chat status.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-token-details-screen.tsx`,
+    interaction: "Switch timeframe pills or click heart button to favorite.",
+    usage: `import { CryptoTokenDetailsScreen } from "@/components/ui/crypto-token-details-screen"
+
+export function Demo() {
+  return <CryptoTokenDetailsScreen />
+}`,
   },
 ];
+
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
 

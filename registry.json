@@ -722,19 +722,426 @@
       ]
     },
     {
-      "name": "crypto-token-details",
+      "name": "crypto-wallet-main",
       "type": "registry:ui",
-      "title": "Crypto Token Details",
-      "description": "A token detail view displaying live price line chart, position holdings, live chat status, and trade bar.",
+      "title": "Crypto Wallet Main",
+      "description": "A mobile crypto wallet main balance screen with account switcher and SPL token balances.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-wallet-main.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-wallet-drawer",
+      "type": "registry:ui",
+      "title": "Crypto Wallet Drawer",
+      "description": "A dark slide-out wallet menu drawer displaying verified domain identity and network options.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-wallet-drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-wallet-menu-sheet",
+      "type": "registry:ui",
+      "title": "Crypto Wallet Menu Sheet",
+      "description": "A light navigation menu sheet featuring search bar and Web3 ecosystem links.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-wallet-menu-sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-wallet-settings",
+      "type": "registry:ui",
+      "title": "Crypto Wallet Settings",
+      "description": "A dark wallet settings overlay with account management, RPC options, and developer settings.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-wallet-settings.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-explore-news",
+      "type": "registry:ui",
+      "title": "Crypto Explore News",
+      "description": "A market explore card featuring search input, watchlist assets, and ecosystem news feed.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-explore-news.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-explore-categories",
+      "type": "registry:ui",
+      "title": "Crypto Explore Categories",
+      "description": "An explore categories hub with category pills, trending SPL tokens list, and oracle footnotes.",
       "dependencies": ["motion", "lucide-react"],
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "components/ui/crypto-token-details.tsx",
+          "path": "components/ui/crypto-explore-categories.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-user-profile-card",
+      "type": "registry:ui",
+      "title": "Crypto User Profile Card",
+      "description": "A user profile card displaying domain handle, trade volume metrics, and follower statistics.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-user-profile-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-cookie-banner-dialog",
+      "type": "registry:ui",
+      "title": "Crypto Cookie Banner Dialog",
+      "description": "A floating purple cookie policy consent dialog with customizable action pills.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-cookie-banner-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-cookie-banner-sheet",
+      "type": "registry:ui",
+      "title": "Crypto Cookie Banner Sheet",
+      "description": "A privacy consent banner featuring header PDF link and cookie permission buttons.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-cookie-banner-sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-swap-box",
+      "type": "registry:ui",
+      "title": "Crypto Swap Box",
+      "description": "A token swap card with pay and receive input fields and instant token swap flip.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-swap-box.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-prediction-candidate-card",
+      "type": "registry:ui",
+      "title": "Crypto Prediction Candidate Card",
+      "description": "A prediction market event card with YES and NO pool odds breakdown and total volume.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-prediction-candidate-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-prediction-quick-grid",
+      "type": "registry:ui",
+      "title": "Crypto Prediction Quick Grid",
+      "description": "A 5-minute quick prediction markets grid featuring countdown timers and higher or lower tiles.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-prediction-quick-grid.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-prediction-tab-selector",
+      "type": "registry:ui",
+      "title": "Crypto Prediction Tab Selector",
+      "description": "A horizontal category pill selector for prediction market categories.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-prediction-tab-selector.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-prediction-search-bar",
+      "type": "registry:ui",
+      "title": "Crypto Prediction Search Bar",
+      "description": "A search header bar with filter controls for prediction markets.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-prediction-search-bar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-prediction-odds-row",
+      "type": "registry:ui",
+      "title": "Crypto Prediction Odds Row",
+      "description": "A market candidate odds row with progress bar indicator and vote button.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-prediction-odds-row.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-project-progress-bar",
+      "type": "registry:ui",
+      "title": "Crypto Project Progress Bar",
+      "description": "A project milestone progress card with dual segmented progress meters and epoch momentum.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-project-progress-bar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-up-down-options-card",
+      "type": "registry:ui",
+      "title": "Crypto Up Down Options Card",
+      "description": "A live binary options market card with glowing SVG sparkline and target price threshold.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-up-down-options-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-up-down-target-line",
+      "type": "registry:ui",
+      "title": "Crypto Up Down Target Line",
+      "description": "A binary options chart component highlighting target threshold level and payout multiplier.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-up-down-target-line.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-up-down-upcoming-carousel",
+      "type": "registry:ui",
+      "title": "Crypto Up Down Upcoming Carousel",
+      "description": "An upcoming binary options rounds carousel displaying round IDs and start times.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-up-down-upcoming-carousel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-progress-ring-green",
+      "type": "registry:ui",
+      "title": "Crypto Progress Ring Green",
+      "description": "A glowing green circular SVG progress ring card displaying percentage metrics.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-progress-ring-green.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-progress-ring-red",
+      "type": "registry:ui",
+      "title": "Crypto Progress Ring Red",
+      "description": "A glowing red circular SVG progress ring card displaying warning alert status.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-progress-ring-red.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-speed-dial-action-menu",
+      "type": "registry:ui",
+      "title": "Crypto Speed Dial Action Menu",
+      "description": "A radial speed dial quick action menu unfolding action buttons.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-speed-dial-action-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-sales-candlestick-chart",
+      "type": "registry:ui",
+      "title": "Crypto Sales Candlestick Chart",
+      "description": "A sales analytics card featuring candlestick sparkline bars with green glow.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-sales-candlestick-chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-sales-segmented-bars",
+      "type": "registry:ui",
+      "title": "Crypto Sales Segmented Bars",
+      "description": "A sales analytics card featuring segmented horizontal status level bars.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-sales-segmented-bars.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-sales-vertical-graph",
+      "type": "registry:ui",
+      "title": "Crypto Sales Vertical Graph",
+      "description": "A sales analytics card featuring vertical bar graph with top glow tips.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-sales-vertical-graph.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-tvl-analytics-chart",
+      "type": "registry:ui",
+      "title": "Crypto TVL Analytics Chart",
+      "description": "A tactical TVL analytics card featuring crosshair line chart tooltip and timeframe tabs.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-tvl-analytics-chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-tvl-sparkbar-widget",
+      "type": "registry:ui",
+      "title": "Crypto TVL Sparkbar Widget",
+      "description": "A mini transactions sparkbar widget with soundwave bar graph.",
+      "dependencies": ["utils"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-tvl-sparkbar-widget.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-trader-leaderboard-card",
+      "type": "registry:ui",
+      "title": "Crypto Trader Leaderboard Card",
+      "description": "A trader leaderboard and trending dApp directory featuring rank badges and follow toggles.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-trader-leaderboard-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-trading-terminal-workspace",
+      "type": "registry:ui",
+      "title": "Crypto Trading Terminal Workspace",
+      "description": "A dark trading terminal workspace with swap module, balance chart, and multi-wallet asset cards.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-trading-terminal-workspace.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-token-details-screen",
+      "type": "registry:ui",
+      "title": "Crypto Token Details Screen",
+      "description": "A token detail view displaying live price line chart, position holdings, and live chat status.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-token-details-screen.tsx",
           "type": "registry:ui"
         }
       ]
     }
   ]
 }
+
 
