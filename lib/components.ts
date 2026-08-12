@@ -181,7 +181,216 @@ export function Demo() {
 }`,
     credits: ["Inspired by devouringdetails.com"],
   },
+  {
+    name: "Crypto wallet dashboard",
+    href: "/components/cryptowalletdashboard",
+    registry: "crypto-wallet-dashboard",
+    description:
+      "A mobile crypto wallet dashboard with account navigation, balance breakdown, drawer navigation, and settings sheet.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-wallet-dashboard.tsx`,
+    interaction:
+      "Click the avatar button to slide open the main menu drawer, or tap the plus icon to reveal settings overlay.",
+    usage: `import { CryptoWalletDashboard } from "@/components/ui/crypto-wallet-dashboard"
 
+export function Demo() {
+  return <CryptoWalletDashboard />
+}`,
+  },
+  {
+    name: "Crypto user profile",
+    href: "/components/cryptouserprofile",
+    registry: "crypto-user-profile",
+    description:
+      "A crypto user profile card displaying handle, trade volume metrics, follower statistics, and profile management actions.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-user-profile.tsx`,
+    interaction:
+      "Click Manage Profile or Share Profile to trigger profile actions.",
+    usage: `import { CryptoUserProfile } from "@/components/ui/crypto-user-profile"
+
+export function Demo() {
+  return <CryptoUserProfile />
+}`,
+  },
+  {
+    name: "Crypto explore hub",
+    href: "/components/cryptoexplorehub",
+    registry: "crypto-explore-hub",
+    description:
+      "A market explore hub featuring category filter pills, watchlist assets, trending tokens list, and news feed.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-explore-hub.tsx`,
+    interaction:
+      "Switch between Tokens, People, and Sites categories or tap news items to explore markets.",
+    usage: `import { CryptoExploreHub } from "@/components/ui/crypto-explore-hub"
+
+export function Demo() {
+  return <CryptoExploreHub />
+}`,
+  },
+  {
+    name: "Crypto cookie banner",
+    href: "/components/cryptocookiebanner",
+    registry: "crypto-cookie-banner",
+    description:
+      "A floating cookie policy consent dialog with customizable action pills and header bar.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-cookie-banner.tsx`,
+    interaction:
+      "Click Accept or Reject to dismiss the consent banner, or click policy links to view terms.",
+    usage: `import { CryptoCookieBanner } from "@/components/ui/crypto-cookie-banner"
+
+export function Demo() {
+  return <CryptoCookieBanner />
+}`,
+  },
+  {
+    name: "Crypto swap card",
+    href: "/components/cryptoswapcard",
+    registry: "crypto-swap-card",
+    description:
+      "A token swap card featuring instant token flip animation, rate feedback, and market token rankings.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-swap-card.tsx`,
+    interaction:
+      "Click the swap arrow button to invert pay and receive tokens with animated position flip.",
+    usage: `import { CryptoSwapCard } from "@/components/ui/crypto-swap-card"
+
+export function Demo() {
+  return <CryptoSwapCard />
+}`,
+  },
+  {
+    name: "Crypto prediction markets",
+    href: "/components/cryptopredictionmarkets",
+    registry: "crypto-prediction-markets",
+    description:
+      "A prediction market hub with quick 5-minute market bet cards and election event odds breakdown.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-prediction-markets.tsx`,
+    interaction:
+      "Tap any candidate odds row or 5-minute market tile to review bet parameters.",
+    usage: `import { CryptoPredictionMarkets } from "@/components/ui/crypto-prediction-markets"
+
+export function Demo() {
+  return <CryptoPredictionMarkets />
+}`,
+  },
+  {
+    name: "Crypto project progress",
+    href: "/components/cryptoprojectprogress",
+    registry: "crypto-project-progress",
+    description:
+      "A project completion progress widget with dual segmented bar meters and weekly momentum indicator.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-project-progress.tsx`,
+    interaction:
+      "View real-time project progress rates and target sales indicators.",
+    usage: `import { CryptoProjectProgress } from "@/components/ui/crypto-project-progress"
+
+export function Demo() {
+  return <CryptoProjectProgress />
+}`,
+  },
+  {
+    name: "Crypto up down chart",
+    href: "/components/cryptoupdownchart",
+    registry: "crypto-up-down-chart",
+    description:
+      "A live binary options market card featuring glowing SVG sparkline, target price threshold, and countdown timer.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-up-down-chart.tsx`,
+    interaction:
+      "Click Up or Down buttons to place a prediction before the timer expires.",
+    usage: `import { CryptoUpDownChart } from "@/components/ui/crypto-up-down-chart"
+
+export function Demo() {
+  return <CryptoUpDownChart />
+}`,
+  },
+  {
+    name: "Crypto progress ring",
+    href: "/components/cryptoprogressring",
+    registry: "crypto-progress-ring",
+    description:
+      "A circular SVG glow progress ring widget with expandable radial speed-dial action menu.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-progress-ring.tsx`,
+    interaction:
+      "Click the plus button to unfold radial quick action speed-dial menu items.",
+    usage: `import { CryptoProgressRing } from "@/components/ui/crypto-progress-ring"
+
+export function Demo() {
+  return <CryptoProgressRing />
+}`,
+  },
+  {
+    name: "Crypto sales chart",
+    href: "/components/cryptosaleschart",
+    registry: "crypto-sales-chart",
+    description:
+      "A sales analytics summary card supporting candlestick, segmented status levels, and vertical bar chart views.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-sales-chart.tsx`,
+    interaction:
+      "Toggle top view mode buttons to switch chart rendering between candlestick, segmented, and bar modes.",
+    usage: `import { CryptoSalesChart } from "@/components/ui/crypto-sales-chart"
+
+export function Demo() {
+  return <CryptoSalesChart />
+}`,
+  },
+  {
+    name: "Crypto TVL analytics",
+    href: "/components/cryptotvlanalytics",
+    registry: "crypto-tvl-analytics",
+    description:
+      "A tactical TVL analytics card featuring interactive crosshair tooltip, net flow breakdown, and timeframe tabs.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-tvl-analytics.tsx`,
+    interaction:
+      "Hover over line chart points to inspect TVL and transaction counts for specific dates.",
+    usage: `import { CryptoTvlAnalytics } from "@/components/ui/crypto-tvl-analytics"
+
+export function Demo() {
+  return <CryptoTvlAnalytics />
+}`,
+  },
+  {
+    name: "Crypto trader leaderboard",
+    href: "/components/cryptotraderleaderboard",
+    registry: "crypto-trader-leaderboard",
+    description:
+      "A trader leaderboard and trending dApp directory featuring rank badges and follow toggles.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-trader-leaderboard.tsx`,
+    interaction:
+      "Click Follow buttons to toggle trader follow status.",
+    usage: `import { CryptoTraderLeaderboard } from "@/components/ui/crypto-trader-leaderboard"
+
+export function Demo() {
+  return <CryptoTraderLeaderboard />
+}`,
+  },
+  {
+    name: "Crypto trading terminal",
+    href: "/components/cryptotradingterminal",
+    registry: "crypto-trading-terminal",
+    description:
+      "A dark crypto trading workspace with inline token swap, interactive balance chart, and multi-wallet asset cards.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-trading-terminal.tsx`,
+    interaction:
+      "Switch timeframe tabs to inspect balance history or toggle the swap and transfer switch.",
+    usage: `import { CryptoTradingTerminal } from "@/components/ui/crypto-trading-terminal"
+
+export function Demo() {
+  return <CryptoTradingTerminal />
+}`,
+  },
+  {
+    name: "Crypto token details",
+    href: "/components/cryptotokendetails",
+    registry: "crypto-token-details",
+    description:
+      "A token detail view displaying live price line chart, position holdings, live chat status, and trade bar.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-token-details.tsx`,
+    interaction:
+      "Switch timeframe pills to update price chart resolution or tap the heart button to favorite.",
+    usage: `import { CryptoTokenDetails } from "@/components/ui/crypto-token-details"
+
+export function Demo() {
+  return <CryptoTokenDetails />
+}`,
+  },
   {
     name: "Scroll Progress",
     href: "/components/scrollprogressindicator",
