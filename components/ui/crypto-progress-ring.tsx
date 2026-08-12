@@ -23,22 +23,22 @@ export function CryptoProgressRing({
     <div
       data-slot="root"
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col items-center overflow-hidden rounded-[36px] bg-black p-6 text-white shadow-2xl border border-zinc-800/80 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col items-center overflow-hidden rounded-3xl bg-zinc-950 p-6 text-white shadow-xl border border-zinc-800 font-sans",
         className
       )}
       {...props}
     >
-      <div className="w-full flex items-center justify-between mb-4">
+      <div className="w-full flex items-center justify-between mb-3 pb-2 border-b border-zinc-900">
         <div>
-          <span className="text-[10px] uppercase font-bold text-emerald-400">Solana Health</span>
-          <h3 className="text-sm font-extrabold text-white">Staking & Gas Pool</h3>
+          <span className="text-[10px] uppercase font-semibold text-zinc-400">Pool Health</span>
+          <h3 className="text-xs font-bold text-white">Staking & Gas</h3>
         </div>
-        <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-xs font-bold text-emerald-400">
+        <span className="rounded-full bg-zinc-900 border border-zinc-800 px-2.5 py-0.5 text-[10px] font-semibold text-zinc-300">
           Optimal
         </span>
       </div>
 
-      <div className="relative my-4 flex h-48 w-48 items-center justify-center">
+      <div className="relative my-3 flex h-44 w-44 items-center justify-center">
         <svg className="h-full w-full rotate-[-90deg]" viewBox="0 0 100 100">
           <circle
             cx="50"
@@ -46,27 +46,26 @@ export function CryptoProgressRing({
             r="40"
             fill="none"
             stroke="#27272a"
-            strokeWidth="8"
+            strokeWidth="7"
           />
           <motion.circle
             cx="50"
             cy="50"
             r="40"
             fill="none"
-            stroke="#34d399"
-            strokeWidth="8"
+            stroke="#10b981"
+            strokeWidth="7"
             strokeLinecap="round"
             strokeDasharray="251.2"
             initial={{ strokeDashoffset: 251.2 }}
             animate={{ strokeDashoffset: 251.2 - (251.2 * stakingHealthPercent) / 100 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="drop-shadow-[0_0_12px_rgba(52,211,153,0.8)]"
           />
         </svg>
 
         <div className="absolute flex flex-col items-center justify-center text-center">
-          <span className="text-3xl font-black text-white">{stakingHealthPercent}%</span>
-          <span className="text-xs font-semibold text-zinc-400 mt-0.5">{solBalance} SOL Staked</span>
+          <span className="text-3xl font-extrabold text-white">{stakingHealthPercent}%</span>
+          <span className="text-xs font-medium text-zinc-400 mt-0.5">{solBalance} SOL Staked</span>
         </div>
       </div>
 
@@ -76,12 +75,12 @@ export function CryptoProgressRing({
             type="button"
             onClick={() => setDialOpen(!dialOpen)}
             className={cn(
-              "flex h-12 w-12 items-center justify-center rounded-full bg-emerald-400 text-zinc-950 shadow-xl transition-transform active:scale-95 cursor-pointer z-20",
+              "flex h-11 w-11 items-center justify-center rounded-full bg-white text-zinc-950 shadow-md transition-transform active:scale-95 cursor-pointer z-20 hover:bg-zinc-200",
               dialOpen && "rotate-45"
             )}
-            aria-label="Toggle Solana quick actions"
+            aria-label="Toggle quick actions"
           >
-            <Plus className="h-6 w-6 stroke-[3]" />
+            <Plus className="h-5 w-5 stroke-[2.5]" />
           </button>
         </div>
 
@@ -91,25 +90,25 @@ export function CryptoProgressRing({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="absolute -top-14 left-0 right-0 flex justify-center gap-4 z-10"
+              className="absolute -top-14 left-0 right-0 flex justify-center gap-3 z-10"
             >
               <button
                 type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-700 text-emerald-400 shadow-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer"
                 title="Send SOL"
               >
                 <Send className="h-4 w-4" />
               </button>
               <button
                 type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-700 text-emerald-400 shadow-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer"
                 title="Receive SOL"
               >
                 <Download className="h-4 w-4" />
               </button>
               <button
                 type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-700 text-emerald-400 shadow-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer"
                 title="Swap SPL"
               >
                 <RefreshCw className="h-4 w-4" />

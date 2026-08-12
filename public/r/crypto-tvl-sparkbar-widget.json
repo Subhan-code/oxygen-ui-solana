@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-tvl-sparkbar-widget",
+  "title": "Crypto TVL Sparkbar Widget",
+  "description": "A mini transactions sparkbar widget with soundwave bar graph.",
+  "dependencies": [
+    "utils"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-tvl-sparkbar-widget.tsx",
+      "content": "\"use client\"\n\nimport React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoTvlSparkbarWidgetProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  txCount?: string\n  growthPercent?: string\n}\n\nexport function CryptoTvlSparkbarWidget({\n  txCount = \"+24.6M\",\n  growthPercent = \"5.2%\",\n  className,\n  ...props\n}: CryptoTvlSparkbarWidgetProps) {\n  return (\n    <div\n      data-slot=\"root\"\n      className={cn(\n        \"relative mx-auto flex w-full max-w-sm items-center justify-between rounded-2xl border border-zinc-800 bg-zinc-950 p-4 text-white shadow-xl font-sans\",\n        className\n      )}\n      {...props}\n    >\n      <div>\n        <span className=\"block text-[10px] uppercase font-semibold tracking-wider text-zinc-400\">Transactions & TPS</span>\n        <div className=\"flex items-baseline gap-1.5 mt-0.5\">\n          <span className=\"text-sm font-bold text-white\">{txCount}</span>\n          <span className=\"text-[10px] font-semibold text-emerald-500\">↑ {growthPercent}</span>\n        </div>\n      </div>\n\n      <div className=\"flex items-end gap-1 h-7\">\n        {[4, 6, 8, 7, 5, 9, 10].map((h, i) => (\n          <div key={i} className=\"w-1.5 rounded-xs bg-zinc-800 flex flex-col justify-end h-full\">\n            <div\n              style={{ height: `${h * 10}%` }}\n              className=\"w-full bg-emerald-500 rounded-xs\"\n            />\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

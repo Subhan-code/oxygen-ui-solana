@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-prediction-candidate-card",
+  "title": "Crypto Prediction Candidate Card",
+  "description": "A prediction market event card with YES and NO pool odds breakdown and total volume.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-prediction-candidate-card.tsx",
+      "content": "\"use client\"\n\nimport React from \"react\"\nimport { Vote } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoPredictionCandidateCardProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  eventTitle?: string\n  yesPercent?: number\n  noPercent?: number\n  volumeUsd?: string\n}\n\nexport function CryptoPredictionCandidateCard({\n  eventTitle = \"Solana Spot ETF Approval in 2026?\",\n  yesPercent = 72,\n  noPercent = 28,\n  volumeUsd = \"$4,250,000\",\n  className,\n  ...props\n}: CryptoPredictionCandidateCardProps) {\n  return (\n    <div\n      data-slot=\"root\"\n      className={cn(\n        \"relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800 font-sans\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center justify-between mb-3 pb-2 border-b border-zinc-900\">\n        <div className=\"flex items-center gap-2\">\n          <Vote className=\"h-4 w-4 text-zinc-400\" />\n          <span className=\"text-xs font-bold uppercase text-zinc-400\">Prediction Market</span>\n        </div>\n        <span className=\"rounded-full bg-zinc-900 px-2 py-0.5 text-[10px] font-semibold text-zinc-300 border border-zinc-800\">\n          Active Pool\n        </span>\n      </div>\n\n      <h3 className=\"text-sm font-bold text-white mb-4 leading-snug\">{eventTitle}</h3>\n\n      <div className=\"grid grid-cols-2 gap-3 mb-4\">\n        <div className=\"rounded-2xl bg-zinc-900 p-3.5 border border-zinc-800 text-center\">\n          <span className=\"block text-[10px] font-bold text-emerald-500 uppercase\">YES Odds</span>\n          <span className=\"text-xl font-extrabold text-white mt-1 block\">{yesPercent}%</span>\n        </div>\n\n        <div className=\"rounded-2xl bg-zinc-900 p-3.5 border border-zinc-800 text-center\">\n          <span className=\"block text-[10px] font-bold text-rose-500 uppercase\">NO Odds</span>\n          <span className=\"text-xl font-extrabold text-white mt-1 block\">{noPercent}%</span>\n        </div>\n      </div>\n\n      <div className=\"flex items-center justify-between text-xs text-zinc-400 pt-2 border-t border-zinc-900\">\n        <span>Pool Volume</span>\n        <span className=\"font-semibold text-zinc-200\">{volumeUsd}</span>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

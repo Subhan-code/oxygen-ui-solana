@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-prediction-search-bar",
+  "title": "Crypto Prediction Search Bar",
+  "description": "A search header bar with filter controls for prediction markets.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-prediction-search-bar.tsx",
+      "content": "\"use client\"\n\nimport React from \"react\"\nimport { Search, SlidersHorizontal } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoPredictionSearchBarProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  onSearch?: (query: string) => void\n}\n\nexport function CryptoPredictionSearchBar({\n  onSearch,\n  className,\n  ...props\n}: CryptoPredictionSearchBarProps) {\n  return (\n    <div\n      data-slot=\"root\"\n      className={cn(\n        \"relative mx-auto flex w-full max-w-sm items-center gap-2 rounded-2xl bg-zinc-950 p-2 text-white shadow-xl border border-zinc-800 font-sans\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"relative flex-1\">\n        <Search className=\"absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-500\" />\n        <input\n          type=\"text\"\n          placeholder=\"Search prediction markets...\"\n          onChange={(e) => onSearch?.(e.target.value)}\n          className=\"w-full rounded-xl border border-zinc-800 bg-zinc-900 py-1.5 pl-8 pr-3 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-700\"\n        />\n      </div>\n      <button\n        type=\"button\"\n        className=\"flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 transition-colors cursor-pointer\"\n        aria-label=\"Filter markets\"\n      >\n        <SlidersHorizontal className=\"h-3.5 w-3.5\" />\n      </button>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-sales-vertical-graph",
+  "title": "Crypto Sales Vertical Graph",
+  "description": "A sales analytics card featuring vertical bar graph with top glow tips.",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-sales-vertical-graph.tsx",
+      "content": "\"use client\"\n\nimport React from \"react\"\nimport { motion } from \"motion/react\"\nimport { BarChart3 } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoSalesVerticalGraphProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  salesAmount?: string\n  growthPercent?: string\n}\n\nexport function CryptoSalesVerticalGraph({\n  salesAmount = \"$9,134 SOL\",\n  growthPercent = \"2.5%\",\n  className,\n  ...props\n}: CryptoSalesVerticalGraphProps) {\n  return (\n    <div\n      data-slot=\"root\"\n      className={cn(\n        \"relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800 font-sans\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center justify-between mb-3 pb-2 border-b border-zinc-900\">\n        <div>\n          <span className=\"text-xs font-medium text-zinc-400\">Vertical Bar Graph</span>\n          <div className=\"flex items-baseline gap-2 mt-0.5\">\n            <span className=\"text-xl font-bold tracking-tight text-white\">{salesAmount}</span>\n            <span className=\"text-xs font-semibold text-emerald-500\">↑ {growthPercent}</span>\n          </div>\n        </div>\n        <div className=\"flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300\">\n          <BarChart3 className=\"h-4 w-4\" />\n        </div>\n      </div>\n\n      <div className=\"h-28 w-full rounded-2xl bg-zinc-900/60 p-3 border border-zinc-800 flex items-center justify-center\">\n        <div className=\"flex items-end gap-2 h-full w-full justify-between pt-2\">\n          {[50, 70, 85, 75, 65, 90, 80].map((height, i) => (\n            <motion.div\n              key={i}\n              initial={{ height: 0 }}\n              animate={{ height: `${height}%` }}\n              transition={{ duration: 0.5, delay: i * 0.05 }}\n              className=\"w-full flex-1 rounded-t-xs bg-emerald-500 relative\"\n            />\n          ))}\n        </div>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

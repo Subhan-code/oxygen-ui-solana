@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-prediction-odds-row",
+  "title": "Crypto Prediction Odds Row",
+  "description": "A market candidate odds row with progress bar indicator and vote button.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-prediction-odds-row.tsx",
+      "content": "\"use client\"\n\nimport React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoPredictionOddsRowProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  candidateName?: string\n  oddsPercent?: number\n  volumeUsd?: string\n}\n\nexport function CryptoPredictionOddsRow({\n  candidateName = \"Solana Spot ETF Approval\",\n  oddsPercent = 72,\n  volumeUsd = \"$4.2M\",\n  className,\n  ...props\n}: CryptoPredictionOddsRowProps) {\n  return (\n    <div\n      data-slot=\"root\"\n      className={cn(\n        \"relative mx-auto flex w-full max-w-sm items-center justify-between gap-3 rounded-2xl bg-zinc-950 p-3.5 text-white shadow-xl border border-zinc-800 font-sans\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex-1 min-w-0\">\n        <h4 className=\"text-xs font-bold text-white truncate\">{candidateName}</h4>\n        <div className=\"mt-1.5 flex items-center gap-2\">\n          <div className=\"h-1.5 flex-1 rounded-full bg-zinc-800 overflow-hidden\">\n            <div\n              style={{ width: `${oddsPercent}%` }}\n              className=\"h-full rounded-full bg-emerald-500\"\n            />\n          </div>\n          <span className=\"text-xs font-bold text-emerald-500\">{oddsPercent}%</span>\n        </div>\n      </div>\n\n      <button\n        type=\"button\"\n        className=\"rounded-xl bg-white px-3.5 py-1.5 text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition-colors shadow cursor-pointer shrink-0\"\n      >\n        Vote\n      </button>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

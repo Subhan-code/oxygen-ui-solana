@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-prediction-tab-selector",
+  "title": "Crypto Prediction Tab Selector",
+  "description": "A horizontal category pill selector for prediction market categories.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-prediction-tab-selector.tsx",
+      "content": "\"use client\"\n\nimport React, { useState } from \"react\"\nimport { motion } from \"motion/react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoPredictionTabSelectorProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  onSelectTab?: (tab: string) => void\n}\n\nexport function CryptoPredictionTabSelector({\n  onSelectTab,\n  className,\n  ...props\n}: CryptoPredictionTabSelectorProps) {\n  const [activeTab, setActiveTab] = useState(\"Top\")\n  const tabs = [\"Top\", \"5m Markets\", \"Politics\", \"Crypto\", \"Tech\"]\n\n  return (\n    <div\n      data-slot=\"root\"\n      className={cn(\n        \"relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-zinc-950 p-1.5 text-white shadow-xl border border-zinc-800 font-sans\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center gap-1 overflow-x-auto no-scrollbar\">\n        {tabs.map((tab) => (\n          <button\n            key={tab}\n            type=\"button\"\n            onClick={() => {\n              setActiveTab(tab)\n              onSelectTab?.(tab)\n            }}\n            className={cn(\n              \"relative rounded-xl px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer shrink-0\",\n              activeTab === tab ? \"text-zinc-950\" : \"text-zinc-400 hover:text-white\"\n            )}\n          >\n            {activeTab === tab && (\n              <motion.div\n                layoutId=\"pred-selector-pill\"\n                className=\"absolute inset-0 rounded-xl bg-white\"\n                transition={{ type: \"spring\", stiffness: 450, damping: 35 }}\n              />\n            )}\n            <span className=\"relative z-10\">{tab}</span>\n          </button>\n        ))}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

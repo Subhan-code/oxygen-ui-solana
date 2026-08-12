@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from "react"
-import { motion } from "motion/react"
 import { ArrowDown, Settings, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -25,16 +24,16 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
     <div
       data-slot="root"
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-[36px] bg-black p-5 text-white shadow-2xl border border-zinc-800/80 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800 font-sans",
         className
       )}
       {...props}
     >
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 pb-2 border-b border-zinc-900">
         <div className="flex items-center gap-2">
-          <h2 className="text-xl font-extrabold text-white">Solana Swap</h2>
-          <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
-            Jupiter DEX
+          <h2 className="text-base font-bold text-white">Swap Tokens</h2>
+          <span className="rounded-full bg-zinc-900 px-2 py-0.5 text-[10px] font-medium text-zinc-400 border border-zinc-800">
+            Jupiter Route
           </span>
         </div>
         <button
@@ -47,7 +46,7 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
 
       <div className="relative space-y-2 mb-4">
         <div className="rounded-2xl bg-zinc-900/80 p-3.5 border border-zinc-800">
-          <div className="flex items-center justify-between text-xs font-semibold text-zinc-400 mb-1">
+          <div className="flex items-center justify-between text-xs font-medium text-zinc-400 mb-1">
             <span>You Pay</span>
             <span>Balance: {payToken.balance}</span>
           </div>
@@ -56,13 +55,13 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
               type="text"
               value={payAmount}
               onChange={(e) => setPayAmount(e.target.value)}
-              className="w-1/2 bg-transparent text-2xl font-extrabold text-white focus:outline-none"
+              className="w-1/2 bg-transparent text-xl font-extrabold text-white focus:outline-none"
             />
             <button
               type="button"
-              className="flex items-center gap-1.5 rounded-full bg-zinc-800 px-3 py-1.5 text-xs font-bold text-white hover:bg-zinc-700 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 rounded-full bg-zinc-800 px-3 py-1.5 text-xs font-bold text-white hover:bg-zinc-700 transition-colors cursor-pointer border border-zinc-700"
             >
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-400 font-bold text-[10px] text-black">
+              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-700 font-bold text-[10px] text-white">
                 {payToken.symbol[0]}
               </div>
               <span>{payToken.symbol}</span>
@@ -71,18 +70,18 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
           </div>
         </div>
 
-        <div className="flex justify-center -my-2 z-10 relative">
+        <div className="flex justify-center -my-2.5 z-10 relative">
           <button
             type="button"
             onClick={handleFlip}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-zinc-800 text-emerald-400 border border-zinc-700 hover:bg-zinc-700 transition-transform active:rotate-180 cursor-pointer shadow-lg"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-300 border border-zinc-700 hover:bg-zinc-800 transition-transform active:rotate-180 cursor-pointer shadow-md"
           >
             <ArrowDown className="h-4 w-4" />
           </button>
         </div>
 
         <div className="rounded-2xl bg-zinc-900/80 p-3.5 border border-zinc-800">
-          <div className="flex items-center justify-between text-xs font-semibold text-zinc-400 mb-1">
+          <div className="flex items-center justify-between text-xs font-medium text-zinc-400 mb-1">
             <span>You Receive</span>
             <span>Balance: {receiveToken.balance}</span>
           </div>
@@ -91,13 +90,13 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
               type="text"
               value={receiveAmount}
               onChange={(e) => setReceiveAmount(e.target.value)}
-              className="w-1/2 bg-transparent text-2xl font-extrabold text-white focus:outline-none"
+              className="w-1/2 bg-transparent text-xl font-extrabold text-white focus:outline-none"
             />
             <button
               type="button"
-              className="flex items-center gap-1.5 rounded-full bg-zinc-800 px-3 py-1.5 text-xs font-bold text-white hover:bg-zinc-700 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 rounded-full bg-zinc-800 px-3 py-1.5 text-xs font-bold text-white hover:bg-zinc-700 transition-colors cursor-pointer border border-zinc-700"
             >
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 font-bold text-[10px] text-white">
+              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-900/60 font-bold text-[10px] text-blue-300">
                 {receiveToken.symbol[0]}
               </div>
               <span>{receiveToken.symbol}</span>
@@ -108,13 +107,13 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
       </div>
 
       <div className="mb-4 flex items-center justify-between text-xs text-zinc-400 px-1">
-        <span>Rate</span>
+        <span>Exchange Rate</span>
         <span className="font-semibold text-zinc-200">1 {payToken.symbol} ≈ 142.5 {receiveToken.symbol}</span>
       </div>
 
       <button
         type="button"
-        className="w-full rounded-2xl bg-emerald-400 py-3.5 text-center text-sm font-extrabold text-zinc-950 hover:bg-emerald-300 transition-colors shadow-lg active:scale-98 cursor-pointer"
+        className="w-full rounded-2xl bg-white py-3 text-center text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition-colors shadow-md active:scale-98 cursor-pointer"
       >
         Swap Tokens
       </button>

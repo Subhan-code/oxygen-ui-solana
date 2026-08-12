@@ -18,46 +18,46 @@ export function CryptoPredictionQuickGrid({ className, ...props }: CryptoPredict
     <div
       data-slot="root"
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-[32px] bg-black p-4 text-white shadow-2xl border border-zinc-800/80 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-4 text-white shadow-xl border border-zinc-800 font-sans",
         className
       )}
       {...props}
     >
       <div className="flex items-center justify-between mb-3 px-1">
-        <h3 className="text-sm font-extrabold text-white">5-Minute Express Markets</h3>
-        <span className="text-[11px] font-semibold text-emerald-400">Pyth Oracles</span>
+        <h3 className="text-xs font-bold text-white">5-Minute Markets</h3>
+        <span className="text-[11px] font-medium text-zinc-400">Pyth Oracles</span>
       </div>
 
       <div className="space-y-3">
         {quickMarkets.map((m) => (
-          <div key={m.id} className="rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3.5 space-y-3">
+          <div key={m.id} className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 space-y-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-extrabold text-white">{m.pair}</span>
-              <div className="flex items-center gap-1 text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
-                <Clock className="h-3 w-3" />
+              <span className="text-xs font-bold text-white">{m.pair}</span>
+              <div className="flex items-center gap-1 text-[11px] font-medium text-zinc-300 bg-zinc-800 px-2 py-0.5 rounded-full border border-zinc-700">
+                <Clock className="h-3 w-3 text-zinc-400" />
                 <span>{m.timeLeft}</span>
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-xs text-zinc-400">
-              <span>Target: <strong className="text-white">{m.target}</strong></span>
+            <div className="flex items-center justify-between text-[11px] text-zinc-400">
+              <span>Target: <strong className="text-zinc-200">{m.target}</strong></span>
               <span>Odds</span>
             </div>
 
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
-                className="rounded-xl bg-emerald-500/20 border border-emerald-500/40 p-2 text-center hover:bg-emerald-500/30 transition-colors cursor-pointer"
+                className="rounded-xl bg-zinc-900 border border-zinc-800 p-2 text-center hover:bg-zinc-800 transition-colors cursor-pointer"
               >
-                <span className="block text-[10px] font-bold text-emerald-400">HIGHER</span>
-                <span className="text-sm font-extrabold text-white">{m.yesOdds}</span>
+                <span className="block text-[10px] font-bold text-emerald-500">HIGHER</span>
+                <span className="text-xs font-bold text-white mt-0.5 block">{m.yesOdds}</span>
               </button>
               <button
                 type="button"
-                className="rounded-xl bg-rose-500/20 border border-rose-500/40 p-2 text-center hover:bg-rose-500/30 transition-colors cursor-pointer"
+                className="rounded-xl bg-zinc-900 border border-zinc-800 p-2 text-center hover:bg-zinc-800 transition-colors cursor-pointer"
               >
-                <span className="block text-[10px] font-bold text-rose-400">LOWER</span>
-                <span className="text-sm font-extrabold text-white">{m.noOdds}</span>
+                <span className="block text-[10px] font-bold text-rose-500">LOWER</span>
+                <span className="text-xs font-bold text-white mt-0.5 block">{m.noOdds}</span>
               </button>
             </div>
           </div>

@@ -15,13 +15,13 @@ export function CryptoPredictionTabSelector({
   ...props
 }: CryptoPredictionTabSelectorProps) {
   const [activeTab, setActiveTab] = useState("Top")
-  const tabs = ["Top", "5m Markets", "Politics", "Crypto", "AI"]
+  const tabs = ["Top", "5m Markets", "Politics", "Crypto", "Tech"]
 
   return (
     <div
       data-slot="root"
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-zinc-950 p-2 text-white shadow-xl border border-zinc-800 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-zinc-950 p-1.5 text-white shadow-xl border border-zinc-800 font-sans",
         className
       )}
       {...props}
@@ -36,14 +36,14 @@ export function CryptoPredictionTabSelector({
               onSelectTab?.(tab)
             }}
             className={cn(
-              "relative rounded-xl px-3.5 py-1.5 text-xs font-bold transition-colors cursor-pointer shrink-0",
+              "relative rounded-xl px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer shrink-0",
               activeTab === tab ? "text-zinc-950" : "text-zinc-400 hover:text-white"
             )}
           >
             {activeTab === tab && (
               <motion.div
                 layoutId="pred-selector-pill"
-                className="absolute inset-0 rounded-xl bg-emerald-300"
+                className="absolute inset-0 rounded-xl bg-white"
                 transition={{ type: "spring", stiffness: 450, damping: 35 }}
               />
             )}

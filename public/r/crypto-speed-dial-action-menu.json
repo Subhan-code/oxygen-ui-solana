@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-speed-dial-action-menu",
+  "title": "Crypto Speed Dial Action Menu",
+  "description": "A radial speed dial quick action menu unfolding action buttons.",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-speed-dial-action-menu.tsx",
+      "content": "\"use client\"\n\nimport React, { useState } from \"react\"\nimport { motion, AnimatePresence } from \"motion/react\"\nimport { Plus, Send, Download, RefreshCw } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoSpeedDialActionMenuProps\n  extends React.HTMLAttributes<HTMLDivElement> {}\n\nexport function CryptoSpeedDialActionMenu({ className, ...props }: CryptoSpeedDialActionMenuProps) {\n  const [open, setOpen] = useState(true)\n\n  return (\n    <div\n      data-slot=\"root\"\n      className={cn(\n        \"relative mx-auto flex w-full max-w-sm flex-col items-center justify-center p-8 rounded-3xl bg-zinc-950 border border-zinc-800 font-sans min-h-[200px]\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"relative\">\n        <button\n          type=\"button\"\n          onClick={() => setOpen(!open)}\n          className={cn(\n            \"flex h-11 w-11 items-center justify-center rounded-full bg-white text-zinc-950 shadow-md transition-transform cursor-pointer z-20 hover:bg-zinc-200\",\n            open && \"rotate-45\"\n          )}\n        >\n          <Plus className=\"h-5 w-5 stroke-[2.5]\" />\n        </button>\n\n        <AnimatePresence>\n          {open && (\n            <motion.div\n              initial={{ opacity: 0, scale: 0.8 }}\n              animate={{ opacity: 1, scale: 1 }}\n              exit={{ opacity: 0, scale: 0.8 }}\n              className=\"absolute -top-14 left-1/2 -translate-x-1/2 flex justify-center gap-3 z-10 w-48\"\n            >\n              <button\n                type=\"button\"\n                className=\"flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer\"\n                title=\"Send SOL\"\n              >\n                <Send className=\"h-4 w-4\" />\n              </button>\n              <button\n                type=\"button\"\n                className=\"flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer\"\n                title=\"Receive SOL\"\n              >\n                <Download className=\"h-4 w-4\" />\n              </button>\n              <button\n                type=\"button\"\n                className=\"flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer\"\n                title=\"Swap SPL\"\n              >\n                <RefreshCw className=\"h-4 w-4\" />\n              </button>\n            </motion.div>\n          )}\n        </AnimatePresence>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

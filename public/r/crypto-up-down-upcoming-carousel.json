@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-up-down-upcoming-carousel",
+  "title": "Crypto Up Down Upcoming Carousel",
+  "description": "An upcoming binary options rounds carousel displaying round IDs and start times.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-up-down-upcoming-carousel.tsx",
+      "content": "\"use client\"\n\nimport React from \"react\"\nimport { ChevronRight, Clock } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoUpDownUpcomingCarouselProps\n  extends React.HTMLAttributes<HTMLDivElement> {}\n\nexport function CryptoUpDownUpcomingCarousel({ className, ...props }: CryptoUpDownUpcomingCarouselProps) {\n  const upcomingRounds = [\n    { id: \"#1042\", time: \"05:00\", pool: \"$12,450\" },\n    { id: \"#1043\", time: \"10:00\", pool: \"$18,200\" },\n    { id: \"#1044\", time: \"15:00\", pool: \"$15,800\" },\n  ]\n\n  return (\n    <div\n      data-slot=\"root\"\n      className={cn(\n        \"relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-zinc-950 p-4 text-white shadow-xl border border-zinc-800 font-sans\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center justify-between text-xs font-bold text-zinc-300 mb-3\">\n        <div className=\"flex items-center gap-1.5\">\n          <Clock className=\"h-4 w-4 text-zinc-400\" />\n          <span>Upcoming Option Rounds</span>\n        </div>\n        <ChevronRight className=\"h-4 w-4 text-zinc-500 cursor-pointer\" />\n      </div>\n\n      <div className=\"flex gap-2 overflow-x-auto no-scrollbar\">\n        {upcomingRounds.map((r) => (\n          <div\n            key={r.id}\n            className=\"flex-1 min-w-[100px] rounded-xl bg-zinc-900/80 p-2.5 border border-zinc-800 flex flex-col justify-between\"\n          >\n            <span className=\"text-[10px] font-mono font-bold text-zinc-500\">{r.id}</span>\n            <span className=\"text-xs font-bold text-white mt-1 block\">{r.time}</span>\n            <span className=\"text-[10px] font-semibold text-emerald-500 mt-0.5\">{r.pool}</span>\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
