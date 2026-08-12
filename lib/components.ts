@@ -1260,6 +1260,7 @@ export function Demo() {
     />
   )
 }`,
+  },
   {
     name: "Crypto wallet main",
     href: "/components/cryptowalletmain",
