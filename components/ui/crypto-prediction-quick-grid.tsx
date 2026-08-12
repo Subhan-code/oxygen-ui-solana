@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { motion } from "motion/react"
 import { Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -15,10 +16,13 @@ export function CryptoPredictionQuickGrid({ className, ...props }: CryptoPredict
   ]
 
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-4 text-white shadow-xl border border-zinc-800 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-4 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
@@ -47,22 +51,22 @@ export function CryptoPredictionQuickGrid({ className, ...props }: CryptoPredict
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
-                className="rounded-xl bg-zinc-900 border border-zinc-800 p-2 text-center hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="rounded-xl bg-blue-950/60 border border-blue-800/50 p-2 text-center hover:bg-blue-900/60 transition-transform active:scale-98 cursor-pointer"
               >
-                <span className="block text-[10px] font-bold text-emerald-500">HIGHER</span>
+                <span className="block text-[10px] font-bold text-blue-400">HIGHER</span>
                 <span className="text-xs font-bold text-white mt-0.5 block">{m.yesOdds}</span>
               </button>
               <button
                 type="button"
-                className="rounded-xl bg-zinc-900 border border-zinc-800 p-2 text-center hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="rounded-xl bg-purple-950/60 border border-purple-800/50 p-2 text-center hover:bg-purple-900/60 transition-transform active:scale-98 cursor-pointer"
               >
-                <span className="block text-[10px] font-bold text-rose-500">LOWER</span>
+                <span className="block text-[10px] font-bold text-purple-300">LOWER</span>
                 <span className="text-xs font-bold text-white mt-0.5 block">{m.noOdds}</span>
               </button>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   )
 }

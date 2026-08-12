@@ -19,10 +19,13 @@ export function CryptoExploreCategories({ className, ...props }: CryptoExploreCa
   ]
 
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-4 text-white shadow-xl border border-zinc-800 font-sans min-h-[540px]",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-4 text-white shadow-xl border border-zinc-800/80 font-sans min-h-[520px]",
         className
       )}
       {...props}
@@ -34,7 +37,7 @@ export function CryptoExploreCategories({ className, ...props }: CryptoExploreCa
             type="button"
             onClick={() => setActiveCategory(cat)}
             className={cn(
-              "relative flex-1 rounded-full py-1.5 text-center text-xs font-bold transition-colors cursor-pointer",
+              "relative flex-1 rounded-full py-1.5 text-center text-xs font-bold transition-colors cursor-pointer active:scale-95 duration-100",
               activeCategory === cat ? "text-zinc-950" : "text-zinc-400 hover:text-white"
             )}
           >
@@ -42,7 +45,7 @@ export function CryptoExploreCategories({ className, ...props }: CryptoExploreCa
               <motion.div
                 layoutId="exp-cat-pill"
                 className="absolute inset-0 rounded-full bg-white"
-                transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                transition={{ type: "spring", bounce: 0, duration: 0.35 }}
               />
             )}
             <span className="relative z-10">{cat}</span>
@@ -61,7 +64,7 @@ export function CryptoExploreCategories({ className, ...props }: CryptoExploreCa
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-2 space-y-1">
           {trendingTokens.map((token) => (
-            <div key={token.symbol} className="flex items-center justify-between p-2 rounded-xl hover:bg-zinc-900 transition-colors">
+            <div key={token.symbol} className="flex items-center justify-between p-2 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98">
               <div className="flex items-center gap-3">
                 <span className="text-xs font-bold text-zinc-500 w-4">{token.rank}</span>
                 <div>
@@ -71,7 +74,7 @@ export function CryptoExploreCategories({ className, ...props }: CryptoExploreCa
               </div>
               <div className="text-right">
                 <span className="block text-xs font-bold text-white">{token.price}</span>
-                <span className={cn("text-[10px] font-bold", token.change.startsWith("+") ? "text-emerald-500" : "text-rose-500")}>
+                <span className={cn("text-[10px] font-bold", token.change.startsWith("+") ? "text-blue-400" : "text-purple-400")}>
                   {token.change}
                 </span>
               </div>
@@ -79,11 +82,11 @@ export function CryptoExploreCategories({ className, ...props }: CryptoExploreCa
           ))}
         </div>
 
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-2.5 flex items-start gap-2 text-[11px] text-zinc-400">
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-2.5 flex items-start gap-2 text-[11px] text-zinc-400">
           <Info className="h-3.5 w-3.5 text-zinc-500 shrink-0 mt-0.5" />
           <p>Real-time token prices powered by Pyth Network oracle feeds.</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

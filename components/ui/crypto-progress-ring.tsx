@@ -20,10 +20,13 @@ export function CryptoProgressRing({
   const [dialOpen, setDialOpen] = useState(false)
 
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col items-center overflow-hidden rounded-3xl bg-zinc-950 p-6 text-white shadow-xl border border-zinc-800 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col items-center overflow-hidden rounded-3xl bg-zinc-950 p-6 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
@@ -33,7 +36,7 @@ export function CryptoProgressRing({
           <span className="text-[10px] uppercase font-semibold text-zinc-400">Pool Health</span>
           <h3 className="text-xs font-bold text-white">Staking & Gas</h3>
         </div>
-        <span className="rounded-full bg-zinc-900 border border-zinc-800 px-2.5 py-0.5 text-[10px] font-semibold text-zinc-300">
+        <span className="rounded-full bg-blue-950/60 border border-blue-800/50 px-2.5 py-0.5 text-[10px] font-semibold text-blue-300">
           Optimal
         </span>
       </div>
@@ -53,13 +56,13 @@ export function CryptoProgressRing({
             cy="50"
             r="40"
             fill="none"
-            stroke="#10b981"
+            stroke="#3b82f6"
             strokeWidth="7"
             strokeLinecap="round"
             strokeDasharray="251.2"
             initial={{ strokeDashoffset: 251.2 }}
             animate={{ strokeDashoffset: 251.2 - (251.2 * stakingHealthPercent) / 100 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ type: "spring", bounce: 0, duration: 1.0 }}
           />
         </svg>
 
@@ -90,25 +93,26 @@ export function CryptoProgressRing({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ type: "spring", bounce: 0, duration: 0.25 }}
               className="absolute -top-14 left-0 right-0 flex justify-center gap-3 z-10"
             >
               <button
                 type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-transform active:scale-95 cursor-pointer"
                 title="Send SOL"
               >
                 <Send className="h-4 w-4" />
               </button>
               <button
                 type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-transform active:scale-95 cursor-pointer"
                 title="Receive SOL"
               >
                 <Download className="h-4 w-4" />
               </button>
               <button
                 type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-200 shadow hover:bg-zinc-800 transition-transform active:scale-95 cursor-pointer"
                 title="Swap SPL"
               >
                 <RefreshCw className="h-4 w-4" />
@@ -117,6 +121,6 @@ export function CryptoProgressRing({
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   )
 }

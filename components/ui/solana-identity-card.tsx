@@ -68,7 +68,7 @@ export function SolanaIdentityCard({
             {verified && (
               <span
                 title="Verified Solana Identity"
-                className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-white"
+                className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-500 text-white"
               >
                 <ShieldCheck className="h-3 w-3" />
               </span>
@@ -115,7 +115,7 @@ export function SolanaIdentityCard({
           >
             {copied ? (
               <>
-                <Check className="h-3.5 w-3.5 text-emerald-500" />
+                <Check className="h-3.5 w-3.5 text-blue-500" />
                 <span>Copied</span>
               </>
             ) : (

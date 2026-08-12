@@ -18,10 +18,13 @@ export function CryptoSalesVerticalGraph({
   ...props
 }: CryptoSalesVerticalGraphProps) {
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
@@ -30,11 +33,11 @@ export function CryptoSalesVerticalGraph({
         <div>
           <span className="text-xs font-medium text-zinc-400">Vertical Bar Graph</span>
           <div className="flex items-baseline gap-2 mt-0.5">
-            <span className="text-xl font-bold tracking-tight text-white">{salesAmount}</span>
-            <span className="text-xs font-semibold text-emerald-500">↑ {growthPercent}</span>
+            <span className="text-lg font-bold tracking-tight text-white">{salesAmount}</span>
+            <span className="text-xs font-semibold text-blue-400">↑ {growthPercent}</span>
           </div>
         </div>
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300">
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-950/60 border border-blue-800/50 text-blue-300">
           <BarChart3 className="h-4 w-4" />
         </div>
       </div>
@@ -46,12 +49,12 @@ export function CryptoSalesVerticalGraph({
               key={i}
               initial={{ height: 0 }}
               animate={{ height: `${height}%` }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="w-full flex-1 rounded-t-xs bg-emerald-500 relative"
+              transition={{ type: "spring", bounce: 0, duration: 0.4, delay: i * 0.03 }}
+              className="w-full flex-1 rounded-t-xs bg-blue-600"
             />
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

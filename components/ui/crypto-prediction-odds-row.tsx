@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoPredictionOddsRowProps
@@ -18,10 +19,13 @@ export function CryptoPredictionOddsRow({
   ...props
 }: CryptoPredictionOddsRowProps) {
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm items-center justify-between gap-3 rounded-2xl bg-zinc-950 p-3.5 text-white shadow-xl border border-zinc-800 font-sans",
+        "relative mx-auto flex w-full max-w-sm items-center justify-between gap-3 rounded-2xl bg-zinc-950 p-3.5 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
@@ -30,21 +34,23 @@ export function CryptoPredictionOddsRow({
         <h4 className="text-xs font-bold text-white truncate">{candidateName}</h4>
         <div className="mt-1.5 flex items-center gap-2">
           <div className="h-1.5 flex-1 rounded-full bg-zinc-800 overflow-hidden">
-            <div
-              style={{ width: `${oddsPercent}%` }}
-              className="h-full rounded-full bg-emerald-500"
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${oddsPercent}%` }}
+              transition={{ type: "spring", bounce: 0, duration: 0.5 }}
+              className="h-full rounded-full bg-blue-500"
             />
           </div>
-          <span className="text-xs font-bold text-emerald-500">{oddsPercent}%</span>
+          <span className="text-xs font-bold text-blue-400">{oddsPercent}%</span>
         </div>
       </div>
 
       <button
         type="button"
-        className="rounded-xl bg-white px-3.5 py-1.5 text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition-colors shadow cursor-pointer shrink-0"
+        className="rounded-xl bg-white px-3.5 py-1.5 text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition-colors shadow cursor-pointer shrink-0 active:scale-95"
       >
         Vote
       </button>
-    </div>
+    </motion.div>
   )
 }

@@ -32,48 +32,48 @@ export function CryptoPredictionMarkets({
     <div
       data-slot="root"
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-[36px] bg-black p-4 text-white shadow-2xl border border-zinc-800/80 font-sans min-h-[640px]",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-4 text-white shadow-xl border border-zinc-800/80 font-sans min-h-[640px]",
         className
       )}
       {...props}
     >
       <div className="mb-4">
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-3 pb-2 border-b border-zinc-900">
           <div className="flex items-center gap-2">
-            <Vote className="h-5 w-5 text-emerald-400" />
-            <h2 className="text-xl font-extrabold text-white">Solana Predictions</h2>
+            <Vote className="h-4 w-4 text-blue-400" />
+            <h2 className="text-base font-bold text-white">Predictions</h2>
           </div>
-          <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
+          <span className="rounded-full bg-blue-950/60 border border-blue-800/50 px-2 py-0.5 text-[10px] font-semibold text-blue-300">
             Live Markets
           </span>
         </div>
 
         <div className="relative">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-500" />
           <input
             type="text"
-            placeholder="Search Solana prediction markets..."
-            className="w-full rounded-2xl border border-zinc-800 bg-zinc-900 py-2 pl-9 pr-3 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none"
+            placeholder="Search prediction markets..."
+            className="w-full rounded-full border border-zinc-800 bg-zinc-900 py-1.5 pl-8 pr-3 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-700"
           />
         </div>
       </div>
 
-      <div className="flex items-center gap-1.5 mb-4 rounded-full bg-zinc-900/80 p-1 border border-zinc-800">
+      <div className="flex items-center gap-1 mb-4 rounded-full bg-zinc-900 p-1 border border-zinc-800">
         {(["5m Markets", "Ecosystem Events"] as const).map((tab) => (
           <button
             key={tab}
             type="button"
             onClick={() => setActiveTab(tab)}
             className={cn(
-              "relative flex-1 rounded-full py-1.5 text-center text-xs font-bold transition-colors cursor-pointer",
-              activeTab === tab ? "text-black" : "text-zinc-400 hover:text-white"
+              "relative flex-1 rounded-full py-1 text-center text-xs font-bold transition-colors cursor-pointer active:scale-95 duration-100",
+              activeTab === tab ? "text-zinc-950" : "text-zinc-400 hover:text-white"
             )}
           >
             {activeTab === tab && (
               <motion.div
-                layoutId="pred-tab-pill"
-                className="absolute inset-0 rounded-full bg-emerald-300"
-                transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                layoutId="pred-main-tab-pill"
+                className="absolute inset-0 rounded-full bg-white"
+                transition={{ type: "spring", bounce: 0, duration: 0.35 }}
               />
             )}
             <span className="relative z-10">{tab}</span>
@@ -81,40 +81,40 @@ export function CryptoPredictionMarkets({
         ))}
       </div>
 
-      <div className="flex-1 space-y-4 overflow-y-auto pr-1 no-scrollbar pb-4">
+      <div className="flex-1 space-y-3 overflow-y-auto pr-1 no-scrollbar pb-4">
         {activeTab === "5m Markets" && (
           <div className="space-y-3">
             {quickMarkets.map((m) => (
-              <div key={m.id} className="rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3.5 space-y-3">
+              <div key={m.id} className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 space-y-2.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-extrabold text-white">{m.pair}</span>
-                  <div className="flex items-center gap-1 text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
-                    <Clock className="h-3 w-3" />
+                  <span className="text-xs font-bold text-white">{m.pair}</span>
+                  <div className="flex items-center gap-1 text-[10px] font-semibold text-zinc-300 bg-zinc-800 px-2 py-0.5 rounded-full border border-zinc-700">
+                    <Clock className="h-3 w-3 text-zinc-400" />
                     <span>{m.timeLeft}</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-zinc-400">
+                <div className="flex items-center justify-between text-[11px] text-zinc-400">
                   <span>Target: <strong className="text-white">{m.target}</strong></span>
-                  <span>Pool Odds</span>
+                  <span>Odds</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => onPredict?.(m.id, "Yes")}
-                    className="rounded-xl bg-emerald-500/20 border border-emerald-500/40 p-2 text-center transition-all hover:bg-emerald-500/30 cursor-pointer"
+                    className="rounded-xl bg-blue-950/60 border border-blue-800/50 p-2 text-center transition-transform hover:bg-blue-900/60 cursor-pointer active:scale-98"
                   >
-                    <span className="block text-[10px] font-bold text-emerald-400">HIGHER</span>
-                    <span className="text-sm font-extrabold text-white">{m.yesOdds}</span>
+                    <span className="block text-[10px] font-bold text-blue-400">HIGHER</span>
+                    <span className="text-xs font-extrabold text-white mt-0.5 block">{m.yesOdds}</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => onPredict?.(m.id, "No")}
-                    className="rounded-xl bg-rose-500/20 border border-rose-500/40 p-2 text-center transition-all hover:bg-rose-500/30 cursor-pointer"
+                    className="rounded-xl bg-purple-950/60 border border-purple-800/50 p-2 text-center transition-transform hover:bg-purple-900/60 cursor-pointer active:scale-98"
                   >
-                    <span className="block text-[10px] font-bold text-rose-400">LOWER</span>
-                    <span className="text-sm font-extrabold text-white">{m.noOdds}</span>
+                    <span className="block text-[10px] font-bold text-purple-300">LOWER</span>
+                    <span className="text-xs font-extrabold text-white mt-0.5 block">{m.noOdds}</span>
                   </button>
                 </div>
               </div>
@@ -125,16 +125,16 @@ export function CryptoPredictionMarkets({
         {activeTab === "Ecosystem Events" && (
           <div className="space-y-3">
             {ecosystemEvents.map((ev) => (
-              <div key={ev.title} className="rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3.5 space-y-3">
+              <div key={ev.title} className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 space-y-2.5">
                 <h4 className="text-xs font-bold text-white leading-snug">{ev.title}</h4>
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 rounded-lg bg-emerald-500/20 p-2 text-center border border-emerald-500/30">
-                    <span className="block text-[10px] font-bold text-emerald-400">YES</span>
-                    <span className="text-sm font-extrabold text-white">{ev.yes}</span>
+                  <div className="flex-1 rounded-xl bg-blue-950/60 p-2 text-center border border-blue-800/50">
+                    <span className="block text-[10px] font-bold text-blue-400">YES</span>
+                    <span className="text-xs font-extrabold text-white mt-0.5 block">{ev.yes}</span>
                   </div>
-                  <div className="flex-1 rounded-lg bg-rose-500/20 p-2 text-center border border-rose-500/30">
-                    <span className="block text-[10px] font-bold text-rose-400">NO</span>
-                    <span className="text-sm font-extrabold text-white">{ev.no}</span>
+                  <div className="flex-1 rounded-xl bg-purple-950/60 p-2 text-center border border-purple-800/50">
+                    <span className="block text-[10px] font-bold text-purple-300">NO</span>
+                    <span className="text-xs font-extrabold text-white mt-0.5 block">{ev.no}</span>
                   </div>
                 </div>
                 <div className="text-[10px] text-zinc-500 text-right">Volume: {ev.volume}</div>

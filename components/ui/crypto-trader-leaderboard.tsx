@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import { motion } from "motion/react"
 import { ChevronRight, ExternalLink, Search, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -28,47 +29,50 @@ export function CryptoTraderLeaderboard({
   ]
 
   const sites = [
-    { rank: 1, name: "GMGN.ai", category: "Solana Trading", color: "bg-emerald-600 text-white" },
-    { rank: 2, name: "pump.fun", category: "Solana Launchpad", color: "bg-teal-500 text-black" },
-    { rank: 3, name: "Jupiter", category: "Solana DEX Aggregator", color: "bg-green-600 text-white" },
+    { rank: 1, name: "GMGN.ai", category: "Solana Trading" },
+    { rank: 2, name: "pump.fun", category: "Solana Launchpad" },
+    { rank: 3, name: "Jupiter", category: "Solana DEX Aggregator" },
   ]
 
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-[36px] bg-black p-4 text-white shadow-2xl border border-zinc-800/80 font-sans min-h-[640px]",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-4 text-white shadow-xl border border-zinc-800/80 font-sans min-h-[600px]",
         className
       )}
       {...props}
     >
-      <div className="flex-1 space-y-6 overflow-y-auto pr-1 no-scrollbar pb-16">
+      <div className="flex-1 space-y-5 overflow-y-auto pr-1 no-scrollbar pb-16">
         <div>
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-1 text-base font-extrabold text-white cursor-pointer">
+          <div className="flex items-center justify-between mb-3 pb-2 border-b border-zinc-900">
+            <div className="flex items-center gap-1 text-sm font-bold text-white cursor-pointer">
               <span>Top Solana Traders</span>
-              <ChevronRight className="h-5 w-5 text-zinc-400" />
+              <ChevronRight className="h-4 w-4 text-zinc-400" />
             </div>
-            <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
+            <span className="rounded-full bg-blue-950/60 border border-blue-800/50 px-2 py-0.5 text-[10px] font-semibold text-blue-300">
               Solana Mainnet
             </span>
           </div>
 
-          <div className="rounded-3xl border border-zinc-800/80 bg-zinc-900/60 p-3 space-y-3">
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 space-y-3">
             {traders.map((trader) => {
               const isFollowing = followedMap[trader.handle]
               return (
                 <div key={trader.handle} className="flex items-center justify-between p-1">
                   <div className="flex items-center gap-3">
-                    <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-tr from-purple-500 via-teal-400 to-emerald-300 font-bold text-black text-xs">
+                    <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-blue-950/60 border border-blue-800/50 font-bold text-blue-300 text-xs">
                       <span>⚡</span>
-                      <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-400 text-[10px] font-black text-black">
+                      <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[9px] font-black text-zinc-950">
                         {trader.rank}
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white leading-tight">{trader.handle}</h4>
-                      <p className="text-xs font-semibold text-emerald-400">{trader.return}</p>
+                      <h4 className="text-xs font-bold text-white leading-tight">{trader.handle}</h4>
+                      <p className="text-xs font-semibold text-blue-400">{trader.return}</p>
                     </div>
                   </div>
 
@@ -76,10 +80,10 @@ export function CryptoTraderLeaderboard({
                     type="button"
                     onClick={() => toggleFollow(trader.handle)}
                     className={cn(
-                      "rounded-full px-4 py-1.5 text-xs font-bold transition-all cursor-pointer",
+                      "rounded-full px-3 py-1.5 text-xs font-bold transition-transform active:scale-95 cursor-pointer",
                       isFollowing
                         ? "bg-zinc-800 text-zinc-300 border border-zinc-700"
-                        : "bg-emerald-300 text-zinc-950 hover:bg-emerald-200"
+                        : "bg-white text-zinc-950 hover:bg-zinc-200"
                     )}
                   >
                     {isFollowing ? "Following" : "Follow"}
@@ -91,31 +95,31 @@ export function CryptoTraderLeaderboard({
         </div>
 
         <div>
-          <div className="flex items-center gap-1 text-base font-extrabold text-white mb-3 cursor-pointer">
+          <div className="flex items-center gap-1 text-sm font-bold text-white mb-3 cursor-pointer">
             <span>Trending Solana dApps</span>
-            <ChevronRight className="h-5 w-5 text-zinc-400" />
+            <ChevronRight className="h-4 w-4 text-zinc-400" />
           </div>
 
-          <div className="rounded-3xl border border-zinc-800/80 bg-zinc-900/60 p-3 space-y-3">
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 space-y-3">
             {sites.map((site) => (
-              <div key={site.name} className="flex items-center justify-between p-1 cursor-pointer group">
+              <div key={site.name} className="flex items-center justify-between p-1 cursor-pointer group active:scale-98 transition-transform">
                 <div className="flex items-center gap-3">
-                  <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-800 font-bold text-sm">
-                    <span className="text-lg">🌐</span>
-                    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-400 text-[10px] font-black text-black">
+                  <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 font-bold text-sm">
+                    <span>🌐</span>
+                    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[9px] font-black text-zinc-950">
                       {site.rank}
                     </span>
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
+                    <h4 className="text-xs font-bold text-white group-hover:text-zinc-300 transition-colors">
                       {site.name}
                     </h4>
-                    <p className="text-xs text-zinc-400">{site.category}</p>
+                    <p className="text-[10px] text-zinc-400">{site.category}</p>
                   </div>
                 </div>
 
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-300 group-hover:bg-zinc-700 transition-colors">
-                  <ExternalLink className="h-4 w-4" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 group-hover:bg-zinc-800 transition-colors">
+                  <ExternalLink className="h-3.5 w-3.5" />
                 </div>
               </div>
             ))}
@@ -123,22 +127,22 @@ export function CryptoTraderLeaderboard({
         </div>
       </div>
 
-      <div className="absolute bottom-3 left-3 right-3 bg-black/90 backdrop-blur-md p-2 flex items-center gap-2 rounded-full border border-zinc-800/80">
+      <div className="absolute bottom-3 left-3 right-3 bg-zinc-950 p-2 flex items-center gap-2 rounded-full border border-zinc-800 shadow-lg">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-500" />
           <input
             type="text"
             placeholder="Search traders or dApps..."
-            className="w-full rounded-full border border-zinc-800/80 bg-zinc-900/90 py-2 pl-9 pr-3 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none"
+            className="w-full rounded-full border border-zinc-800 bg-zinc-900 py-1.5 pl-9 pr-3 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-700"
           />
         </div>
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-300 text-zinc-950 hover:bg-emerald-200 transition-colors shadow-lg active:scale-95 cursor-pointer"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-colors shadow-md active:scale-95 cursor-pointer"
         >
-          <Plus className="h-5 w-5" />
+          <Plus className="h-4 w-4" />
         </button>
       </div>
-    </div>
+    </motion.div>
   )
 }

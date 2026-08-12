@@ -26,9 +26,9 @@ export function SolanaNetworkHealth({
   const [menuOpen, setMenuOpen] = useState(false);
 
   const getHealthBadge = (ms: number) => {
-    if (ms < 50) return { label: "Optimal", color: "bg-emerald-500", text: "text-emerald-500" };
+    if (ms < 50) return { label: "Optimal", color: "bg-blue-500", text: "text-blue-400" };
     if (ms < 150) return { label: "Fair", color: "bg-amber-500", text: "text-amber-500" };
-    return { label: "Degraded", color: "bg-rose-500", text: "text-rose-500" };
+    return { label: "Degraded", color: "bg-zinc-500", text: "text-zinc-400" };
   };
 
   const health = getHealthBadge(pingMs);

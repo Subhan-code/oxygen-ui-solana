@@ -36,7 +36,7 @@ export function CryptoTokenDetailsScreen({
       {...props}
     >
       <div className="flex items-center justify-between mb-4 pb-2 border-b border-zinc-900">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-xs font-bold text-white">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-950/60 border border-blue-800/50 text-xs font-bold text-blue-200">
           SOL
         </div>
         <div className="flex items-center gap-2">
@@ -69,7 +69,7 @@ export function CryptoTokenDetailsScreen({
         <div className="mt-1 flex items-baseline gap-2">
           <span className="text-3xl font-extrabold tracking-tight text-white">${priceUsd.toFixed(2)}</span>
         </div>
-        <div className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
+        <div className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-blue-400">
           <span>+${changeUsd.toFixed(2)}</span>
           <span>(+{changePercent.toFixed(2)}%)</span>
         </div>
@@ -80,11 +80,11 @@ export function CryptoTokenDetailsScreen({
           <path
             d="M 0 90 L 15 95 L 30 85 L 45 100 L 60 80 L 80 85 L 90 75 L 105 40 L 120 20 L 135 45 L 150 25 L 175 40 L 195 32 L 225 35 L 245 60 L 265 65 L 285 20"
             fill="none"
-            stroke="#10b981"
-            strokeWidth="3"
+            stroke="#3b82f6"
+            strokeWidth="2.5"
             strokeLinecap="round"
           />
-          <circle cx="285" cy="20" r="4" fill="#10b981" />
+          <circle cx="285" cy="20" r="4" fill="#3b82f6" />
         </svg>
       </div>
 
@@ -107,7 +107,7 @@ export function CryptoTokenDetailsScreen({
               />
             )}
             <span className="relative z-10 flex items-center justify-center gap-1">
-              {tf === "LIVE" && <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />}
+              {tf === "LIVE" && <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />}
               {tf}
             </span>
           </button>
@@ -122,7 +122,7 @@ export function CryptoTokenDetailsScreen({
           <h3 className="text-xs font-bold text-zinc-300 mb-2">Your Position</h3>
           <div className="flex items-center justify-between rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 transition-colors hover:bg-zinc-900">
             <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 border border-zinc-700 text-xs font-bold text-white">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-950/60 border border-blue-800/50 text-xs font-bold text-blue-200">
                 SOL
               </div>
               <div>
@@ -134,7 +134,7 @@ export function CryptoTokenDetailsScreen({
             <div className="flex items-center gap-2">
               <div className="text-right">
                 <span className="block text-xs font-bold text-white">${(solBalance * priceUsd).toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>
-                <span className="text-[11px] font-semibold text-emerald-500">+${(solBalance * changeUsd).toFixed(2)}</span>
+                <span className="text-[11px] font-semibold text-blue-400">+${(solBalance * changeUsd).toFixed(2)}</span>
               </div>
               <ChevronRight className="h-4 w-4 text-zinc-500" />
             </div>
@@ -146,8 +146,8 @@ export function CryptoTokenDetailsScreen({
             <span>Community Chat</span>
             <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
           </div>
-          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-500">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-blue-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
             <span>1,420 online</span>
           </div>
         </div>

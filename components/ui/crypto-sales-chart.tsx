@@ -24,22 +24,25 @@ export function CryptoSalesChart({
   const [viewMode, setViewMode] = useState<"candlestick" | "segmented" | "bars">("candlestick")
 
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-[28px] bg-black p-5 text-white shadow-2xl border border-zinc-800/80 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
     >
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-3 pb-2 border-b border-zinc-900">
         <div>
           <span className="text-xs font-medium text-zinc-400">{title}</span>
           <div className="flex items-baseline gap-2 mt-0.5">
-            <span className="text-2xl font-black tracking-tight text-white">{salesAmount}</span>
-            <span className="text-xs font-bold text-emerald-400">↑ {growthPercent}</span>
+            <span className="text-lg font-bold tracking-tight text-white">{salesAmount}</span>
+            <span className="text-xs font-semibold text-blue-400">↑ {growthPercent}</span>
           </div>
-          <p className="text-[11px] text-zinc-500 mt-0.5">Avg. epoch volume {avgScore}</p>
+          <p className="text-[10px] text-zinc-500 mt-0.5">Avg. epoch volume {avgScore}</p>
         </div>
 
         <div className="flex items-center gap-1 rounded-xl bg-zinc-900 p-1 border border-zinc-800">
@@ -47,8 +50,8 @@ export function CryptoSalesChart({
             type="button"
             onClick={() => setViewMode("candlestick")}
             className={cn(
-              "p-1.5 rounded-lg transition-colors cursor-pointer",
-              viewMode === "candlestick" ? "bg-zinc-800 text-emerald-400" : "text-zinc-500 hover:text-zinc-300"
+              "p-1.5 rounded-lg transition-colors cursor-pointer active:scale-95",
+              viewMode === "candlestick" ? "bg-zinc-800 text-blue-400" : "text-zinc-500 hover:text-zinc-300"
             )}
             title="Candlestick view"
           >
@@ -58,8 +61,8 @@ export function CryptoSalesChart({
             type="button"
             onClick={() => setViewMode("segmented")}
             className={cn(
-              "p-1.5 rounded-lg transition-colors cursor-pointer",
-              viewMode === "segmented" ? "bg-zinc-800 text-emerald-400" : "text-zinc-500 hover:text-zinc-300"
+              "p-1.5 rounded-lg transition-colors cursor-pointer active:scale-95",
+              viewMode === "segmented" ? "bg-zinc-800 text-blue-400" : "text-zinc-500 hover:text-zinc-300"
             )}
             title="Segmented view"
           >
@@ -69,8 +72,8 @@ export function CryptoSalesChart({
             type="button"
             onClick={() => setViewMode("bars")}
             className={cn(
-              "p-1.5 rounded-lg transition-colors cursor-pointer",
-              viewMode === "bars" ? "bg-zinc-800 text-emerald-400" : "text-zinc-500 hover:text-zinc-300"
+              "p-1.5 rounded-lg transition-colors cursor-pointer active:scale-95",
+              viewMode === "bars" ? "bg-zinc-800 text-blue-400" : "text-zinc-500 hover:text-zinc-300"
             )}
             title="Bar view"
           >
@@ -79,17 +82,17 @@ export function CryptoSalesChart({
         </div>
       </div>
 
-      <div className="h-28 w-full rounded-2xl bg-zinc-950/80 p-3 border border-zinc-900 flex items-center justify-center">
+      <div className="h-28 w-full rounded-2xl bg-zinc-900/60 p-3 border border-zinc-800 flex items-center justify-center">
         {viewMode === "candlestick" && (
           <div className="flex items-end gap-2 h-full w-full justify-between pt-2">
             {[40, 65, 80, 55, 75, 45, 90, 60, 70].map((h, i) => (
               <div key={i} className="flex flex-col items-center flex-1 h-full justify-end">
-                <div className="w-[1.5px] h-full bg-emerald-500/40 relative flex items-center justify-center">
+                <div className="w-[1.5px] h-full bg-zinc-800 relative flex items-center justify-center">
                   <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: `${h}%` }}
-                    transition={{ duration: 0.5, delay: i * 0.05 }}
-                    className="w-2.5 rounded-sm bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
+                    transition={{ type: "spring", bounce: 0, duration: 0.4, delay: i * 0.03 }}
+                    className="w-2 rounded-xs bg-blue-500"
                   />
                 </div>
               </div>
@@ -105,10 +108,10 @@ export function CryptoSalesChart({
                   <div
                     key={colIdx}
                     className={cn(
-                      "h-3.5 flex-1 rounded-full transition-all",
+                      "h-3 flex-1 rounded-full transition-all",
                       colIdx < activeCount
-                        ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
-                        : "bg-zinc-800/60"
+                        ? "bg-blue-500"
+                        : "bg-zinc-800"
                     )}
                   />
                 ))}
@@ -124,15 +127,13 @@ export function CryptoSalesChart({
                 key={i}
                 initial={{ height: 0 }}
                 animate={{ height: `${height}%` }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="w-full flex-1 rounded-t-sm bg-gradient-to-t from-emerald-950 via-emerald-600 to-emerald-400 relative"
-              >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-200 shadow-[0_0_6px_#5eead4]" />
-              </motion.div>
+                transition={{ type: "spring", bounce: 0, duration: 0.4, delay: i * 0.03 }}
+                className="w-full flex-1 rounded-t-xs bg-blue-600 relative"
+              />
             ))}
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   )
 }

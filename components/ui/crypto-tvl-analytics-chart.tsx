@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import { motion } from "motion/react"
 import { ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -37,31 +38,34 @@ export function CryptoTvlAnalyticsChart({
   const activePoint = hoverIndex !== null ? dataPoints[hoverIndex] : dataPoints[4]
 
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
     >
       <div className="relative mb-3 pb-2 border-b border-zinc-900">
-        <span className="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold">Total Value Locked</span>
+        <span className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Total Value Locked</span>
         <div className="flex items-baseline gap-2 mt-1">
           <span className="text-2xl font-bold tracking-tight text-white">{totalTvl}</span>
-          <span className="text-xs font-semibold text-emerald-500 flex items-center gap-0.5">
+          <span className="text-xs font-semibold text-blue-400 flex items-center gap-0.5">
             <ArrowUpRight className="h-3.5 w-3.5" />
             {growth}
           </span>
         </div>
       </div>
 
-      <div className="relative h-44 w-full my-2 border-b border-zinc-800/80">
+      <div className="relative h-44 w-full my-2 border-b border-zinc-800">
         <svg className="h-full w-full overflow-visible" viewBox="0 0 300 130">
           <path
             d="M 0 80 L 30 105 L 60 75 L 90 65 L 140 40 L 300 25"
             fill="none"
-            stroke="#10b981"
+            stroke="#3b82f6"
             strokeWidth="2"
           />
 
@@ -80,8 +84,8 @@ export function CryptoTvlAnalyticsChart({
                 cx={hoverIndex * 55 + 20}
                 cy={dataPoints[hoverIndex].y}
                 r="4"
-                fill="#10b981"
-                stroke="#000000"
+                fill="#3b82f6"
+                stroke="#09090b"
                 strokeWidth="2"
               />
             </g>
@@ -129,7 +133,7 @@ export function CryptoTvlAnalyticsChart({
         </div>
         <div>
           <span className="block text-[10px] uppercase font-medium text-zinc-500">Net Flow</span>
-          <span className="text-xs font-bold text-emerald-500 mt-0.5 block">{netFlow}</span>
+          <span className="text-xs font-bold text-blue-400 mt-0.5 block">{netFlow}</span>
         </div>
       </div>
 
@@ -140,9 +144,9 @@ export function CryptoTvlAnalyticsChart({
             type="button"
             onClick={() => setActiveTab(tab)}
             className={cn(
-              "flex-1 py-1 text-center text-[10px] font-bold rounded-lg transition-colors cursor-pointer border",
+              "flex-1 py-1 text-center text-[10px] font-bold rounded-lg transition-colors cursor-pointer border active:scale-95",
               activeTab === tab
-                ? "border-white bg-white text-zinc-950 shadow-sm"
+                ? "border-white bg-white text-zinc-950"
                 : "border-zinc-800 text-zinc-400 hover:text-white"
             )}
           >
@@ -150,6 +154,6 @@ export function CryptoTvlAnalyticsChart({
           </button>
         ))}
       </div>
-    </div>
+    </motion.div>
   )
 }

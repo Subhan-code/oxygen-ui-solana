@@ -17,14 +17,14 @@ export default function SuccessCheck() {
       <button
         type="button"
         onClick={trigger}
-        className="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-semibold text-white shadow-md hover:bg-emerald-500 active:scale-95"
+        className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-md hover:bg-blue-500 active:scale-95"
       >
         Replay Success Check
       </button>
 
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950/40">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-950/40">
         <span className="t-success-check" data-state={state} aria-hidden="true">
-          <svg className="h-10 w-10 text-emerald-600 dark:text-emerald-400" viewBox="0 0 48 48" fill="none">
+          <svg className="h-10 w-10 text-blue-600 dark:text-blue-400" viewBox="0 0 48 48" fill="none">
             <path
               d="M14 24L21 31L34 17"
               stroke="currentColor"

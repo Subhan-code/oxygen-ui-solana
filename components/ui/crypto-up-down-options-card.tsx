@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import { motion } from "motion/react"
 import { ArrowUp, ArrowDown, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -35,17 +36,20 @@ export function CryptoUpDownOptionsCard({
   }
 
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
     >
       <div className="flex items-center justify-between mb-2 pb-2 border-b border-zinc-900">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 font-bold text-xs">
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-950/60 border border-blue-800/50 text-blue-300 font-bold text-xs">
             ⚡
           </div>
           <div>
@@ -72,10 +76,10 @@ export function CryptoUpDownOptionsCard({
             <path
               d="M 0 70 Q 50 30, 100 65 T 200 40 T 260 25 T 300 15"
               fill="none"
-              stroke="#10b981"
+              stroke="#3b82f6"
               strokeWidth="2.5"
             />
-            <circle cx="300" cy="15" r="4" fill="#10b981" />
+            <circle cx="300" cy="15" r="4" fill="#3b82f6" />
           </svg>
         </div>
       </div>
@@ -85,13 +89,13 @@ export function CryptoUpDownOptionsCard({
           type="button"
           onClick={() => setUserChoice("UP")}
           className={cn(
-            "flex flex-col items-center justify-center rounded-2xl p-3 transition-all cursor-pointer border",
+            "flex flex-col items-center justify-center rounded-2xl p-3 transition-transform active:scale-98 cursor-pointer border",
             userChoice === "UP"
-              ? "bg-emerald-600 text-white border-emerald-500 shadow-md"
+              ? "bg-blue-600 text-white border-blue-500 shadow-md"
               : "bg-zinc-900 text-zinc-200 border-zinc-800 hover:bg-zinc-800"
           )}
         >
-          <ArrowUp className="h-4 w-4 mb-1 text-emerald-500" />
+          <ArrowUp className="h-4 w-4 mb-1 text-blue-400" />
           <span className="text-xs font-bold uppercase">Higher</span>
           <span className="text-[10px] text-zinc-400 mt-0.5">Payout 1.92x</span>
         </button>
@@ -100,17 +104,17 @@ export function CryptoUpDownOptionsCard({
           type="button"
           onClick={() => setUserChoice("DOWN")}
           className={cn(
-            "flex flex-col items-center justify-center rounded-2xl p-3 transition-all cursor-pointer border",
+            "flex flex-col items-center justify-center rounded-2xl p-3 transition-transform active:scale-98 cursor-pointer border",
             userChoice === "DOWN"
-              ? "bg-rose-600 text-white border-rose-500 shadow-md"
+              ? "bg-purple-600 text-white border-purple-500 shadow-md"
               : "bg-zinc-900 text-zinc-200 border-zinc-800 hover:bg-zinc-800"
           )}
         >
-          <ArrowDown className="h-4 w-4 mb-1 text-rose-500" />
+          <ArrowDown className="h-4 w-4 mb-1 text-purple-300" />
           <span className="text-xs font-bold uppercase">Lower</span>
           <span className="text-[10px] text-zinc-400 mt-0.5">Payout 1.88x</span>
         </button>
       </div>
-    </div>
+    </motion.div>
   )
 }

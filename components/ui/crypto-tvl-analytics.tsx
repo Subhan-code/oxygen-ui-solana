@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import { motion } from "motion/react"
 import { ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -37,33 +38,34 @@ export function CryptoTvlAnalytics({
   const activePoint = hoverIndex !== null ? dataPoints[hoverIndex] : dataPoints[4]
 
   return (
-    <div
+    <motion.div
       data-slot="root"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-xl bg-zinc-950 p-5 text-white shadow-2xl border border-zinc-800 font-mono",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
     >
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px]" />
-
-      <div className="relative mb-3">
-        <span className="text-[11px] uppercase tracking-widest text-emerald-400">Solana Total Value Locked</span>
+      <div className="relative mb-3 pb-2 border-b border-zinc-900">
+        <span className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Solana Total Value Locked</span>
         <div className="flex items-baseline gap-2 mt-1">
-          <span className="text-3xl font-extrabold tracking-tight text-white">{totalTvl}</span>
-          <span className="text-xs font-bold text-emerald-400 flex items-center gap-0.5">
+          <span className="text-2xl font-bold tracking-tight text-white">{totalTvl}</span>
+          <span className="text-xs font-semibold text-blue-400 flex items-center gap-0.5">
             <ArrowUpRight className="h-3.5 w-3.5" />
             {growth}
           </span>
         </div>
       </div>
 
-      <div className="relative h-44 w-full my-2 border-b border-zinc-800/80">
+      <div className="relative h-44 w-full my-2 border-b border-zinc-800">
         <svg className="h-full w-full overflow-visible" viewBox="0 0 300 130">
           <path
             d="M 0 80 L 30 105 L 60 75 L 90 65 L 140 40 L 300 25"
             fill="none"
-            stroke="#34d399"
+            stroke="#3b82f6"
             strokeWidth="2"
           />
 
@@ -82,8 +84,8 @@ export function CryptoTvlAnalytics({
                 cx={hoverIndex * 55 + 20}
                 cy={dataPoints[hoverIndex].y}
                 r="4"
-                fill="#34d399"
-                stroke="#000000"
+                fill="#3b82f6"
+                stroke="#09090b"
                 strokeWidth="2"
               />
             </g>
@@ -104,15 +106,15 @@ export function CryptoTvlAnalytics({
         </svg>
 
         {activePoint && (
-          <div className="absolute top-2 right-2 rounded border border-zinc-700 bg-zinc-900/95 p-2.5 shadow-xl text-[10px] space-y-1">
-            <div className="text-zinc-400 font-bold uppercase">SOL TVL: {activePoint.label}</div>
+          <div className="absolute top-2 right-2 rounded-xl border border-zinc-800 bg-zinc-900 p-2.5 shadow-xl text-[10px] space-y-1">
+            <div className="text-zinc-400 font-bold uppercase">{activePoint.label}</div>
             <div className="flex gap-4 pt-1">
               <div>
-                <span className="block text-[9px] text-zinc-500 uppercase">Total TVL</span>
+                <span className="block text-[9px] text-zinc-500 uppercase">TVL</span>
                 <span className="font-bold text-white text-xs">{activePoint.tvl}</span>
               </div>
               <div>
-                <span className="block text-[9px] text-zinc-500 uppercase">Transactions</span>
+                <span className="block text-[9px] text-zinc-500 uppercase">TXs</span>
                 <span className="font-bold text-white text-xs">{activePoint.txs}</span>
               </div>
             </div>
@@ -120,32 +122,32 @@ export function CryptoTvlAnalytics({
         )}
       </div>
 
-      <div className="grid grid-cols-3 gap-2 py-3 border-b border-zinc-800/80 text-left">
+      <div className="grid grid-cols-3 gap-2 py-3 border-b border-zinc-900 text-left">
         <div>
-          <span className="block text-[9px] uppercase tracking-wider text-zinc-500">Inflow</span>
+          <span className="block text-[9px] uppercase font-medium text-zinc-500">Inflow</span>
           <span className="text-xs font-bold text-zinc-200 mt-0.5 block">{inflow}</span>
         </div>
         <div>
-          <span className="block text-[9px] uppercase tracking-wider text-zinc-500">Outflow</span>
+          <span className="block text-[9px] uppercase font-medium text-zinc-500">Outflow</span>
           <span className="text-xs font-bold text-zinc-200 mt-0.5 block">{outflow}</span>
         </div>
         <div>
-          <span className="block text-[9px] uppercase tracking-wider text-zinc-500">Net Flow</span>
-          <span className="text-xs font-bold text-emerald-400 mt-0.5 block">{netFlow}</span>
+          <span className="block text-[9px] uppercase font-medium text-zinc-500">Net Flow</span>
+          <span className="text-xs font-bold text-blue-400 mt-0.5 block">{netFlow}</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-1 pt-4 mb-4">
+      <div className="flex items-center justify-between gap-1 pt-3 mb-3">
         {(["7D", "30D", "90D", "ALL TIME"] as const).map((tab) => (
           <button
             key={tab}
             type="button"
             onClick={() => setActiveTab(tab)}
             className={cn(
-              "flex-1 py-1.5 text-center text-[10px] font-bold rounded transition-colors cursor-pointer border",
+              "flex-1 py-1.5 text-center text-[10px] font-bold rounded-lg transition-colors cursor-pointer border active:scale-95",
               activeTab === tab
-                ? "border-emerald-400 bg-zinc-900 text-emerald-300 shadow-sm"
-                : "border-transparent text-zinc-500 hover:text-zinc-300"
+                ? "border-blue-600 bg-blue-950/60 text-blue-300"
+                : "border-zinc-800 text-zinc-500 hover:text-zinc-300"
             )}
           >
             {tab}
@@ -153,12 +155,12 @@ export function CryptoTvlAnalytics({
         ))}
       </div>
 
-      <div className="rounded border border-zinc-800 bg-zinc-900/60 p-3 flex items-center justify-between">
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-3 flex items-center justify-between">
         <div>
           <span className="block text-[9px] uppercase tracking-wider text-zinc-400">Solana TPS & Txs</span>
           <div className="flex items-baseline gap-1.5 mt-0.5">
-            <span className="text-sm font-extrabold text-white">+24.6M</span>
-            <span className="text-[10px] font-bold text-emerald-400">↑ 5.2%</span>
+            <span className="text-xs font-bold text-white">+24.6M</span>
+            <span className="text-[10px] font-semibold text-blue-400">↑ 5.2%</span>
           </div>
         </div>
 
@@ -167,12 +169,12 @@ export function CryptoTvlAnalytics({
             <div key={i} className="w-1.5 rounded-xs bg-zinc-800 flex flex-col justify-end h-full">
               <div
                 style={{ height: `${h * 10}%` }}
-                className="w-full bg-emerald-400 rounded-xs"
+                className="w-full bg-blue-500 rounded-xs"
               />
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

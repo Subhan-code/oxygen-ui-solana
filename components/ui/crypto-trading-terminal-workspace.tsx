@@ -54,7 +54,7 @@ export function CryptoTradingTerminalWorkspace({
           <div className="hidden md:flex items-center gap-2 rounded-xl bg-zinc-950 px-3 py-1.5 border border-zinc-800 text-zinc-300">
             <span>SOL/USDC</span>
             <span className="font-bold text-white">142.50</span>
-            <span className="text-emerald-500 font-bold">+4.25%</span>
+            <span className="text-blue-400 font-bold">+4.25%</span>
           </div>
 
           <div className="flex items-center gap-2.5 rounded-xl bg-zinc-950 px-3 py-1.5 border border-zinc-800">
@@ -79,15 +79,15 @@ export function CryptoTradingTerminalWorkspace({
         </div>
         <div className="md:col-span-2">
           <span className="text-zinc-500 block">Solana TVL:</span>
-          <span className="font-bold text-emerald-500">$4,945,323,954</span>
+          <span className="font-bold text-blue-400">$4,945,323,954</span>
         </div>
         <div>
           <span className="text-zinc-500 block">24h Vol:</span>
-          <span className="font-bold text-emerald-500">$2.51B</span>
+          <span className="font-bold text-blue-400">$2.51B</span>
         </div>
         <div>
           <span className="text-zinc-500 block">Network TPS:</span>
-          <span className="font-bold text-emerald-500">2,840 TPS</span>
+          <span className="font-bold text-blue-400">2,840 TPS</span>
         </div>
       </div>
 
@@ -186,10 +186,10 @@ export function CryptoTradingTerminalWorkspace({
                 <path
                   d="M 0 60 Q 40 40, 70 70 T 130 90 T 180 50 T 250 70"
                   fill="none"
-                  stroke="#10b981"
+                  stroke="#3b82f6"
                   strokeWidth="2.5"
                 />
-                <circle cx="130" cy="90" r="4" fill="#10b981" />
+                <circle cx="130" cy="90" r="4" fill="#3b82f6" />
               </svg>
             </div>
           </div>

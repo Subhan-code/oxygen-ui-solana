@@ -51,7 +51,7 @@ const DEFAULT_TOKENS: TokenAsset[] = [
     amount: 450.0,
     usdValue: 495.0,
     change24h: 12.8,
-    iconBg: "bg-emerald-500",
+    iconBg: "bg-blue-600",
   },
 ];
 
@@ -104,7 +104,7 @@ export function SolanaTokenCard({
               })}`}
         </span>
         <div className="flex items-center gap-1.5 text-xs">
-          <span className="inline-flex items-center gap-0.5 font-medium text-emerald-500">
+          <span className="inline-flex items-center gap-0.5 font-medium text-blue-400">
             <TrendingUp className="h-3.5 w-3.5" />
             +4.85%
           </span>
@@ -157,7 +157,7 @@ export function SolanaTokenCard({
                 <span
                   className={cn(
                     "flex items-center text-[10px] font-medium",
-                    token.change24h >= 0 ? "text-emerald-500" : "text-rose-500"
+                    token.change24h >= 0 ? "text-blue-400" : "text-purple-400"
                   )}
                 >
                   {token.change24h >= 0 ? (

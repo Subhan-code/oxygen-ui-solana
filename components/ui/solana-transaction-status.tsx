@@ -31,8 +31,8 @@ export function SolanaTransactionStatus({
     finalized: {
       label: "Finalized",
       icon: CheckCircle2,
-      color: "text-emerald-500",
-      bg: "bg-emerald-500/10 border-emerald-500/20",
+      color: "text-blue-500",
+      bg: "bg-blue-500/10 border-blue-500/20",
       animate: false,
     },
     confirmed: {
