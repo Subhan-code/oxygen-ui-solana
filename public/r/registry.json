@@ -1140,6 +1140,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "toggle-pill",
+      "type": "registry:ui",
+      "title": "Toggle Pill",
+      "description": "A 74x28px toggle track with 44x22px sliding capsule thumb supporting spring physics, CSS transitions, and styling presets.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/toggle-pill.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

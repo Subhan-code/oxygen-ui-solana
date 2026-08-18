@@ -392,6 +392,63 @@ export function Demo() {
 }`,
   },
   {
+    name: "Toggle Pill",
+    href: "/components/togglepill",
+    registry: "toggle-pill",
+    description:
+      "A 74x28px toggle track with 44x22px sliding capsule thumb supporting spring physics, CSS transitions, and styling presets.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/toggle-pill.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Click or press Space to toggle the capsule thumb with animated 24px horizontal shift.",
+    usage: `import { TogglePill } from "@/components/ui/toggle-pill"
+
+export function Demo() {
+  return <TogglePill variant="monochrome-dark" defaultChecked />
+}`,
+    props: [
+      {
+        name: "checked",
+        type: "boolean",
+        description: "Controlled active state of the toggle switch.",
+      },
+      {
+        name: "defaultChecked",
+        type: "boolean",
+        default: "false",
+        description: "Initial state for uncontrolled usage.",
+      },
+      {
+        name: "variant",
+        type: '"monochrome-dark" | "monochrome-light" | "apple-ios" | "linear-indigo" | "spotify-green" | "electric-blue"',
+        default: '"monochrome-dark"',
+        description: "Styling profile preset determining track and thumb colors.",
+      },
+      {
+        name: "showGuides",
+        type: "boolean",
+        default: "false",
+        description: "Renders visual alignment guidelines for padding and margins.",
+      },
+      {
+        name: "useCssTransition",
+        type: "boolean",
+        default: "false",
+        description: "Switches transition engine from Framer Motion spring to pure CSS.",
+      },
+      {
+        name: "onChange",
+        type: "(checked: boolean) => void",
+        description: "Callback invoked whenever switch state toggles.",
+      },
+    ],
+  },
+  {
     name: "Scroll Progress",
     href: "/components/scrollprogressindicator",
     registry: "scroll-progress",
