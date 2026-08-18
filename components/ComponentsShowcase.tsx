@@ -10,9 +10,6 @@ export default function ComponentsShowcase() {
     "/components/proximitysidebar",
     "/components/scrollprogressindicator",
     "/components/githubactivity",
-    "/components/emojireaction",
-    "/components/inputmorphmessage",
-    "/components/gooeymenu",
   ];
 
   const showcaseItems = components.filter((item) =>
@@ -20,10 +17,10 @@ export default function ComponentsShowcase() {
   );
 
   const displayList =
-    showcaseItems.length >= 4 ? showcaseItems : components.slice(0, 7);
+    showcaseItems.length >= 4 ? showcaseItems.slice(0, 5) : components.slice(0, 5);
 
   const heroItem = displayList[0];
-  const gridItems = displayList.slice(1);
+  const gridItems = displayList.slice(1, 5);
 
   return (
     <section className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-6 md:py-32">

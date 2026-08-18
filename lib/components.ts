@@ -1708,6 +1708,32 @@ export function Demo() {
   return <CryptoTokenDetailsScreen />
 }`,
   },
+  {
+    name: "Crypto Download Header",
+    href: "/components/cryptodownloadheader",
+    registry: "crypto-download-header",
+    description: "A floating header banner with dApp branding, download call to action, and menu controls.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-download-header.tsx`,
+    interaction: "Click the download button or open the mobile navigation menu.",
+    usage: `import { CryptoDownloadHeader } from "@/components/ui/crypto-download-header"
+
+export function Demo() {
+  return <CryptoDownloadHeader />
+}`,
+  },
+  {
+    name: "Crypto Mobile Browser Bar",
+    href: "/components/cryptomobilebrowserbar",
+    registry: "crypto-mobile-browser-bar",
+    description: "A Web3 mobile browser control bar with tab counter, URL status, and navigation actions.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-mobile-browser-bar.tsx`,
+    interaction: "Click the tab counter to inspect open tabs, or use the back and menu actions.",
+    usage: `import { CryptoMobileBrowserBar } from "@/components/ui/crypto-mobile-browser-bar"
+
+export function Demo() {
+  return <CryptoMobileBrowserBar />
+}`,
+  },
 ];
 
 

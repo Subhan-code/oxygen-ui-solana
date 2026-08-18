@@ -1154,6 +1154,34 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "crypto-download-header",
+      "type": "registry:ui",
+      "title": "Crypto Download Header",
+      "description": "A floating header component for dApp download prompts with action buttons.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-download-header.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "crypto-mobile-browser-bar",
+      "type": "registry:ui",
+      "title": "Crypto Mobile Browser Bar",
+      "description": "A Web3 mobile browser control bar with tab counter, URL status, and navigation actions.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/crypto-mobile-browser-bar.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
