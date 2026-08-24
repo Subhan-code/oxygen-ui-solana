@@ -1464,6 +1464,25 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "evil-buttons-group",
+      "type": "registry:ui",
+      "title": "Evil Buttons Showcase",
+      "description": "A suite of 10 interactive button micro-interactions built with Framer Motion, spring physics, and Apple UI design.",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/evil-buttons-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

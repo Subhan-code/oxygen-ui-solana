@@ -215,9 +215,11 @@ export const components: ComponentItem[] = [
   {
     name: "Checkout Card",
     href: "/components/cryptocheckoutcard",
-    description: "Crypto Checkout Card component for Oxygen UI.",
+    description: "A crypto checkout card with token selection, live conversion rates, and transaction state.",
     registry: "crypto-checkout-card",
-    source: `${REGISTRY_HOMEPAGE}/components/ui/crypto-checkout-card.tsx`,
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-checkout-card.tsx`,
+    interaction: "Select a token from the dropdown and click Pay to process the transaction.",
+    usage: `import { CryptoCheckoutCard } from "@/components/ui/crypto-checkout-card"\n\nexport function Demo() {\n  return <CryptoCheckoutCard />\n}`,
   },
   {
     name: "Copy Button",
@@ -267,6 +269,15 @@ export const components: ComponentItem[] = [
     description: "Animated Tabs component for Oxygen UI.",
     registry: "animated-tabs",
     source: `${REGISTRY_HOMEPAGE}/components/ui/animated-tabs.tsx`,
+  },
+  {
+    name: "Evil Buttons Showcase",
+    href: "/components/evilbuttonsgroup",
+    registry: "evil-buttons-group",
+    description: "A collection of interactive button micro-interactions built with spring physics.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/evil-buttons-group.tsx`,
+    interaction: "Click, hold, or hover over buttons to trigger spring micro-interactions.",
+    usage: `import { EvilButtonsGroup } from "@/components/ui/evil-buttons-group"\n\nexport function Demo() {\n  return <EvilButtonsGroup />\n}`,
   },
   {
     name: "Animated Switch",
