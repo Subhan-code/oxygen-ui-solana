@@ -1428,6 +1428,42 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "curved-tab-bar",
+      "type": "registry:ui",
+      "title": "Curved Tab Bar",
+      "description": "Curved Tab Bar component for Oxygen UI.",
+      "files": [
+        {
+          "path": "components/ui/curved-tab-bar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "run-stats-stacks",
+      "type": "registry:ui",
+      "title": "Run Stats Stacks",
+      "description": "Run Stats Stacks component for Oxygen UI.",
+      "files": [
+        {
+          "path": "components/ui/run-stats-stacks.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Timeline component for Oxygen UI.",
+      "files": [
+        {
+          "path": "components/ui/timeline.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

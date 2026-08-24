@@ -15,7 +15,7 @@ export const ButtonGooey = ({ children = "Hover me", className, ...props }: Butt
         <button className="gooey-button" {...props}>
           <span className="relative z-10 font-semibold">{children}</span>
           <div className="gooey-bubble" aria-hidden="true">
-            <ArrowRightIcon className="h-5 w-5 text-white dark:text-zinc-950" />
+            <ArrowRightIcon className="h-6 w-6 text-white dark:text-zinc-950" />
           </div>
         </button>
       </div>
@@ -55,21 +55,20 @@ export const ButtonGooey = ({ children = "Hover me", className, ...props }: Butt
         }
 
         .gooey-button {
-          background: #18181b;
-          color: #ffffff;
+          background: #000000;
+          color: #eeeeee;
           display: inline-flex;
-          font-weight: 600;
-          padding: 0 28px;
-          border-radius: 14px;
-          font-size: 1rem;
-          line-height: 1.5rem;
-          height: 52px;
+          font-weight: 700;
+          padding: 0 24px;
+          border-radius: 12px;
+          font-size: 1.25rem;
+          line-height: 1.25rem;
+          height: 64px;
           align-items: center;
           position: relative;
           cursor: pointer;
           border: none;
           outline: none;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         }
 
         :global(.dark) .gooey-button {
@@ -79,19 +78,19 @@ export const ButtonGooey = ({ children = "Hover me", className, ...props }: Butt
 
         .gooey-bubble {
           color: #ffffff;
-          z-index: -1;
+          z-index: -10;
           display: flex;
-          background: #18181b;
+          background: #000000;
           align-items: center;
           justify-content: center;
-          width: 52px;
-          height: 52px;
+          width: 64px;
+          height: 64px;
           position: absolute;
           right: 0;
           top: 0;
-          border-radius: 14px;
-          transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.2);
-          transform: translateX(0%) scale(0.85);
+          border-radius: 12px;
+          transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+          transform: translateX(80%) translateY(0%);
         }
 
         :global(.dark) .gooey-bubble {
@@ -100,7 +99,7 @@ export const ButtonGooey = ({ children = "Hover me", className, ...props }: Butt
         }
 
         .gooey-button:hover .gooey-bubble {
-          transform: translateX(125%) scale(1);
+          transform: translateX(210%) translateY(0%);
         }
       `}</style>
     </div>

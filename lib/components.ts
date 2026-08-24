@@ -52,6 +52,20 @@ export const PANEL_INFO = {
 
 export const components: ComponentItem[] = [
   {
+    name: "Timeline",
+    href: "/components/timeline",
+    description: "Timeline component for Oxygen UI.",
+    registry: "timeline",
+    source: `${REGISTRY_HOMEPAGE}/components/ui/timeline.tsx`,
+  },
+  {
+    name: "Curved Tab Bar",
+    href: "/components/curvedtabbar",
+    description: "Curved Tab Bar component for Oxygen UI.",
+    registry: "curved-tab-bar",
+    source: `${REGISTRY_HOMEPAGE}/components/ui/curved-tab-bar.tsx`,
+  },
+  {
     name: "Step Tracker Widget",
     href: "/components/steptrackerwidget",
     description: "Step Tracker Widget component for Oxygen UI.",
