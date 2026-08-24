@@ -20,23 +20,23 @@ import { cn } from "@/lib/utils";
 
 const MENU_ITEMS = [
   {
-    icon: <HeartIcon className="h-4 w-4 text-white" />,
-    label: "Like Solana Token",
+    icon: <HeartIcon className="h-4 w-4 text-zinc-950 dark:text-white" />,
+    label: "Like",
     onClick: () => console.log("like"),
   },
   {
-    icon: <DownloadIcon className="h-4 w-4 text-white" />,
-    label: "Download Keypair",
+    icon: <DownloadIcon className="h-4 w-4 text-zinc-950 dark:text-white" />,
+    label: "Download",
     onClick: () => console.log("download"),
   },
   {
-    icon: <DrawingPinIcon className="h-4 w-4 text-white" />,
-    label: "Pin Wallet Address",
+    icon: <DrawingPinIcon className="h-4 w-4 text-zinc-950 dark:text-white" />,
+    label: "Pin",
     onClick: () => console.log("pin"),
   },
   {
-    icon: <PlusIcon className="h-4 w-4 text-white" />,
-    label: "Add to Watchlist",
+    icon: <PlusIcon className="h-4 w-4 text-zinc-950 dark:text-white" />,
+    label: "Plus",
     onClick: () => console.log("add"),
   },
 ];
@@ -58,7 +58,7 @@ function ExplodingMenuItem({
   item,
   index,
 }: {
-  item: typeof MENU_ITEMS[0];
+  item: (typeof MENU_ITEMS)[0];
   index: number;
 }) {
   const DISTANCE_INCREMENT = 14;
@@ -94,7 +94,7 @@ function ExplodingMenuItem({
         x,
         y,
       }}
-      whileHover={{ scale: 1.2 }}
+      whileHover={{ scale: 1.15 }}
       initial={{
         opacity: 0,
         scale: 0.5,
@@ -123,7 +123,7 @@ function ExplodingMenuItem({
       <motion.button
         type="button"
         onClick={item.onClick}
-        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-purple-600 shadow-lg text-white hover:bg-purple-500 active:scale-95"
+        className="flex h-8 w-8 cursor-move items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-800 shadow-md active:scale-95"
       >
         {item.icon}
       </motion.button>
@@ -163,34 +163,28 @@ export function ExplodingMenu({ className }: { className?: string }) {
     <div
       data-slot="exploding-menu"
       className={cn(
-        "relative flex h-[360px] w-full max-w-sm flex-col items-center justify-center rounded-3xl bg-zinc-950 p-4 select-none active:cursor-move",
+        "relative flex h-[400px] w-full flex-col items-center justify-center select-none active:cursor-move",
         className
       )}
       onTouchEnd={longPressHandlers.onTouchEnd}
       onMouseUp={longPressHandlers.onMouseUp}
     >
       {isTouchDevice ? (
-        <p className="py-2 text-center text-xs text-zinc-400 font-mono">
-          This component is optimized for mouse hover/hold.
+        <p className="py-6 text-center text-sm text-zinc-500">
+          This component is not made for touch devices.
         </p>
       ) : null}
       <div
-        className="relative z-0 h-64 w-64 select-none rounded-2xl overflow-hidden shadow-xl border border-zinc-800"
+        className="relative z-0 h-80 w-80 select-none rounded-[12px] overflow-hidden shadow-xl border border-zinc-200 dark:border-zinc-800"
         onMouseMove={handleMouseMove}
         onTouchStart={longPressHandlers.onTouchStart}
         onMouseDown={longPressHandlers.onMouseDown}
       >
         <img
-          src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&auto=format&fit=crop"
-          alt="Solana Web3 Hub"
-          className="pointer-events-none h-full w-full select-none rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=800&auto=format&fit=crop"
+          alt="monks doing ambient music"
+          className="pointer-events-none h-full w-full select-none rounded-[12px] object-cover"
         />
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4 text-center pointer-events-none">
-          <span className="rounded-full bg-black/60 px-3 py-1 font-mono text-xs font-bold text-white border border-white/20 backdrop-blur-md">
-            Click & Hold to Explode Menu 🚀
-          </span>
-        </div>
-
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -202,7 +196,7 @@ export function ExplodingMenu({ className }: { className?: string }) {
             >
               <ul className="relative">
                 <li
-                  className="absolute h-8 w-8 rounded-full border-4 border-purple-500/50"
+                  className="absolute h-8 w-8 rounded-full border-4 border-neutral-200/50"
                   style={{
                     transformOrigin: "center",
                     left: 0,
