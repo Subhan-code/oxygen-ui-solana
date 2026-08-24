@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-checkout-card",
-  "title": "Crypto Checkout Card",
+  "title": "Checkout Card",
   "description": "Crypto Checkout Card component for Oxygen UI.",
   "files": [
     {

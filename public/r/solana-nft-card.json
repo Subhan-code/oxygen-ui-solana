@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "solana-nft-card",
-  "title": "Solana NFT Card",
+  "title": "NFT Card",
   "description": "A Solana NFT asset showcase card featuring floor price, rarity rank, and trait attributes.",
   "dependencies": [
     "motion",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-trading-terminal",
-  "title": "Crypto Trading Terminal",
+  "title": "Trading Terminal",
   "description": "A dark crypto trading workspace with inline token swap, interactive balance chart, and multi-wallet asset cards.",
   "dependencies": [
     "motion",

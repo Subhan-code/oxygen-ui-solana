@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "solana-swap-card",
-  "title": "Solana Swap Card",
+  "title": "Swap Card",
   "description": "A Solana token swap interface with token selection, rate calculation, and flip animation.",
   "dependencies": [
     "motion",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-prediction-quick-grid",
-  "title": "Crypto Prediction Quick Grid",
+  "title": "Quick Grid",
   "description": "A 5-minute quick prediction markets grid featuring countdown timers and higher or lower tiles.",
   "dependencies": [
     "lucide-react"

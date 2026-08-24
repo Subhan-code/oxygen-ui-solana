@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-wallet-menu-sheet",
-  "title": "Crypto Wallet Menu Sheet",
+  "title": "Menu Sheet",
   "description": "A light navigation menu sheet featuring search bar and Web3 ecosystem links.",
   "dependencies": [
     "lucide-react"

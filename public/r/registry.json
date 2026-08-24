@@ -59,7 +59,7 @@
     {
       "name": "input-morph-message",
       "type": "registry:ui",
-      "title": "Input Morph Message",
+      "title": "Morph Input",
       "description": "An input bar that morphs its text content into a message bubble when submitted.",
       "dependencies": [
         "motion",
@@ -96,7 +96,7 @@
     {
       "name": "popover-slide-selector",
       "type": "registry:ui",
-      "title": "Popover Slide Selector",
+      "title": "Followers Popover",
       "description": "A follower popover menu that reveals a horizontal avatar list on click.",
       "dependencies": [
         "motion",
@@ -116,7 +116,7 @@
     {
       "name": "family-popover-menu",
       "type": "registry:ui",
-      "title": "Family Popover Menu",
+      "title": "Family Popover",
       "description": "A circular trigger button that expands into a smooth menu card.",
       "dependencies": [
         "motion",
@@ -135,7 +135,7 @@
     {
       "name": "underlay-action-sheet",
       "type": "registry:ui",
-      "title": "Underlay Action Sheet",
+      "title": "Action Sheet",
       "description": "An iOS-inspired underlay action sheet with drag-to-resize gesture physics.",
       "dependencies": [
         "motion",
@@ -154,7 +154,7 @@
     {
       "name": "button-gooey",
       "type": "registry:ui",
-      "title": "Button Gooey",
+      "title": "Gooey Button",
       "description": "A call to action button with a gooey trailing arrow bubble on hover.",
       "dependencies": [
         "@radix-ui/react-icons"
@@ -172,7 +172,7 @@
     {
       "name": "button-ripple-effect",
       "type": "registry:ui",
-      "title": "Button Ripple Effect",
+      "title": "Ripple Button",
       "description": "A click ripple animation originating from pointer coordinates.",
       "dependencies": [],
       "registryDependencies": [
@@ -188,7 +188,7 @@
     {
       "name": "input-border-spotlight",
       "type": "registry:ui",
-      "title": "Input Border Spotlight",
+      "title": "Spotlight Input",
       "description": "An input container with a radial cursor-tracking spotlight border glow.",
       "dependencies": [],
       "registryDependencies": [
@@ -220,7 +220,7 @@
     {
       "name": "error-state-shake",
       "type": "registry:ui",
-      "title": "Error State Shake",
+      "title": "Error Shake",
       "description": "An input validation error animation with multi-segment keyframe shake.",
       "dependencies": [],
       "registryDependencies": [
@@ -236,7 +236,7 @@
     {
       "name": "spinning-counter",
       "type": "registry:ui",
-      "title": "Spinning Counter",
+      "title": "Spin Counter",
       "description": "A mechanical reel counter with vertical digit column rolling.",
       "dependencies": [],
       "registryDependencies": [
@@ -286,7 +286,7 @@
     {
       "name": "solana-identity-card",
       "type": "registry:ui",
-      "title": "Solana Identity Card",
+      "title": "Identity Card",
       "description": "A Solana wallet identity card displaying domain name, cluster, balance, and one-click copy.",
       "dependencies": [
         "motion",
@@ -305,7 +305,7 @@
     {
       "name": "solana-token-card",
       "type": "registry:ui",
-      "title": "Solana Token Card",
+      "title": "Token Card",
       "description": "A token balance and portfolio card with hide/reveal toggle and SPL token metrics.",
       "dependencies": [
         "motion",
@@ -324,7 +324,7 @@
     {
       "name": "solana-transaction-status",
       "type": "registry:ui",
-      "title": "Solana Transaction Status",
+      "title": "Transaction Status",
       "description": "A transaction activity status banner displaying signature, slot number, and state.",
       "dependencies": [
         "motion",
@@ -343,7 +343,7 @@
     {
       "name": "solana-network-health",
       "type": "registry:ui",
-      "title": "Solana Network Health",
+      "title": "Network Health",
       "description": "A Solana RPC cluster health monitor displaying ping latency, TPS throughput, and epoch progress.",
       "dependencies": [
         "motion",
@@ -362,7 +362,7 @@
     {
       "name": "solana-nft-card",
       "type": "registry:ui",
-      "title": "Solana NFT Card",
+      "title": "NFT Card",
       "description": "A Solana NFT asset showcase card featuring floor price, rarity rank, and trait attributes.",
       "dependencies": [
         "motion",
@@ -381,7 +381,7 @@
     {
       "name": "solana-swap-card",
       "type": "registry:ui",
-      "title": "Solana Swap Card",
+      "title": "Swap Card",
       "description": "A Solana token swap interface with token selection, rate calculation, and flip animation.",
       "dependencies": [
         "motion",
@@ -400,7 +400,7 @@
     {
       "name": "crypto-wallet-dashboard",
       "type": "registry:ui",
-      "title": "Crypto Wallet Dashboard",
+      "title": "Wallet Dashboard",
       "description": "A mobile crypto wallet dashboard with account navigation, balance breakdown, drawer navigation, and settings sheet.",
       "dependencies": [
         "motion",
@@ -419,7 +419,7 @@
     {
       "name": "crypto-user-profile",
       "type": "registry:ui",
-      "title": "Crypto User Profile",
+      "title": "User Profile",
       "description": "A crypto user profile card displaying handle, trade volume metrics, follower statistics, and profile management actions.",
       "dependencies": [
         "lucide-react"
@@ -437,7 +437,7 @@
     {
       "name": "crypto-explore-hub",
       "type": "registry:ui",
-      "title": "Crypto Explore Hub",
+      "title": "Explore Hub",
       "description": "A market explore hub featuring category filter pills, watchlist assets, trending tokens list, and news feed.",
       "dependencies": [
         "motion",
@@ -456,7 +456,7 @@
     {
       "name": "crypto-cookie-banner",
       "type": "registry:ui",
-      "title": "Crypto Cookie Banner",
+      "title": "Cookie Banner",
       "description": "A floating cookie policy consent dialog with customizable action pills and header bar.",
       "dependencies": [
         "motion",
@@ -475,7 +475,7 @@
     {
       "name": "crypto-prediction-markets",
       "type": "registry:ui",
-      "title": "Crypto Prediction Markets",
+      "title": "Prediction Markets",
       "description": "A prediction market hub with quick 5-minute market bet cards and election event odds breakdown.",
       "dependencies": [
         "motion",
@@ -494,7 +494,7 @@
     {
       "name": "crypto-project-progress",
       "type": "registry:ui",
-      "title": "Crypto Project Progress",
+      "title": "Project Progress",
       "description": "A project completion progress widget with dual segmented bar meters and weekly momentum indicator.",
       "dependencies": [
         "motion",
@@ -513,7 +513,7 @@
     {
       "name": "crypto-up-down-chart",
       "type": "registry:ui",
-      "title": "Crypto Up Down Chart",
+      "title": "Up Down Chart",
       "description": "A live binary options market card featuring glowing SVG sparkline, target price threshold, and countdown timer.",
       "dependencies": [
         "motion",
@@ -532,7 +532,7 @@
     {
       "name": "crypto-progress-ring",
       "type": "registry:ui",
-      "title": "Crypto Progress Ring",
+      "title": "Progress Ring",
       "description": "A circular SVG glow progress ring widget with expandable radial speed-dial action menu.",
       "dependencies": [
         "motion",
@@ -551,7 +551,7 @@
     {
       "name": "crypto-sales-chart",
       "type": "registry:ui",
-      "title": "Crypto Sales Chart",
+      "title": "Sales Chart",
       "description": "A sales analytics summary card supporting candlestick, segmented status levels, and vertical bar chart views.",
       "dependencies": [
         "motion",
@@ -570,7 +570,7 @@
     {
       "name": "crypto-tvl-analytics",
       "type": "registry:ui",
-      "title": "Crypto TVL Analytics",
+      "title": "TVL Analytics",
       "description": "A tactical TVL analytics card featuring interactive crosshair tooltip, net flow breakdown, and timeframe tabs.",
       "dependencies": [
         "motion",
@@ -589,7 +589,7 @@
     {
       "name": "crypto-trader-leaderboard",
       "type": "registry:ui",
-      "title": "Crypto Trader Leaderboard",
+      "title": "Leaderboard",
       "description": "A trader leaderboard and trending dApp directory featuring rank badges and follow toggles.",
       "dependencies": [
         "lucide-react"
@@ -607,7 +607,7 @@
     {
       "name": "crypto-trading-terminal",
       "type": "registry:ui",
-      "title": "Crypto Trading Terminal",
+      "title": "Trading Terminal",
       "description": "A dark crypto trading workspace with inline token swap, interactive balance chart, and multi-wallet asset cards.",
       "dependencies": [
         "motion",
@@ -626,7 +626,7 @@
     {
       "name": "crypto-wallet-main",
       "type": "registry:ui",
-      "title": "Crypto Wallet Main",
+      "title": "Main Wallet",
       "description": "A mobile crypto wallet main balance screen with account switcher and SPL token balances.",
       "dependencies": [
         "lucide-react"
@@ -644,7 +644,7 @@
     {
       "name": "crypto-wallet-drawer",
       "type": "registry:ui",
-      "title": "Crypto Wallet Drawer",
+      "title": "Wallet Drawer",
       "description": "A dark slide-out wallet menu drawer displaying verified domain identity and network options.",
       "dependencies": [
         "lucide-react"
@@ -662,7 +662,7 @@
     {
       "name": "crypto-wallet-menu-sheet",
       "type": "registry:ui",
-      "title": "Crypto Wallet Menu Sheet",
+      "title": "Menu Sheet",
       "description": "A light navigation menu sheet featuring search bar and Web3 ecosystem links.",
       "dependencies": [
         "lucide-react"
@@ -680,7 +680,7 @@
     {
       "name": "crypto-wallet-settings",
       "type": "registry:ui",
-      "title": "Crypto Wallet Settings",
+      "title": "Wallet Settings",
       "description": "A dark wallet settings overlay with account management, RPC options, and developer settings.",
       "dependencies": [
         "lucide-react"
@@ -698,7 +698,7 @@
     {
       "name": "crypto-explore-news",
       "type": "registry:ui",
-      "title": "Crypto Explore News",
+      "title": "Explore News",
       "description": "A market explore card featuring search input, watchlist assets, and ecosystem news feed.",
       "dependencies": [
         "lucide-react"
@@ -716,7 +716,7 @@
     {
       "name": "crypto-explore-categories",
       "type": "registry:ui",
-      "title": "Crypto Explore Categories",
+      "title": "Explore Categories",
       "description": "An explore categories hub with category pills, trending SPL tokens list, and oracle footnotes.",
       "dependencies": [
         "motion",
@@ -735,7 +735,7 @@
     {
       "name": "crypto-swap-box",
       "type": "registry:ui",
-      "title": "Crypto Swap Box",
+      "title": "Swap Box",
       "description": "A token swap card with pay and receive input fields and instant token swap flip.",
       "dependencies": [
         "motion",
@@ -754,7 +754,7 @@
     {
       "name": "crypto-prediction-candidate-card",
       "type": "registry:ui",
-      "title": "Crypto Prediction Candidate Card",
+      "title": "Candidate Card",
       "description": "A prediction market event card with YES and NO pool odds breakdown and total volume.",
       "dependencies": [
         "lucide-react"
@@ -772,7 +772,7 @@
     {
       "name": "crypto-prediction-quick-grid",
       "type": "registry:ui",
-      "title": "Crypto Prediction Quick Grid",
+      "title": "Quick Grid",
       "description": "A 5-minute quick prediction markets grid featuring countdown timers and higher or lower tiles.",
       "dependencies": [
         "lucide-react"
@@ -790,7 +790,7 @@
     {
       "name": "crypto-prediction-tab-selector",
       "type": "registry:ui",
-      "title": "Crypto Prediction Tab Selector",
+      "title": "Tab Selector",
       "description": "A horizontal category pill selector for prediction market categories.",
       "dependencies": [
         "motion"
@@ -808,7 +808,7 @@
     {
       "name": "crypto-prediction-search-bar",
       "type": "registry:ui",
-      "title": "Crypto Prediction Search Bar",
+      "title": "Search Bar",
       "description": "A search header bar with filter controls for prediction markets.",
       "dependencies": [
         "lucide-react"
@@ -826,7 +826,7 @@
     {
       "name": "crypto-prediction-odds-row",
       "type": "registry:ui",
-      "title": "Crypto Prediction Odds Row",
+      "title": "Odds Row",
       "description": "A market candidate odds row with progress bar indicator and vote button.",
       "dependencies": [
         "lucide-react"
@@ -844,7 +844,7 @@
     {
       "name": "crypto-up-down-options-card",
       "type": "registry:ui",
-      "title": "Crypto Up Down Options Card",
+      "title": "Options Card",
       "description": "A live binary options market card with glowing SVG sparkline and target price threshold.",
       "dependencies": [
         "lucide-react"
@@ -862,7 +862,7 @@
     {
       "name": "crypto-up-down-target-line",
       "type": "registry:ui",
-      "title": "Crypto Up Down Target Line",
+      "title": "Target Line",
       "description": "A binary options chart component highlighting target threshold level and payout multiplier.",
       "dependencies": [
         "lucide-react"
@@ -880,7 +880,7 @@
     {
       "name": "crypto-up-down-upcoming-carousel",
       "type": "registry:ui",
-      "title": "Crypto Up Down Upcoming Carousel",
+      "title": "Upcoming Carousel",
       "description": "An upcoming binary options rounds carousel displaying round IDs and start times.",
       "dependencies": [
         "lucide-react"
@@ -898,7 +898,7 @@
     {
       "name": "crypto-speed-dial-action-menu",
       "type": "registry:ui",
-      "title": "Crypto Speed Dial Action Menu",
+      "title": "Speed Dial",
       "description": "A radial speed dial quick action menu unfolding action buttons.",
       "dependencies": [
         "motion",
@@ -917,7 +917,7 @@
     {
       "name": "crypto-sales-candlestick-chart",
       "type": "registry:ui",
-      "title": "Crypto Sales Candlestick Chart",
+      "title": "Candlestick Chart",
       "description": "A sales analytics card featuring candlestick sparkline bars with green glow.",
       "dependencies": [
         "motion",
@@ -936,7 +936,7 @@
     {
       "name": "crypto-sales-segmented-bars",
       "type": "registry:ui",
-      "title": "Crypto Sales Segmented Bars",
+      "title": "Segmented Bars",
       "description": "A sales analytics card featuring segmented horizontal status level bars.",
       "dependencies": [
         "lucide-react"
@@ -954,7 +954,7 @@
     {
       "name": "crypto-sales-vertical-graph",
       "type": "registry:ui",
-      "title": "Crypto Sales Vertical Graph",
+      "title": "Vertical Graph",
       "description": "A sales analytics card featuring vertical bar graph with top glow tips.",
       "dependencies": [
         "motion",
@@ -973,7 +973,7 @@
     {
       "name": "crypto-tvl-analytics-chart",
       "type": "registry:ui",
-      "title": "Crypto TVL Analytics Chart",
+      "title": "TVL Chart",
       "description": "A tactical TVL analytics card featuring crosshair line chart tooltip and timeframe tabs.",
       "dependencies": [
         "lucide-react"
@@ -991,7 +991,7 @@
     {
       "name": "crypto-tvl-sparkbar-widget",
       "type": "registry:ui",
-      "title": "Crypto TVL Sparkbar Widget",
+      "title": "Sparkbar Widget",
       "description": "A mini transactions sparkbar widget with soundwave bar graph.",
       "dependencies": [
         "utils"
@@ -1009,7 +1009,7 @@
     {
       "name": "crypto-token-details-screen",
       "type": "registry:ui",
-      "title": "Crypto Token Details Screen",
+      "title": "Token Details",
       "description": "A token detail view displaying live price line chart, position holdings, and live chat status.",
       "dependencies": [
         "motion",
@@ -1046,7 +1046,7 @@
     {
       "name": "crypto-download-header",
       "type": "registry:ui",
-      "title": "Crypto Download Header",
+      "title": "Download Header",
       "description": "A floating header component for dApp download prompts with action buttons.",
       "dependencies": [
         "motion",
@@ -1065,7 +1065,7 @@
     {
       "name": "crypto-mobile-browser-bar",
       "type": "registry:ui",
-      "title": "Crypto Mobile Browser Bar",
+      "title": "Browser Bar",
       "description": "A Web3 mobile browser control bar with tab counter, URL status, and navigation actions.",
       "dependencies": [
         "motion",
@@ -1180,7 +1180,7 @@
     {
       "name": "crypto-checkout-card",
       "type": "registry:ui",
-      "title": "Crypto Checkout Card",
+      "title": "Checkout Card",
       "description": "Crypto Checkout Card component for Oxygen UI.",
       "files": [
         {
@@ -1192,7 +1192,7 @@
     {
       "name": "crypto-subscription-card",
       "type": "registry:ui",
-      "title": "Crypto Subscription Card",
+      "title": "Subscription Card",
       "description": "Crypto Subscription Card component for Oxygen UI.",
       "files": [
         {
@@ -1204,7 +1204,7 @@
     {
       "name": "event-tag-pills",
       "type": "registry:ui",
-      "title": "Event Tag Pills",
+      "title": "Event Pills",
       "description": "Event Tag Pills component for Oxygen UI.",
       "files": [
         {
@@ -1240,7 +1240,7 @@
     {
       "name": "financial-metrics-grid",
       "type": "registry:ui",
-      "title": "Financial Metrics Grid",
+      "title": "Metrics Grid",
       "description": "Financial Metrics Grid component for Oxygen UI.",
       "files": [
         {
@@ -1252,7 +1252,7 @@
     {
       "name": "floating-action-button",
       "type": "registry:ui",
-      "title": "Floating Action Button",
+      "title": "Action Button",
       "description": "Floating Action Button component for Oxygen UI.",
       "files": [
         {
@@ -1300,7 +1300,7 @@
     {
       "name": "hold-to-confirm",
       "type": "registry:ui",
-      "title": "Hold To Confirm",
+      "title": "Hold Button",
       "description": "Hold To Confirm component for Oxygen UI.",
       "files": [
         {
@@ -1348,7 +1348,7 @@
     {
       "name": "multi-state-badge",
       "type": "registry:ui",
-      "title": "Multi State Badge",
+      "title": "Status Badge",
       "description": "Multi State Badge component for Oxygen UI.",
       "files": [
         {
@@ -1360,7 +1360,7 @@
     {
       "name": "notifications-stack",
       "type": "registry:ui",
-      "title": "Notifications Stack",
+      "title": "Notifications",
       "description": "Notifications Stack component for Oxygen UI.",
       "files": [
         {
@@ -1384,7 +1384,7 @@
     {
       "name": "qr-code",
       "type": "registry:ui",
-      "title": "Qr Code",
+      "title": "QR Code",
       "description": "Qr Code component for Oxygen UI.",
       "files": [
         {
@@ -1396,7 +1396,7 @@
     {
       "name": "segmented-progress-card",
       "type": "registry:ui",
-      "title": "Segmented Progress Card",
+      "title": "Progress Card",
       "description": "Segmented Progress Card component for Oxygen UI.",
       "files": [
         {
@@ -1420,7 +1420,7 @@
     {
       "name": "step-tracker-widget",
       "type": "registry:ui",
-      "title": "Step Tracker Widget",
+      "title": "Step Tracker",
       "description": "Step Tracker Widget component for Oxygen UI.",
       "files": [
         {
@@ -1432,7 +1432,7 @@
     {
       "name": "curved-tab-bar",
       "type": "registry:ui",
-      "title": "Curved Tab Bar",
+      "title": "Curved Bar",
       "description": "Curved Tab Bar component for Oxygen UI.",
       "files": [
         {
@@ -1444,7 +1444,7 @@
     {
       "name": "run-stats-stacks",
       "type": "registry:ui",
-      "title": "Run Stats Stacks",
+      "title": "Stats Stack",
       "description": "Run Stats Stacks component for Oxygen UI.",
       "files": [
         {

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "button-ripple-effect",
-  "title": "Button Ripple Effect",
+  "title": "Ripple Button",
   "description": "A click ripple animation originating from pointer coordinates.",
   "dependencies": [],
   "registryDependencies": [

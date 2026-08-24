@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "solana-network-health",
-  "title": "Solana Network Health",
+  "title": "Network Health",
   "description": "A Solana RPC cluster health monitor displaying ping latency, TPS throughput, and epoch progress.",
   "dependencies": [
     "motion",

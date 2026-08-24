@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-tvl-analytics-chart",
-  "title": "Crypto TVL Analytics Chart",
+  "title": "TVL Chart",
   "description": "A tactical TVL analytics card featuring crosshair line chart tooltip and timeframe tabs.",
   "dependencies": [
     "lucide-react"

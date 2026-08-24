@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-token-details-screen",
-  "title": "Crypto Token Details Screen",
+  "title": "Token Details",
   "description": "A token detail view displaying live price line chart, position holdings, and live chat status.",
   "dependencies": [
     "motion",

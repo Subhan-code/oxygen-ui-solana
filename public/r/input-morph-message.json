@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "input-morph-message",
-  "title": "Input Morph Message",
+  "title": "Morph Input",
   "description": "An input bar that morphs its text content into a message bubble when submitted.",
   "dependencies": [
     "motion",

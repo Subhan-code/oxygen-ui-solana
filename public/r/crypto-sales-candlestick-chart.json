@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-sales-candlestick-chart",
-  "title": "Crypto Sales Candlestick Chart",
+  "title": "Candlestick Chart",
   "description": "A sales analytics card featuring candlestick sparkline bars with green glow.",
   "dependencies": [
     "motion",

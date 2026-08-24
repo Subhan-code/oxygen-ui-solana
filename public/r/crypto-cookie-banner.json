@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-cookie-banner",
-  "title": "Crypto Cookie Banner",
+  "title": "Cookie Banner",
   "description": "A floating cookie policy consent dialog with customizable action pills and header bar.",
   "dependencies": [
     "motion",

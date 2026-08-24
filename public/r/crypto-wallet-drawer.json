@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-wallet-drawer",
-  "title": "Crypto Wallet Drawer",
+  "title": "Wallet Drawer",
   "description": "A dark slide-out wallet menu drawer displaying verified domain identity and network options.",
   "dependencies": [
     "lucide-react"

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-wallet-settings",
-  "title": "Crypto Wallet Settings",
+  "title": "Wallet Settings",
   "description": "A dark wallet settings overlay with account management, RPC options, and developer settings.",
   "dependencies": [
     "lucide-react"

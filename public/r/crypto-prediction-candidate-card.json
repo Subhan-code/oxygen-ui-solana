@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-prediction-candidate-card",
-  "title": "Crypto Prediction Candidate Card",
+  "title": "Candidate Card",
   "description": "A prediction market event card with YES and NO pool odds breakdown and total volume.",
   "dependencies": [
     "lucide-react"

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "popover-slide-selector",
-  "title": "Popover Slide Selector",
+  "title": "Followers Popover",
   "description": "A follower popover menu that reveals a horizontal avatar list on click.",
   "dependencies": [
     "motion",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-mobile-browser-bar",
-  "title": "Crypto Mobile Browser Bar",
+  "title": "Browser Bar",
   "description": "A Web3 mobile browser control bar with tab counter, URL status, and navigation actions.",
   "dependencies": [
     "motion",

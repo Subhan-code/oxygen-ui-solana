@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "underlay-action-sheet",
-  "title": "Underlay Action Sheet",
+  "title": "Action Sheet",
   "description": "An iOS-inspired underlay action sheet with drag-to-resize gesture physics.",
   "dependencies": [
     "motion",

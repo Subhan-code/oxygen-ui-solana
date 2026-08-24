@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "financial-metrics-grid",
-  "title": "Financial Metrics Grid",
+  "title": "Metrics Grid",
   "description": "Financial Metrics Grid component for Oxygen UI.",
   "files": [
     {

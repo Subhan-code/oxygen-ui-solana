@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-prediction-markets",
-  "title": "Crypto Prediction Markets",
+  "title": "Prediction Markets",
   "description": "A prediction market hub with quick 5-minute market bet cards and election event odds breakdown.",
   "dependencies": [
     "motion",

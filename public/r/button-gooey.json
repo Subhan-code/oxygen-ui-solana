@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "button-gooey",
-  "title": "Button Gooey",
+  "title": "Gooey Button",
   "description": "A call to action button with a gooey trailing arrow bubble on hover.",
   "dependencies": [
     "@radix-ui/react-icons"

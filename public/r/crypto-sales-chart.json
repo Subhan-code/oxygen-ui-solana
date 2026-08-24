@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-sales-chart",
-  "title": "Crypto Sales Chart",
+  "title": "Sales Chart",
   "description": "A sales analytics summary card supporting candlestick, segmented status levels, and vertical bar chart views.",
   "dependencies": [
     "motion",

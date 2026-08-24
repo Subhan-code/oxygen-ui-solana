@@ -59,14 +59,14 @@ export const components: ComponentItem[] = [
     source: `${REGISTRY_HOMEPAGE}/components/ui/timeline.tsx`,
   },
   {
-    name: "Curved Tab Bar",
+    name: "Curved Bar",
     href: "/components/curvedtabbar",
     description: "Curved Tab Bar component for Oxygen UI.",
     registry: "curved-tab-bar",
     source: `${REGISTRY_HOMEPAGE}/components/ui/curved-tab-bar.tsx`,
   },
   {
-    name: "Step Tracker Widget",
+    name: "Step Tracker",
     href: "/components/steptrackerwidget",
     description: "Step Tracker Widget component for Oxygen UI.",
     registry: "step-tracker-widget",
@@ -80,14 +80,14 @@ export const components: ComponentItem[] = [
     source: `${REGISTRY_HOMEPAGE}/components/ui/smooth-tabs.tsx`,
   },
   {
-    name: "Segmented Progress Card",
+    name: "Progress Card",
     href: "/components/segmentedprogresscard",
     description: "Segmented Progress Card component for Oxygen UI.",
     registry: "segmented-progress-card",
     source: `${REGISTRY_HOMEPAGE}/components/ui/segmented-progress-card.tsx`,
   },
   {
-    name: "Qr Code",
+    name: "QR Code",
     href: "/components/qrcode",
     description: "Qr Code component for Oxygen UI.",
     registry: "qr-code",
@@ -101,14 +101,14 @@ export const components: ComponentItem[] = [
     source: `${REGISTRY_HOMEPAGE}/components/ui/password-input.tsx`,
   },
   {
-    name: "Notifications Stack",
+    name: "Notifications",
     href: "/components/notificationsstack",
     description: "Notifications Stack component for Oxygen UI.",
     registry: "notifications-stack",
     source: `${REGISTRY_HOMEPAGE}/components/ui/notifications-stack.tsx`,
   },
   {
-    name: "Multi State Badge",
+    name: "Status Badge",
     href: "/components/multistatebadge",
     description: "Multi State Badge component for Oxygen UI.",
     registry: "multi-state-badge",
@@ -136,7 +136,7 @@ export const components: ComponentItem[] = [
     source: `${REGISTRY_HOMEPAGE}/components/ui/liquid-radio.tsx`,
   },
   {
-    name: "Hold To Confirm",
+    name: "Hold Button",
     href: "/components/holdtoconfirm",
     description: "Hold To Confirm component for Oxygen UI.",
     registry: "hold-to-confirm",
@@ -164,14 +164,14 @@ export const components: ComponentItem[] = [
     source: `${REGISTRY_HOMEPAGE}/components/ui/gauge.tsx`,
   },
   {
-    name: "Floating Action Button",
+    name: "Action Button",
     href: "/components/floatingactionbutton",
     description: "Floating Action Button component for Oxygen UI.",
     registry: "floating-action-button",
     source: `${REGISTRY_HOMEPAGE}/components/ui/floating-action-button.tsx`,
   },
   {
-    name: "Financial Metrics Grid",
+    name: "Metrics Grid",
     href: "/components/financialmetricsgrid",
     description: "Financial Metrics Grid component for Oxygen UI.",
     registry: "financial-metrics-grid",
@@ -199,21 +199,21 @@ export const components: ComponentItem[] = [
     source: `${REGISTRY_HOMEPAGE}/components/ui/exploding-menu.tsx`,
   },
   {
-    name: "Event Tag Pills",
+    name: "Event Pills",
     href: "/components/eventtagpills",
     description: "Event Tag Pills component for Oxygen UI.",
     registry: "event-tag-pills",
     source: `${REGISTRY_HOMEPAGE}/components/ui/event-tag-pills.tsx`,
   },
   {
-    name: "Crypto Subscription Card",
+    name: "Subscription Card",
     href: "/components/cryptosubscriptioncard",
     description: "Crypto Subscription Card component for Oxygen UI.",
     registry: "crypto-subscription-card",
     source: `${REGISTRY_HOMEPAGE}/components/ui/crypto-subscription-card.tsx`,
   },
   {
-    name: "Crypto Checkout Card",
+    name: "Checkout Card",
     href: "/components/cryptocheckoutcard",
     description: "Crypto Checkout Card component for Oxygen UI.",
     registry: "crypto-checkout-card",
@@ -407,7 +407,7 @@ export function Demo() {
     credits: ["Syed Subhan"],
   },
   {
-    name: "Crypto wallet dashboard",
+    name: "Wallet Dashboard",
     href: "/components/cryptowalletdashboard",
     registry: "crypto-wallet-dashboard",
     description:
@@ -422,7 +422,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto user profile",
+    name: "User Profile",
     href: "/components/cryptouserprofile",
     registry: "crypto-user-profile",
     description:
@@ -437,7 +437,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto explore hub",
+    name: "Explore Hub",
     href: "/components/cryptoexplorehub",
     registry: "crypto-explore-hub",
     description:
@@ -452,7 +452,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto cookie banner",
+    name: "Cookie Banner",
     href: "/components/cryptocookiebanner",
     registry: "crypto-cookie-banner",
     description:
@@ -482,7 +482,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto prediction markets",
+    name: "Prediction Markets",
     href: "/components/cryptopredictionmarkets",
     registry: "crypto-prediction-markets",
     description:
@@ -497,7 +497,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto project progress",
+    name: "Project Progress",
     href: "/components/cryptoprojectprogress",
     registry: "crypto-project-progress",
     description:
@@ -512,7 +512,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto up down chart",
+    name: "Up Down Chart",
     href: "/components/cryptoupdownchart",
     registry: "crypto-up-down-chart",
     description:
@@ -527,7 +527,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto progress ring",
+    name: "Progress Ring",
     href: "/components/cryptoprogressring",
     registry: "crypto-progress-ring",
     description:
@@ -542,7 +542,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto sales chart",
+    name: "Sales Chart",
     href: "/components/cryptosaleschart",
     registry: "crypto-sales-chart",
     description:
@@ -557,7 +557,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto TVL analytics",
+    name: "TVL Analytics",
     href: "/components/cryptotvlanalytics",
     registry: "crypto-tvl-analytics",
     description:
@@ -572,7 +572,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto trader leaderboard",
+    name: "Leaderboard",
     href: "/components/cryptotraderleaderboard",
     registry: "crypto-trader-leaderboard",
     description:
@@ -587,7 +587,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto trading terminal",
+    name: "Trading Terminal",
     href: "/components/cryptotradingterminal",
     registry: "crypto-trading-terminal",
     description:
@@ -1049,7 +1049,7 @@ export function Demo() {
 </EmojiReaction>`,
   },
   {
-    name: "Input morph message",
+    name: "Morph Input",
     href: "/components/inputmorphmessage",
     registry: "input-morph-message",
     description:
@@ -1070,7 +1070,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Gooey menu",
+    name: "Gooey Menu",
     href: "/components/gooeymenu",
     registry: "gooey-menu",
     description:
@@ -1085,7 +1085,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Run stats stacks",
+    name: "Stats Stack",
     href: "/components/runstatsstacks",
     registry: "run-stats-stacks",
     description:
@@ -1106,7 +1106,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Popover slide selector",
+    name: "Followers Popover",
     href: "/components/popoverslideselector",
     registry: "popover-slide-selector",
     description:
@@ -1127,7 +1127,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Family popover menu",
+    name: "Family Popover",
     href: "/components/familypopovermenu",
     registry: "family-popover-menu",
     description:
@@ -1148,7 +1148,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Underlay action sheet",
+    name: "Action Sheet",
     href: "/components/underlayactionsheet",
     registry: "underlay-action-sheet",
     description:
@@ -1169,7 +1169,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Button gooey",
+    name: "Gooey Button",
     href: "/components/buttongooy",
     registry: "button-gooey",
     description:
@@ -1214,7 +1214,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Button ripple effect",
+    name: "Ripple Button",
     href: "/components/buttonrippleeffect",
     registry: "button-ripple-effect",
     description:
@@ -1229,7 +1229,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Input border spotlight",
+    name: "Spotlight Input",
     href: "/components/inputborderspotlight",
     registry: "input-border-spotlight",
     description:
@@ -1304,7 +1304,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Skeleton reveal",
+    name: "Skeleton Reveal",
     href: "/components/skeletonreveal",
     registry: "skeleton-reveal",
     description:
@@ -1319,7 +1319,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Error state shake",
+    name: "Error Shake",
     href: "/components/errorstateshake",
     registry: "error-state-shake",
     description:
@@ -1334,7 +1334,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Spinning counter",
+    name: "Spin Counter",
     href: "/components/spinningcounter",
     registry: "spinning-counter",
     description:
@@ -1364,7 +1364,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Success check",
+    name: "Success Check",
     href: "/components/successcheck",
     registry: "success-check",
     description:
@@ -1379,7 +1379,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Notification badge",
+    name: "Notification Badge",
     href: "/components/notificationbadge",
     registry: "notification-badge",
     description:
@@ -1409,7 +1409,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Solana identity card",
+    name: "Identity Card",
     href: "/components/solanaidentitycard",
     registry: "solana-identity-card",
     description:
@@ -1424,7 +1424,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Solana token card",
+    name: "Token Card",
     href: "/components/solanatokencard",
     registry: "solana-token-card",
     description:
@@ -1439,7 +1439,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Solana transaction status",
+    name: "Transaction Status",
     href: "/components/solanatransactionstatus",
     registry: "solana-transaction-status",
     description:
@@ -1454,7 +1454,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Solana network health",
+    name: "Network Health",
     href: "/components/solananetworkhealth",
     registry: "solana-network-health",
     description:
@@ -1469,7 +1469,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Solana NFT card",
+    name: "NFT Card",
     href: "/components/solananftcard",
     registry: "solana-nft-card",
     description:
@@ -1484,7 +1484,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Solana swap card",
+    name: "Swap Card",
     href: "/components/solanaswapcard",
     registry: "solana-swap-card",
     description:
@@ -1544,7 +1544,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto wallet main",
+    name: "Main Wallet",
     href: "/components/cryptowalletmain",
     registry: "crypto-wallet-main",
     description: "A mobile crypto wallet main balance screen with account switcher and SPL token balances.",
@@ -1557,7 +1557,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto wallet drawer",
+    name: "Wallet Drawer",
     href: "/components/cryptowalletdrawer",
     registry: "crypto-wallet-drawer",
     description: "A dark slide-out wallet menu drawer displaying verified domain identity and network options.",
@@ -1570,7 +1570,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto wallet menu sheet",
+    name: "Menu Sheet",
     href: "/components/cryptowalletmenusheet",
     registry: "crypto-wallet-menu-sheet",
     description: "A light navigation menu sheet featuring search bar and Web3 ecosystem links.",
@@ -1583,7 +1583,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto wallet settings",
+    name: "Wallet Settings",
     href: "/components/cryptowalletsettings",
     registry: "crypto-wallet-settings",
     description: "A dark wallet settings overlay with account management, RPC options, and developer settings.",
@@ -1596,7 +1596,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto explore news",
+    name: "Explore News",
     href: "/components/cryptoexplorenews",
     registry: "crypto-explore-news",
     description: "A market explore card featuring search input, watchlist assets, and ecosystem news feed.",
@@ -1609,7 +1609,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto explore categories",
+    name: "Explore Categories",
     href: "/components/cryptoexplorecategories",
     registry: "crypto-explore-categories",
     description: "An explore categories hub with category pills, trending SPL tokens list, and oracle footnotes.",
@@ -1661,7 +1661,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto swap box",
+    name: "Swap Box",
     href: "/components/cryptoswapbox",
     registry: "crypto-swap-box",
     description: "A token swap card with pay and receive input fields and instant token swap flip.",
@@ -1674,7 +1674,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto prediction candidate card",
+    name: "Candidate Card",
     href: "/components/cryptopredictioncandidatecard",
     registry: "crypto-prediction-candidate-card",
     description: "A prediction market event card with YES and NO pool odds breakdown and total volume.",
@@ -1687,7 +1687,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto prediction quick grid",
+    name: "Quick Grid",
     href: "/components/cryptopredictionquickgrid",
     registry: "crypto-prediction-quick-grid",
     description: "A 5-minute quick prediction markets grid featuring countdown timers and higher or lower tiles.",
@@ -1700,7 +1700,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto prediction tab selector",
+    name: "Tab Selector",
     href: "/components/cryptopredictiontabselector",
     registry: "crypto-prediction-tab-selector",
     description: "A horizontal category pill selector for prediction market categories.",
@@ -1713,7 +1713,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto prediction search bar",
+    name: "Search Bar",
     href: "/components/cryptopredictionsearchbar",
     registry: "crypto-prediction-search-bar",
     description: "A search header bar with filter controls for prediction markets.",
@@ -1726,7 +1726,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto prediction odds row",
+    name: "Odds Row",
     href: "/components/cryptopredictionoddsrow",
     registry: "crypto-prediction-odds-row",
     description: "A market candidate odds row with progress bar indicator and vote button.",
@@ -1752,7 +1752,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto up down options card",
+    name: "Options Card",
     href: "/components/cryptoupdownoptionscard",
     registry: "crypto-up-down-options-card",
     description: "A live binary options market card with glowing SVG sparkline and target price threshold.",
@@ -1765,7 +1765,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto up down target line",
+    name: "Target Line",
     href: "/components/cryptoupdowntargetline",
     registry: "crypto-up-down-target-line",
     description: "A binary options chart component highlighting target threshold level and payout multiplier.",
@@ -1778,7 +1778,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto up down upcoming carousel",
+    name: "Upcoming Carousel",
     href: "/components/cryptoupdownupcomingcarousel",
     registry: "crypto-up-down-upcoming-carousel",
     description: "An upcoming binary options rounds carousel displaying round IDs and start times.",
@@ -1817,7 +1817,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto speed dial action menu",
+    name: "Speed Dial",
     href: "/components/cryptospeeddialactionmenu",
     registry: "crypto-speed-dial-action-menu",
     description: "A radial speed dial quick action menu unfolding action buttons.",
@@ -1830,7 +1830,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto sales candlestick chart",
+    name: "Candlestick Chart",
     href: "/components/cryptosalescandlestickchart",
     registry: "crypto-sales-candlestick-chart",
     description: "A sales analytics card featuring candlestick sparkline bars with green glow.",
@@ -1843,7 +1843,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto sales segmented bars",
+    name: "Segmented Bars",
     href: "/components/cryptosalessegmentedbars",
     registry: "crypto-sales-segmented-bars",
     description: "A sales analytics card featuring segmented horizontal status level bars.",
@@ -1856,7 +1856,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto sales vertical graph",
+    name: "Vertical Graph",
     href: "/components/cryptosalesverticalgraph",
     registry: "crypto-sales-vertical-graph",
     description: "A sales analytics card featuring vertical bar graph with top glow tips.",
@@ -1869,7 +1869,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto TVL analytics chart",
+    name: "TVL Chart",
     href: "/components/cryptotvlanalyticschart",
     registry: "crypto-tvl-analytics-chart",
     description: "A tactical TVL analytics card featuring crosshair line chart tooltip and timeframe tabs.",
@@ -1882,7 +1882,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto TVL sparkbar widget",
+    name: "Sparkbar Widget",
     href: "/components/cryptotvlsparkbarwidget",
     registry: "crypto-tvl-sparkbar-widget",
     description: "A mini transactions sparkbar widget with soundwave bar graph.",
@@ -1921,7 +1921,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto token details screen",
+    name: "Token Details",
     href: "/components/cryptotokendetailsscreen",
     registry: "crypto-token-details-screen",
     description: "A token detail view displaying live price line chart, position holdings, and live chat status.",
@@ -1934,7 +1934,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto Download Header",
+    name: "Download Header",
     href: "/components/cryptodownloadheader",
     registry: "crypto-download-header",
     description: "A floating header banner with dApp branding, download call to action, and menu controls.",
@@ -1947,7 +1947,7 @@ export function Demo() {
 }`,
   },
   {
-    name: "Crypto Mobile Browser Bar",
+    name: "Browser Bar",
     href: "/components/cryptomobilebrowserbar",
     registry: "crypto-mobile-browser-bar",
     description: "A Web3 mobile browser control bar with tab counter, URL status, and navigation actions.",

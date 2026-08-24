@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-swap-box",
-  "title": "Crypto Swap Box",
+  "title": "Swap Box",
   "description": "A token swap card with pay and receive input fields and instant token swap flip.",
   "dependencies": [
     "motion",

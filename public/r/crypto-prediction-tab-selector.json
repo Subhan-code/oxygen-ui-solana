@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-prediction-tab-selector",
-  "title": "Crypto Prediction Tab Selector",
+  "title": "Tab Selector",
   "description": "A horizontal category pill selector for prediction market categories.",
   "dependencies": [
     "motion"

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "event-tag-pills",
-  "title": "Event Tag Pills",
+  "title": "Event Pills",
   "description": "Event Tag Pills component for Oxygen UI.",
   "files": [
     {

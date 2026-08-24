@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "step-tracker-widget",
-  "title": "Step Tracker Widget",
+  "title": "Step Tracker",
   "description": "Step Tracker Widget component for Oxygen UI.",
   "files": [
     {

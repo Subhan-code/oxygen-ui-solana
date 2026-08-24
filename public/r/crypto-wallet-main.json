@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-wallet-main",
-  "title": "Crypto Wallet Main",
+  "title": "Main Wallet",
   "description": "A mobile crypto wallet main balance screen with account switcher and SPL token balances.",
   "dependencies": [
     "lucide-react"

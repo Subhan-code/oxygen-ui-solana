@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-progress-ring",
-  "title": "Crypto Progress Ring",
+  "title": "Progress Ring",
   "description": "A circular SVG glow progress ring widget with expandable radial speed-dial action menu.",
   "dependencies": [
     "motion",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "input-border-spotlight",
-  "title": "Input Border Spotlight",
+  "title": "Spotlight Input",
   "description": "An input container with a radial cursor-tracking spotlight border glow.",
   "dependencies": [],
   "registryDependencies": [

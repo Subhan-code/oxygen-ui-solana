@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "solana-token-card",
-  "title": "Solana Token Card",
+  "title": "Token Card",
   "description": "A token balance and portfolio card with hide/reveal toggle and SPL token metrics.",
   "dependencies": [
     "motion",

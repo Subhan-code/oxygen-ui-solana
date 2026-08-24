@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-speed-dial-action-menu",
-  "title": "Crypto Speed Dial Action Menu",
+  "title": "Speed Dial",
   "description": "A radial speed dial quick action menu unfolding action buttons.",
   "dependencies": [
     "motion",

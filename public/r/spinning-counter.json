@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "spinning-counter",
-  "title": "Spinning Counter",
+  "title": "Spin Counter",
   "description": "A mechanical reel counter with vertical digit column rolling.",
   "dependencies": [],
   "registryDependencies": [

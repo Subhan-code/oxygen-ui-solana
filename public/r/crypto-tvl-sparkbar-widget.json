@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-tvl-sparkbar-widget",
-  "title": "Crypto TVL Sparkbar Widget",
+  "title": "Sparkbar Widget",
   "description": "A mini transactions sparkbar widget with soundwave bar graph.",
   "dependencies": [
     "utils"

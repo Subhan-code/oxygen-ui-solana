@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-project-progress",
-  "title": "Crypto Project Progress",
+  "title": "Project Progress",
   "description": "A project completion progress widget with dual segmented bar meters and weekly momentum indicator.",
   "dependencies": [
     "motion",

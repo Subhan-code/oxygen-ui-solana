@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-sales-segmented-bars",
-  "title": "Crypto Sales Segmented Bars",
+  "title": "Segmented Bars",
   "description": "A sales analytics card featuring segmented horizontal status level bars.",
   "dependencies": [
     "lucide-react"

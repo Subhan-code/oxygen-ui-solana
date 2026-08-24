@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "hold-to-confirm",
-  "title": "Hold To Confirm",
+  "title": "Hold Button",
   "description": "Hold To Confirm component for Oxygen UI.",
   "files": [
     {

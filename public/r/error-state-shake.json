@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "error-state-shake",
-  "title": "Error State Shake",
+  "title": "Error Shake",
   "description": "An input validation error animation with multi-segment keyframe shake.",
   "dependencies": [],
   "registryDependencies": [

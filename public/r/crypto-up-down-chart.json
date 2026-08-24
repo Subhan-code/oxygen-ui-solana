@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-up-down-chart",
-  "title": "Crypto Up Down Chart",
+  "title": "Up Down Chart",
   "description": "A live binary options market card featuring glowing SVG sparkline, target price threshold, and countdown timer.",
   "dependencies": [
     "motion",

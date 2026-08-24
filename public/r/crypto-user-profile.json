@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-user-profile",
-  "title": "Crypto User Profile",
+  "title": "User Profile",
   "description": "A crypto user profile card displaying handle, trade volume metrics, follower statistics, and profile management actions.",
   "dependencies": [
     "lucide-react"

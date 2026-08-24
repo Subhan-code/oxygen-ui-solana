@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-explore-news",
-  "title": "Crypto Explore News",
+  "title": "Explore News",
   "description": "A market explore card featuring search input, watchlist assets, and ecosystem news feed.",
   "dependencies": [
     "lucide-react"

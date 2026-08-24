@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "curved-tab-bar",
-  "title": "Curved Tab Bar",
+  "title": "Curved Bar",
   "description": "Curved Tab Bar component for Oxygen UI.",
   "files": [
     {

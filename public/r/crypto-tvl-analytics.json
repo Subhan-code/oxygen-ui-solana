@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-tvl-analytics",
-  "title": "Crypto TVL Analytics",
+  "title": "TVL Analytics",
   "description": "A tactical TVL analytics card featuring interactive crosshair tooltip, net flow breakdown, and timeframe tabs.",
   "dependencies": [
     "motion",

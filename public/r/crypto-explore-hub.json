@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-explore-hub",
-  "title": "Crypto Explore Hub",
+  "title": "Explore Hub",
   "description": "A market explore hub featuring category filter pills, watchlist assets, trending tokens list, and news feed.",
   "dependencies": [
     "motion",

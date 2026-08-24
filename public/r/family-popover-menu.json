@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "family-popover-menu",
-  "title": "Family Popover Menu",
+  "title": "Family Popover",
   "description": "A circular trigger button that expands into a smooth menu card.",
   "dependencies": [
     "motion",

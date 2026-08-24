@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "solana-transaction-status",
-  "title": "Solana Transaction Status",
+  "title": "Transaction Status",
   "description": "A transaction activity status banner displaying signature, slot number, and state.",
   "dependencies": [
     "motion",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-sales-vertical-graph",
-  "title": "Crypto Sales Vertical Graph",
+  "title": "Vertical Graph",
   "description": "A sales analytics card featuring vertical bar graph with top glow tips.",
   "dependencies": [
     "motion",

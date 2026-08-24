@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "solana-identity-card",
-  "title": "Solana Identity Card",
+  "title": "Identity Card",
   "description": "A Solana wallet identity card displaying domain name, cluster, balance, and one-click copy.",
   "dependencies": [
     "motion",

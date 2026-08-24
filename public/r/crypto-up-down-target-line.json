@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-up-down-target-line",
-  "title": "Crypto Up Down Target Line",
+  "title": "Target Line",
   "description": "A binary options chart component highlighting target threshold level and payout multiplier.",
   "dependencies": [
     "lucide-react"

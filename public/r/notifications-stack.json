@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "notifications-stack",
-  "title": "Notifications Stack",
+  "title": "Notifications",
   "description": "Notifications Stack component for Oxygen UI.",
   "files": [
     {

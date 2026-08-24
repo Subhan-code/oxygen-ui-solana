@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "run-stats-stacks",
-  "title": "Run Stats Stacks",
+  "title": "Stats Stack",
   "description": "Run Stats Stacks component for Oxygen UI.",
   "files": [
     {

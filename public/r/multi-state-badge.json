@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "multi-state-badge",
-  "title": "Multi State Badge",
+  "title": "Status Badge",
   "description": "Multi State Badge component for Oxygen UI.",
   "files": [
     {

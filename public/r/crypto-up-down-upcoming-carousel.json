@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "crypto-up-down-upcoming-carousel",
-  "title": "Crypto Up Down Upcoming Carousel",
+  "title": "Upcoming Carousel",
   "description": "An upcoming binary options rounds carousel displaying round IDs and start times.",
   "dependencies": [
     "lucide-react"
