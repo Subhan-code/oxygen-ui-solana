@@ -41,7 +41,7 @@ export const PANEL_INFO = {
     "Click the code icon in the top-right corner to view the source code.",
   keepInMind:
     "Oxygen UI provides composable primitives tailored for Solana applications, including account interfaces, token balance cards, transaction status states, and network metrics. Built for performance and seamless dApp integration.",
-  contactEmail: "swamimalodeofficial@gmail.com",
+  contactEmail: "syedsubhan.official@gmail.com",
   contactNote: "Found a bug or issue? Feel free to drop a DM.",
   license: [
     "Free to use and modify in both personal and commercial Solana dApps.",
@@ -390,7 +390,7 @@ export function Demo() {
     </aside>
   )
 }`,
-    credits: ["Inspired by devouringdetails.com"],
+    credits: ["Syed Subhan"],
   },
   {
     name: "Crypto wallet dashboard",
