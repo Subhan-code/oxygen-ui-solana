@@ -31,7 +31,7 @@ export default function DesktopShell({
         className="h-full"
       >
         <div
-          className="relative z-0 h-full rounded-[45px] bg-card p-4"
+          className="relative z-0 flex h-full w-full flex-col items-center justify-center overflow-auto rounded-[45px] bg-card p-4 transition-all duration-300"
           style={{ cornerShape: "squircle" } as React.CSSProperties}
         >
           {children}

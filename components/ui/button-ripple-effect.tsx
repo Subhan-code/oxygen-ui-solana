@@ -39,7 +39,7 @@ export default function ButtonRippleEffect() {
         className="relative overflow-hidden rounded-xl bg-zinc-900 px-6 py-3 font-semibold text-white shadow-lg transition-transform active:scale-95 dark:bg-white dark:text-zinc-900"
         onClick={createRipple}
       >
-        <span>Click for Ripple</span>
+        <span>Authorize Transaction</span>
         {ripples.map((ripple) => (
           <span
             key={ripple.id}
@@ -58,7 +58,7 @@ export default function ButtonRippleEffect() {
       <style jsx>{`
         @keyframes ripple {
           0% {
-            transform: scale(0);
+            transform: scale(0.95);
             opacity: 0.6;
           }
           100% {

@@ -62,7 +62,7 @@ export function CryptoMobileBrowserBar({
           </button>
           <div className="flex items-center gap-1.5 px-2">
             <Lock className="h-3 w-3 text-emerald-400" />
-            <span className="text-xs font-semibold tracking-tight text-zinc-200 truncate max-w-[140px]">
+            <span className="text-xs font-semibold tracking-tight leading-tight text-zinc-200 truncate max-w-[140px]">
               {url}
             </span>
           </div>

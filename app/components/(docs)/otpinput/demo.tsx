@@ -9,7 +9,7 @@ export default function OtpInputPage() {
   const [status, setStatus] = useState<OtpStatus>("idle");
 
   return (
-    <div className="relative flex h-full flex-col items-center justify-center gap-6">
+    <div className="relative flex h-full flex-col items-center justify-center gap-6 w-full transition-all duration-300">
       <OtpInput
         length={6}
         status={status}
@@ -20,7 +20,7 @@ export default function OtpInputPage() {
         }
       />
       <p className="text-sm text-foreground/50">
-        Enter {CORRECT_CODE} to pass. Any other code fails.
+        Enter {CORRECT_CODE} to authorize transfer. Any other code fails.
       </p>
     </div>
   );

@@ -6,7 +6,7 @@ import { User, MessageSquare, Bookmark, History, Settings, HelpCircle, X } from 
 import { cn } from "@/lib/utils"
 
 export interface CryptoWalletDrawerProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   domainHandle?: string
   networkName?: string
   onClose?: () => void

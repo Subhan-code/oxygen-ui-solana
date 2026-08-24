@@ -6,7 +6,7 @@ import { Plus, Send, Download, RefreshCw } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoProgressRingProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   solBalance?: number
   stakingHealthPercent?: number
 }

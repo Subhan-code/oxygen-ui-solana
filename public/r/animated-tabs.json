@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "animated-tabs",
+  "title": "Animated Tabs",
+  "description": "Animated Tabs component for Oxygen UI.",
+  "files": [
+    {
+      "path": "components/ui/animated-tabs.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion } from \"motion/react\";\nimport { Coins, Image, Lock, Activity, Wallet } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface TabItem {\n  id: string;\n  label: string;\n  icon?: React.ElementType;\n}\n\nconst DEFAULT_TABS: TabItem[] = [\n  { id: \"tokens\", label: \"Tokens\", icon: Coins },\n  { id: \"nfts\", label: \"NFTs\", icon: Image },\n  { id: \"staking\", label: \"Staking\", icon: Lock },\n  { id: \"activity\", label: \"Activity\", icon: Activity },\n  { id: \"vaults\", label: \"Vaults\", icon: Wallet },\n];\n\nexport interface AnimatedTabsProps extends React.HTMLAttributes<HTMLDivElement> {\n  tabs?: TabItem[];\n  defaultTab?: string;\n  onTabChange?: (id: string) => void;\n}\n\nexport function AnimatedTabs({\n  tabs = DEFAULT_TABS,\n  defaultTab = \"tokens\",\n  onTabChange,\n  className,\n  ...props\n}: AnimatedTabsProps) {\n  const [activeTab, setActiveTab] = useState(defaultTab);\n\n  const handleSelect = (id: string) => {\n    setActiveTab(id);\n    onTabChange?.(id);\n  };\n\n  return (\n    <div\n      data-slot=\"animated-tabs\"\n      className={cn(\n        \"relative flex items-center gap-1 rounded-2xl bg-zinc-100 p-1.5 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 select-none\",\n        className\n      )}\n      {...props}\n    >\n      {tabs.map((tab) => {\n        const isActive = activeTab === tab.id;\n        const Icon = tab.icon;\n\n        return (\n          <button\n            key={tab.id}\n            type=\"button\"\n            onClick={() => handleSelect(tab.id)}\n            className={cn(\n              \"relative flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-bold transition-colors duration-200 cursor-pointer active:scale-95\",\n              isActive\n                ? \"text-zinc-950 dark:text-white\"\n                : \"text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200\"\n            )}\n          >\n            {isActive && (\n              <motion.div\n                layoutId=\"active-pill\"\n                transition={{ type: \"spring\", stiffness: 400, damping: 30 }}\n                className=\"absolute inset-0 rounded-xl bg-white shadow-xs dark:bg-zinc-800\"\n              />\n            )}\n            {Icon && <Icon className=\"relative z-10 h-3.5 w-3.5\" />}\n            <span className=\"relative z-10\">{tab.label}</span>\n          </button>\n        );\n      })}\n    </div>\n  );\n}\n\nexport default AnimatedTabs;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

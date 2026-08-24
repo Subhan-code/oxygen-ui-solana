@@ -6,7 +6,7 @@ import { Heart, Share2, ChevronDown, ChevronRight, SlidersHorizontal } from "luc
 import { cn } from "@/lib/utils"
 
 export interface CryptoTokenDetailsScreenProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   tokenName?: string
   priceUsd?: number
   changeUsd?: number

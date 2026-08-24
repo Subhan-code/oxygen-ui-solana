@@ -6,7 +6,7 @@ import { X, Share2, Settings, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoUserProfileProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   username?: string
   tradeVolumeUsd?: number
   followersCount?: number
@@ -50,7 +50,7 @@ export function CryptoUserProfile({
               <X className="h-4 w-4" />
             </button>
           )}
-          <h2 className="text-base font-bold tracking-tight text-white">{username}</h2>
+          <h2 className="text-base font-bold tracking-tight leading-tight text-white">{username}</h2>
         </div>
         <span className="rounded-full bg-blue-950/60 border border-blue-800/50 px-2.5 py-0.5 text-[11px] font-semibold text-blue-300">
           Solana ID

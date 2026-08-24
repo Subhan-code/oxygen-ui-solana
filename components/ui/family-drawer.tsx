@@ -42,6 +42,7 @@ export default function FamilyDrawer() {
             // eslint-disable-next-line react-hooks/refs
             bounds.height - previousHeightRef.current,
         );
+        // eslint-disable-next-line react-hooks/refs
         previousHeightRef.current = bounds.height;
 
         const duration = Math.min(
@@ -59,7 +60,7 @@ export default function FamilyDrawer() {
                 onClick={() => setIsOpen(true)}
                 style={{ fontFamily: "var(--font-open-runde)" }}
             >
-                Try it out
+                Manage Wallet
             </button>
             <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
                 <Drawer.Portal>

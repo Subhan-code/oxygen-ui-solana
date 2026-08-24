@@ -50,7 +50,7 @@ export default function NotificationBadge() {
           will-change: transform, opacity, filter;
         }
         .t-badge[data-open="false"] .t-badge-dot {
-          transform: scale(0);
+          transform: scale(0.95);
           opacity: 0;
           filter: blur(2px);
           transition:

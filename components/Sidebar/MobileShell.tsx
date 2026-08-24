@@ -20,9 +20,11 @@ export default function MobileShell({
   return (
     <div className="no-scrollbar h-full overflow-y-auto">
       <div className="flex flex-col gap-2 pb-2">
-        <div className={cn(CARD, "relative h-[88svh] shrink-0 p-4")}>
+        <div className={cn(CARD, "relative flex h-[88svh] w-full shrink-0 flex-col items-center justify-center overflow-auto p-4 transition-all duration-300")}>
           <MobileSidebar />
-          {children}
+          <div className="flex h-full w-full flex-col items-center justify-center overflow-auto">
+            {children}
+          </div>
         </div>
 
         <div className={cn(CARD, "p-6")}>

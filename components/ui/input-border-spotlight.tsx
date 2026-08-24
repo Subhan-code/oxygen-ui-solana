@@ -57,7 +57,7 @@ export default function InputBorderSpotlight() {
           type="text"
           onFocus={handleFocus}
           onBlur={handleBlur}
-          placeholder="Hover or focus for spotlight border..."
+          placeholder="Search Solana tokens, mint addresses, transactions..."
           className="relative w-full rounded-[10px] bg-white px-4 py-2.5 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-500"
         />
       </div>

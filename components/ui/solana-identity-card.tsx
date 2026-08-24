@@ -6,7 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export interface SolanaIdentityCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   address?: string;
   domain?: string;
   avatarUrl?: string;
@@ -55,7 +55,7 @@ export function SolanaIdentityCard({
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xs">
+          <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-purple-600 dark:bg-purple-500 text-white shadow-xs">
             {avatarUrl ? (
               <img
                 src={avatarUrl}

@@ -6,7 +6,7 @@ import { Search, ChevronRight, Wallet, Sliders, Shield, Globe, Users, Code, X } 
 import { cn } from "@/lib/utils"
 
 export interface CryptoWalletSettingsProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   domainHandle?: string
   onClose?: () => void
 }

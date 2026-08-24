@@ -5,8 +5,8 @@ import { motion } from "motion/react"
 import { Search, ChevronRight, Bookmark, Info } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export interface CryptoExploreNewsProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export type CryptoExploreNewsProps =
+  Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart">;
 
 export function CryptoExploreNews({ className, ...props }: CryptoExploreNewsProps) {
   const news = [

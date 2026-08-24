@@ -45,45 +45,45 @@ export default function Demo() {
 
   const settingsRows = [
     {
-      title: "Wi-Fi 6E Wireless",
-      desc: "Connect automatically to known high-speed networks",
+      title: "Solana Priority Gas Fees",
+      desc: "Submit dynamic compute unit price to land transactions fast",
       variant: "electric-blue" as TogglePillVariant,
       defaultVal: true,
     },
     {
-      title: "Bluetooth Accessories",
-      desc: "Pair keyboard, trackpad, and wireless headphones",
+      title: "RPC Cluster Failover",
+      desc: "Switch automatically between Helius, Triton, and Alchemy endpoints",
       variant: "apple-ios" as TogglePillVariant,
       defaultVal: true,
     },
     {
-      title: "Dark Mode Appearance",
-      desc: "Switch system chrome to high-contrast monochrome dark",
+      title: "Auto-Approve Micro-Swaps",
+      desc: "Bypass confirmation modal for trades below 0.1 SOL",
       variant: "monochrome-dark" as TogglePillVariant,
       defaultVal: true,
     },
     {
-      title: "Acoustic Click Sound",
-      desc: "Play physical synthesized tick upon switch toggling",
+      title: "MEV Protection & Jito Bundles",
+      desc: "Route swap transactions through private mempool to avoid sandwich attacks",
       variant: "linear-indigo" as TogglePillVariant,
       defaultVal: false,
     },
     {
-      title: "Two-Factor Hardware Key",
-      desc: "Require biometric security authentication for sensitive actions",
+      title: "Hardware Ledger Signer",
+      desc: "Require Ledger Nano or Keystone biometric signing for transfers",
       variant: "spotify-green" as TogglePillVariant,
       defaultVal: true,
     },
     {
-      title: "Hardware Acceleration Boost",
-      desc: "Enable dedicated GPU compositor for smooth 120fps spring physics",
+      title: "Real-time WebSocket Streaming",
+      desc: "Stream live SPL token account balance updates via Solana Geyser RPC",
       variant: "electric-blue" as TogglePillVariant,
       defaultVal: true,
     },
   ];
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-12 p-6 md:p-10 select-none">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-12 p-6 md:p-10 select-none items-center justify-center transition-all duration-300">
       {/* Header Specs Bar */}
       <header className="flex flex-col items-center gap-3 text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-1.5 text-xs font-semibold shadow-xs backdrop-blur-md dark:border-white/15 dark:bg-white/10 text-sky-500">

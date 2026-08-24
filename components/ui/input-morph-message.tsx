@@ -15,7 +15,9 @@ export default function InputMorphMessage() {
       id: number;
       text: string;
     }[]
-  >([]);
+  >([
+    { id: 1, text: "Swapped 5.4 SOL for 1,200 USDC on Jupiter" },
+  ]);
   const [newMessage, setNewMessage] = useState<string>('');
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -52,7 +54,7 @@ export default function InputMorphMessage() {
             onChange={(e) => setNewMessage(e.target.value)}
             value={newMessage}
             className="relative h-9 w-[250px] grow rounded-full border border-gray-200 bg-white px-3 text-[15px] outline-hidden placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-blue-500/20 focus-visible:ring-offset-1 dark:border-black/60 dark:bg-black dark:text-gray-50 dark:placeholder-gray-500 dark:focus-visible:ring-blue-500/20 dark:focus-visible:ring-offset-1 dark:focus-visible:ring-offset-gray-700"
-            placeholder="Type your message"
+            placeholder="Send on-chain memo..."
           />
           <motion.div
             key={messages.length}

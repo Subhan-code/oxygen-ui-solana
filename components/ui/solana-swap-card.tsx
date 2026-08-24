@@ -20,7 +20,7 @@ const SWAP_TOKENS: SwapToken[] = [
 ];
 
 export interface SolanaSwapCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   defaultPayToken?: string;
   defaultReceiveToken?: string;
   slippagePct?: number;
@@ -180,7 +180,7 @@ export function SolanaSwapCard({
         onClick={handleSwap}
         disabled={swapping || payValueNum <= 0}
         whileTap={reduceMotion ? {} : { scale: 0.98 }}
-        className="mt-1 flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 font-runde text-sm font-semibold text-white shadow-xs transition-opacity hover:opacity-95 disabled:opacity-50"
+        className="mt-1 flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 dark:bg-blue-500 font-runde text-sm font-semibold text-white shadow-xs transition-opacity hover:opacity-95 disabled:opacity-50"
       >
         {swapping ? (
           <>

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glass-filter",
+  "title": "Glass Filter",
+  "description": "Glass Filter component for Oxygen UI.",
+  "files": [
+    {
+      "path": "components/ui/glass-filter.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface GlassFilterProps extends React.SVGAttributes<SVGSVGElement> {\n  id?: string;\n  baseFrequency?: string;\n  stdDeviation?: number;\n  scale?: number;\n  className?: string;\n}\n\nexport function GlassFilter({\n  id = \"radio-glass\",\n  baseFrequency = \"0.05 0.05\",\n  stdDeviation = 2,\n  scale = 30,\n  className,\n  ...props\n}: GlassFilterProps) {\n  return (\n    <svg\n      aria-hidden=\"true\"\n      data-slot=\"glass-filter\"\n      className={cn(\"hidden pointer-events-none absolute w-0 h-0 overflow-hidden\", className)}\n      {...props}\n    >\n      <defs>\n        <filter\n          id={id}\n          x=\"0%\"\n          y=\"0%\"\n          width=\"100%\"\n          height=\"100%\"\n          colorInterpolationFilters=\"sRGB\"\n        >\n          <feTurbulence\n            type=\"fractalNoise\"\n            baseFrequency={baseFrequency}\n            numOctaves=\"1\"\n            seed=\"1\"\n            result=\"turbulence\"\n          />\n          <feGaussianBlur in=\"turbulence\" stdDeviation={stdDeviation} result=\"blurredNoise\" />\n          <feDisplacementMap\n            in=\"SourceGraphic\"\n            in2=\"blurredNoise\"\n            scale={scale}\n            xChannelSelector=\"R\"\n            yChannelSelector=\"B\"\n            result=\"displaced\"\n          />\n          <feGaussianBlur in=\"displaced\" stdDeviation={stdDeviation} result=\"finalBlur\" />\n          <feComposite in=\"finalBlur\" in2=\"finalBlur\" operator=\"over\" />\n        </filter>\n      </defs>\n    </svg>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

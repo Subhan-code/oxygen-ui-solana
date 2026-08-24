@@ -5,11 +5,11 @@ import ViewAllCard from "./gallery/ViewAllCard";
 export default function ComponentsShowcase() {
   // Select top showcase items for the Bento Grid layout
   const featuredHrefs = [
-    "/components/otpinput",
-    "/components/bouncesidebar",
-    "/components/proximitysidebar",
-    "/components/scrollprogressindicator",
-    "/components/githubactivity",
+    "/components/cryptowalletdashboard",
+    "/components/solanaswapcard",
+    "/components/cryptotradingterminal",
+    "/components/solanaidentitycard",
+    "/components/holdtoconfirm",
   ];
 
   const showcaseItems = components.filter((item) =>

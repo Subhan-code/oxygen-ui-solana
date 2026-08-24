@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-image-reveal",
+  "title": "Scroll Image Reveal",
+  "description": "Images reveal with a clip-path curtain effect as you scroll into viewport.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/scroll-image-reveal.tsx",
+      "content": "\"use client\";\n\nimport React, { useRef } from \"react\";\nimport { motion, useScroll, useTransform, useReducedMotion } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ScrollImageItem {\n  src: string;\n  alt?: string;\n  aspectRatio?: string;\n}\n\nconst DEFAULT_IMAGES: ScrollImageItem[] = [\n  {\n    src: \"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80\",\n    alt: \"Mountain valley landscape\",\n    aspectRatio: \"666 / 500\",\n  },\n  {\n    src: \"https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1200&q=80\",\n    alt: \"Misty evergreen forest\",\n    aspectRatio: \"667 / 500\",\n  },\n  {\n    src: \"https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80\",\n    alt: \"Wilderness nature trail\",\n    aspectRatio: \"375 / 500\",\n  },\n  {\n    src: \"https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80\",\n    alt: \"Foggy mountain range\",\n    aspectRatio: \"667 / 500\",\n  },\n];\n\nexport interface ScrollImageRevealProps\n  extends React.HTMLAttributes<HTMLDivElement> {\n  items?: ScrollImageItem[];\n  title?: string;\n}\n\nexport function ScrollImageReveal({\n  items = DEFAULT_IMAGES,\n  title = \"Curtain Reveal\",\n  className,\n  ...props\n}: ScrollImageRevealProps) {\n  return (\n    <div\n      data-slot=\"scroll-image-reveal\"\n      className={cn(\"w-full overflow-visible\", className)}\n      {...props}\n    >\n      {title ? (\n        <section className=\"flex h-36 items-center justify-center\">\n          <h2 className=\"text-3xl font-black tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl uppercase text-center\">\n            {title}\n          </h2>\n        </section>\n      ) : null}\n\n      <div className=\"flex flex-col gap-16 py-8\">\n        {items.map((item, index) => (\n          <RevealCard key={item.src + index} item={item} />\n        ))}\n      </div>\n    </div>\n  );\n}\n\nfunction RevealCard({ item }: { item: ScrollImageItem }) {\n  const containerRef = useRef<HTMLDivElement>(null);\n  const shouldReduceMotion = useReducedMotion();\n\n  const { scrollYProgress } = useScroll({\n    target: containerRef,\n    offset: [\"start end\", \"end start\"],\n  });\n\n  const clipInset = useTransform(\n    scrollYProgress,\n    [0.15, 0.45, 0.75, 1],\n    [50, 0, 0, 50]\n  );\n\n  const clipPath = useTransform(\n    clipInset,\n    (val) => (shouldReduceMotion ? \"none\" : `inset(0% ${val}% 0% ${val}%)`)\n  );\n\n  const translateY = useTransform(\n    scrollYProgress,\n    [0.15, 0.5, 0.85],\n    [10, 0, -10]\n  );\n\n  return (\n    <div\n      ref={containerRef}\n      className=\"w-full max-w-3xl mx-auto px-4\"\n    >\n      <motion.div\n        style={{\n          clipPath,\n          aspectRatio: item.aspectRatio || \"16 / 10\",\n        }}\n        className=\"w-full overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-900 shadow-2xl will-change-[clip-path]\"\n      >\n        <motion.div\n          style={{\n            y: shouldReduceMotion ? 0 : translateY,\n          }}\n          className=\"h-full w-full relative\"\n        >\n          {/* eslint-disable-next-line @next/next/no-img-element */}\n          <img\n            src={item.src}\n            alt={item.alt || \"Reveal landscape\"}\n            className=\"h-full w-full object-cover select-none pointer-events-none\"\n            draggable={false}\n          />\n        </motion.div>\n      </motion.div>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

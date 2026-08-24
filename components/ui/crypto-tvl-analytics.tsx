@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoTvlAnalyticsProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   totalTvl?: string
   growth?: string
   inflow?: string
@@ -52,7 +52,7 @@ export function CryptoTvlAnalytics({
       <div className="relative mb-3 pb-2 border-b border-zinc-900">
         <span className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Solana Total Value Locked</span>
         <div className="flex items-baseline gap-2 mt-1">
-          <span className="text-2xl font-bold tracking-tight text-white">{totalTvl}</span>
+          <span className="text-2xl font-bold tracking-tight leading-tight text-white">{totalTvl}</span>
           <span className="text-xs font-semibold text-blue-400 flex items-center gap-0.5">
             <ArrowUpRight className="h-3.5 w-3.5" />
             {growth}

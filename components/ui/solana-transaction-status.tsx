@@ -2,13 +2,13 @@
 
 import React from "react";
 import { AlertCircle, CheckCircle2, Clock, ExternalLink, Loader2 } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export type TransactionState = "finalized" | "confirmed" | "processing" | "failed";
 
 export interface SolanaTransactionStatusProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   signature?: string;
   status?: TransactionState;
   amountSol?: number;

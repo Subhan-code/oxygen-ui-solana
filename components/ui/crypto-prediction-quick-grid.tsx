@@ -5,8 +5,8 @@ import { motion } from "motion/react"
 import { Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export interface CryptoPredictionQuickGridProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export type CryptoPredictionQuickGridProps =
+  Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart">;
 
 export function CryptoPredictionQuickGrid({ className, ...props }: CryptoPredictionQuickGridProps) {
   const quickMarkets = [

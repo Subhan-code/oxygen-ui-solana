@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { motion } from "motion/react"
-import { ArrowUpRight } from "lucide-react"
-import { cn } from "@/lib/utils"
+import React, { useState } from "react";
+import { motion } from "motion/react";
+import { ArrowUpRight, TrendingUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface CryptoTvlAnalyticsChartProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  totalTvl?: string
-  growth?: string
-  inflow?: string
-  outflow?: string
-  netFlow?: string
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
+  totalTvl?: string;
+  growth?: string;
+  inflow?: string;
+  outflow?: string;
+  netFlow?: string;
 }
 
 export function CryptoTvlAnalyticsChart({
@@ -23,19 +23,37 @@ export function CryptoTvlAnalyticsChart({
   className,
   ...props
 }: CryptoTvlAnalyticsChartProps) {
-  const [activeTab, setActiveTab] = useState<"7D" | "30D" | "90D" | "ALL TIME">("7D")
-  const [hoverIndex, setHoverIndex] = useState<number | null>(4)
+  const [activeTab, setActiveTab] = useState<"7D" | "30D" | "90D" | "ALL TIME">("7D");
+  const [hoverIndex, setHoverIndex] = useState<number | null>(4);
 
   const dataPoints = [
-    { label: "AUG 20", tvl: "$1.42B", txs: "290K", y: 80 },
-    { label: "AUG 21", tvl: "$1.35B", txs: "275K", y: 105 },
-    { label: "AUG 22", tvl: "$1.48B", txs: "310K", y: 75 },
-    { label: "AUG 23", tvl: "$1.52B", txs: "330K", y: 65 },
-    { label: "AUG 24", tvl: "$1.61B", txs: "356.4K", y: 40 },
-    { label: "AUG 25", tvl: "$1.72B", txs: "390K", y: 25 },
-  ]
+    { label: "AUG 20", tvl: "$1.42B", txs: "290K", value: 1.42 },
+    { label: "AUG 21", tvl: "$1.35B", txs: "275K", value: 1.35 },
+    { label: "AUG 22", tvl: "$1.48B", txs: "310K", value: 1.48 },
+    { label: "AUG 23", tvl: "$1.52B", txs: "330K", value: 1.52 },
+    { label: "AUG 24", tvl: "$1.61B", txs: "356.4K", value: 1.61 },
+    { label: "AUG 25", tvl: "$1.72B", txs: "390K", value: 1.72 },
+  ];
 
-  const activePoint = hoverIndex !== null ? dataPoints[hoverIndex] : dataPoints[4]
+  // SVG coordinate calculations (Width: 300, Height: 120)
+  const minVal = 1.2;
+  const maxVal = 1.8;
+  const getX = (idx: number) => 20 + idx * 52;
+  const getY = (val: number) => 110 - ((val - minVal) / (maxVal - minVal)) * 90;
+
+  const points = dataPoints.map((pt, idx) => ({
+    x: getX(idx),
+    y: getY(pt.value),
+    ...pt,
+  }));
+
+  const pathD = points.reduce((acc, pt, i) => {
+    return i === 0 ? `M ${pt.x} ${pt.y}` : `${acc} L ${pt.x} ${pt.y}`;
+  }, "");
+
+  const areaD = `${pathD} L ${points[points.length - 1].x} 120 L ${points[0].x} 120 Z`;
+
+  const activePoint = hoverIndex !== null ? points[hoverIndex] : points[4];
 
   return (
     <motion.div
@@ -44,116 +62,104 @@ export function CryptoTvlAnalyticsChart({
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", bounce: 0, duration: 0.35 }}
       className={cn(
-        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800/80 font-sans",
+        "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800/80 font-sans",
         className
       )}
       {...props}
     >
-      <div className="relative mb-3 pb-2 border-b border-zinc-900">
-        <span className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Total Value Locked</span>
-        <div className="flex items-baseline gap-2 mt-1">
-          <span className="text-2xl font-bold tracking-tight text-white">{totalTvl}</span>
-          <span className="text-xs font-semibold text-blue-400 flex items-center gap-0.5">
-            <ArrowUpRight className="h-3.5 w-3.5" />
-            {growth}
-          </span>
+      <div className="relative mb-3 pb-2 border-b border-zinc-900 flex items-center justify-between">
+        <div>
+          <span className="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Total Value Locked</span>
+          <div className="flex items-baseline gap-2 mt-1">
+            <span className="text-2xl font-bold tracking-tight leading-tight text-white">{activePoint.tvl}</span>
+            <span className="text-xs font-semibold text-blue-400 flex items-center gap-0.5">
+              <ArrowUpRight className="h-3.5 w-3.5" />
+              {growth}
+            </span>
+          </div>
+          <p className="text-[10px] text-zinc-500 font-mono mt-0.5">{activePoint.label} · Txs: {activePoint.txs}</p>
+        </div>
+
+        <div className="flex gap-1 rounded-xl bg-zinc-900 p-1 border border-zinc-800 text-[10px] font-mono">
+          {(["7D", "30D", "90D"] as const).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setActiveTab(tab)}
+              className={cn(
+                "px-2 py-1 rounded-lg transition-colors cursor-pointer active:scale-95",
+                activeTab === tab ? "bg-blue-600 text-white font-bold" : "text-zinc-400 hover:text-white"
+              )}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
       </div>
 
-      <div className="relative h-44 w-full my-2 border-b border-zinc-800">
-        <svg className="h-full w-full overflow-visible" viewBox="0 0 300 130">
-          <path
-            d="M 0 80 L 30 105 L 60 75 L 90 65 L 140 40 L 300 25"
-            fill="none"
-            stroke="#3b82f6"
-            strokeWidth="2"
-          />
+      <div className="relative h-36 w-full my-2">
+        <svg className="h-full w-full overflow-visible" viewBox="0 0 300 120">
+          <defs>
+            <linearGradient id="tvl-gradient-area" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.0" />
+            </linearGradient>
+          </defs>
+
+          <path d={areaD} fill="url(#tvl-gradient-area)" />
+          <path d={pathD} fill="none" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 
           {hoverIndex !== null && (
             <g>
               <line
-                x1={hoverIndex * 55 + 20}
+                x1={points[hoverIndex].x}
                 y1="0"
-                x2={hoverIndex * 55 + 20}
-                y2="130"
-                stroke="#52525b"
-                strokeWidth="1"
-                strokeDasharray="2 2"
+                x2={points[hoverIndex].x}
+                y2="120"
+                stroke="#3f3f46"
+                strokeWidth="1.5"
+                strokeDasharray="3 3"
               />
               <circle
-                cx={hoverIndex * 55 + 20}
-                cy={dataPoints[hoverIndex].y}
-                r="4"
+                cx={points[hoverIndex].x}
+                cy={points[hoverIndex].y}
+                r="5"
                 fill="#3b82f6"
                 stroke="#09090b"
-                strokeWidth="2"
+                strokeWidth="2.5"
               />
             </g>
           )}
 
-          {dataPoints.map((pt, idx) => (
+          {points.map((pt, idx) => (
             <rect
               key={idx}
-              x={idx * 55}
+              x={pt.x - 20}
               y="0"
-              width="50"
-              height="130"
+              width="40"
+              height="120"
               fill="transparent"
               className="cursor-pointer"
               onMouseEnter={() => setHoverIndex(idx)}
             />
           ))}
         </svg>
-
-        {activePoint && (
-          <div className="absolute top-2 right-2 rounded-xl border border-zinc-800 bg-zinc-900 p-2.5 shadow-xl text-[10px] space-y-1">
-            <div className="text-zinc-400 font-bold uppercase">{activePoint.label}</div>
-            <div className="flex gap-4 pt-1">
-              <div>
-                <span className="block text-[9px] text-zinc-500 uppercase">TVL</span>
-                <span className="font-bold text-white text-xs">{activePoint.tvl}</span>
-              </div>
-              <div>
-                <span className="block text-[9px] text-zinc-500 uppercase">Transactions</span>
-                <span className="font-bold text-white text-xs">{activePoint.txs}</span>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
-      <div className="grid grid-cols-3 gap-2 py-3 border-b border-zinc-900 text-left">
-        <div>
-          <span className="block text-[10px] uppercase font-medium text-zinc-500">Inflow</span>
-          <span className="text-xs font-bold text-zinc-200 mt-0.5 block">{inflow}</span>
+      <div className="grid grid-cols-3 gap-2 mt-2 pt-3 border-t border-zinc-900 text-center font-mono text-[11px]">
+        <div className="rounded-xl bg-zinc-900/60 p-2 border border-zinc-800">
+          <span className="block text-[9px] text-zinc-500 uppercase">Inflow</span>
+          <span className="font-semibold text-emerald-400">{inflow}</span>
         </div>
-        <div>
-          <span className="block text-[10px] uppercase font-medium text-zinc-500">Outflow</span>
-          <span className="text-xs font-bold text-zinc-200 mt-0.5 block">{outflow}</span>
+        <div className="rounded-xl bg-zinc-900/60 p-2 border border-zinc-800">
+          <span className="block text-[9px] text-zinc-500 uppercase">Outflow</span>
+          <span className="font-semibold text-rose-400">{outflow}</span>
         </div>
-        <div>
-          <span className="block text-[10px] uppercase font-medium text-zinc-500">Net Flow</span>
-          <span className="text-xs font-bold text-blue-400 mt-0.5 block">{netFlow}</span>
+        <div className="rounded-xl bg-zinc-900/60 p-2 border border-zinc-800">
+          <span className="block text-[9px] text-zinc-500 uppercase">Net Flow</span>
+          <span className="font-semibold text-blue-400">{netFlow}</span>
         </div>
-      </div>
-
-      <div className="flex items-center justify-between gap-1 pt-3">
-        {(["7D", "30D", "90D", "ALL TIME"] as const).map((tab) => (
-          <button
-            key={tab}
-            type="button"
-            onClick={() => setActiveTab(tab)}
-            className={cn(
-              "flex-1 py-1 text-center text-[10px] font-bold rounded-lg transition-colors cursor-pointer border active:scale-95",
-              activeTab === tab
-                ? "border-white bg-white text-zinc-950"
-                : "border-zinc-800 text-zinc-400 hover:text-white"
-            )}
-          >
-            {tab}
-          </button>
-        ))}
       </div>
     </motion.div>
-  )
+  );
 }

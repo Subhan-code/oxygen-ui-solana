@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 
 export default function ErrorStateShake() {
-  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [isError, setIsError] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.includes("@")) {
+    const isValid = address.endsWith(".sol") || address.length >= 32;
+    if (!isValid || !address.trim()) {
       setIsError(true);
       setIsShaking(false);
       requestAnimationFrame(() => {
@@ -22,7 +23,6 @@ export default function ErrorStateShake() {
     } else {
       setIsError(false);
       setIsShaking(false);
-      alert("Submitted successfully!");
     }
   };
 
@@ -39,20 +39,20 @@ export default function ErrorStateShake() {
           >
             <input
               type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email..."
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Enter wallet address or .sol domain..."
               className="w-full bg-transparent text-sm text-zinc-900 outline-none dark:text-zinc-100 placeholder:text-zinc-400"
             />
             <button
               type="submit"
               className="ml-2 rounded-lg bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white dark:bg-white dark:text-zinc-900"
             >
-              Submit
+              Verify
             </button>
           </div>
           <p className="t-error-msg mt-2 text-xs font-medium text-red-500 dark:text-red-400">
-            Please enter a valid email address.
+            Invalid Solana public key or SNS domain format.
           </p>
         </div>
       </form>

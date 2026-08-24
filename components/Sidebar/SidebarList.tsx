@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import React, { useRef, useState, useCallback, memo } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { components } from "@/lib/components";
+import React, { useRef, useState, useCallback, memo } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { components } from "@/lib/components"
 import {
   motion,
   useMotionValue,
   useSpring,
   useTransform,
-  MotionValue,
-} from "motion/react";
+  type MotionValue,
+} from "motion/react"
 
-const RADIUS = 45;
-const BASE_WIDTH = 32;
-const MAX_WIDTH = 55;
+const RADIUS = 45
+const BASE_WIDTH = 32
+const MAX_WIDTH = 55
 
 const ProximityScaleItem = memo(function ProximityScaleItem({
   component,
@@ -23,43 +23,44 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
   mouseY,
   onNavigate,
 }: {
-  component: (typeof components)[number];
-  index: number;
-  isActive: boolean;
-  mouseY: MotionValue<number>;
-  onNavigate?: () => void;
+  component: (typeof components)[number]
+  index: number
+  isActive: boolean
+  mouseY: MotionValue<number>
+  onNavigate?: () => void
 }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const numStr = String(index + 1).padStart(2, "0");
+  const ref = useRef<HTMLAnchorElement>(null)
+  const numStr = String(index + 1).padStart(2, "0")
 
   const distance = useTransform(mouseY, (y) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return RADIUS;
-    return y - (rect.top + rect.height / 2);
-  });
+    const rect = ref.current?.getBoundingClientRect()
+    if (!rect) return RADIUS
+    return y - (rect.top + rect.height / 2)
+  })
 
   const targetWidth = useTransform(
     distance,
     [-RADIUS, 0, RADIUS],
     [BASE_WIDTH, MAX_WIDTH, BASE_WIDTH],
     { clamp: true }
-  );
+  )
 
   const proxWidth = useSpring(targetWidth, {
     stiffness: 350,
     damping: 30,
     mass: 0.6,
-  });
+  })
 
   return (
     <Link
       ref={ref}
       href={component.href}
       onClick={onNavigate}
-      className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px]"
+      title={`${numStr} ${component.name}`}
+      className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px] min-w-0 max-w-full"
     >
       <motion.span
-        className={`inline-block h-[1px] transition-colors duration-150 ${
+        className={`inline-block h-[1px] shrink-0 transition-colors duration-150 ${
           isActive
             ? "bg-sky-500"
             : "bg-zinc-300 dark:bg-white/20 group-hover:bg-sky-500"
@@ -69,7 +70,7 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
         }}
       />
       <span
-        className={`whitespace-nowrap transition-all ease-out ${
+        className={`truncate min-w-0 max-w-[210px] transition-all ease-out ${
           isActive
             ? "text-sky-500 opacity-100 font-medium"
             : "opacity-60 text-zinc-700 dark:text-white group-hover:text-sky-500 group-hover:opacity-100"
@@ -78,27 +79,27 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
         {numStr} {component.name}
       </span>
     </Link>
-  );
-});
+  )
+})
 
 const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
-  const pathname = usePathname();
-  const [sortMode, setSortMode] = useState<"id" | "reverse">("id");
-  const mouseY = useMotionValue(Infinity);
+  const pathname = usePathname()
+  const [sortMode, setSortMode] = useState<"id" | "reverse">("id")
+  const mouseY = useMotionValue(Infinity)
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent) => {
-      mouseY.set(e.clientY);
+      mouseY.set(e.clientY)
     },
     [mouseY]
-  );
+  )
 
   const handlePointerLeave = useCallback(() => {
-    mouseY.set(Infinity);
-  }, [mouseY]);
+    mouseY.set(Infinity)
+  }, [mouseY])
 
   const displayList =
-    sortMode === "reverse" ? [...components].reverse() : components;
+    sortMode === "reverse" ? [...components].reverse() : components
 
   return (
     <div
@@ -146,8 +147,8 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
 
       {/* All Components header */}
       <div className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px]">
-        <span className="bg-zinc-900 dark:bg-white inline-block h-[1px] w-[32px]" />
-        <span className="whitespace-nowrap transition-all ease-out opacity-100 text-zinc-900 dark:text-white font-medium">
+        <span className="bg-zinc-900 dark:bg-white inline-block h-[1px] w-[32px] shrink-0" />
+        <span className="whitespace-nowrap transition-all ease-out opacity-100 text-zinc-900 dark:text-white font-medium truncate">
           All Components
         </span>
       </div>
@@ -160,8 +161,8 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
       {displayList.map((component, idx) => {
         const originalIndex = components.findIndex(
           (c) => c.href === component.href
-        );
-        const isActive = pathname === component.href;
+        )
+        const isActive = pathname === component.href
 
         return (
           <React.Fragment key={component.href}>
@@ -179,10 +180,10 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
               </>
             )}
           </React.Fragment>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default SidebarList;
+export default SidebarList

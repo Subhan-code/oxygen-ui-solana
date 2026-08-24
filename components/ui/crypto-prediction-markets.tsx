@@ -6,7 +6,7 @@ import { Clock, Search, Vote } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoPredictionMarketsProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   onPredict?: (marketId: string, choice: string) => void
 }
 

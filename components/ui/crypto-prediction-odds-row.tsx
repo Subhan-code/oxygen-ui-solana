@@ -5,16 +5,14 @@ import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoPredictionOddsRowProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   candidateName?: string
   oddsPercent?: number
-  volumeUsd?: string
 }
 
 export function CryptoPredictionOddsRow({
   candidateName = "Solana Spot ETF Approval",
   oddsPercent = 72,
-  volumeUsd = "$4.2M",
   className,
   ...props
 }: CryptoPredictionOddsRowProps) {

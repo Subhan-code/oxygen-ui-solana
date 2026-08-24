@@ -16,17 +16,12 @@ import {
   HelpCircle,
   Shield,
   Sliders,
-  Globe,
-  Users,
-  Code,
-  Share2,
-  Info,
   Wallet,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoWalletDashboardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   accountName?: string
   balanceUsd?: number
   changeUsd?: number

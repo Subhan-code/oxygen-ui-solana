@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hold-confirm-button",
+  "title": "Hold Confirm Button",
+  "description": "Hold Confirm Button component micro-interaction.",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/hold-confirm-button.tsx",
+      "content": "\"use client\";\n\nimport React, { useState, useRef } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface HoldConfirmButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  label?: string;\n  onConfirmed?: () => void;\n}\n\nexport function HoldConfirmButton({\n  label = \"Hold to Confirm\",\n  onConfirmed,\n  className,\n  ...props\n}: HoldConfirmButtonProps) {\n  const [holdTime, setHoldTime] = useState(0);\n  const [confirmed, setConfirmed] = useState(false);\n  const timerRef = useRef<NodeJS.Timeout | null>(null);\n\n  const handleStart = () => {\n    if (confirmed) return;\n    timerRef.current = setInterval(() => {\n      setHoldTime((prev) => {\n        if (prev >= 100) {\n          clearInterval(timerRef.current!);\n          setConfirmed(true);\n          onConfirmed?.();\n          return 100;\n        }\n        return prev + 5;\n      });\n    }, 40);\n  };\n\n  const handleEnd = () => {\n    if (confirmed) return;\n    if (timerRef.current) clearInterval(timerRef.current);\n    setHoldTime(0);\n  };\n\n  return (\n    <button\n      type=\"button\"\n      onMouseDown={handleStart}\n      onMouseUp={handleEnd}\n      onMouseLeave={handleEnd}\n      onTouchStart={handleStart}\n      onTouchEnd={handleEnd}\n      onClick={confirmed ? () => { setConfirmed(false); setHoldTime(0); } : undefined}\n      className={cn(\n        \"relative flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold transition-all select-none cursor-pointer border shadow-md\",\n        confirmed\n          ? \"bg-emerald-600 text-white border-emerald-500\"\n          : \"bg-rose-950 text-rose-200 border-rose-800 hover:bg-rose-900\",\n        className\n      )}\n      {...props}\n    >\n      <svg className=\"h-5 w-5 -rotate-90\">\n        <circle\n          cx=\"10\"\n          cy=\"10\"\n          r=\"8\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2\"\n          className=\"opacity-20\"\n          fill=\"none\"\n        />\n        <circle\n          cx=\"10\"\n          cy=\"10\"\n          r=\"8\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2\"\n          fill=\"none\"\n          strokeDasharray=\"50\"\n          strokeDashoffset={50 - (50 * holdTime) / 100}\n          className=\"text-white transition-all duration-75\"\n        />\n      </svg>\n      <span>{confirmed ? \"Confirmed!\" : label}</span>\n    </button>\n  );\n}\n\nexport default HoldConfirmButton;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

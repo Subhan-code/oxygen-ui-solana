@@ -5,7 +5,7 @@ import { Search, SlidersHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoPredictionSearchBarProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   onSearch?: (query: string) => void
 }
 

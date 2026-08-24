@@ -19,7 +19,7 @@ export default function SuccessCheck() {
         onClick={trigger}
         className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-md hover:bg-blue-500 active:scale-95"
       >
-        Replay Success Check
+        Replay Transaction Success
       </button>
 
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-950/40">

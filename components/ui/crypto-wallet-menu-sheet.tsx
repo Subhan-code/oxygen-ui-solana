@@ -6,7 +6,7 @@ import { Search, ChevronRight, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoWalletMenuSheetProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   onConnectWallet?: () => void
   onClose?: () => void
 }

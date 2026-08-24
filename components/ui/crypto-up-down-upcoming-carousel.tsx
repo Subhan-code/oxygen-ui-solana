@@ -5,8 +5,8 @@ import { motion } from "motion/react"
 import { ChevronRight, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export interface CryptoUpDownUpcomingCarouselProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export type CryptoUpDownUpcomingCarouselProps =
+  Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart">;
 
 export function CryptoUpDownUpcomingCarousel({ className, ...props }: CryptoUpDownUpcomingCarouselProps) {
   const upcomingRounds = [

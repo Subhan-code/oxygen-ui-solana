@@ -12,8 +12,11 @@ export default function SpinningCounter() {
   const digits = String(count).padStart(4, "0").split("");
 
   return (
-    <div className="flex h-[260px] w-full flex-col items-center justify-center gap-6 p-4">
-      <div className="t-reel flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-6 py-4 text-3xl font-bold tracking-tight text-zinc-900 shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:text-white">
+    <div className="flex h-[260px] w-full flex-col items-center justify-center gap-4 p-4">
+      <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+        Live Solana Network TPS
+      </div>
+      <div className="t-reel flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-6 py-4 text-3xl font-bold tracking-tight leading-tight text-zinc-900 shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:text-white">
         {digits.map((digit, index) => {
           const digitNum = parseInt(digit, 10);
           return (

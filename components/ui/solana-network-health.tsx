@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Activity, Check, ChevronDown, Cpu, Network, Zap } from "lucide-react";
+import { Check, ChevronDown, Cpu, Network, Zap } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export interface SolanaNetworkHealthProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   tps?: number;
   pingMs?: number;
   currentEpoch?: number;
@@ -127,8 +127,8 @@ export function SolanaNetworkHealth({
           <motion.div
             initial={reduceMotion ? { width: `${epochProgressPct}%` } : { width: "0%" }}
             animate={{ width: `${epochProgressPct}%` }}
-            transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            className="h-full rounded-full bg-gradient-to-r from-purple-500 to-indigo-500"
+            transition={{ type: "spring", stiffness: 350, damping: 22 }}
+            className="h-full rounded-full bg-purple-600 dark:bg-purple-500"
           />
         </div>
       </div>

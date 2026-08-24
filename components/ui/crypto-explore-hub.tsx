@@ -6,7 +6,7 @@ import { Search, ChevronRight, Bookmark, TrendingUp, Info } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoExploreHubProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   onSelectCategory?: (category: string) => void
 }
 

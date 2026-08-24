@@ -15,7 +15,7 @@ export type TokenAsset = {
 };
 
 export interface SolanaTokenCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   portfolioName?: string;
   tokens?: TokenAsset[];
 }
@@ -27,7 +27,7 @@ const DEFAULT_TOKENS: TokenAsset[] = [
     amount: 32.4,
     usdValue: 5832.0,
     change24h: 6.42,
-    iconBg: "bg-gradient-to-br from-purple-500 to-indigo-600",
+    iconBg: "bg-purple-600 dark:bg-purple-500",
   },
   {
     symbol: "USDC",
@@ -95,7 +95,7 @@ export function SolanaTokenCard({
       </div>
 
       <div className="flex flex-col gap-1">
-        <span className="font-mono text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+        <span className="font-mono text-2xl font-bold tracking-tight leading-tight text-zinc-900 dark:text-white">
           {hideBalance
             ? "••••••••"
             : `$${totalUsd.toLocaleString("en-US", {

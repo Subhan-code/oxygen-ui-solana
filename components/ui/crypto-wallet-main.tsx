@@ -6,7 +6,7 @@ import { Search, Plus, ChevronRight, ChevronDown, Wallet } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoWalletMainProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   accountName?: string
   balanceUsd?: number
   changeUsd?: number

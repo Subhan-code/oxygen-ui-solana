@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-checkout-card",
+  "title": "Crypto Checkout Card",
+  "description": "Crypto Checkout Card component for Oxygen UI.",
+  "files": [
+    {
+      "path": "components/ui/crypto-checkout-card.tsx",
+      "content": "\"use client\";\n\nimport { PopoverSlideSelector } from \"./popover-slide-selector\";\n\nexport { PopoverSlideSelector as CheckoutCard };\nexport { PopoverSlideSelector as CryptoCheckoutCard };\nexport { PopoverSlideSelector as PaymentCheckoutCard };\nexport default PopoverSlideSelector;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,15 +1,21 @@
 "use client";
 
+import React from "react";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
 
-export const ButtonGooey = () => {
+export interface ButtonGooeyProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode;
+}
+
+export const ButtonGooey = ({ children = "Hover me", className, ...props }: ButtonGooeyProps) => {
   return (
-    <>
-      <div className="wrapper">
-        <button className="button">
-          Hover me
-          <div className="bubble">
-            <ArrowRightIcon className="h-8 w-8" />
+    <div data-slot="button-gooey-container" className={cn("relative inline-flex items-center justify-center select-none", className)}>
+      <div className="gooey-wrapper">
+        <button className="gooey-button" {...props}>
+          <span className="relative z-10 font-semibold">{children}</span>
+          <div className="gooey-bubble" aria-hidden="true">
+            <ArrowRightIcon className="h-5 w-5 text-white dark:text-zinc-950" />
           </div>
         </button>
       </div>
@@ -39,51 +45,65 @@ export const ButtonGooey = () => {
         </defs>
       </svg>
 
-      <style jsx>{`
-        .wrapper {
+      <style jsx global>{`
+        .gooey-wrapper {
           filter: url("#gooey");
-          height: 100%;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .button {
-          background: #000;
-          color: #eee;
           display: inline-flex;
-          font-weight: bold;
-          padding: 0 24px 0 24px;
-          border-radius: 12px;
-          font-size: 1.25rem;
-          line-height: 1.25rem;
-          height: 64px;
+          justify-content: center;
           align-items: center;
+          position: relative;
         }
 
-        .bubble {
-          color: #fff;
-          z-index: -10;
+        .gooey-button {
+          background: #18181b;
+          color: #ffffff;
+          display: inline-flex;
+          font-weight: 600;
+          padding: 0 28px;
+          border-radius: 14px;
+          font-size: 1rem;
+          line-height: 1.5rem;
+          height: 52px;
+          align-items: center;
+          position: relative;
+          cursor: pointer;
+          border: none;
+          outline: none;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        :global(.dark) .gooey-button {
+          background: #ffffff;
+          color: #09090b;
+        }
+
+        .gooey-bubble {
+          color: #ffffff;
+          z-index: -1;
           display: flex;
-          background: #000;
+          background: #18181b;
           align-items: center;
           justify-content: center;
-          width: 64px;
-          height: 64px;
+          width: 52px;
+          height: 52px;
           position: absolute;
-          content: "";
-          border-radius: 12px;
-          transition: transform 0.8s;
-          transition-timing-function: bezier(0.2, 0.8, 0.2, 1.2);
-          transform: translateX(80%) translateY(0%);
+          right: 0;
+          top: 0;
+          border-radius: 14px;
+          transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+          transform: translateX(0%) scale(0.85);
         }
 
-        .button:hover .bubble {
-          transform: translateX(210%) translateY(0%);
+        :global(.dark) .gooey-bubble {
+          background: #ffffff;
+          color: #09090b;
+        }
+
+        .gooey-button:hover .gooey-bubble {
+          transform: translateX(125%) scale(1);
         }
       `}</style>
-    </>
+    </div>
   );
 };
 

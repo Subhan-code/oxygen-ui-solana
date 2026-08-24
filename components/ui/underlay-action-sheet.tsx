@@ -159,23 +159,23 @@ export const UnderlayActionSheet = () => {
             >
               <div className="pb-2 pt-3">
                 <img
-                  src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=500&auto=format&fit=crop&q=60"
-                  alt="Artistic abstract artwork"
+                  src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=500&auto=format&fit=crop&q=60"
+                  alt="Oxygen Solana Pass"
                   className="h-28 w-full rounded-xl object-cover"
                 />
               </div>
               <h3 className="text-sm font-semibold text-zinc-900 dark:text-white">
-                Digital Echoes: Dreams & Empathy
+                Oxygen Genesis Pass #4821
               </h3>
               <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                In the labyrinth of the digital age, where hearts intertwine with bytes and thoughts echo in silence.
+                A rare utility collectible unlocking enhanced routing, zero-fee token swaps, and dedicated priority RPC access.
               </p>
               <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                Conversations flowed like rivers of consciousness, bridging the synthetic and organic.
+                Verified on Solana Mainnet · 142.5 SOL Floor · Staking Active.
               </p>
             </motion.div>
             <motion.div
-              className="absolute bottom-0 left-0 flex w-full items-end justify-center bg-gradient-to-t from-white via-white/80 to-transparent dark:from-zinc-950 dark:via-zinc-950/80"
+              className="absolute bottom-0 left-0 flex w-full items-end justify-center bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md"
               style={{
                 height: actionAreaHeight,
               }}
@@ -197,7 +197,7 @@ export const UnderlayActionSheet = () => {
                 whileDrag={{ cursor: "grabbing" }}
                 className="flex h-[80%] w-full items-center justify-center cursor-grab"
               >
-                <motion.button
+                <motion.button whileTap={{ scale: 0.97 }}
                   onClick={openSheet}
                   className="z-10 flex items-center justify-center rounded-lg bg-zinc-200 px-2 text-zinc-700 transition-colors hover:bg-zinc-300 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
                   style={{
@@ -235,21 +235,21 @@ export const UnderlayActionSheet = () => {
           <div className="flex flex-row space-x-2">
             <div className="flex flex-1 flex-col items-center justify-center space-y-1 rounded-xl bg-zinc-200/70 p-3 text-xs dark:bg-zinc-800/70">
               <HeartIcon className="h-4 w-4 text-zinc-700 dark:text-zinc-300" />
-              <span className="text-zinc-700 dark:text-zinc-300">Like</span>
+              <span className="text-zinc-700 dark:text-zinc-300">Stake</span>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center space-y-1 rounded-xl bg-zinc-200/70 p-3 text-xs dark:bg-zinc-800/70">
               <Share1Icon className="h-4 w-4 text-zinc-700 dark:text-zinc-300" />
-              <span className="text-zinc-700 dark:text-zinc-300">Share</span>
+              <span className="text-zinc-700 dark:text-zinc-300">Transfer</span>
             </div>
           </div>
           <div className="flex flex-col space-y-1.5">
             <div className="flex items-center space-x-2 rounded-xl bg-zinc-200/70 p-2.5 text-xs dark:bg-zinc-800/70">
               <MagicWandIcon className="h-4 w-4 text-zinc-700 dark:text-zinc-300" />
-              <span className="text-zinc-700 dark:text-zinc-300">Regenerate</span>
+              <span className="text-zinc-700 dark:text-zinc-300">List on Tensor</span>
             </div>
             <div className="flex items-center space-x-2 rounded-xl bg-zinc-200/70 p-2.5 text-xs dark:bg-zinc-800/70">
               <LockClosedIcon className="h-4 w-4 text-zinc-700 dark:text-zinc-300" />
-              <span className="text-zinc-700 dark:text-zinc-300">Lock</span>
+              <span className="text-zinc-700 dark:text-zinc-300">Lock Liquidity</span>
             </div>
           </div>
         </motion.div>

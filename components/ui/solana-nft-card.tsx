@@ -12,7 +12,7 @@ export type NftAttribute = {
 };
 
 export interface SolanaNftCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   name?: string;
   collectionName?: string;
   imageUrl?: string;
@@ -123,7 +123,7 @@ export function SolanaNftCard({
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            transition={{ type: "spring", stiffness: 350, damping: 20 }}
             className="grid grid-cols-2 gap-2 pt-1"
           >
             {attributes.map((attr) => (

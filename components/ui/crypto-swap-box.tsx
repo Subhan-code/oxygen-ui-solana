@@ -4,8 +4,8 @@ import React, { useState } from "react"
 import { ArrowDown, Settings, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export interface CryptoSwapBoxProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export type CryptoSwapBoxProps =
+  Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart">;
 
 export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
   const [payAmount, setPayAmount] = useState("10")

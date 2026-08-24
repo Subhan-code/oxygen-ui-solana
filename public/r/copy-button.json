@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "copy-button",
+  "title": "Copy Button",
+  "description": "Copy Button component for Oxygen UI.",
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion } from \"motion/react\";\nimport { Copy, Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface CopyButtonProps\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"onDrag\" | \"onDragStart\" | \"onDragEnd\" | \"onAnimationStart\"> {\n  value?: string;\n}\n\nexport function CopyButton({\n  value = \"https://oxygen-ui.com\",\n  className,\n  ...props\n}: CopyButtonProps) {\n  const [copied, setCopied] = useState(false);\n\n  const handleCopy = () => {\n    if (navigator?.clipboard) {\n      navigator.clipboard.writeText(value);\n      setCopied(true);\n      setTimeout(() => setCopied(false), 2000);\n    }\n  };\n\n  return (\n    <motion.button\n      type=\"button\"\n      whileTap={{ scale: 0.96 }}\n      onClick={handleCopy}\n      className={cn(\n        \"inline-flex items-center gap-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-3.5 py-2 text-xs font-mono font-bold text-zinc-900 dark:text-white shadow-xs transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer select-none\",\n        copied && \"border-emerald-500/50 bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400\",\n        className\n      )}\n      {...props}\n    >\n      {copied ? <Check className=\"h-3.5 w-3.5\" /> : <Copy className=\"h-3.5 w-3.5\" />}\n      <span>{copied ? \"Copied Address!\" : `${value.slice(0, 4)}...${value.slice(-4)}`}</span>\n    </motion.button>\n  );\n}\n\nexport default CopyButton;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

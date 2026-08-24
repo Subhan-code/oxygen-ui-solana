@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from "motion/react"
 import { Plus, Send, Download, RefreshCw } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export interface CryptoSpeedDialActionMenuProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export type CryptoSpeedDialActionMenuProps =
+  Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart">;
 
 export function CryptoSpeedDialActionMenu({ className, ...props }: CryptoSpeedDialActionMenuProps) {
   const [open, setOpen] = useState(true)

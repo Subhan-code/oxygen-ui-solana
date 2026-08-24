@@ -6,7 +6,7 @@ import { Layers } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoSalesSegmentedBarsProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   salesAmount?: string
   growthPercent?: string
 }
@@ -33,7 +33,7 @@ export function CryptoSalesSegmentedBars({
         <div>
           <span className="text-xs font-medium text-zinc-400">Segmented Metrics</span>
           <div className="flex items-baseline gap-2 mt-0.5">
-            <span className="text-lg font-bold tracking-tight text-white">{salesAmount}</span>
+            <span className="text-lg font-bold tracking-tight leading-tight text-white">{salesAmount}</span>
             <span className="text-xs font-semibold text-blue-400">↑ {growthPercent}</span>
           </div>
         </div>

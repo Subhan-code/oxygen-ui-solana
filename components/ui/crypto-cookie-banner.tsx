@@ -61,7 +61,7 @@ export function CryptoCookieBanner({
           </div>
 
           <div className="mb-5 space-y-2">
-            <h3 className="text-base font-bold tracking-tight text-white">We Value Your Privacy</h3>
+            <h3 className="text-base font-bold tracking-tight leading-tight text-white">We Value Your Privacy</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               We use non-custodial analytics cookies to improve your dApp performance, verify RPC network latency, and deliver secure Web3 features.
             </p>

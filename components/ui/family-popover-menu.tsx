@@ -1,18 +1,21 @@
 "use client";
 
+import React, { useRef, useState, RefObject } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   EnvelopeClosedIcon,
   GearIcon,
   HeartIcon,
   PlusIcon,
 } from "@radix-ui/react-icons";
-import { AnimatePresence, motion } from "framer-motion";
-import React, { RefObject, useState } from "react";
-import useClickOutside from "hooks/useClickOutside";
-import { useMediaQuery } from "hooks/useMediaQuery";
+import useClickOutside from "@/lib/hooks/useClickOutside";
+import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
+import { cn } from "@/lib/utils";
 
-export default function FamilyPopoverMenu() {
-  const refMenu = React.useRef<HTMLDivElement>(null);
+export type FamilyPopoverMenuProps = React.HTMLAttributes<HTMLDivElement>;
+
+export function FamilyPopoverMenu({ className, ...props }: FamilyPopoverMenuProps) {
+  const refMenu = useRef<HTMLDivElement>(null);
   const [openMenu, setOpenMenu] = useState(false);
 
   const isScreenSizeSm = useMediaQuery("(max-width: 640px)");
@@ -26,7 +29,7 @@ export default function FamilyPopoverMenu() {
       width: isScreenSizeSm ? "100%" : "320px",
       height: 220,
       borderRadius: "16px",
-      bottom: -10,
+      bottom: -44,
       transition,
     },
     closed: {
@@ -41,7 +44,7 @@ export default function FamilyPopoverMenu() {
 
   const contentVariants = {
     open: { opacity: 1, scale: 1, transition },
-    closed: { opacity: 0, scale: 0.95, transition },
+    closed: { opacity: 0, scale: 1, transition },
   };
 
   const buttonVariants = {
@@ -82,65 +85,73 @@ export default function FamilyPopoverMenu() {
   });
 
   return (
-    <div className="relative flex h-[320px] w-full items-center justify-center p-4">
-      <div className="relative flex h-full w-full max-w-[340px] items-end justify-center">
-        <AnimatePresence>
-          {openMenu && (
-            <motion.div
-              className="absolute bottom-0 flex flex-col items-center overflow-hidden border border-zinc-800 bg-zinc-900 p-1.5 shadow-2xl dark:border-zinc-200 dark:bg-white"
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={menuVariants}
-              onClick={(e) => e.stopPropagation()}
-              ref={refMenu}
+    <div
+      data-slot="family-popover-menu"
+      className={cn(
+        "relative mx-6 mb-16 flex h-[300px] w-full max-w-sm items-end justify-start select-none p-4",
+        className
+      )}
+      {...props}
+    >
+      <AnimatePresence>
+        {openMenu && (
+          <motion.div
+            className="absolute bottom-0 left-0 flex flex-col items-center overflow-hidden bg-zinc-950 p-1 dark:bg-zinc-900 shadow-2xl rounded-2xl border border-zinc-800"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={menuVariants}
+            onClick={(e) => e.stopPropagation()}
+            ref={refMenu}
+          >
+            <motion.ul
+              variants={contentVariants}
+              className="relative flex w-full flex-col space-y-1"
             >
-              <motion.ul
-                variants={contentVariants}
-                className="relative flex w-full flex-col space-y-1"
-              >
-                {items.map((item, index) => {
-                  return (
-                    <li
-                      key={index}
-                      className="w-full select-none rounded-[10px] bg-zinc-800/80 px-3 py-2.5 transition-colors hover:bg-zinc-800 active:scale-[0.98] dark:bg-zinc-100 dark:hover:bg-zinc-200"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600/15 text-blue-500 dark:bg-blue-500/15 dark:text-blue-600">
-                          <item.icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-semibold text-white dark:text-zinc-900">
-                            {item.title}
-                          </h3>
-                          <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                            {item.text}
-                          </p>
-                        </div>
+              {items.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <li
+                    key={index}
+                    className="w-full select-none rounded-b-[4px] rounded-t-[4px] bg-zinc-900/90 transition-transform first:rounded-t-[12px] last:rounded-b-[12px] active:scale-[0.98] dark:bg-zinc-800/90 cursor-pointer"
+                  >
+                    <div className="flex items-center py-3">
+                      <div className="px-4">
+                        <Icon className="h-5 w-5 text-white" />
                       </div>
-                    </li>
-                  );
-                })}
-              </motion.ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <motion.button
-          className="absolute bottom-0 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 p-2 text-white shadow-lg shadow-blue-600/30 outline-hidden hover:bg-blue-500 dark:bg-blue-600 dark:text-white"
-          disabled={openMenu}
-          onClick={(e) => {
-            e.stopPropagation();
-            setOpenMenu(true);
-          }}
-          variants={buttonVariants}
-          initial="closed"
-          animate={openMenu ? "open" : "closed"}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Open family menu"
-        >
-          <PlusIcon className="h-6 w-6" />
-        </motion.button>
-      </div>
+                      <div>
+                        <h3 className="text-base font-semibold text-white">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-zinc-400">
+                          {item.text}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </motion.ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <motion.button
+        type="button"
+        className="absolute bottom-0 left-0 flex h-12 w-12 items-center justify-center rounded-full bg-zinc-950 p-2 text-white outline-none dark:bg-white dark:text-zinc-950 cursor-pointer shadow-lg"
+        disabled={openMenu}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpenMenu(true);
+        }}
+        variants={buttonVariants}
+        initial="closed"
+        animate={openMenu ? "open" : "closed"}
+        whileTap={{ scale: 0.95 }}
+      >
+        <PlusIcon className="h-6 w-6" />
+      </motion.button>
     </div>
   );
 }
+
+export default FamilyPopoverMenu;

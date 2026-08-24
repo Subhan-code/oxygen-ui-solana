@@ -213,3 +213,62 @@ html {
 [vaul-overlay] {
   transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 1.25rem)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap, 1.25rem)));
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 20s) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 20s) linear infinite;
+}
+
+.paused {
+  animation-play-state: paused !important;
+}
+
+.direction-\[reverse\] {
+  animation-direction: reverse;
+}
+
+.mask-l-from-80\% {
+  mask-image: linear-gradient(to right, transparent, black 20%);
+}
+
+.mask-r-from-80\% {
+  mask-image: linear-gradient(to left, transparent, black 20%);
+}
+
+.mask-t-from-80\% {
+  mask-image: linear-gradient(to bottom, transparent, black 20%);
+}
+
+.mask-b-from-80\% {
+  mask-image: linear-gradient(to top, transparent, black 20%);
+}
+
+.mask-x-from-80\% {
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.mask-y-from-80\% {
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+

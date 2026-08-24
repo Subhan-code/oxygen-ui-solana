@@ -6,7 +6,7 @@ import { ChevronRight, ExternalLink, Search, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoTraderLeaderboardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   onFollow?: (handle: string) => void
 }
 

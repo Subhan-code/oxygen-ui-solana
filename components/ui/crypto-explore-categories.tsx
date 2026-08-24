@@ -5,8 +5,8 @@ import { motion } from "motion/react"
 import { TrendingUp, Info } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export interface CryptoExploreCategoriesProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export type CryptoExploreCategoriesProps =
+  Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart">;
 
 export function CryptoExploreCategories({ className, ...props }: CryptoExploreCategoriesProps) {
   const [activeCategory, setActiveCategory] = useState<"Tokens" | "People" | "Sites">("Tokens")

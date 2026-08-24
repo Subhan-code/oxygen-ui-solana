@@ -5,7 +5,7 @@ import { SolanaTransactionStatus } from "@/components/ui/solana-transaction-stat
 
 export default function Demo() {
   return (
-    <div className="flex min-h-[500px] w-full items-center justify-center p-6">
+    <div className="flex min-h-[500px] w-full items-center justify-center p-6 transition-all duration-300">
       <SolanaTransactionStatus status="finalized" amountSol={1.5} recipient="9aXy...2bCd" />
     </div>
   );

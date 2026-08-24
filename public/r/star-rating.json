@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "star-rating",
+  "title": "Star Rating",
+  "description": "Star rating with fractional star fills, custom sizes, orientations, and accessibility.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/star-rating.tsx",
+      "content": "import * as React from \"react\";\nimport { Star } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface StarRatingProps {\n  value: number;\n  max?: number;\n  label?: string;\n  size?: \"sm\" | \"md\" | \"lg\";\n  orientation?: \"vertical\" | \"horizontal\";\n  /**\n   * Precision for partial stars. If set, the component will fill each star\n   * proportionally (e.g., 3.2 -> 60% of the 4th star). Defaults to true.\n   */\n  allowPartial?: boolean;\n  containerClassName?: string;\n}\n\nexport function StarRating({\n  value,\n  max = 5,\n  label,\n  size = \"lg\",\n  orientation = \"vertical\",\n  allowPartial = true,\n  className,\n  containerClassName,\n  ...props\n}: StarRatingProps & Omit<React.ComponentProps<\"div\">, \"children\">) {\n  const safeMax = Math.max(1, Math.floor(max));\n  const clampedValue = Math.max(0, Math.min(value, safeMax));\n\n  const sizeClass =\n    size === \"sm\" ? \"h-3.5 w-3.5\" : size === \"md\" ? \"h-4 w-4\" : \"h-5 w-5\";\n\n  return (\n    <div\n      data-size={size}\n      data-orientation={orientation}\n      data-slot=\"star-rating\"\n      className={cn(\n        \"flex flex-col items-center gap-1\",\n        orientation === \"horizontal\" && \"flex-row\",\n        containerClassName\n      )}\n      aria-label={`${clampedValue} out of ${safeMax} stars`}\n      role=\"img\"\n      {...props}\n    >\n      <div className={cn(\"flex items-center gap-0.5 text-amber-400\", className)}>\n        {Array.from({ length: safeMax }).map((_, index) => {\n          const starIndex = index + 1;\n          const filledRatio = allowPartial\n            ? Math.max(0, Math.min(1, clampedValue - index))\n            : clampedValue >= starIndex\n              ? 1\n              : 0;\n\n          return (\n            <span key={index} className=\"relative inline-flex text-neutral-300 dark:text-neutral-700\" aria-hidden=\"true\">\n              {/* Base (unfilled) star */}\n              <Star className={sizeClass} />\n              {/* Filled overlay */}\n              {filledRatio > 0 ? (\n                <span\n                  className=\"absolute inset-0 overflow-hidden text-amber-400\"\n                  style={{ width: `${filledRatio * 100}%` }}\n                >\n                  <Star fill=\"currentColor\" className={sizeClass} />\n                </span>\n              ) : null}\n            </span>\n          );\n        })}\n      </div>\n\n      {label && (\n        <span\n          data-slot=\"star-rating-label\"\n          className=\"text-xs text-muted-foreground font-medium\"\n        >\n          {label}\n        </span>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

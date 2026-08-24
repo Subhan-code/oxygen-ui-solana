@@ -5,7 +5,7 @@ import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoTvlSparkbarWidgetProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   txCount?: string
   growthPercent?: string
 }

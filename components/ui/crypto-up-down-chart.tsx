@@ -6,7 +6,7 @@ import { ArrowUp, ArrowDown, Clock, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoUpDownChartProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   tokenSymbol?: string
   currentPrice?: number
   targetPrice?: number

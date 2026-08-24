@@ -33,17 +33,15 @@ export default function SkeletonReveal() {
         </div>
 
         <div className="t-skel-content flex items-center gap-3">
-          <img
-            src="https://avatars.githubusercontent.com/Subhan-code"
-            alt="Syed Subhan"
-            className="h-12 w-12 rounded-full object-cover"
-          />
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 dark:bg-indigo-500 font-bold text-white text-sm">
+            AL
+          </div>
           <div className="flex flex-col">
             <h4 className="text-sm font-semibold text-zinc-900 dark:text-white">
-              Syed Subhan
+              alex.sol
             </h4>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
-              Founder of Oxygen-UI
+              Solana Mainnet · 142.85 SOL
             </p>
           </div>
         </div>

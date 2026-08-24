@@ -6,7 +6,7 @@ import { Vote } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoPredictionCandidateCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   eventTitle?: string
   yesPercent?: number
   noPercent?: number

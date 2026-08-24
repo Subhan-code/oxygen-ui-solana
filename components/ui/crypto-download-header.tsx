@@ -36,11 +36,11 @@ export function CryptoDownloadHeader({
       {...props}
     >
       <div className="flex items-center gap-2.5 pl-2">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 text-white shadow-sm">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-sm">
           <Sparkles className="h-5 w-5" />
         </div>
         <div className="flex flex-col">
-          <span className="text-sm font-bold tracking-tight text-white">{title}</span>
+          <span className="text-sm font-bold tracking-tight leading-tight text-white">{title}</span>
           <span className="text-[11px] text-zinc-400 font-medium">Solana Native dApp</span>
         </div>
       </div>

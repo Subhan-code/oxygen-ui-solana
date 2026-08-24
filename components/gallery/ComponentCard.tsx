@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import type { ComponentItem } from "@/lib/components";
 import { cn } from "@/lib/utils";
-import PreviewFallback from "./PreviewFallback";
 import PreviewVideo from "./PreviewVideo";
+import LiveComponentPreview from "./LiveComponentPreview";
 
 const ArrowIcon = () => (
   <svg
@@ -64,7 +64,7 @@ export default function ComponentCard({
             autoPlay={autoPlay}
           />
         ) : (
-          <PreviewFallback />
+          <LiveComponentPreview item={item} />
         )}
       </div>
 

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "evil-buttons-group",
+  "title": "Evil Buttons Showcase",
+  "description": "A suite of interactive button micro-interactions including Hold, Grid, Shiny, Cooldown, Hold Confirm, Don't Press, Confetti, Pill, Morph Status, and Copy buttons.",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/evil-buttons-group.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { AlertTriangle } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\nimport { HoldButton } from \"./hold-button\";\nimport { GridButton } from \"./grid-button\";\nimport { ShinyButton } from \"./shiny-button\";\nimport { CooldownButton } from \"./cooldown-button\";\nimport { HoldConfirmButton } from \"./hold-confirm-button\";\nimport { DontPressButton } from \"./dont-press-button\";\nimport { ConfettiButton } from \"./confetti-button\";\nimport { PillButton } from \"./pill-button\";\nimport { MorphStatusButton } from \"./morph-status-button\";\nimport { CopyButton } from \"./copy-button\";\n\nexport function EvilButtonsGroup({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      data-slot=\"evil-buttons-group\"\n      className={cn(\n        \"mx-auto flex w-full max-w-3xl flex-col gap-6 rounded-3xl bg-zinc-950 p-8 text-white shadow-2xl border border-zinc-800/80 font-sans select-none\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex flex-col gap-1 border-b border-zinc-800/80 pb-4\">\n        <h3 className=\"text-xl font-bold tracking-tight text-white flex items-center gap-2\">\n          <AlertTriangle className=\"h-5 w-5 text-amber-400\" />\n          Evil Buttons Collection\n        </h3>\n        <p className=\"text-xs text-zinc-400\">\n          A suite of 10 interactive button micro-interactions built with Framer Motion, spring physics, and Apple UI design.\n        </p>\n      </div>\n\n      <div className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center justify-items-center\">\n        <HoldButton />\n        <GridButton />\n        <ShinyButton />\n        <CooldownButton />\n        <HoldConfirmButton />\n        <DontPressButton />\n        <ConfettiButton />\n        <PillButton />\n        <MorphStatusButton />\n        <CopyButton />\n      </div>\n    </div>\n  );\n}\n\nexport default EvilButtonsGroup;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
