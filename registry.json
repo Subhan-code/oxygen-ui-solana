@@ -1515,7 +1515,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/action-box.tsx",
+          "path": "src/registry/sol/action-box.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1533,7 +1533,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/activity-feed.tsx",
+          "path": "src/registry/sol/activity-feed.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1551,7 +1551,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/address-display.tsx",
+          "path": "src/registry/sol/address-display.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1567,7 +1567,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/auth-card.tsx",
+          "path": "src/registry/sol/auth-card.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1583,7 +1583,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/health-bar.tsx",
+          "path": "src/registry/sol/health-bar.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1599,7 +1599,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/leverage-slider.tsx",
+          "path": "src/registry/sol/leverage-slider.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1615,7 +1615,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/nft-card.tsx",
+          "path": "src/registry/sol/nft-card.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1631,7 +1631,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/order-book.tsx",
+          "path": "src/registry/sol/order-book.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1649,7 +1649,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/order-form.tsx",
+          "path": "src/registry/sol/order-form.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1665,7 +1665,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/pool-card.tsx",
+          "path": "src/registry/sol/pool-card.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1683,7 +1683,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/pool-table.tsx",
+          "path": "src/registry/sol/pool-table.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1699,7 +1699,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/position-card.tsx",
+          "path": "src/registry/sol/position-card.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1717,7 +1717,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/position-table.tsx",
+          "path": "src/registry/sol/position-table.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1735,7 +1735,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/price-chart.tsx",
+          "path": "src/registry/sol/price-chart.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1753,7 +1753,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/sparkline-chart.tsx",
+          "path": "src/registry/sol/sparkline-chart.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1769,7 +1769,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/stat-card.tsx",
+          "path": "src/registry/sol/stat-card.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1787,7 +1787,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/swap-box.tsx",
+          "path": "src/registry/sol/swap-box.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1805,7 +1805,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/token-combobox.tsx",
+          "path": "src/registry/sol/token-combobox.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1823,7 +1823,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/token-command.tsx",
+          "path": "src/registry/sol/token-command.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1839,7 +1839,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/token-icon.tsx",
+          "path": "src/registry/sol/token-icon.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1855,7 +1855,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/token-icon-group.tsx",
+          "path": "src/registry/sol/token-icon-group.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1874,7 +1874,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/token-input.tsx",
+          "path": "src/registry/sol/token-input.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1890,7 +1890,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/trade-box.tsx",
+          "path": "src/registry/sol/trade-box.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1906,7 +1906,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/trade-buttons.tsx",
+          "path": "src/registry/sol/trade-buttons.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1924,7 +1924,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/trade-chart.tsx",
+          "path": "src/registry/sol/trade-chart.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1942,7 +1942,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/trend-badge.tsx",
+          "path": "src/registry/sol/trend-badge.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1961,7 +1961,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/txn-table.tsx",
+          "path": "src/registry/sol/txn-table.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1980,7 +1980,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/txn-toast.tsx",
+          "path": "src/registry/sol/txn-toast.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1996,7 +1996,7 @@
       ],
       "files": [
         {
-          "path": "components/ui/sol/wallet-sheet.tsx",
+          "path": "src/registry/sol/wallet-sheet.tsx",
           "type": "registry:ui"
         }
       ]
