@@ -1503,6 +1503,503 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "action-box",
+      "type": "registry:ui",
+      "title": "Action Box",
+      "description": "A configurable action form with token input, detail rows, and submit button for DeFi operations like staking, lending, and closing positions.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/action-box.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "activity-feed",
+      "type": "registry:ui",
+      "title": "Activity Feed",
+      "description": "A real-time feed of recent activity with token icons, descriptions, and relative timestamps.",
+      "dependencies": [
+        "date-fns"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/activity-feed.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "address-display",
+      "type": "registry:ui",
+      "title": "Address Display",
+      "description": "Displays a truncated Solana wallet address with a copy-to-clipboard button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/address-display.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "auth-card",
+      "type": "registry:ui",
+      "title": "Auth Card",
+      "description": "An authentication card with email/password form and social login buttons for wallet-connected apps.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/auth-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "health-bar",
+      "type": "registry:ui",
+      "title": "Health Bar",
+      "description": "A visual health/risk indicator bar that transitions from green to yellow to red based on a percentage value.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/health-bar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "leverage-slider",
+      "type": "registry:ui",
+      "title": "Leverage Slider",
+      "description": "A slider for selecting trading leverage with configurable min/max range and step increments.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/leverage-slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "nft-card",
+      "type": "registry:ui",
+      "title": "NFT Card",
+      "description": "A card for displaying NFT artwork with collection name, token name, and loading skeleton.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/nft-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "order-book",
+      "type": "registry:ui",
+      "title": "Order Book",
+      "description": "A real-time order book display with bid/ask levels, depth visualization, mid-price, and spread indicator.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/order-book.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "order-form",
+      "type": "registry:ui",
+      "title": "Order Form",
+      "description": "A take profit and stop loss order form for open trading positions with auto-syncing price/percent fields.",
+      "dependencies": [
+        "react-number-format"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/order-form.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pool-card",
+      "type": "registry:ui",
+      "title": "Pool Card",
+      "description": "A card for displaying liquidity pool information with token icons, metrics grid, and optional sparkline chart.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/pool-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pool-table",
+      "type": "registry:ui",
+      "title": "Pool Table",
+      "description": "A sortable table of liquidity pools with token icon groups, TVL, volume, APY, and rewards columns.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/pool-table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "position-card",
+      "type": "registry:ui",
+      "title": "Position Card",
+      "description": "A card displaying an open trading position with side indicator, token icon, size, leverage, entry/mark prices, and P&L.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/position-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "position-table",
+      "type": "registry:ui",
+      "title": "Position Table",
+      "description": "A sortable table of open trading positions with built-in TP/SL editor and close position dialogs.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/position-table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "price-chart",
+      "type": "registry:ui",
+      "title": "Price Chart",
+      "description": "An area chart for displaying token price history over time using Recharts.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/price-chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sparkline-chart",
+      "type": "registry:ui",
+      "title": "Sparkline Chart",
+      "description": "A compact inline sparkline chart for showing price trends in cards and table cells.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/sparkline-chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:ui",
+      "title": "Stat Card",
+      "description": "A card for displaying a single key metric with label, value, and optional trend badge.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/stat-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "swap-box",
+      "type": "registry:ui",
+      "title": "Swap Box",
+      "description": "A two-sided token swap form with flip button, balance display, detail rows, and submit action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/swap-box.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "token-combobox",
+      "type": "registry:ui",
+      "title": "Token Combobox",
+      "description": "A searchable dropdown combobox for selecting tokens with icon display.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/token-combobox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "token-command",
+      "type": "registry:ui",
+      "title": "Token Command",
+      "description": "A command palette for searching and selecting tokens with keyboard navigation.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/token-command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "token-icon",
+      "type": "registry:ui",
+      "title": "Token Icon",
+      "description": "Renders a circular token icon with loading skeleton fallback.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/token-icon.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "token-icon-group",
+      "type": "registry:ui",
+      "title": "Token Icon Group",
+      "description": "Displays a group of overlapping token icons with a configurable max and overflow indicator.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/token-icon-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "token-input",
+      "type": "registry:ui",
+      "title": "Token Input",
+      "description": "A numeric input with integrated token selector dropdown, balance display, and half/max buttons.",
+      "dependencies": [
+        "lucide-react",
+        "react-number-format"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/token-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "trade-box",
+      "type": "registry:ui",
+      "title": "Trade Box",
+      "description": "A perpetual trading form with long/short toggle, token input, leverage slider, detail rows, and submit action.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/trade-box.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "trade-buttons",
+      "type": "registry:ui",
+      "title": "Trade Buttons",
+      "description": "A long/short toggle button group for selecting trade direction.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/trade-buttons.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "trade-chart",
+      "type": "registry:ui",
+      "title": "Trade Chart",
+      "description": "A professional candlestick chart using lightweight-charts for trading interfaces.",
+      "dependencies": [
+        "lightweight-charts"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/trade-chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "trend-badge",
+      "type": "registry:ui",
+      "title": "Trend Badge",
+      "description": "A badge that displays a percentage change with an up/down arrow icon and color coding.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/trend-badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "txn-table",
+      "type": "registry:ui",
+      "title": "Transaction Table",
+      "description": "A table of recent transactions with action badges, token icons, amounts, values, timestamps, and explorer links.",
+      "dependencies": [
+        "date-fns",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/txn-table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "txn-toast",
+      "type": "registry:ui",
+      "title": "Transaction Toast",
+      "description": "A toast notification function for displaying transaction status updates with explorer links and close button.",
+      "dependencies": [
+        "lucide-react",
+        "sonner"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/txn-toast.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "wallet-sheet",
+      "type": "registry:ui",
+      "title": "Wallet Sheet",
+      "description": "A slide-out sheet displaying wallet information with address, token balances, and disconnect button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/sol/wallet-sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

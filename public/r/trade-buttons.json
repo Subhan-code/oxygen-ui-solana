@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "trade-buttons",
+  "title": "Trade Buttons",
+  "description": "A long/short toggle button group for selecting trade direction.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/sol/trade-buttons.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { ToggleGroup, ToggleGroupItem } from \"@/components/ui/sol-primitives/toggle-group\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface TradeButtonsProps {\r\n  defaultValue?: string;\r\n  value?: string;\r\n  onValueChange?: (value: string) => void;\r\n  labels?: [string, string];\r\n  className?: string;\r\n}\r\n\r\nconst TradeButtons = ({\r\n  defaultValue = \"long\",\r\n  value,\r\n  onValueChange,\r\n  labels = [\"Long\", \"Short\"],\r\n  className,\r\n}: TradeButtonsProps) => {\r\n  const [internalValue, setInternalValue] = React.useState(defaultValue);\r\n  const currentValue = value ?? internalValue;\r\n\r\n  const handleValueChange = (newValue: string) => {\r\n    if (!newValue) return;\r\n    setInternalValue(newValue);\r\n    onValueChange?.(newValue);\r\n  };\r\n\r\n  return (\r\n    <ToggleGroup\r\n      type=\"single\"\r\n      variant=\"outline\"\r\n      spacing={2}\r\n      value={currentValue}\r\n      onValueChange={handleValueChange}\r\n      className={cn(\"w-full\", className)}\r\n    >\r\n      <ToggleGroupItem\r\n        value=\"long\"\r\n        aria-label={`Toggle ${labels[0]}`}\r\n        className={cn(\r\n          \"flex-1 shrink transition-colors\",\r\n          currentValue === \"long\"\r\n            ? \"bg-emerald-500/15 text-emerald-500 border-emerald-500/25 hover:bg-emerald-500/25 hover:text-emerald-500 data-[state=on]:bg-emerald-500/15 data-[state=on]:text-emerald-500\"\r\n            : \"hover:bg-muted/80\",\r\n        )}\r\n      >\r\n        {labels[0]}\r\n      </ToggleGroupItem>\r\n      <ToggleGroupItem\r\n        value=\"short\"\r\n        aria-label={`Toggle ${labels[1]}`}\r\n        className={cn(\r\n          \"flex-1 shrink transition-colors\",\r\n          currentValue === \"short\"\r\n            ? \"bg-red-400/15 text-red-400 border-red-400/25 hover:bg-red-400/25 hover:text-red-400 data-[state=on]:bg-red-400/15 data-[state=on]:text-red-400\"\r\n            : \"hover:bg-muted/80\",\r\n        )}\r\n      >\r\n        {labels[1]}\r\n      </ToggleGroupItem>\r\n    </ToggleGroup>\r\n  );\r\n};\r\n\r\nexport type { TradeButtonsProps };\r\nexport { TradeButtons };\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

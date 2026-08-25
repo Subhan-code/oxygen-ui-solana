@@ -75,7 +75,7 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
         className={`inline-block h-[1px] shrink-0 transition-colors duration-150 ${
           isActive
             ? "bg-sky-500"
-            : "bg-zinc-300 dark:bg-white/20 group-hover:bg-sky-500"
+            : "bg-zinc-700 dark:bg-white/20 group-hover:bg-sky-500"
         }`}
         style={{
           width: isActive ? 55 : proxWidth,
@@ -84,8 +84,8 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
       <span
         className={`truncate min-w-0 max-w-[210px] transition-all ease-out ${
           isActive
-            ? "text-sky-500 opacity-100 font-medium"
-            : "opacity-60 text-zinc-700 dark:text-white group-hover:text-sky-500 group-hover:opacity-100"
+            ? "text-sky-500 opacity-100 font-semibold"
+            : "opacity-70 text-zinc-300 dark:text-zinc-200 group-hover:text-sky-400 group-hover:opacity-100"
         }`}
       >
         {numStr} {component.name}

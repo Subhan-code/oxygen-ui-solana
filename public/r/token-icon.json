@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "token-icon",
+  "title": "Token Icon",
+  "description": "Renders a circular token icon with loading skeleton fallback.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/sol/token-icon.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { Skeleton } from \"@/components/ui/sol-primitives/skeleton\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ntype TokenIconProps = {\r\n  src: string;\r\n  alt?: string;\r\n  width?: number;\r\n  height?: number;\r\n  className?: string;\r\n};\r\n\r\nconst TokenIcon = ({\r\n  alt = \"Token\",\r\n  className = \"\",\r\n  width,\r\n  height,\r\n  ...props\r\n}: TokenIconProps) => {\r\n  const [status, setStatus] = React.useState<\"loading\" | \"loaded\" | \"error\">(\r\n    \"loading\",\r\n  );\r\n\r\n  if (status === \"error\") {\r\n    const fontSize = typeof width === \"number\" ? width * 0.35 : \"1rem\";\r\n    return (\r\n      <div\r\n        className={cn(\r\n          \"rounded-full bg-muted inline-flex items-center justify-center font-medium text-muted-foreground\",\r\n          className,\r\n        )}\r\n        style={{ width, height, fontSize }}\r\n      >\r\n        {alt.charAt(0).toUpperCase()}\r\n      </div>\r\n    );\r\n  }\r\n\r\n  return (\r\n    <div className=\"relative inline-block\" style={{ width, height }}>\r\n      {status === \"loading\" && (\r\n        <Skeleton\r\n          className={cn(\"rounded-full absolute inset-0\", className)}\r\n          style={{ width, height }}\r\n        />\r\n      )}\r\n      <img\r\n        alt={alt}\r\n        className={cn(\r\n          \"rounded-full block\",\r\n          status === \"loading\" && \"opacity-0\",\r\n          className,\r\n        )}\r\n        onLoad={() => setStatus(\"loaded\")}\r\n        onError={() => setStatus(\"error\")}\r\n        width={width}\r\n        height={height}\r\n        {...props}\r\n      />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport type { TokenIconProps };\r\nexport { TokenIcon };\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

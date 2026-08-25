@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stat-card",
+  "title": "Stat Card",
+  "description": "A card for displaying a single key metric with label, value, and optional trend badge.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/sol/stat-card.tsx",
+      "content": "import type React from \"react\";\r\nimport { TrendBadge } from \"@/components/ui/sol/trend-badge\";\r\nimport { Card } from \"@/components/ui/sol-primitives/card\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface StatCardProps extends React.ComponentProps<typeof Card> {\r\n  label: string;\r\n  value: string;\r\n  change?: string;\r\n  trend?: \"up\" | \"down\";\r\n  icon?: React.ReactNode;\r\n}\r\n\r\nconst StatCard = ({\r\n  label,\r\n  value,\r\n  change,\r\n  trend = \"up\",\r\n  icon,\r\n  className,\r\n  ...props\r\n}: StatCardProps) => {\r\n  return (\r\n    <Card className={cn(\"p-4 gap-2\", className)} {...props}>\r\n      <div className=\"flex items-center justify-between\">\r\n        <span className=\"text-sm text-muted-foreground\">{label}</span>\r\n        {icon && <span className=\"text-muted-foreground\">{icon}</span>}\r\n      </div>\r\n      <div className=\"flex items-end justify-between gap-2\">\r\n        <span className=\"text-2xl font-semibold tracking-tight\">{value}</span>\r\n        {change && <TrendBadge trend={trend}>{change}</TrendBadge>}\r\n      </div>\r\n    </Card>\r\n  );\r\n};\r\n\r\nexport type { StatCardProps };\r\nexport { StatCard };\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
