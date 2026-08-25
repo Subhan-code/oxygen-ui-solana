@@ -21,12 +21,12 @@ const UTILITY_LINKS = [
 ];
 
 const HOVER =
-  "transition-colors duration-150 ease-out hover:text-black dark:hover:text-white";
+  "transition-colors duration-150 ease-out hover:text-white";
 
-const MUTED = "text-black/50 dark:text-white/50";
+const MUTED = "text-white/70";
 
 function NavLink({ label, href, external }: FooterLink) {
-  const className = `w-fit text-lg ${MUTED} ${HOVER}`;
+  const className = `w-fit text-sm md:text-base ${MUTED} ${HOVER} font-medium tracking-tight`;
 
   if (external) {
     return (
@@ -45,55 +45,67 @@ function NavLink({ label, href, external }: FooterLink) {
 
 export default function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden bg-white text-black dark:bg-black dark:text-white">
-      <FluidWave />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-linear-to-b from-white to-transparent dark:from-black" />
+    <footer className="relative w-full p-1.5 md:p-2.5 my-4">
+      <div
+        className="relative flex min-h-[340px] md:min-h-[400px] w-full flex-col justify-between overflow-hidden rounded-[36px] md:rounded-[45px] border border-white/15 bg-[#09090b] text-white shadow-2xl"
+        style={{ cornerShape: "squircle" } as React.CSSProperties}
+      >
+        {/* Blue fire WebGL fluid wave canvas */}
+        <FluidWave />
+        
+        {/* Top subtle blend gradient */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#09090b]/90 via-[#09090b]/40 to-transparent" />
 
-      <div className="relative mx-auto flex min-h-[min(85svh,50rem)] w-full max-w-[96rem] flex-col px-6 pt-24 sm:px-10 md:pt-32">
-        <div className="h-px w-full bg-white/10" />
+        <div className="relative z-10 mx-auto flex w-full max-w-[96rem] flex-1 flex-col justify-between px-6 pt-7 sm:px-10 md:pt-9">
+          {/* Top header navigation */}
+          <div>
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-5">
+              <Link href="/" className="flex h-fit w-fit items-center gap-2.5">
+                <img src="/logos/Oxygenui.svg" alt="" className="h-7 w-7" />
+                <span className="font-runde text-xl font-bold tracking-tight text-white">
+                  Oxygen-UI
+                </span>
+              </Link>
 
-        <div className="flex flex-wrap items-center justify-between gap-6 py-8">
-          <Link href="/" className="flex h-fit w-fit items-center gap-2.5">
-            <img src="/logos/Oxygenui.svg" alt="" className="h-8 w-8" />
-            <span className="font-runde text-2xl font-bold tracking-tight">
-              Oxygen-UI
+              <nav className="flex flex-wrap items-center gap-x-7 gap-y-2">
+                {LINKS.map((link) => (
+                  <NavLink key={link.label} {...link} />
+                ))}
+              </nav>
+            </div>
+            <div className="h-px w-full bg-white/10" />
+          </div>
+
+          {/* Center typography section */}
+          <div className="flex flex-1 items-center py-6 md:py-10">
+            <h2 className="font-runde text-[clamp(2.5rem,7vw,5.5rem)] font-extrabold leading-[0.95] tracking-tight text-white drop-shadow-lg">
+              Solana UI Primitives
+            </h2>
+          </div>
+
+          {/* Bottom copyright & utility links */}
+          <div
+            className={`flex flex-wrap items-center justify-between gap-3 pb-5 pt-3 text-xs ${MUTED} border-t border-white/10`}
+          >
+            <span className="font-medium">Oxygen-UI &copy; {new Date().getFullYear()}</span>
+            <span className="flex items-center gap-3">
+              {UTILITY_LINKS.map((link, index) => (
+                <Fragment key={link.href}>
+                  {index > 0 && (
+                    <span
+                      aria-hidden="true"
+                      className="text-white/30"
+                    >
+                      &middot;
+                    </span>
+                  )}
+                  <a href={link.href} className={HOVER}>
+                    {link.label}
+                  </a>
+                </Fragment>
+              ))}
             </span>
-          </Link>
-
-          <nav className="flex flex-wrap items-center gap-x-7 gap-y-2">
-            {LINKS.map((link) => (
-              <NavLink key={link.label} {...link} />
-            ))}
-          </nav>
-        </div>
-
-        <div className="flex flex-1 items-center py-16">
-          <h2 className="font-runde text-[clamp(3rem,12.5vw,10.5rem)] font-bold leading-[0.92] tracking-tight">
-            Solana UI Primitives
-          </h2>
-        </div>
-
-        <div
-          className={`flex flex-wrap items-center justify-between gap-3 pb-8 text-xs ${MUTED}`}
-        >
-          <span>Oxygen-UI &copy; {new Date().getFullYear()}</span>
-          <span className="flex items-center gap-2.5">
-            {UTILITY_LINKS.map((link, index) => (
-              <Fragment key={link.href}>
-                {index > 0 && (
-                  <span
-                    aria-hidden="true"
-                    className="text-black/25 dark:text-white/25"
-                  >
-                    &middot;
-                  </span>
-                )}
-                <a href={link.href} className={HOVER}>
-                  {link.label}
-                </a>
-              </Fragment>
-            ))}
-          </span>
+          </div>
         </div>
       </div>
     </footer>

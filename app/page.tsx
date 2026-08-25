@@ -12,30 +12,27 @@ export const metadata: Metadata = {
   },
 };
 
+import FeatureCardsSection from "@/components/FeatureCardsSection";
+
 export default async function Home() {
   const stars = await fetchStarCount();
 
   return (
     <>
+      <GooeyNavbar stars={stars} />
+
       <section className="relative w-full p-1.5 md:p-2.5">
         <div
-          className="relative flex min-h-[min(100svh_-_0.75rem,60rem)] w-full items-center justify-center overflow-hidden rounded-[45px] border border-black/[0.04] bg-[#F5F5F7] dark:border-transparent dark:border-apple dark:bg-[#121212] md:min-h-[min(100svh_-_1.25rem,60rem)]"
+          className="relative flex min-h-[min(92vh,54rem)] w-full items-center justify-center overflow-hidden rounded-[45px] border border-blue-200/60 bg-[#E2EDFF] text-slate-900 shadow-xl backdrop-blur-2xl dark:border-blue-900/40 dark:bg-[#081022] dark:text-white md:min-h-[min(92vh,54rem)]"
           style={{ cornerShape: "squircle" } as React.CSSProperties}
         >
-          <GooeyNavbar stars={stars} />
+          {/* Ambient soft blue mesh glow */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_-5%,rgba(0,122,255,0.12),rgba(56,189,248,0.05)_55%,transparent_80%)]" />
 
-          <img
-            src="/logos/Oxygenui.svg"
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-[68%] w-[860px] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.05] [filter:brightness(0)] dark:opacity-[0.07] dark:[filter:brightness(0)_invert(1)]"
-          />
-          <div className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(120%_75%_at_50%_-5%,rgba(255,255,255,0.07),transparent_60%)] dark:block" />
-
-          <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-3 px-4 pb-20 pt-28 text-center sm:gap-4 sm:px-6">
+          <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-4 px-4 pb-16 pt-24 text-center sm:px-6">
             <HeroIntro
               headline="Craft Premium Solana Frontends in Minutes."
-              sub="Oxygen UI is an open-source React component library built for Solana applications. Integrate wallet account interfaces, token displays, transaction status flows, and network states seamlessly."
+              sub="Production-grade React primitives for Web3 — build lightning-fast, Apple-crafted Solana frontends in seconds."
             >
               <HeroCta />
             </HeroIntro>
@@ -43,6 +40,7 @@ export default async function Home() {
         </div>
       </section>
       <ComponentsShowcase />
+      <FeatureCardsSection />
       <BackersSection />
       <Footer />
     </>
@@ -64,7 +62,7 @@ const BACKERS: Backer[] = [
   {
     name: "Solana Foundation India",
     href: "https://solana.com",
-    lightSrc: "/logos/solana-foundation-india.png",
+    lightSrc: "/logos/solana-foundation-india-dark.png",
     darkSrc: "/logos/solana-foundation-india.png",
     cardHeight: "h-12 sm:h-16 max-h-[85%]",
   },

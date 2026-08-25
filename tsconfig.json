@@ -26,6 +26,14 @@
       "@/*": [
         "./*"
       ],
+      "@/registry/*": [
+        "./src/registry/*",
+        "./registry/*"
+      ],
+      "@/components/ui/*": [
+        "./components/ui/sol-primitives/*",
+        "./components/ui/*"
+      ],
       "hooks/*": [
         "./hooks/*"
       ]

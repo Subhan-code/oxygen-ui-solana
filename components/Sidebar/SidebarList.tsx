@@ -1,211 +1,177 @@
-"use client"
+"use client";
 
-import React, { useRef, useState, useCallback, useEffect, memo } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { components } from "@/lib/components"
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  type MotionValue,
-} from "motion/react"
+import React, { useRef, useState, useCallback, useEffect, useMemo, memo } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { components } from "@/lib/components";
+import { motion } from "motion/react";
 
-const RADIUS = 45
-const BASE_WIDTH = 32
-const MAX_WIDTH = 55
+const springTransition = {
+  type: "spring" as const,
+  stiffness: 380,
+  damping: 28,
+};
 
 const ProximityScaleItem = memo(function ProximityScaleItem({
   component,
   index,
   isActive,
-  mouseY,
   onNavigate,
   activeRef,
 }: {
-  component: (typeof components)[number]
-  index: number
-  isActive: boolean
-  mouseY: MotionValue<number>
-  onNavigate?: () => void
-  activeRef?: React.RefObject<HTMLAnchorElement | null>
+  component: (typeof components)[number];
+  index: number;
+  isActive: boolean;
+  onNavigate?: () => void;
+  activeRef?: React.RefObject<HTMLAnchorElement | null>;
 }) {
-  const localRef = useRef<HTMLAnchorElement | null>(null)
-  const numStr = String(index + 1).padStart(2, "0")
+  const localRef = useRef<HTMLAnchorElement | null>(null);
+  const numStr = String(index + 1).padStart(2, "0");
 
   const setRefs = useCallback(
     (node: HTMLAnchorElement | null) => {
-      localRef.current = node
+      localRef.current = node;
       if (isActive && activeRef) {
-        (activeRef as React.MutableRefObject<HTMLAnchorElement | null>).current = node
+        (activeRef as React.MutableRefObject<HTMLAnchorElement | null>).current = node;
       }
     },
     [isActive, activeRef]
-  )
-
-  const distance = useTransform(mouseY, (y) => {
-    const rect = localRef.current?.getBoundingClientRect()
-    if (!rect) return RADIUS
-    return y - (rect.top + rect.height / 2)
-  })
-
-  const targetWidth = useTransform(
-    distance,
-    [-RADIUS, 0, RADIUS],
-    [BASE_WIDTH, MAX_WIDTH, BASE_WIDTH],
-    { clamp: true }
-  )
-
-  const proxWidth = useSpring(targetWidth, {
-    stiffness: 350,
-    damping: 30,
-    mass: 0.6,
-  })
+  );
 
   return (
     <Link
       ref={setRefs}
       href={component.href}
+      prefetch={true}
       onClick={onNavigate}
       title={`${numStr} ${component.name}`}
-      className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px] min-w-0 max-w-full"
+      className="group relative flex items-center min-w-0 max-w-full my-0.5"
     >
-      <motion.span
-        className={`inline-block h-[1px] shrink-0 transition-colors duration-150 ${
+      <motion.div
+        whileHover={{ x: 2 }}
+        whileTap={{ scale: 0.98 }}
+        transition={springTransition}
+        className={`relative flex w-full items-center justify-between rounded-xl px-3 py-1.5 transition-colors cursor-pointer ${
           isActive
-            ? "bg-sky-500"
-            : "bg-zinc-700 dark:bg-white/20 group-hover:bg-sky-500"
-        }`}
-        style={{
-          width: isActive ? 55 : proxWidth,
-        }}
-      />
-      <span
-        className={`truncate min-w-0 max-w-[210px] transition-all ease-out ${
-          isActive
-            ? "text-sky-500 opacity-100 font-semibold"
-            : "opacity-70 text-zinc-300 dark:text-zinc-200 group-hover:text-sky-400 group-hover:opacity-100"
+            ? "bg-sky-500/15 border border-sky-500/30 text-white font-semibold shadow-sm backdrop-blur-md"
+            : "text-zinc-400 hover:text-zinc-100 hover:bg-white/5 font-medium"
         }`}
       >
-        {numStr} {component.name}
-      </span>
+        <span className="relative z-10 truncate text-sm tracking-tight flex items-center">
+          <span
+            className={`font-mono text-xs mr-2 transition-colors ${
+              isActive
+                ? "text-sky-400 font-bold"
+                : "text-zinc-500 group-hover:text-zinc-300 font-normal"
+            }`}
+          >
+            {numStr}
+          </span>
+          <span className={isActive ? "text-white font-semibold" : ""}>
+            {component.name}
+          </span>
+        </span>
+      </motion.div>
     </Link>
-  )
-})
+  );
+});
 
 const SidebarList = ({
   onNavigate,
   isOpen,
 }: {
-  onNavigate?: () => void
-  isOpen?: boolean
+  onNavigate?: () => void;
+  isOpen?: boolean;
 }) => {
-  const pathname = usePathname()
-  const [sortMode, setSortMode] = useState<"id" | "reverse">("id")
-  const mouseY = useMotionValue(Infinity)
-  const activeRef = useRef<HTMLAnchorElement | null>(null)
+  const pathname = usePathname();
+  const [sortMode, setSortMode] = useState<"id" | "group">("id");
+  const activeRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
     if (isOpen && activeRef.current) {
-      const timer = setTimeout(() => {
-        activeRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        })
-      }, 150)
-      return () => clearTimeout(timer)
+      activeRef.current.scrollIntoView({
+        behavior: "auto",
+        block: "nearest",
+      });
     }
-  }, [isOpen, pathname])
+  }, [isOpen, pathname]);
 
-  const handlePointerMove = useCallback(
-    (e: React.PointerEvent) => {
-      mouseY.set(e.clientY)
-    },
-    [mouseY]
-  )
+  const displayList = useMemo(() => {
+    if (sortMode === "group") {
+      return [...components].sort((a, b) => {
+        const catA = a.category || "General";
+        const catB = b.category || "General";
+        if (catA !== catB) {
+          return catA.localeCompare(catB);
+        }
+        return components.indexOf(a) - components.indexOf(b);
+      });
+    }
+    return components;
+  }, [sortMode]);
 
-  const handlePointerLeave = useCallback(() => {
-    mouseY.set(Infinity)
-  }, [mouseY])
-
-  const displayList =
-    sortMode === "reverse" ? [...components].reverse() : components
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const c of components) {
+      const cat = c.category || "General";
+      counts[cat] = (counts[cat] || 0) + 1;
+    }
+    return counts;
+  }, []);
 
   return (
-    <div
-      className="relative flex h-fit flex-col gap-2 pb-[15vh] pt-[16vh] w-full pr-3 select-none text-[15px] tracking-tight"
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-    >
-      {/* Sort button */}
-      <div className="mb-8 flex items-center justify-between">
-        <button
-          type="button"
-          onClick={() =>
-            setSortMode((prev) => (prev === "id" ? "reverse" : "id"))
-          }
-          className="flex items-center justify-center gap-2 transition-colors text-zinc-500 hover:text-zinc-900 dark:text-white/50 dark:hover:text-white/80 text-sm cursor-pointer"
-        >
-          {sortMode === "id" ? "Sorted by Id" : "Sorted Desc"}
-          <svg
-            className={`transition-transform duration-300 ${
-              sortMode === "reverse" ? "rotate-180" : "rotate-0"
+    <div className="relative flex h-fit flex-col gap-0.5 pt-[16vh] pb-16 w-full px-3 select-none text-sm tracking-tight font-sans">
+      {/* Segmented Filter Control */}
+      <div className="mb-3 px-1">
+        <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <button
+            type="button"
+            onClick={() => setSortMode("id")}
+            className={`flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold transition-all cursor-pointer text-center ${
+              sortMode === "id"
+                ? "bg-sky-500/20 text-sky-400 border border-sky-500/30 shadow-sm"
+                : "text-zinc-400 hover:text-zinc-200"
             }`}
-            width="20"
-            height="20"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              d="M5.2168 11.2812L8.3418 8.15625L11.4668 11.2812"
-              stroke="currentColor"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M5.2168 6.90625L8.3418 3.78125L11.4668 6.90625"
-              stroke="currentColor"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+            Sorted by Id
+          </button>
+          <button
+            type="button"
+            onClick={() => setSortMode("group")}
+            className={`flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold transition-all cursor-pointer text-center ${
+              sortMode === "group"
+                ? "bg-sky-500/20 text-sky-400 border border-sky-500/30 shadow-sm"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            Sorted by Group
+          </button>
+        </div>
       </div>
-
-      {/* All Components header */}
-      <div className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px]">
-        <span className="bg-zinc-900 dark:bg-white inline-block h-[1px] w-[32px] shrink-0" />
-        <span className="whitespace-nowrap transition-all ease-out opacity-100 text-zinc-900 dark:text-white font-medium truncate">
-          Solana Components
-        </span>
-      </div>
-
-      {/* Gap lines */}
-      <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
-      <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
 
       {/* Component items with category headers */}
       {displayList.map((component, idx) => {
         const originalIndex = components.findIndex(
           (c) => c.href === component.href
-        )
-        const isActive = pathname === component.href
-        const prevCategory = idx > 0 ? displayList[idx - 1].category : null
+        );
+        const isActive = pathname === component.href;
+        const prevCategory = idx > 0 ? displayList[idx - 1].category : null;
         const isNewCategory =
-          sortMode === "id" &&
+          sortMode === "group" &&
           component.category &&
-          component.category !== prevCategory
+          component.category !== prevCategory;
+
+        const count = isNewCategory ? categoryCounts[component.category || "General"] : 0;
 
         return (
           <React.Fragment key={component.href}>
-            {isNewCategory && idx > 0 && (
-              <div className="mt-4 mb-2 pt-2 border-t border-zinc-200 dark:border-white/10">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-sky-500/90 pl-1 block">
-                  {component.category}
+            {isNewCategory && (
+              <div className={`px-3 pt-3 pb-1 ${idx > 0 ? "mt-3 border-t border-white/5" : ""}`}>
+                <span className="text-[11px] font-bold uppercase tracking-widest text-sky-400 inline-flex items-baseline gap-1">
+                  <span>{component.category}</span>
+                  <sup className="text-[10px] font-mono font-extrabold text-sky-400/90">
+                    [{count}]
+                  </sup>
                 </span>
               </div>
             )}
@@ -213,21 +179,14 @@ const SidebarList = ({
               component={component}
               index={originalIndex}
               isActive={isActive}
-              mouseY={mouseY}
               onNavigate={onNavigate}
               activeRef={activeRef}
             />
-            {idx < displayList.length - 1 && (
-              <>
-                <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
-                <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
-              </>
-            )}
           </React.Fragment>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default SidebarList
+export default SidebarList;
