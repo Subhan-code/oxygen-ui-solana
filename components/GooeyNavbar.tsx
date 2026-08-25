@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { label: "Home", href: "/" },
   { label: "Components", href: "/components" },
+  { label: "Docs", href: "/docs/installation" },
 ];
 
 const GITHUB_URL = "https://github.com/Subhan-code/oxygen_ui";

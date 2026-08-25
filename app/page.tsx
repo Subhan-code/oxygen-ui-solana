@@ -62,18 +62,18 @@ type Backer = {
 // mintlify's wordmark has a far larger x-height and sits higher in its artboard, so it needs its own size
 const BACKERS: Backer[] = [
   {
-    name: "Databuddy",
-    href: "https://www.databuddy.cc",
-    lightSrc: "/logos/databuddydark.svg",
-    darkSrc: "/logos/databuddywhite.svg",
-    cardHeight: "h-10 sm:h-12",
+    name: "Solana Foundation India",
+    href: "https://solana.com",
+    lightSrc: "/logos/solana-foundation-india.png",
+    darkSrc: "/logos/solana-foundation-india.png",
+    cardHeight: "h-12 sm:h-16 max-h-[85%]",
   },
   {
     name: "Mintlify",
     href: "https://mintlify.com",
     lightSrc: "/logos/mintlifydark.png",
     darkSrc: "/logos/mintlifylight.png",
-    cardHeight: "h-8 sm:h-9.5",
+    cardHeight: "h-8 sm:h-9",
   },
 ];
 
@@ -106,7 +106,7 @@ function SponsorSlot() {
       href={SPONSOR_URL}
       target="_blank"
       rel="noreferrer"
-      className="group relative flex h-24 w-full items-center justify-center rounded-3xl bg-card/60 transition-colors duration-150 ease-out hover:bg-card dark:bg-muted/60 dark:hover:bg-muted sm:h-32"
+      className="group relative flex h-24 w-full items-center justify-center rounded-3xl bg-card/60 transition-colors duration-150 ease-out hover:bg-card dark:bg-muted/60 dark:hover:bg-muted sm:h-28"
     >
       <span className="flex items-center gap-2.5 text-muted-foreground/70 transition-colors duration-200 ease-out group-hover:text-foreground">
         <svg
@@ -142,7 +142,7 @@ function BackersSection() {
   return (
     <section
       id="sponsors"
-      className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-col items-center gap-12 px-6 py-24 text-center md:py-32"
+      className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-col items-center gap-12 px-6 pt-24 pb-0 text-center md:pt-32 md:pb-0"
     >
       <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl">
         Supported by Solana Foundation India Grants and ecosystem backers
@@ -154,7 +154,7 @@ function BackersSection() {
             href={backer.href}
             target="_blank"
             rel="noreferrer"
-            className="flex h-24 items-center justify-center rounded-3xl bg-card/60 px-6 transition-colors duration-150 ease-out hover:bg-card dark:bg-muted/60 dark:hover:bg-muted sm:h-32"
+            className="flex h-24 items-center justify-center rounded-3xl bg-card/60 px-4 py-2 transition-colors duration-150 ease-out hover:bg-card dark:bg-muted/60 dark:hover:bg-muted sm:h-28"
           >
             <BackerLogo
               backer={backer}

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState, useCallback, memo } from "react"
+import React, { useRef, useState, useCallback, useEffect, memo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { components } from "@/lib/components"
@@ -22,18 +22,30 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
   isActive,
   mouseY,
   onNavigate,
+  activeRef,
 }: {
   component: (typeof components)[number]
   index: number
   isActive: boolean
   mouseY: MotionValue<number>
   onNavigate?: () => void
+  activeRef?: React.RefObject<HTMLAnchorElement | null>
 }) {
-  const ref = useRef<HTMLAnchorElement>(null)
+  const localRef = useRef<HTMLAnchorElement | null>(null)
   const numStr = String(index + 1).padStart(2, "0")
 
+  const setRefs = useCallback(
+    (node: HTMLAnchorElement | null) => {
+      localRef.current = node
+      if (isActive && activeRef) {
+        (activeRef as React.MutableRefObject<HTMLAnchorElement | null>).current = node
+      }
+    },
+    [isActive, activeRef]
+  )
+
   const distance = useTransform(mouseY, (y) => {
-    const rect = ref.current?.getBoundingClientRect()
+    const rect = localRef.current?.getBoundingClientRect()
     if (!rect) return RADIUS
     return y - (rect.top + rect.height / 2)
   })
@@ -53,7 +65,7 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
 
   return (
     <Link
-      ref={ref}
+      ref={setRefs}
       href={component.href}
       onClick={onNavigate}
       title={`${numStr} ${component.name}`}
@@ -82,10 +94,29 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
   )
 })
 
-const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
+const SidebarList = ({
+  onNavigate,
+  isOpen,
+}: {
+  onNavigate?: () => void
+  isOpen?: boolean
+}) => {
   const pathname = usePathname()
   const [sortMode, setSortMode] = useState<"id" | "reverse">("id")
   const mouseY = useMotionValue(Infinity)
+  const activeRef = useRef<HTMLAnchorElement | null>(null)
+
+  useEffect(() => {
+    if (isOpen && activeRef.current) {
+      const timer = setTimeout(() => {
+        activeRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        })
+      }, 150)
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen, pathname])
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent) => {
@@ -149,7 +180,7 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
       <div className="group relative flex h-px cursor-pointer items-center gap-3 after:absolute after:left-0 after:top-1/2 after:size-full after:-translate-y-1/2 after:p-[14px]">
         <span className="bg-zinc-900 dark:bg-white inline-block h-[1px] w-[32px] shrink-0" />
         <span className="whitespace-nowrap transition-all ease-out opacity-100 text-zinc-900 dark:text-white font-medium truncate">
-          All Components
+          Solana Components
         </span>
       </div>
 
@@ -157,21 +188,34 @@ const SidebarList = ({ onNavigate }: { onNavigate?: () => void }) => {
       <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
       <span className="bg-zinc-300 dark:bg-white/20 block h-[1px] w-[32px]" />
 
-      {/* Component items */}
+      {/* Component items with category headers */}
       {displayList.map((component, idx) => {
         const originalIndex = components.findIndex(
           (c) => c.href === component.href
         )
         const isActive = pathname === component.href
+        const prevCategory = idx > 0 ? displayList[idx - 1].category : null
+        const isNewCategory =
+          sortMode === "id" &&
+          component.category &&
+          component.category !== prevCategory
 
         return (
           <React.Fragment key={component.href}>
+            {isNewCategory && idx > 0 && (
+              <div className="mt-4 mb-2 pt-2 border-t border-zinc-200 dark:border-white/10">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-sky-500/90 pl-1 block">
+                  {component.category}
+                </span>
+              </div>
+            )}
             <ProximityScaleItem
               component={component}
               index={originalIndex}
               isActive={isActive}
               mouseY={mouseY}
               onNavigate={onNavigate}
+              activeRef={activeRef}
             />
             {idx < displayList.length - 1 && (
               <>

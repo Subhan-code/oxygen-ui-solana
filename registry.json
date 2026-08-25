@@ -20,6 +20,26 @@
       ]
     },
     {
+      "name": "solana-wallet-card",
+      "type": "registry:ui",
+      "title": "Solana Wallet Card",
+      "description": "A light glassmorphic wallet card featuring overlapping token avatars, PnL percentage badge, and Swap/Send action buttons.",
+      "dependencies": [
+        "motion",
+        "lucide-react",
+        "thesvg"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/solana-wallet-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "family-drawer",
       "type": "registry:ui",
       "title": "Family Drawer",

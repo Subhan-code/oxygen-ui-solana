@@ -75,7 +75,7 @@ const Sidebar = ({
         transition={{ type: "spring", stiffness: 320, damping: 32 }}
         className="pointer-events-auto bg-white text-zinc-900 border-zinc-200/80 dark:bg-[#111] dark:text-white dark:border-white/10 relative flex h-full w-[320px] flex-col overflow-y-auto overflow-x-clip rounded-3xl pl-4 pr-2 text-[15px] tracking-tight border shadow-2xl no-scrollbar will-change-transform"
       >
-        <SidebarList onNavigate={handleNavigateClose} />
+        <SidebarList onNavigate={handleNavigateClose} isOpen={open} />
       </motion.div>
     </div>
   );

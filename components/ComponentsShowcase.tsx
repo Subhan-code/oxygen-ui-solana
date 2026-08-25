@@ -26,11 +26,10 @@ export default function ComponentsShowcase() {
     <section className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-6 md:py-32">
       <header className="flex flex-col items-center gap-3 text-center">
         <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-          {components.length}+ components
+          {components.length}+ Solana components &amp; primitives
         </h2>
         <p className="max-w-xl text-balance text-sm font-medium text-muted-foreground sm:text-base md:text-lg">
-          Just one file for each component. Add it with the shadcn CLI, using
-          any package manager you like.
+          Reusable Solana UI building blocks for account interfaces, token displays, and dApp dashboards. Add any component with the shadcn CLI.
         </p>
       </header>
 

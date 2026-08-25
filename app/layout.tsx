@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Databuddy } from '@databuddy/sdk/react';
 import {
   SITE_DESCRIPTION,
   SITE_NAME,
@@ -132,15 +131,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="flex flex-1 flex-col">{children}</div>
-          <Databuddy
-            clientId={process.env.NEXT_PUBLIC_DATABUDDY_CLIENT_ID!}
-            trackHashChanges={true}
-            trackAttributes={true}
-            trackOutgoingLinks={true}
-            trackInteractions={true}
-            trackWebVitals={true}
-            trackErrors={true}
-          />
         </ThemeProvider>
       </body>
     </html>
