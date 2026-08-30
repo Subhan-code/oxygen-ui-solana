@@ -29,7 +29,7 @@ export function CryptoUserProfile({
 }: CryptoUserProfileProps) {
   return (
     <motion.div
-      data-slot="root"
+      data-slot="crypto-user-profile"
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", bounce: 0, duration: 0.35 }}
@@ -45,7 +45,7 @@ export function CryptoUserProfile({
             <button
               type="button"
               onClick={onClose}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white transition-colors cursor-pointer active:scale-95"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white transition-colors cursor-pointer motion-safe:active:scale-[0.97]"
             >
               <X className="h-4 w-4" />
             </button>
@@ -82,7 +82,7 @@ export function CryptoUserProfile({
         <button
           type="button"
           onClick={onManageProfile}
-          className="flex items-center justify-center gap-2 rounded-xl bg-zinc-900 py-2 px-3 text-xs font-semibold text-zinc-200 hover:bg-zinc-800 transition-colors border border-zinc-800 cursor-pointer active:scale-98"
+          className="flex items-center justify-center gap-2 rounded-xl bg-zinc-900 py-2 px-3 text-xs font-semibold text-zinc-200 hover:bg-zinc-800 transition-colors border border-zinc-800 cursor-pointer motion-safe:active:scale-[0.97]"
         >
           <Settings className="h-3.5 w-3.5 text-zinc-400" />
           <span>Manage Profile</span>
@@ -90,7 +90,7 @@ export function CryptoUserProfile({
         <button
           type="button"
           onClick={onShareProfile}
-          className="flex items-center justify-center gap-2 rounded-xl bg-zinc-900 py-2 px-3 text-xs font-semibold text-zinc-200 hover:bg-zinc-800 transition-colors border border-zinc-800 cursor-pointer active:scale-98"
+          className="flex items-center justify-center gap-2 rounded-xl bg-zinc-900 py-2 px-3 text-xs font-semibold text-zinc-200 hover:bg-zinc-800 transition-colors border border-zinc-800 cursor-pointer motion-safe:active:scale-[0.97]"
         >
           <Share2 className="h-3.5 w-3.5 text-zinc-400" />
           <span>Share Profile</span>

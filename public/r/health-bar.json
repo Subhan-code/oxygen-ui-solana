@@ -2,15 +2,17 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "health-bar",
   "title": "Health Bar",
-  "description": "A visual health/risk indicator bar that transitions from green to yellow to red based on a percentage value.",
-  "dependencies": [],
+  "description": "A progress safety indicator for lending positions",
+  "dependencies": [
+    "lucide-react"
+  ],
   "registryDependencies": [
     "utils"
   ],
   "files": [
     {
-      "path": "src/registry/sol/health-bar.tsx",
-      "content": "import { cn } from \"@/lib/utils\";\r\n\r\ninterface HealthBarProps {\r\n  value: number;\r\n  label?: string;\r\n  showValue?: boolean;\r\n  className?: string;\r\n}\r\n\r\nconst getHealthColor = (value: number) => {\r\n  if (value >= 66) return \"text-emerald-500\";\r\n  if (value >= 33) return \"text-yellow-500\";\r\n  return \"text-red-400\";\r\n};\r\n\r\nconst HealthBar = ({\r\n  value,\r\n  label = \"Health Factor\",\r\n  showValue = true,\r\n  className,\r\n}: HealthBarProps) => {\r\n  const clamped = Math.max(0, Math.min(100, value));\r\n\r\n  return (\r\n    <div className={cn(\"flex flex-col gap-2 w-full\", className)}>\r\n      <div className=\"flex items-center justify-between\">\r\n        <span className=\"text-sm text-muted-foreground\">{label}</span>\r\n        {showValue && (\r\n          <span className={cn(\"text-sm font-medium\", getHealthColor(clamped))}>\r\n            {clamped.toFixed(0)}%\r\n          </span>\r\n        )}\r\n      </div>\r\n      <div className=\"relative h-2.5 w-full rounded-full bg-muted\">\r\n        <div\r\n          className=\"absolute inset-y-0 left-0 overflow-hidden rounded-full transition-all duration-300\"\r\n          style={{ width: `${clamped}%` }}\r\n        >\r\n          <div\r\n            className=\"h-full bg-gradient-to-r from-red-400 via-yellow-500 to-emerald-500\"\r\n            style={{ width: `${clamped > 0 ? (100 / clamped) * 100 : 100}%` }}\r\n          />\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport type { HealthBarProps };\r\nexport { HealthBar };\r\n",
+      "path": "components/ui/health-bar.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\ninterface HealthBarProps {\n  value: number;\n  label?: string;\n  showValue?: boolean;\n  className?: string;\n}\n\nconst getHealthColor = (value: number) => {\n  if (value >= 66) return \"text-[#34C759] dark:text-[#30D158]\";\n  if (value >= 33) return \"text-[#FF9500] dark:text-[#FF9F0A]\";\n  return \"text-[#FF3B30] dark:text-[#FF453A]\";\n};\n\nconst getHealthBg = (value: number) => {\n  if (value >= 66) return \"bg-[#34C759] dark:bg-[#30D158]\";\n  if (value >= 33) return \"bg-[#FF9500] dark:bg-[#FF9F0A]\";\n  return \"bg-[#FF3B30] dark:bg-[#FF453A]\";\n};\n\nconst HealthBar = ({\n  value,\n  label = \"Health Factor\",\n  showValue = true,\n  className,\n}: HealthBarProps) => {\n  const clamped = Math.max(0, Math.min(100, value));\n\n  return (\n    <div data-slot=\"health-bar\" className={cn(\"flex flex-col gap-2 w-full\", className)}>\n      <div className=\"flex items-center justify-between\">\n        <span className=\"text-sm text-muted-foreground\">{label}</span>\n        {showValue && (\n          <span className={cn(\"text-sm font-medium tabular-nums\", getHealthColor(clamped))}>\n            {clamped.toFixed(0)}%\n          </span>\n        )}\n      </div>\n      <div className=\"relative h-2.5 w-full overflow-hidden rounded-full bg-muted\">\n        <div\n          className={cn(\n            \"h-full origin-left rounded-full motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-[var(--ease-out-expo)]\",\n            getHealthBg(clamped),\n          )}\n          style={{ transform: `scaleX(${clamped / 100})` }}\n        />\n      </div>\n    </div>\n  );\n};\n\nexport type { HealthBarProps };\nexport { HealthBar };\n",
       "type": "registry:ui"
     }
   ],

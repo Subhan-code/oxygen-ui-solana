@@ -5,15 +5,24 @@ import { motion } from "motion/react"
 import { Layers } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+import {
+  Metric,
+  MetricLabel,
+  MetricChange,
+  MetricValue,
+} from "@/components/metric"
+
 export interface CryptoSalesSegmentedBarsProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   salesAmount?: string
-  growthPercent?: string
+  growthPercent?: number | null
 }
+
+const ROWS: number[] = [2, 1, 2, 4]
 
 export function CryptoSalesSegmentedBars({
   salesAmount = "$9,134 SOL",
-  growthPercent = "2.5%",
+  growthPercent = 2.5,
   className,
   ...props
 }: CryptoSalesSegmentedBarsProps) {
@@ -29,14 +38,14 @@ export function CryptoSalesSegmentedBars({
       )}
       {...props}
     >
-      <div className="flex items-center justify-between mb-3 pb-2 border-b border-zinc-900">
-        <div>
-          <span className="text-xs font-medium text-zinc-400">Segmented Metrics</span>
-          <div className="flex items-baseline gap-2 mt-0.5">
-            <span className="text-lg font-bold tracking-tight leading-tight text-white">{salesAmount}</span>
-            <span className="text-xs font-semibold text-blue-400">↑ {growthPercent}</span>
-          </div>
-        </div>
+      <div className="flex items-start justify-between mb-3 pb-2 border-b border-zinc-900">
+        <Metric className="p-0">
+          <MetricLabel className="text-zinc-400">
+            Segmented Metrics
+            <MetricChange value={growthPercent} />
+          </MetricLabel>
+          <MetricValue className="text-white">{salesAmount}</MetricValue>
+        </Metric>
         <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-950/60 border border-blue-800/50 text-blue-300">
           <Layers className="h-4 w-4" />
         </div>
@@ -44,7 +53,7 @@ export function CryptoSalesSegmentedBars({
 
       <div className="h-28 w-full rounded-2xl bg-zinc-900/60 p-3 border border-zinc-800 flex items-center justify-center">
         <div className="flex flex-col justify-between h-full w-full py-1 gap-2">
-          {[2, 1, 2, 4].map((activeCount, rowIdx) => (
+          {ROWS.map((activeCount, rowIdx) => (
             <div key={rowIdx} className="flex gap-2 w-full">
               {Array.from({ length: 5 }).map((_, colIdx) => (
                 <motion.div

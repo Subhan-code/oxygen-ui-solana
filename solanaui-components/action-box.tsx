@@ -1,0 +1,342 @@
+"use client";
+
+import { Check, ChevronsUpDown, WalletIcon } from "lucide-react";
+import React from "react";
+import { NumericFormat } from "react-number-format";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
+
+interface DetailRow {
+  label: string;
+  value: string;
+  className?: string;
+}
+
+type TokenIconProps = {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  className?: string;
+};
+
+const TokenIcon = ({
+  alt = "Token",
+  className = "",
+  width,
+  height,
+  ...props
+}: TokenIconProps) => {
+  const [status, setStatus] = React.useState<"loading" | "loaded" | "error">(
+    "loading",
+  );
+
+  if (status === "error") {
+    const fontSize = typeof width === "number" ? width * 0.35 : "1rem";
+    return (
+      <div
+        className={cn(
+          "rounded-full bg-muted inline-flex items-center justify-center font-medium text-muted-foreground",
+          className,
+        )}
+        style={{ width, height, fontSize }}
+      >
+        {alt.charAt(0).toUpperCase()}
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative inline-block" style={{ width, height }}>
+      {status === "loading" && (
+        <Skeleton
+          className={cn("rounded-full absolute inset-0", className)}
+          style={{ width, height }}
+        />
+      )}
+      <img
+        alt={alt}
+        className={cn(
+          "rounded-full block",
+          status === "loading" && "opacity-0",
+          className,
+        )}
+        onLoad={() => setStatus("loaded")}
+        onError={() => setStatus("error")}
+        width={width}
+        height={height}
+        {...props}
+      />
+    </div>
+  );
+};
+
+interface TokenComboboxProps {
+  tokens: {
+    icon: string;
+    symbol: string;
+  }[];
+  defaultValue?: string;
+  onSelect?: (token: { icon: string; symbol: string }) => void;
+  className?: string;
+}
+
+const TokenCombobox = ({
+  tokens,
+  defaultValue,
+  onSelect,
+  className,
+}: TokenComboboxProps) => {
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(defaultValue ?? "");
+
+  const activeToken = tokens.find(
+    (token) => token.symbol.toLowerCase() === value.toLowerCase(),
+  );
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className={cn("shrink-0 justify-between", className)}
+        >
+          {activeToken ? (
+            <div className="flex items-center gap-2.5">
+              <TokenIcon
+                src={activeToken.icon}
+                alt={activeToken.symbol}
+                width={20}
+                height={20}
+              />
+              {activeToken.symbol}
+            </div>
+          ) : (
+            "Select token..."
+          )}
+          <ChevronsUpDown className="opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search token..." className="h-9" />
+          <CommandList>
+            <CommandEmpty>No tokens found.</CommandEmpty>
+            <CommandGroup>
+              {tokens.map((token) => (
+                <CommandItem
+                  key={token.symbol}
+                  value={token.symbol}
+                  onSelect={(currentValue) => {
+                    const newValue = currentValue === value ? "" : currentValue;
+                    setValue(newValue);
+                    setOpen(false);
+                    if (newValue) {
+                      const selected = tokens.find(
+                        (t) =>
+                          t.symbol.toLowerCase() === newValue.toLowerCase(),
+                      );
+                      if (selected) onSelect?.(selected);
+                    }
+                  }}
+                >
+                  <TokenIcon
+                    src={token.icon}
+                    alt={token.symbol}
+                    width={20}
+                    height={20}
+                  />
+                  {token.symbol}
+                  <Check
+                    className={cn(
+                      "ml-auto",
+                      value.toLowerCase() === token.symbol.toLowerCase()
+                        ? "opacity-100"
+                        : "opacity-0",
+                    )}
+                  />
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+interface TokenInputProps {
+  tokens: { icon: string; symbol: string }[];
+  defaultToken?: string;
+  balance?: string;
+  value?: string;
+  usdValue?: string;
+  onValueChange?: (value: string) => void;
+  onTokenSelect?: (token: { icon: string; symbol: string }) => void;
+  className?: string;
+}
+
+const TokenInput = ({
+  tokens,
+  defaultToken,
+  balance,
+  value,
+  usdValue,
+  onValueChange,
+  onTokenSelect,
+  className,
+}: TokenInputProps) => {
+  const [internalValue, setInternalValue] = React.useState(value ?? "");
+  const currentValue = value ?? internalValue;
+
+  const handleValueChange = (values: { value: string }) => {
+    setInternalValue(values.value);
+    onValueChange?.(values.value);
+  };
+
+  const handleQuickAmount = (fraction: number) => {
+    if (!balance) return;
+    const numericBalance = Number.parseFloat(balance.replace(/,/g, ""));
+    if (Number.isNaN(numericBalance)) return;
+    const newValue = (numericBalance * fraction).toString();
+    setInternalValue(newValue);
+    onValueChange?.(newValue);
+  };
+
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-3 border p-4 rounded-lg w-full",
+        className,
+      )}
+    >
+      {balance && (
+        <div className="flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+            <WalletIcon className="size-3.5" />
+            {balance}
+          </span>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-xs h-6 px-2 rounded-sm"
+              onClick={() => handleQuickAmount(0.5)}
+            >
+              Half
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-xs h-6 px-2 rounded-sm"
+              onClick={() => handleQuickAmount(1)}
+            >
+              Max
+            </Button>
+          </div>
+        </div>
+      )}
+      <div className="flex items-center gap-2 w-full">
+        <TokenCombobox
+          tokens={tokens}
+          defaultValue={defaultToken}
+          onSelect={onTokenSelect}
+        />
+        <div className="flex flex-col flex-1 min-w-0 items-end">
+          <NumericFormat
+            value={currentValue}
+            onValueChange={handleValueChange}
+            thousandSeparator=","
+            decimalSeparator="."
+            allowNegative={false}
+            placeholder="0"
+            inputMode="decimal"
+            customInput={Input}
+            className="text-right bg-transparent pr-1 dark:bg-transparent shadow-none border-none focus:ring-0 focus-visible:ring-0 w-full md:text-xl"
+          />
+          {usdValue && (
+            <span className="text-xs text-muted-foreground pr-1">
+              {usdValue}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+type ActionBoxDetail = DetailRow;
+
+interface ActionBoxProps {
+  tokens: { icon: string; symbol: string }[];
+  defaultToken?: string;
+  balance?: string;
+  label?: string;
+  details?: ActionBoxDetail[];
+  submitLabel?: string;
+  onSubmit?: () => void;
+  className?: string;
+}
+
+const ActionBox = ({
+  tokens,
+  defaultToken,
+  balance,
+  label,
+  details,
+  submitLabel = "Submit",
+  onSubmit,
+  className,
+}: ActionBoxProps) => {
+  return (
+    <div className={cn("flex flex-col gap-4 border rounded-lg p-4", className)}>
+      {label && (
+        <span className="text-sm font-medium text-muted-foreground">
+          {label}
+        </span>
+      )}
+      <TokenInput
+        tokens={tokens}
+        defaultToken={defaultToken}
+        balance={balance}
+      />
+      {details && details.length > 0 && (
+        <>
+          <Separator />
+          <div className="flex flex-col gap-1.5 text-sm">
+            {details.map((detail) => (
+              <div key={detail.label} className="flex justify-between">
+                <span className="text-muted-foreground">{detail.label}</span>
+                <span className={detail.className}>{detail.value}</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+      <Button className="w-full" size="lg" onClick={onSubmit}>
+        {submitLabel}
+      </Button>
+    </div>
+  );
+};
+
+export type { ActionBoxDetail, ActionBoxProps, DetailRow, TokenInputProps };
+export { ActionBox, TokenInput };

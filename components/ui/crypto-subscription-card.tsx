@@ -137,7 +137,7 @@ export function CryptoSubscriptionCard({
               type="button"
               onClick={() => setAutopay(!autopay)}
               className={cn(
-                "relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out p-0.5",
+                "relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full transition-colors duration-150 ease-[var(--ease-out-quad)] p-0.5",
                 autopay ? "bg-blue-600" : "bg-zinc-300 dark:bg-zinc-700"
               )}
             >

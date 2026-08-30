@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useCallback, useEffect, useMemo, memo } from "react";
+import React, { useRef, useState, useEffect, useMemo, memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { components } from "@/lib/components";
@@ -25,22 +25,11 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
   onNavigate?: () => void;
   activeRef?: React.RefObject<HTMLAnchorElement | null>;
 }) {
-  const localRef = useRef<HTMLAnchorElement | null>(null);
   const numStr = String(index + 1).padStart(2, "0");
-
-  const setRefs = useCallback(
-    (node: HTMLAnchorElement | null) => {
-      localRef.current = node;
-      if (isActive && activeRef) {
-        (activeRef as React.MutableRefObject<HTMLAnchorElement | null>).current = node;
-      }
-    },
-    [isActive, activeRef]
-  );
 
   return (
     <Link
-      ref={setRefs}
+      ref={isActive ? activeRef : undefined}
       href={component.href}
       prefetch={true}
       onClick={onNavigate}
@@ -166,7 +155,7 @@ const SidebarList = ({
         return (
           <React.Fragment key={component.href}>
             {isNewCategory && (
-              <div className={`px-3 pt-3 pb-1 ${idx > 0 ? "mt-3 border-t border-white/5" : ""}`}>
+              <div className={`px-3 pt-4 pb-1.5 ${idx > 0 ? "mt-6 border-t border-white/10" : ""}`}>
                 <span className="text-[11px] font-bold uppercase tracking-widest text-sky-400 inline-flex items-baseline gap-1">
                   <span>{component.category}</span>
                   <sup className="text-[10px] font-mono font-extrabold text-sky-400/90">

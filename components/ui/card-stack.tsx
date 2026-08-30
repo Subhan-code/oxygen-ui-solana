@@ -20,7 +20,7 @@ const DEFAULT_CARDS: CardItem[] = [
     title: "Solana Breakpoint 2026 VIP Pass",
     badge: "EVENT TICKET",
     description: "All-access developer pass for Solana Breakpoint in Dubai with exclusive workshop entries.",
-    accent: "from-purple-600 to-indigo-600",
+    accent: "bg-purple-600",
     icon: Sparkles,
   },
   {
@@ -28,7 +28,7 @@ const DEFAULT_CARDS: CardItem[] = [
     title: "Jupiter Pro Trader Pass",
     badge: "MEV REBATE",
     description: "Zero slippage fees and priority transaction routing across all Solana liquidity pools.",
-    accent: "from-emerald-600 to-teal-600",
+    accent: "bg-emerald-600",
     icon: Shield,
   },
   {
@@ -36,7 +36,7 @@ const DEFAULT_CARDS: CardItem[] = [
     title: "Phantom Hardware Key",
     badge: "SECURITY",
     description: "Ed25519 hardware key authentication for multi-sig vault approvals and staking.",
-    accent: "from-amber-600 to-orange-600",
+    accent: "bg-amber-600",
     icon: Key,
   },
   {
@@ -44,7 +44,7 @@ const DEFAULT_CARDS: CardItem[] = [
     title: "Superteam Ecosystem Leader",
     badge: "BADGE",
     description: "Top 1% builder badge granted for outstanding contributions to Solana core tools.",
-    accent: "from-blue-600 to-cyan-600",
+    accent: "bg-blue-600",
     icon: Award,
   },
 ];

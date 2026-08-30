@@ -11,7 +11,7 @@ export default function Demo() {
 
   return (
     <div className="flex min-h-[500px] w-full flex-col items-center justify-center gap-8 p-6 max-w-sm mx-auto transition-all duration-300">
-      <div className="flex flex-col gap-4 w-full p-6 rounded-3xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950 shadow-xl">
+      <div className="flex flex-col gap-4 w-full p-6 rounded-3xl border border-zinc-200 bg-white dark:border-zinc-800 dark: shadow-xl">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <Plane className="h-4 w-4 text-sky-500" />

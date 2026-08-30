@@ -84,7 +84,7 @@ export function FloatingActionButton({
                       action.onClick?.();
                       setIsOpen(false);
                     }}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.92 }}
                     className={cn(
                       "flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg cursor-pointer transition-colors",
@@ -105,7 +105,7 @@ export function FloatingActionButton({
         type="button"
         aria-label={label}
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.06 }}
+        whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.94 }}
         className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-2xl hover:bg-emerald-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 cursor-pointer"
       >

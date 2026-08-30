@@ -5,16 +5,11 @@ import { motion, useReducedMotion } from "motion/react";
 import { Hourglass, ArrowUpRight, PieChart, Link as LinkIcon, ChevronRight, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export interface MetricCardData {
-  id: string;
-  title: string;
-  value: string;
-  subtitleValue?: string;
-  icon: React.ReactNode;
-  rows?: { label: string; value: string; isLink?: boolean }[];
-  progressPercent?: number;
-  actionText?: string;
-}
+import {
+  Metric,
+  MetricLabel,
+  MetricValue,
+} from "@/components/metric";
 
 export interface FinancialMetricsGridProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
@@ -35,22 +30,21 @@ export function FinancialMetricsGrid({
       className={cn("grid w-full max-w-lg grid-cols-1 sm:grid-cols-2 gap-4 p-2 font-sans select-none mx-auto", className)}
       {...props}
     >
-      {/* Card 1: Total Hours */}
       <motion.div
         whileHover={reduceMotion ? {} : { y: -2 }}
         className="flex flex-col justify-between rounded-3xl bg-white p-5 shadow-lg border border-zinc-200/80 dark:bg-zinc-950 dark:border-zinc-800/80"
       >
-        <div>
-          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
-            <span className="text-xs font-medium">Total hours</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
-              <Hourglass className="h-4 w-4" />
-            </div>
-          </div>
-          <h3 className="mt-2 text-2xl font-bold tracking-tight text-zinc-950 dark:text-white font-mono">
-            17.00
-          </h3>
-        </div>
+        <Metric className="p-0">
+          <MetricLabel>
+            <span className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
+                <Hourglass className="h-4 w-4" />
+              </div>
+              Total hours
+            </span>
+          </MetricLabel>
+          <MetricValue className="mt-2 text-2xl text-zinc-950 dark:text-white font-mono">17.00</MetricValue>
+        </Metric>
 
         <div className="mt-6 flex flex-col gap-1.5 rounded-2xl bg-zinc-50/80 p-3 border border-zinc-200/60 dark:bg-zinc-900/60 dark:border-zinc-800/60 text-xs font-medium">
           <div className="flex items-center justify-between text-zinc-700 dark:text-zinc-300">
@@ -64,22 +58,23 @@ export function FinancialMetricsGrid({
         </div>
       </motion.div>
 
-      {/* Card 2: Internal Costs */}
       <motion.div
         whileHover={reduceMotion ? {} : { y: -2 }}
         className="flex flex-col justify-between rounded-3xl bg-white p-5 shadow-lg border border-zinc-200/80 dark:bg-zinc-950 dark:border-zinc-800/80"
       >
-        <div>
-          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
-            <span className="text-xs font-medium">Internal costs</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
-              <ArrowUpRight className="h-4 w-4" />
-            </div>
-          </div>
-          <h3 className="mt-2 text-2xl font-bold tracking-tight text-zinc-950 dark:text-white font-mono">
+        <Metric className="p-0">
+          <MetricLabel>
+            <span className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
+                <ArrowUpRight className="h-4 w-4" />
+              </div>
+              Internal costs
+            </span>
+          </MetricLabel>
+          <MetricValue className="mt-2 text-2xl text-zinc-950 dark:text-white font-mono">
             <span className="text-base font-semibold mr-0.5">$</span>611.37
-          </h3>
-        </div>
+          </MetricValue>
+        </Metric>
 
         <div className="mt-6 flex flex-col gap-1.5 rounded-2xl bg-zinc-50/80 p-3 border border-zinc-200/60 dark:bg-zinc-900/60 dark:border-zinc-800/60 text-xs font-medium">
           <div className="flex items-center justify-between text-zinc-700 dark:text-zinc-300">
@@ -96,58 +91,54 @@ export function FinancialMetricsGrid({
         </div>
       </motion.div>
 
-      {/* Card 3: Budget Remaining */}
       <motion.div
         whileHover={reduceMotion ? {} : { y: -2 }}
         className="flex flex-col justify-between rounded-3xl bg-white p-5 shadow-lg border border-zinc-200/80 dark:bg-zinc-950 dark:border-zinc-800/80"
       >
-        <div>
-          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
-            <span className="text-xs font-medium">Budget remaining</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
-              <PieChart className="h-4 w-4" />
-            </div>
-          </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <h3 className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-white font-mono">
-              8.00
-            </h3>
-            <span className="text-xs font-bold text-blue-600 dark:text-blue-400 font-mono">
-              32%
+        <Metric className="p-0">
+          <MetricLabel>
+            <span className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
+                <PieChart className="h-4 w-4" />
+              </div>
+              Budget remaining
             </span>
+          </MetricLabel>
+          <div className="mt-2 flex items-baseline gap-2">
+            <MetricValue className="text-2xl text-zinc-950 dark:text-white font-mono">8.00</MetricValue>
+            <span className="text-xs font-bold text-blue-600 dark:text-blue-400 font-mono">32%</span>
           </div>
-        </div>
+        </Metric>
 
         <div className="mt-6 flex flex-col gap-2 pt-1">
           <div className="flex items-center justify-between text-xs font-semibold text-zinc-900 dark:text-white">
             <span>Total budget</span>
             <span className="font-mono">25.00</span>
           </div>
-          {/* Blue Filled Progress Bar */}
           <div className="h-1.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
             <div className="h-full w-[32%] rounded-full bg-blue-600" />
           </div>
         </div>
       </motion.div>
 
-      {/* Card 4: Unvoiced Amount */}
       <motion.div
         whileHover={reduceMotion ? {} : { y: -2 }}
         className="flex flex-col justify-between rounded-3xl bg-white p-5 shadow-lg border border-zinc-200/80 dark:bg-zinc-950 dark:border-zinc-800/80"
       >
-        <div>
-          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
-            <span className="text-xs font-medium">Unvoiced amount</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
-              <LinkIcon className="h-4 w-4" />
-            </div>
-          </div>
-          <h3 className="mt-2 text-2xl font-bold tracking-tight text-zinc-950 dark:text-white font-mono">
+        <Metric className="p-0">
+          <MetricLabel>
+            <span className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
+                <LinkIcon className="h-4 w-4" />
+              </div>
+              Unvoiced amount
+            </span>
+          </MetricLabel>
+          <MetricValue className="mt-2 text-2xl text-zinc-950 dark:text-white font-mono">
             <span className="text-base font-semibold mr-0.5">$</span>1,716.37
-          </h3>
-        </div>
+          </MetricValue>
+        </Metric>
 
-        {/* Soft Blue Action Pill Button */}
         <motion.button
           type="button"
           whileTap={reduceMotion ? {} : { scale: 0.97 }}

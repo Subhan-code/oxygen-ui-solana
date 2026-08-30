@@ -4,10 +4,30 @@ import GooeyNavbar from "@/components/GooeyNavbar";
 import { fetchStarCount } from "@/lib/github";
 import CopyButton from "@/components/CopyButton";
 
+export const dynamic = "force-static";
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Installation & Integration Guide",
   description:
-    "Learn how to set up Oxygen UI in your Next.js, Vite, or React Solana project using shadcn CLI.",
+    "Learn how to set up Oxygen UI in your Next.js, Vite, or React Solana project using the shadcn CLI.",
+  alternates: {
+    canonical: "/docs/installation",
+  },
+  openGraph: {
+    title: "Installation & Integration Guide — Oxygen UI",
+    description:
+      "Learn how to set up Oxygen UI in your Next.js, Vite, or React Solana project using the shadcn CLI.",
+    url: "/docs/installation",
+    images: ["/ogimage.webp"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Installation & Integration Guide — Oxygen UI",
+    description:
+      "Learn how to set up Oxygen UI in your Next.js, Vite, or React Solana project using the shadcn CLI.",
+    images: ["/ogimage.webp"],
+  },
 };
 
 export default async function InstallationPage() {

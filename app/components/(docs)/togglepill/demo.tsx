@@ -122,7 +122,7 @@ export default function Demo() {
         </div>
 
         {/* Live Preview Display Box */}
-        <div className="relative flex min-h-[220px] w-full flex-col items-center justify-center gap-4 rounded-2xl border border-black/[0.06] bg-zinc-950/90 p-8 text-white">
+        <div className="relative flex min-h-[220px] w-full flex-col items-center justify-center gap-4 rounded-2xl border border-black/[0.06] p-8 text-white">
           <TogglePill
             checked={checked}
             onChange={setChecked}
@@ -279,7 +279,7 @@ export default function Demo() {
               Copy Exact HTML
             </button>
           </div>
-          <pre className="no-scrollbar overflow-x-auto rounded-2xl border border-black/10 bg-zinc-950 p-4 font-mono text-xs text-zinc-200 dark:border-white/10">
+          <pre className="no-scrollbar overflow-x-auto rounded-2xl border border-black/10 p-4 font-mono text-xs text-zinc-200 dark:border-white/10">
             {htmlStructureOutput}
           </pre>
         </div>

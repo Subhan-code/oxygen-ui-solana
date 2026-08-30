@@ -188,7 +188,7 @@ export function CryptoCheckoutCard({
                   <img
                     src={selectedToken.icon}
                     alt={selectedToken.name}
-                    className="h-8 w-8 rounded-full"
+                    className="h-8 w-8 rounded-full object-cover"
                   />
                   <div>
                     <div className="text-sm font-bold flex items-center gap-1.5">
@@ -230,7 +230,7 @@ export function CryptoCheckoutCard({
                         <img
                           src={token.icon}
                           alt={token.name}
-                          className="h-6 w-6 rounded-full"
+                          className="h-6 w-6 rounded-full object-cover"
                         />
                         <span>{token.symbol}</span>
                       </div>
@@ -263,7 +263,7 @@ export function CryptoCheckoutCard({
             type="button"
             onClick={handlePay}
             disabled={status === "processing"}
-            className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-500/20 hover:from-emerald-600 hover:to-teal-700 active:scale-[0.99] disabled:opacity-70 transition-all duration-200"
+            className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-[#0071E3] hover:bg-[#0077ED] dark:bg-[#0A84FF] dark:hover:bg-[#0071E3] py-3.5 text-sm font-bold text-white shadow-md active:scale-[0.99] disabled:opacity-70 transition-all duration-200"
           >
             {status === "processing" ? (
               <RefreshCw className="h-4 w-4 animate-spin" />

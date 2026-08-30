@@ -73,7 +73,7 @@ export default function CopyButton({
       aria-label={copied ? "Copied" : label}
       title={title === undefined ? label : title || undefined}
       className={cn(
-        "inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md text-foreground/60 transition-colors hover:text-white",
+        "inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md text-foreground/60 transition-colors hover:text-white press-scale active:scale-[0.95]",
         children ? "h-7 gap-1.5 px-2" : "size-7",
         className,
       )}
@@ -87,7 +87,7 @@ export default function CopyButton({
             scale: copied ? 0.6 : 1,
             filter: copied ? "blur(3px)" : "blur(0px)",
           }}
-          transition={{ duration: 0.15, ease: "easeIn" }}
+          transition={{ duration: 0.14, ease: [0.16, 1, 0.3, 1] }}
         >
           {idleIcon ?? <CopyGlyph />}
         </motion.span>

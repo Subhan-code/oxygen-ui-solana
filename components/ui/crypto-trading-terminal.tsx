@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import { ArrowDown, RefreshCw, Copy, ExternalLink } from "lucide-react"
+import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 
 export interface CryptoTradingTerminalProps
@@ -25,7 +26,7 @@ export function CryptoTradingTerminal({
 
   return (
     <div
-      data-slot="root"
+      data-slot="crypto-trading-terminal"
       className={cn(
         "relative mx-auto flex w-full max-w-4xl flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800 font-sans",
         className
@@ -122,9 +123,13 @@ export function CryptoTradingTerminal({
             </div>
 
             <div className="flex justify-center -my-2 z-10 relative">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-900 text-zinc-300 border border-zinc-700">
+              <button
+                type="button"
+                className="flex size-11 items-center justify-center rounded-full bg-zinc-900 text-zinc-300 border border-zinc-700 motion-safe:active:scale-[0.97] outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
+                aria-label="Flip tokens"
+              >
                 <ArrowDown className="h-3.5 w-3.5" />
-              </div>
+              </button>
             </div>
 
             <div className="rounded-xl bg-zinc-950 p-3 border border-zinc-800">
@@ -153,13 +158,13 @@ export function CryptoTradingTerminal({
                 type="button"
                 onClick={() => setSwapAndTransfer(!swapAndTransfer)}
                 className={cn(
-                  "h-5 w-9 rounded-full transition-colors relative p-0.5 cursor-pointer",
+                  "relative h-5 w-9 rounded-full motion-safe:transition-colors motion-safe:duration-150 cursor-pointer before:absolute before:inset-y-[-12px] before:inset-x-[-8px]",
                   swapAndTransfer ? "bg-white" : "bg-zinc-800"
                 )}
               >
                 <div
                   className={cn(
-                    "h-4 w-4 rounded-full bg-zinc-950 transition-transform",
+                    "h-4 w-4 rounded-full bg-zinc-950 motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)]",
                     swapAndTransfer && "translate-x-4"
                   )}
                 />
@@ -169,7 +174,7 @@ export function CryptoTradingTerminal({
 
           <button
             type="button"
-            className="mt-4 w-full rounded-xl bg-white py-2.5 text-center text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition-colors cursor-pointer shadow"
+            className="mt-4 w-full h-11 rounded-xl bg-white py-2.5 text-center text-xs font-bold text-zinc-950 hover:bg-zinc-200 motion-safe:transition-colors motion-safe:active:scale-[0.97] cursor-pointer shadow outline-none focus-visible:ring-2 focus-visible:ring-white/50"
           >
             Swap on Solana
           </button>
@@ -201,13 +206,21 @@ export function CryptoTradingTerminal({
                 type="button"
                 onClick={() => setActiveTimeframe(tf)}
                 className={cn(
-                  "rounded-lg px-2 py-1 text-[10px] font-bold transition-colors cursor-pointer",
+                  "relative rounded-lg px-2 py-1 text-[10px] font-bold motion-safe:transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/30",
                   activeTimeframe === tf
-                    ? "bg-white text-zinc-950 shadow"
+                    ? "text-zinc-950"
                     : "text-zinc-500 hover:text-zinc-300"
                 )}
               >
-                {tf}
+                {activeTimeframe === tf && (
+                  <motion.span
+                    layoutId="terminal-timeframe"
+                    className="absolute inset-0 bg-white shadow"
+                    style={{ borderRadius: 8 }}
+                    transition={{ type: "spring", duration: 0.2, bounce: 0 }}
+                  />
+                )}
+                <span className="relative z-10">{tf}</span>
               </button>
             ))}
           </div>

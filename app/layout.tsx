@@ -9,21 +9,67 @@ import {
   SITE_URL,
 } from "@/lib/site";
 import { SITE_KEYWORDS, siteJsonLd } from "@/lib/seo";
+import ScrollLockCleaner from "@/components/ScrollLockCleaner";
 import "./globals.css";
+
+if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+  const origConsoleError = console.error;
+  const EXTENSION_PATTERNS = [
+    "bis_skin_checked",
+    "cz-shortcut-listen",
+    "grammarly-extension",
+    "data-new-gr-c-s-check-loaded",
+    "data-gr-ext-installed",
+    "chrome-extension://",
+    "M_ID",
+  ];
+  console.error = (...args: unknown[]) => {
+    const isExtensionError = args.some((arg) => {
+      if (typeof arg === "string") {
+        return EXTENSION_PATTERNS.some((pattern) => arg.includes(pattern));
+      }
+      try {
+        const str = JSON.stringify(arg);
+        return EXTENSION_PATTERNS.some((pattern) => str.includes(pattern));
+      } catch {
+        return false;
+      }
+    });
+    if (isExtensionError) return;
+    origConsoleError(...args);
+  };
+
+  window.addEventListener(
+    "error",
+    (event) => {
+      if (
+        event.filename?.includes("chrome-extension://") ||
+        event.error?.stack?.includes("chrome-extension://") ||
+        (typeof event.message === "string" && event.message.includes("M_ID"))
+      ) {
+        event.stopImmediatePropagation();
+      }
+    },
+    true
+  );
+}
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = JetBrains_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const calSans = Plus_Jakarta_Sans({
   variable: "--font-cal-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const openRunde = localFont({
@@ -123,14 +169,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd()) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-1 flex-col">{children}</div>
+          <ScrollLockCleaner />
+          <div className="flex flex-1 flex-col" suppressHydrationWarning>{children}</div>
         </ThemeProvider>
       </body>
     </html>

@@ -5,7 +5,7 @@ import { SolanaWalletCard } from "@/components/ui/solana-wallet-card";
 
 export default function Demo() {
   return (
-    <div className="flex min-h-[500px] w-full items-center justify-center p-6 bg-zinc-950/20 transition-all duration-300">
+    <div className="flex min-h-[500px] w-full items-center justify-center p-6">
       <SolanaWalletCard
         walletLabel="Main wallet"
         address="0x3ddedt...ac563"

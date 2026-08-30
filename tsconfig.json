@@ -48,6 +48,8 @@
   ],
   "exclude": [
     "node_modules",
-    "scratch"
+    "scratch",
+    "components-copy",
+    "solanaui-components"
   ]
 }

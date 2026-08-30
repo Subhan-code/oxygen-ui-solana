@@ -7,7 +7,8 @@ export async function GET(request: Request) {
   const name = new URL(request.url).searchParams.get("name");
   if (!name) return new Response("Missing 'name' query.", { status: 400 });
 
-  const item = registry.items.find((entry) => entry.name === name);
+  const items = registry.items || [];
+  const item = items.find((entry) => entry.name === name);
   const file = item?.files?.[0]?.path;
   if (!file) return new Response("Source not found.", { status: 404 });
 
@@ -17,6 +18,6 @@ export async function GET(request: Request) {
       headers: { "content-type": "text/plain; charset=utf-8" },
     });
   } catch {
-    return new Response("Unable to read source.", { status: 500 });
+    return new Response("Source file unavailable.", { status: 404 });
   }
 }

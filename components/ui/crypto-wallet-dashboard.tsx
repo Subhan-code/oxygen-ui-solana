@@ -51,7 +51,7 @@ export function CryptoWalletDashboard({
 
   return (
     <div
-      data-slot="root"
+      data-slot="crypto-wallet-dashboard"
       className={cn(
         "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 text-white shadow-xl border border-zinc-800/80 font-sans min-h-[680px]",
         className
@@ -62,7 +62,7 @@ export function CryptoWalletDashboard({
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white font-bold transition-transform active:scale-95 cursor-pointer shadow"
+          className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white font-bold motion-safe:transition-transform motion-safe:active:scale-[0.97] cursor-pointer shadow"
           aria-label="Open wallet menu"
         >
           <span className="text-xs">⚡</span>
@@ -75,7 +75,7 @@ export function CryptoWalletDashboard({
               type="button"
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "relative rounded-full px-3.5 py-1 text-xs font-semibold transition-colors cursor-pointer active:scale-95 duration-100",
+                "relative rounded-full px-3.5 py-1 text-xs font-semibold motion-safe:transition-colors cursor-pointer motion-safe:active:scale-[0.97] duration-100",
                 activeTab === tab ? "text-zinc-950" : "text-zinc-400 hover:text-zinc-200"
               )}
             >
@@ -83,7 +83,8 @@ export function CryptoWalletDashboard({
                 <motion.div
                   layoutId="solana-dash-tab-pill"
                   className="absolute inset-0 rounded-full bg-white"
-                  transition={{ type: "spring", bounce: 0, duration: 0.35 }}
+                  style={{ borderRadius: 999 }}
+                  transition={{ type: "spring", bounce: 0, duration: 0.2 }}
                 />
               )}
               <span className="relative z-10">{tab}</span>
@@ -94,7 +95,7 @@ export function CryptoWalletDashboard({
         <button
           type="button"
           onClick={() => setLightMenuOpen(true)}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white transition-colors text-xs cursor-pointer active:scale-95"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white motion-safe:transition-colors text-xs cursor-pointer motion-safe:active:scale-[0.97]"
           title="Toggle Navigation Menu"
         >
           🌐
@@ -106,7 +107,7 @@ export function CryptoWalletDashboard({
           <button
             type="button"
             onClick={() => setAccountMenuOpen(!accountMenuOpen)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer active:scale-98"
+            className="flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-zinc-200 motion-safe:transition-colors cursor-pointer motion-safe:active:scale-[0.97]"
           >
             <span>{selectedAccount}</span>
             <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", accountMenuOpen && "rotate-180")} />
@@ -115,10 +116,12 @@ export function CryptoWalletDashboard({
           <AnimatePresence>
             {accountMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: -4 }}
+                key="dash-account-menu"
+                initial={{ opacity: 0, scale: 0.96, y: -4 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: -4 }}
-                transition={{ type: "spring", bounce: 0, duration: 0.25 }}
+                exit={{ opacity: 0, scale: 0.96, y: -4 }}
+                transition={{ type: "spring", bounce: 0, duration: 0.2 }}
+                style={{ transformOrigin: "top left", borderRadius: 12 }}
                 className="absolute left-0 top-7 z-30 w-48 rounded-xl border border-zinc-800 bg-zinc-900 p-1.5 shadow-xl backdrop-blur-md"
               >
                 {accounts.map((acc) => (
@@ -130,7 +133,7 @@ export function CryptoWalletDashboard({
                       setAccountMenuOpen(false)
                     }}
                     className={cn(
-                      "flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-xs font-medium transition-colors cursor-pointer active:scale-98",
+                      "flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-xs font-medium transition-colors cursor-pointer motion-safe:active:scale-[0.97]",
                       selectedAccount === acc ? "bg-blue-950/60 text-blue-300 font-semibold border border-blue-800/40" : "text-zinc-400 hover:bg-zinc-800/60"
                     )}
                   >
@@ -171,7 +174,7 @@ export function CryptoWalletDashboard({
         </div>
 
         <div className="space-y-2 mb-4">
-          <div className="flex items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3 transition-colors hover:bg-zinc-900 cursor-pointer active:scale-98">
+          <div className="flex items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3 transition-colors hover:bg-zinc-900 cursor-pointer motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-950/60 border border-purple-800/50 text-purple-300 font-bold text-xs">
                 SOL
@@ -187,7 +190,7 @@ export function CryptoWalletDashboard({
             </div>
           </div>
 
-          <div className="flex items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3 transition-colors hover:bg-zinc-900 cursor-pointer active:scale-98">
+          <div className="flex items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3 transition-colors hover:bg-zinc-900 cursor-pointer motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-950/60 border border-blue-800/50 text-blue-300 font-bold text-xs">
                 USDC
@@ -235,7 +238,7 @@ export function CryptoWalletDashboard({
         <button
           type="button"
           onClick={() => setSettingsOpen(true)}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-colors shadow cursor-pointer active:scale-95"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-colors shadow cursor-pointer motion-safe:active:scale-[0.97]"
           aria-label="Open settings"
         >
           <Plus className="h-4 w-4" />
@@ -271,7 +274,7 @@ export function CryptoWalletDashboard({
                   <button
                     type="button"
                     onClick={() => setDrawerOpen(false)}
-                    className="p-1 text-zinc-400 hover:text-white cursor-pointer active:scale-95"
+                    className="p-1 text-zinc-400 hover:text-white cursor-pointer motion-safe:active:scale-[0.97]"
                   >
                     <X className="h-4 w-4" />
                   </button>
@@ -290,7 +293,7 @@ export function CryptoWalletDashboard({
                       key={item.label}
                       type="button"
                       onClick={item.action || (() => setDrawerOpen(false))}
-                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-xs font-semibold text-zinc-300 hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98"
+                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-xs font-semibold text-zinc-300 hover:bg-zinc-900 transition-colors cursor-pointer motion-safe:active:scale-[0.97]"
                     >
                       <item.icon className="h-4 w-4 text-zinc-400" />
                       <span>{item.label}</span>
@@ -316,7 +319,7 @@ export function CryptoWalletDashboard({
               <button
                 type="button"
                 onClick={() => setSettingsOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-300 cursor-pointer active:scale-95"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-300 cursor-pointer motion-safe:active:scale-[0.97]"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -396,14 +399,14 @@ export function CryptoWalletDashboard({
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
-                    className="rounded-full bg-white px-4 py-1.5 text-xs font-bold text-zinc-950 cursor-pointer active:scale-95"
+                    className="rounded-full bg-white px-4 py-1.5 text-xs font-bold text-zinc-950 cursor-pointer motion-safe:active:scale-[0.97]"
                   >
                     Connect Wallet
                   </button>
                   <button
                     type="button"
                     onClick={() => setLightMenuOpen(false)}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 cursor-pointer active:scale-95"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 cursor-pointer motion-safe:active:scale-[0.97]"
                   >
                     <X className="h-4 w-4" />
                   </button>

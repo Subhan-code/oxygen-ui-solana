@@ -5,14 +5,14 @@ import { cn } from "@/lib/utils";
 
 export function GlassFilter() {
   return (
-    <svg className="hidden">
+    <svg className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0" aria-hidden="true">
       <defs>
         <filter
           id="radio-glass"
-          x="0%"
-          y="0%"
-          width="100%"
-          height="100%"
+          x="-20%"
+          y="-20%"
+          width="140%"
+          height="140%"
           colorInterpolationFilters="sRGB"
         >
           <feTurbulence
@@ -26,13 +26,11 @@ export function GlassFilter() {
           <feDisplacementMap
             in="SourceGraphic"
             in2="blurredNoise"
-            scale="30"
+            scale="12"
             xChannelSelector="R"
             yChannelSelector="B"
             result="displaced"
           />
-          <feGaussianBlur in="displaced" stdDeviation="2" result="finalBlur" />
-          <feComposite in="finalBlur" in2="finalBlur" operator="over" />
         </filter>
       </defs>
     </svg>

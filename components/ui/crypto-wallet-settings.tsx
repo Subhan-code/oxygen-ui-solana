@@ -19,7 +19,7 @@ export function CryptoWalletSettings({
 }: CryptoWalletSettingsProps) {
   return (
     <motion.div
-      data-slot="root"
+      data-slot="crypto-wallet-settings"
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: "spring", bounce: 0, duration: 0.3 }}
@@ -34,7 +34,7 @@ export function CryptoWalletSettings({
           <button
             type="button"
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 cursor-pointer active:scale-95 transition-transform"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 cursor-pointer motion-safe:active:scale-[0.97] transition-transform"
           >
             <X className="h-4 w-4" />
           </button>
@@ -52,7 +52,7 @@ export function CryptoWalletSettings({
         />
       </div>
 
-      <div className="mb-4 flex items-center justify-between rounded-2xl bg-zinc-900 p-3 border border-zinc-800 cursor-pointer active:scale-98 transition-transform">
+      <div className="mb-4 flex items-center justify-between rounded-2xl bg-zinc-900 p-3 border border-zinc-800 cursor-pointer motion-safe:active:scale-[0.97] transition-transform">
         <div className="flex items-center gap-3">
           <div className="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center text-xs text-white font-bold shadow-xs">
             ⚡
@@ -67,7 +67,7 @@ export function CryptoWalletSettings({
 
       <div className="space-y-3 flex-1 overflow-y-auto no-scrollbar">
         <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800 p-1 divide-y divide-zinc-800/80">
-          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors active:scale-98">
+          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3 text-xs font-semibold text-zinc-200">
               <Wallet className="h-4 w-4 text-zinc-400" />
               <span>Manage Accounts</span>
@@ -77,14 +77,14 @@ export function CryptoWalletSettings({
               <ChevronRight className="h-4 w-4" />
             </div>
           </div>
-          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors active:scale-98">
+          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3 text-xs font-semibold text-zinc-200">
               <Sliders className="h-4 w-4 text-zinc-400" />
               <span>RPC Preferences</span>
             </div>
             <ChevronRight className="h-4 w-4 text-zinc-500" />
           </div>
-          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors active:scale-98">
+          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3 text-xs font-semibold text-zinc-200">
               <Shield className="h-4 w-4 text-zinc-400" />
               <span>Security & Passkey</span>
@@ -94,7 +94,7 @@ export function CryptoWalletSettings({
         </div>
 
         <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800 p-1 divide-y divide-zinc-800/80">
-          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors active:scale-98">
+          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3 text-xs font-semibold text-zinc-200">
               <Globe className="h-4 w-4 text-zinc-400" />
               <span>Active Network</span>
@@ -104,14 +104,14 @@ export function CryptoWalletSettings({
               <ChevronRight className="h-4 w-4" />
             </div>
           </div>
-          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors active:scale-98">
+          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3 text-xs font-semibold text-zinc-200">
               <Users className="h-4 w-4 text-zinc-400" />
               <span>Address Book</span>
             </div>
             <ChevronRight className="h-4 w-4 text-zinc-500" />
           </div>
-          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors active:scale-98">
+          <div className="flex items-center justify-between p-3 cursor-pointer hover:bg-zinc-800/60 transition-colors motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3 text-xs font-semibold text-zinc-200">
               <Code className="h-4 w-4 text-zinc-400" />
               <span>Connected dApps</span>

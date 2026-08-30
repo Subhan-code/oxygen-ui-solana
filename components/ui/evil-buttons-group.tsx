@@ -148,9 +148,8 @@ export function EvilButtonsGroup({
         {/* 2. Grid Glow Button */}
         <button
           type="button"
-          className="group relative flex h-12 w-48 items-center justify-center overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-200 shadow-md hover:border-emerald-500/50 hover:shadow-emerald-500/10 transition-all"
+          className="group relative flex h-12 w-48 items-center justify-center overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-200 shadow-md hover:border-emerald-500/50 transition-all"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:12px_12px] opacity-0 group-hover:opacity-20 transition-opacity" />
           <span className="relative z-10 flex items-center gap-1.5">
             <Zap className="h-4 w-4 text-emerald-400" />
             Grid Active
@@ -160,9 +159,8 @@ export function EvilButtonsGroup({
         {/* 3. Shiny Shimmer Button */}
         <button
           type="button"
-          className="group relative flex h-12 w-48 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 border border-zinc-700 text-xs font-semibold text-zinc-100 shadow-md"
+          className="group relative flex h-12 w-48 items-center justify-center overflow-hidden rounded-xl bg-zinc-900 border border-zinc-700 text-xs font-semibold text-zinc-100 shadow-md hover:bg-zinc-800 transition-colors"
         >
-          <div className="absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-shine" />
           <span className="relative z-10 flex items-center gap-1.5">
             <Sparkles className="h-4 w-4 text-indigo-400" />
             Shimmer Effect

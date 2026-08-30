@@ -19,7 +19,7 @@ export function CryptoWalletMenuSheet({
 }: CryptoWalletMenuSheetProps) {
   return (
     <motion.div
-      data-slot="root"
+      data-slot="crypto-wallet-menu-sheet"
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", bounce: 0, duration: 0.35 }}
@@ -40,7 +40,7 @@ export function CryptoWalletMenuSheet({
             <button
               type="button"
               onClick={onConnectWallet}
-              className="rounded-full bg-white px-4 py-1.5 text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition-colors cursor-pointer active:scale-95"
+              className="h-11 rounded-full bg-white px-4 text-xs font-bold text-zinc-950 hover:bg-zinc-200 motion-safe:transition-colors cursor-pointer motion-safe:active:scale-[0.97]"
             >
               Connect Wallet
             </button>
@@ -48,7 +48,7 @@ export function CryptoWalletMenuSheet({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white cursor-pointer active:scale-95"
+                className="flex size-11 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white cursor-pointer motion-safe:active:scale-[0.97]"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -66,26 +66,26 @@ export function CryptoWalletMenuSheet({
         </div>
 
         <div className="space-y-2 font-semibold text-xs text-zinc-200">
-          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98">
+          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer motion-safe:active:scale-[0.97]">
             <span>Solana Features</span>
             <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
           </div>
-          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98">
+          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer motion-safe:active:scale-[0.97]">
             <span>Learn Web3</span>
             <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
           </div>
-          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98">
+          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer motion-safe:active:scale-[0.97]">
             <span>Explore dApps</span>
           </div>
-          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98">
+          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer motion-safe:active:scale-[0.97]">
             <span>Ecosystem</span>
             <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
           </div>
-          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98">
+          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer motion-safe:active:scale-[0.97]">
             <span>Developers</span>
             <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
           </div>
-          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98">
+          <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-900 transition-colors cursor-pointer motion-safe:active:scale-[0.97]">
             <span>Support</span>
           </div>
         </div>

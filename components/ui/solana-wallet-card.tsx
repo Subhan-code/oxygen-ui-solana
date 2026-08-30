@@ -91,8 +91,8 @@ export function SolanaWalletCard({
           <motion.button
             type="button"
             onClick={handleCopy}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.92 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             title="Copy Wallet Address"
             className="flex h-8 w-8 items-center justify-center rounded-xl border border-zinc-200/80 bg-white text-zinc-600 shadow-xs hover:bg-zinc-50 hover:text-zinc-900 dark:border-zinc-700/80 dark:bg-[#232c3e] dark:text-zinc-300 dark:hover:bg-zinc-700 dark:hover:text-white transition-colors cursor-pointer"
           >
@@ -121,25 +121,25 @@ export function SolanaWalletCard({
           <div className="flex items-center -space-x-2">
             {/* Bitcoin */}
             <div
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden bg-zinc-900 ring-2 ring-white dark:ring-zinc-900 shadow-xs [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden ring-2 ring-white dark:ring-zinc-900 shadow-xs [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover"
               dangerouslySetInnerHTML={{ __html: bitcoin.svg }}
             />
             {/* Solana */}
             <div
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden bg-zinc-900 ring-2 ring-white dark:ring-zinc-900 shadow-xs [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden ring-2 ring-white dark:ring-zinc-900 shadow-xs [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover"
               dangerouslySetInnerHTML={{ __html: solana.svg }}
             />
             {/* Ethereum */}
             <div
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden bg-zinc-900 ring-2 ring-white dark:ring-zinc-900 shadow-xs [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden ring-2 ring-white dark:ring-zinc-900 shadow-xs [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover"
               dangerouslySetInnerHTML={{ __html: ethereum.svg }}
             />
             {/* Plus add token */}
             <motion.button
               type="button"
               onClick={() => triggerAction("Add Token", onAddToken)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.92 }}
+              whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.97 }}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-zinc-600 font-bold text-xs ring-2 ring-white dark:ring-zinc-900 dark:bg-[#232c3e] dark:text-zinc-300 shadow-xs cursor-pointer hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
               <Plus className="h-4 w-4" />
@@ -173,9 +173,9 @@ export function SolanaWalletCard({
         <motion.button
           type="button"
           onClick={() => triggerAction("Swap", onSwap)}
-          whileHover={{ y: -2, scale: 1.02 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center justify-center gap-2.5 rounded-3xl border border-zinc-200/80 bg-white py-3.5 px-4 font-bold text-zinc-900 shadow-xs transition-all hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-[#1a2130] dark:text-white dark:hover:border-zinc-700 cursor-pointer"
+          className="flex items-center justify-center gap-2.5 rounded-3xl border border-zinc-200/80 bg-white py-3.5 px-4 font-bold text-zinc-900 shadow-xs motion-safe:transition-[border-color,box-shadow,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-[#1a2130] dark:text-white dark:hover:border-zinc-700 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#eff3f8] text-zinc-700 dark:bg-[#252e42] dark:text-zinc-200">
             <ArrowRightLeft className="h-3.5 w-3.5" />
@@ -187,9 +187,9 @@ export function SolanaWalletCard({
         <motion.button
           type="button"
           onClick={() => triggerAction("Send", onSend)}
-          whileHover={{ y: -2, scale: 1.02 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center justify-center gap-2.5 rounded-3xl border border-zinc-200/80 bg-white py-3.5 px-4 font-bold text-zinc-900 shadow-xs transition-all hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-[#1a2130] dark:text-white dark:hover:border-zinc-700 cursor-pointer"
+          className="flex items-center justify-center gap-2.5 rounded-3xl border border-zinc-200/80 bg-white py-3.5 px-4 font-bold text-zinc-900 shadow-xs motion-safe:transition-[border-color,box-shadow,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-[#1a2130] dark:text-white dark:hover:border-zinc-700 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#eff3f8] text-zinc-700 dark:bg-[#252e42] dark:text-zinc-200">
             <ArrowUpRight className="h-3.5 w-3.5" />

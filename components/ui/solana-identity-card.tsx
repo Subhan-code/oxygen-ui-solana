@@ -110,7 +110,7 @@ export function SolanaIdentityCard({
       fiatValue: solFiatValue,
       change: "+$70.97",
       isPositive: true,
-      iconBg: "bg-gradient-to-tr from-blue-700 via-indigo-600 to-cyan-400 border border-blue-400/40",
+      iconBg: "bg-[#0071E3] border border-blue-400/40",
     },
     {
       symbol: "USDC",
@@ -130,7 +130,7 @@ export function SolanaIdentityCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       className={cn(
-        "relative flex w-full max-w-sm flex-col overflow-hidden rounded-[38px] border border-blue-500/30 bg-gradient-to-b from-[#081528] via-[#070e1b] to-[#040810] p-6 text-white shadow-2xl shadow-blue-950/60 backdrop-blur-2xl font-sans select-none",
+        "relative flex w-full max-w-sm flex-col overflow-hidden rounded-[38px] border border-white/10 bg-[#1C1C1E] p-6 text-white shadow-2xl backdrop-blur-2xl font-sans select-none",
         className
       )}
       {...props}
@@ -212,8 +212,8 @@ export function SolanaIdentityCard({
           <motion.button
             type="button"
             onClick={handleCopy}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             title="Scan QR / Copy Address"
             className="flex h-9 w-9 items-center justify-center rounded-2xl bg-zinc-900/90 border border-blue-900/50 text-blue-300 hover:text-white hover:border-blue-500/50 transition-colors cursor-pointer"
           >
@@ -221,8 +221,8 @@ export function SolanaIdentityCard({
           </motion.button>
           <motion.button
             type="button"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             title="Search transactions"
             className="flex h-9 w-9 items-center justify-center rounded-2xl bg-zinc-900/90 border border-blue-900/50 text-blue-300 hover:text-white hover:border-blue-500/50 transition-colors cursor-pointer"
           >
@@ -270,9 +270,9 @@ export function SolanaIdentityCard({
         <motion.button
           type="button"
           onClick={() => handleAction("Receive", onReceive)}
-          whileHover={{ y: -3, scale: 1.03 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 transition-all cursor-pointer shadow-md"
+          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/40">
             <Grid className="h-4 w-4" />
@@ -284,9 +284,9 @@ export function SolanaIdentityCard({
         <motion.button
           type="button"
           onClick={() => handleAction("Send", onSend)}
-          whileHover={{ y: -3, scale: 1.03 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 transition-all cursor-pointer shadow-md"
+          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/40">
             <Send className="h-4 w-4 -rotate-45" />
@@ -298,9 +298,9 @@ export function SolanaIdentityCard({
         <motion.button
           type="button"
           onClick={() => handleAction("Swap", onSwap)}
-          whileHover={{ y: -3, scale: 1.03 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 transition-all cursor-pointer shadow-md"
+          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/40">
             <Repeat className="h-4 w-4" />
@@ -312,9 +312,9 @@ export function SolanaIdentityCard({
         <motion.button
           type="button"
           onClick={() => handleAction("Buy", onBuy)}
-          whileHover={{ y: -3, scale: 1.03 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 transition-all cursor-pointer shadow-md"
+          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/40">
             <DollarSign className="h-4 w-4" />
@@ -330,7 +330,7 @@ export function SolanaIdentityCard({
             key={asset.symbol}
             whileHover={{ scale: 1.02, x: 2 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="flex items-center justify-between rounded-2xl border border-blue-900/50 bg-zinc-900/80 p-4 transition-all hover:bg-zinc-900 hover:border-blue-500/40 cursor-pointer shadow-sm"
+            className="flex items-center justify-between rounded-2xl border border-blue-900/50 bg-zinc-900/80 p-4 motion-safe:transition-[background-color,border-color] motion-safe:duration-150 hover:bg-zinc-900 hover:border-blue-500/40 cursor-pointer shadow-sm"
           >
             {/* Left: Full-cover Token Icon + Name & Amount */}
             <div className="flex items-center gap-3.5">

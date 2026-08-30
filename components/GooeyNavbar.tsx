@@ -1,10 +1,12 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { GooeyNav } from "@/components/ui/gooey-nav";
 import ThemeToggle from "@/components/ThemeToggle";
+import { SPRING_LAYOUT } from "@/lib/ease";
 import { useStarCount } from "@/lib/use-star-count";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +15,8 @@ const LINKS = [
   { label: "Components", href: "/components" },
   { label: "Docs", href: "/docs/installation" },
 ];
+
+
 
 const GITHUB_URL = "https://github.com/Subhan-code/oxygen_ui";
 
@@ -61,7 +65,7 @@ export default function GooeyNavbar({ stars }: { stars?: number | null }) {
 
   const morphSpring = { type: "spring", stiffness: 250, damping: 24 } as const;
   const popSpring = { type: "spring", stiffness: 320, damping: 15 } as const;
-  const fade = { duration: 0.3, ease: "easeOut" } as const;
+  const fade = { duration: 0.2, ease: [0.19, 1, 0.22, 1] } as const;
   const morphTransition = {
     scale: morphSpring,
     rotate: morphSpring,
@@ -83,24 +87,31 @@ export default function GooeyNavbar({ stars }: { stars?: number | null }) {
   }, []);
 
   useEffect(() => {
-    if (!menuOpen) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-    };
+    document.body.style.overflow = "";
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setMenuOpen(false);
+      };
+      window.addEventListener("keydown", onKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", onKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
   }, [menuOpen]);
 
   const spring = { type: "spring", stiffness: 300, damping: 30 } as const;
   const animateLayout = !reduceMotion;
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-5 md:top-4 z-50 flex justify-center px-5  sm:px-6 md:top-7.5">
+    <div className="pointer-events-none fixed inset-x-0 top-5 md:top-4 z-50 flex justify-center px-5 sm:px-6 md:top-7.5">
       <motion.nav
         layout={animateLayout}
         transition={spring}
@@ -141,9 +152,9 @@ export default function GooeyNavbar({ stars }: { stars?: number | null }) {
               <Link
                 href={link.href}
                 className={cn(
-                  "px-3.5 text-sm",
-                  pathname === link.href
-                    ? "text-white"
+                  "px-3.5 text-xs font-semibold",
+                  pathname === link.href || (link.href !== "/" && pathname.startsWith(`${link.href}/`))
+                    ? "text-white font-bold"
                     : "text-white/60 transition-colors duration-150 ease-out hover:text-white",
                 )}
               >
@@ -302,7 +313,10 @@ export default function GooeyNavbar({ stars }: { stars?: number | null }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.25, ease: "easeOut" }}
+            transition={{
+              duration: reduceMotion ? 0.18 : 0.25,
+              ease: [0.19, 1, 0.22, 1],
+            }}
             className="pointer-events-auto fixed inset-0 z-0 bg-neutral-950/85 backdrop-blur-2xl md:hidden"
           >
             <div className="flex h-full flex-col items-center justify-center gap-7 px-6">

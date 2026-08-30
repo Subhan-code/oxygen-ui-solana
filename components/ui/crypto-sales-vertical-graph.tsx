@@ -3,17 +3,33 @@
 import React from "react"
 import { motion } from "motion/react"
 import { BarChart3 } from "lucide-react"
+import { XAxis } from "recharts"
 import { cn } from "@/lib/utils"
+
+import LineChart, { Line } from "@/components/charts/line-chart"
+import Grid from "@/components/charts/grid"
+import { ChartTooltip } from "@/components/charts/tooltip"
+import {
+  Metric,
+  MetricLabel,
+  MetricChange,
+  MetricValue,
+} from "@/components/metric"
 
 export interface CryptoSalesVerticalGraphProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
   salesAmount?: string
-  growthPercent?: string
+  growthPercent?: number | null
 }
+
+const DATA = [50, 70, 85, 75, 65, 90, 80].map((v, i) => ({
+  date: `Day ${i + 1}`,
+  volume: v,
+}))
 
 export function CryptoSalesVerticalGraph({
   salesAmount = "$9,134 SOL",
-  growthPercent = "2.5%",
+  growthPercent = 2.5,
   className,
   ...props
 }: CryptoSalesVerticalGraphProps) {
@@ -29,32 +45,39 @@ export function CryptoSalesVerticalGraph({
       )}
       {...props}
     >
-      <div className="flex items-center justify-between mb-3 pb-2 border-b border-zinc-900">
-        <div>
-          <span className="text-xs font-medium text-zinc-400">Vertical Bar Graph</span>
-          <div className="flex items-baseline gap-2 mt-0.5">
-            <span className="text-lg font-bold tracking-tight leading-tight text-white">{salesAmount}</span>
-            <span className="text-xs font-semibold text-blue-400">↑ {growthPercent}</span>
-          </div>
-        </div>
+      <div className="flex items-start justify-between mb-3 pb-2 border-b border-zinc-900">
+        <Metric className="p-0">
+          <MetricLabel className="text-zinc-400">
+            Vertical Bar Graph
+            <MetricChange value={growthPercent} />
+          </MetricLabel>
+          <MetricValue className="text-white">{salesAmount}</MetricValue>
+        </Metric>
         <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-950/60 border border-blue-800/50 text-blue-300">
           <BarChart3 className="h-4 w-4" />
         </div>
       </div>
 
-      <div className="h-28 w-full rounded-2xl bg-zinc-900/60 p-3 border border-zinc-800 flex items-center justify-center">
-        <div className="flex items-end gap-2 h-full w-full justify-between pt-2">
-          {[50, 70, 85, 75, 65, 90, 80].map((height, i) => (
-            <motion.div
-              key={i}
-              initial={{ height: 0 }}
-              animate={{ height: `${height}%` }}
-              transition={{ type: "spring", bounce: 0, duration: 0.4, delay: i * 0.03 }}
-              className="w-full flex-1 rounded-t-xs bg-blue-600"
-            />
-          ))}
-        </div>
-      </div>
+      <LineChart
+        data={DATA}
+        margin={{ top: 8, right: 8, bottom: 24, left: 8 }}
+        className="h-28 aspect-auto"
+      >
+        <Grid horizontal />
+        <XAxis
+          dataKey="date"
+          tickLine={false}
+          axisLine={false}
+          tick={{ fill: "rgba(161,161,170,0.7)", fontSize: 9 }}
+          tickMargin={6}
+        />
+        <Line
+          dataKey="volume"
+          stroke="var(--chart-line-primary)"
+          strokeWidth={2}
+        />
+        <ChartTooltip />
+      </LineChart>
     </motion.div>
   )
 }

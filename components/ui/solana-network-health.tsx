@@ -92,7 +92,7 @@ export function SolanaNetworkHealth({
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
       className={cn(
-        "relative flex w-full max-w-sm flex-col gap-4 rounded-[36px] border border-blue-500/30 bg-gradient-to-b from-[#081528] via-[#070e1b] to-[#040810] p-5 text-white shadow-2xl shadow-blue-950/60 backdrop-blur-2xl font-sans select-none overflow-hidden",
+        "relative flex w-full max-w-sm flex-col gap-4 rounded-[36px] border border-white/10 bg-[#1C1C1E] p-5 text-white shadow-2xl backdrop-blur-2xl font-sans select-none overflow-hidden",
         className
       )}
       {...props}
@@ -310,7 +310,7 @@ export function SolanaNetworkHealth({
             }
             animate={{ width: `${epochProgressPct}%` }}
             transition={{ type: "spring", stiffness: 350, damping: 22 }}
-            className="h-full rounded-full bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-400 shadow-md shadow-blue-500/40"
+            className="h-full rounded-full bg-[#0071E3] dark:bg-[#0A84FF] shadow-sm"
           />
         </div>
       </div>

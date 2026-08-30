@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "trend-badge",
   "title": "Trend Badge",
-  "description": "A badge that displays a percentage change with an up/down arrow icon and color coding.",
+  "description": "A price movement trend percentage badge with up/down arrow icons.",
   "dependencies": [
     "lucide-react"
   ],
@@ -11,8 +11,8 @@
   ],
   "files": [
     {
-      "path": "src/registry/sol/trend-badge.tsx",
-      "content": "import { TrendingDownIcon, TrendingUpIcon } from \"lucide-react\";\r\nimport type React from \"react\";\r\nimport { Badge } from \"@/components/ui/badge\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface TrendBadgeProps extends React.ComponentProps<typeof Badge> {\r\n  trend?: \"up\" | \"down\";\r\n}\r\n\r\nconst TrendBadge = ({\r\n  trend = \"up\",\r\n  children,\r\n  className,\r\n  ...props\r\n}: TrendBadgeProps) => {\r\n  const isUp = trend === \"up\";\r\n  const Icon = isUp ? TrendingUpIcon : TrendingDownIcon;\r\n\r\n  return (\r\n    <Badge\r\n      className={cn(\r\n        isUp\r\n          ? \"bg-emerald-500/15 text-emerald-500 border-emerald-500/25\"\r\n          : \"bg-red-400/15 text-red-400 border-red-400/25\",\r\n        className,\r\n      )}\r\n      {...props}\r\n    >\r\n      <Icon className=\"size-3\" />\r\n      {children && <span className=\"text-xs\">{children}</span>}\r\n    </Badge>\r\n  );\r\n};\r\n\r\nexport type { TrendBadgeProps };\r\nexport { TrendBadge };\r\n",
+      "path": "components/ui/trend-badge.tsx",
+      "content": "import { TrendingDownIcon, TrendingUpIcon } from \"lucide-react\";\nimport type React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface TrendBadgeProps extends React.ComponentProps<\"span\"> {\n  trend?: \"up\" | \"down\";\n  children?: React.ReactNode;\n}\n\nconst TrendBadge = ({\n  trend = \"up\",\n  children,\n  className,\n  ...props\n}: TrendBadgeProps) => {\n  const isUp = trend === \"up\";\n  const Icon = isUp ? TrendingUpIcon : TrendingDownIcon;\n\n  return (\n    <span\n      className={cn(\n        \"inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-xs font-semibold transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n        isUp\n          ? \"bg-emerald-500/15 text-emerald-500 border-emerald-500/25\"\n          : \"bg-red-400/15 text-red-400 border-red-400/25\",\n        className,\n      )}\n      {...props}\n    >\n      <Icon className=\"size-3\" />\n      {children && <span className=\"text-xs\">{children}</span>}\n    </span>\n  );\n};\n\nexport type { TrendBadgeProps };\nexport { TrendBadge };\n",
       "type": "registry:ui"
     }
   ],

@@ -61,7 +61,7 @@ export function AnimatedSwitch({
         disabled={disabled}
         onClick={toggle}
         className={cn(
-          "relative inline-flex h-7 w-12 shrink-0 cursor-pointer rounded-full p-1 transition-colors duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 active:scale-95",
+          "relative inline-flex h-7 w-12 shrink-0 cursor-pointer rounded-full p-1 transition-colors duration-150 ease-[var(--ease-out-quad)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 motion-safe:active:scale-[0.97]",
           disabled && "cursor-not-allowed opacity-50",
           isChecked ? "bg-purple-600 dark:bg-purple-500" : "bg-zinc-200 dark:bg-zinc-800"
         )}

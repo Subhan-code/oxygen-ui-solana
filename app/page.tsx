@@ -3,16 +3,38 @@ import GooeyNavbar from "@/components/GooeyNavbar";
 import { fetchStarCount } from "@/lib/github";
 import HeroCta from "@/components/HeroCta";
 import HeroIntro from "@/components/HeroIntro";
+import FluidWave from "@/components/FluidWave";
 import ComponentsShowcase from "@/components/ComponentsShowcase";
 import Footer from "@/components/Footer";
 
+export const dynamic = "force-static";
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
+  title: "Oxygen UI — Open Source Solana React Components",
+  description:
+    "Production-grade React primitives you own: wallet surfaces, swap terminals, dynamic charts, and transaction flows for Solana dApps. Install via shadcn CLI.",
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    title: "Oxygen UI — Open Source Solana React Components",
+    description:
+      "Production-grade React primitives you own: wallet surfaces, swap terminals, dynamic charts, and transaction flows for Solana dApps.",
+    url: "/",
+    images: ["/ogimage.webp"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Oxygen UI — Open Source Solana React Components",
+    description:
+      "Production-grade React primitives you own: wallet surfaces, swap terminals, dynamic charts, and transaction flows for Solana dApps.",
+    images: ["/ogimage.webp"],
   },
 };
 
 import FeatureCardsSection from "@/components/FeatureCardsSection";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default async function Home() {
   const stars = await fetchStarCount();
@@ -23,16 +45,18 @@ export default async function Home() {
 
       <section className="relative w-full p-1.5 md:p-2.5">
         <div
-          className="relative flex min-h-[min(92vh,54rem)] w-full items-center justify-center overflow-hidden rounded-[45px] border border-blue-200/60 bg-[#E2EDFF] text-slate-900 shadow-xl backdrop-blur-2xl dark:border-blue-900/40 dark:bg-[#081022] dark:text-white md:min-h-[min(92vh,54rem)]"
+          className="relative isolate flex min-h-[min(92vh,54rem)] w-full items-center overflow-hidden rounded-[36px] border border-black/10 bg-[#F5F5F7] text-black shadow-xl dark:border-white/15 dark:bg-[#1C1C1E] dark:text-white md:rounded-[45px]"
           style={{ cornerShape: "squircle" } as React.CSSProperties}
         >
-          {/* Ambient soft blue mesh glow */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_-5%,rgba(0,122,255,0.12),rgba(56,189,248,0.05)_55%,transparent_80%)]" />
+          <FluidWave variant="field" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[#F5F5F7]/70 dark:bg-[#1C1C1E]/70"
+          />
 
-          <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-4 px-4 pb-16 pt-24 text-center sm:px-6">
+          <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center px-6 py-24 sm:py-32 text-center">
             <HeroIntro
-              headline="Craft Premium Solana Frontends in Minutes."
-              sub="Production-grade React primitives for Web3 — build lightning-fast, Apple-crafted Solana frontends in seconds."
+              sub="Production-grade React primitives you own: wallet surfaces, swap terminals, and transaction flows, installed as files via the shadcn CLI."
             >
               <HeroCta />
             </HeroIntro>
@@ -41,7 +65,9 @@ export default async function Home() {
       </section>
       <ComponentsShowcase />
       <FeatureCardsSection />
-      <BackersSection />
+      <ScrollReveal>
+        <BackersSection />
+      </ScrollReveal>
       <Footer />
     </>
   );
@@ -104,7 +130,8 @@ function SponsorSlot() {
       href={SPONSOR_URL}
       target="_blank"
       rel="noreferrer"
-      className="group relative flex h-24 w-full items-center justify-center rounded-3xl bg-card/60 transition-colors duration-150 ease-out hover:bg-card dark:bg-muted/60 dark:hover:bg-muted sm:h-28"
+      className="group relative flex h-28 w-full items-center justify-center rounded-[28px] border border-dashed border-black/10 bg-card/40 transition-all duration-200 ease-out hover:border-black/20 hover:bg-card dark:border-white/15 dark:bg-muted/40 dark:hover:border-white/30 dark:hover:bg-muted/80 sm:h-32 shadow-sm hover:shadow-md"
+      style={{ cornerShape: "squircle" } as React.CSSProperties}
     >
       <span className="flex items-center gap-2.5 text-muted-foreground/70 transition-colors duration-200 ease-out group-hover:text-foreground">
         <svg
@@ -140,7 +167,7 @@ function BackersSection() {
   return (
     <section
       id="sponsors"
-      className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-col items-center gap-12 px-6 pt-24 pb-0 text-center md:pt-32 md:pb-0"
+      className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-col items-center gap-8 px-6 pt-24 pb-12 text-center md:pt-32"
     >
       <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl">
         Supported by Solana Foundation India Grants and ecosystem backers
@@ -152,11 +179,12 @@ function BackersSection() {
             href={backer.href}
             target="_blank"
             rel="noreferrer"
-            className="flex h-24 items-center justify-center rounded-3xl bg-card/60 px-4 py-2 transition-colors duration-150 ease-out hover:bg-card dark:bg-muted/60 dark:hover:bg-muted sm:h-28"
+            className="group relative flex h-28 items-center justify-center rounded-[28px] border border-black/5 bg-card/60 px-6 py-3 shadow-md backdrop-blur-xl transition-all duration-200 ease-out hover:border-black/15 hover:bg-card hover:shadow-xl dark:border-white/10 dark:bg-muted/60 dark:hover:border-white/20 dark:hover:bg-muted sm:h-32"
+            style={{ cornerShape: "squircle" } as React.CSSProperties}
           >
             <BackerLogo
               backer={backer}
-              className={`${backer.cardHeight} max-w-full object-contain`}
+              className={`${backer.cardHeight} max-w-full object-contain transition-transform duration-200 group-hover:scale-105`}
             />
           </a>
         ))}

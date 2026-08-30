@@ -5,7 +5,7 @@ import { SolanaIdentityCard } from "@/components/ui/solana-identity-card";
 
 export default function Demo() {
   return (
-    <div className="flex min-h-[640px] w-full items-center justify-center p-6 bg-zinc-950/60 transition-all duration-300">
+    <div className="flex min-h-[640px] w-full items-center justify-center p-6">
       <SolanaIdentityCard
         address="7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"
         handle="@cirmits"

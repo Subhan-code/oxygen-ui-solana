@@ -40,20 +40,46 @@ export function componentPageMetadata(href: string): Metadata {
   if (!item) return {};
 
   const name = item.name.toLowerCase();
+  const title = `${item.name} — Solana React Component`;
+  const description = item.description || `Copy-paste ${item.name} component for Solana dApps with Tailwind CSS and Motion.`;
+  const url = `${SITE_URL}${item.href}`;
 
   return {
-    title: `${item.name}: Solana React Component`,
-    description: item.description,
+    title,
+    description,
     keywords: [
       name,
       `${name} react`,
       `${name} component`,
       `animated ${name}`,
       `${name} shadcn`,
+      `${name} solana`,
       ...SITE_KEYWORDS,
     ],
     alternates: {
       canonical: item.href,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: SITE_NAME,
+      locale: "en_US",
+      type: "website",
+      images: [
+        {
+          url: "/ogimage.webp",
+          width: 2400,
+          height: 1260,
+          alt: `${item.name} - Oxygen UI Component`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/ogimage.webp"],
     },
   };
 }

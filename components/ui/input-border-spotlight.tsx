@@ -2,20 +2,15 @@
 
 import React, { useRef, useState } from "react";
 
-export default function InputBorderSpotlight() {
+export function InputBorderSpotlight() {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = () => {
     if (!divRef.current || isFocused) return;
-
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
-
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
+
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -50,7 +45,7 @@ export default function InputBorderSpotlight() {
           className="pointer-events-none absolute -inset-px transition-opacity duration-300"
           style={{
             opacity,
-            background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(59, 130, 246, 0.5), transparent 80%)`,
+            background: `rgba(0, 113, 227, 0.4)`,
           }}
         />
         <input
@@ -64,3 +59,6 @@ export default function InputBorderSpotlight() {
     </div>
   );
 }
+
+export default InputBorderSpotlight;
+

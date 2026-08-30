@@ -5,7 +5,7 @@ import {
   useAnimation,
   useMotionValue,
   useTransform,
-} from "framer-motion";
+} from "motion/react";
 import {
   CaretSortIcon,
   Cross1Icon,

@@ -20,7 +20,7 @@ export function GET() {
     if (item.source) lines.push(`- Source: ${item.source}`);
     if (item.dependencies?.length) {
       lines.push(
-        `- Dependencies: ${item.dependencies.map((d) => d.name).join(", ")}`,
+        `- Dependencies: ${item.dependencies.map((d) => (typeof d === "string" ? d : d.name)).join(", ")}`,
       );
     }
     return lines.join("\n");

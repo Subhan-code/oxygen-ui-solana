@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useState, useMemo, useRef, useCallback } from "react";
+import { motion, AnimatePresence, useSpring, useMotionTemplate, type SpringOptions } from "motion/react";
 import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MetricLabel, MetricValue } from "@/components/metric";
 
 export interface HeatmapDay {
   date: string;
@@ -27,6 +28,9 @@ const DEFAULT_LEVEL_COLORS: [string, string, string, string, string] = [
 
 const DAYS_OF_WEEK = ["Mon", "Wed", "Fri"];
 
+const SPRING: SpringOptions = { damping: 18 };
+const SLOW_SPRING: SpringOptions = { damping: 40 };
+
 export function HeatmapChart({
   weeks = 24,
   levelColors = DEFAULT_LEVEL_COLORS,
@@ -40,9 +44,38 @@ export function HeatmapChart({
     y: number;
   } | null>(null);
 
-  const [activeLegendLevel, setActiveLegendLevel] = useState<number | null>(
-    null
+  const [activeLegendLevel, setActiveLegendLevel] = useState<number | null>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const chartX = useSpring(0, isHovering ? SPRING : SLOW_SPRING);
+  const chartXValueTemplate = useMotionTemplate`inset(0px ${chartX}% 0px 0px)`;
+
+  const onPointerMove = useCallback(
+    (e: React.PointerEvent<HTMLDivElement>) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const relativeX = e.clientX - rect.left;
+      const percentage = Math.max(0, Math.min(100, (relativeX / rect.width) * 100));
+      chartX.set(100 - percentage);
+    },
+    [chartX]
   );
+
+  const onPointerLeave = useCallback(() => {
+    setIsHovering(false);
+    timeoutRef.current = setTimeout(() => {
+      chartX.set(0);
+    }, 1000);
+  }, [chartX]);
+
+  const onPointerEnter = useCallback(() => {
+    setIsHovering(true);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }, []);
 
   // Generate realistic contribution data
   const grid = useMemo(() => {
@@ -94,7 +127,7 @@ export function HeatmapChart({
     <div
       data-slot="heatmap-chart"
       className={cn(
-        "relative flex flex-col items-center justify-center p-8 w-full max-w-2xl mx-auto select-none rounded-3xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950 shadow-2xl",
+        "relative flex flex-col items-center justify-center p-8 w-full max-w-2xl mx-auto select-none rounded-3xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950 shadow-2xl overflow-hidden",
         className
       )}
       {...props}
@@ -104,13 +137,13 @@ export function HeatmapChart({
         <div>
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-emerald-500" />
-            <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
+            <MetricValue className="text-base text-neutral-900 dark:text-neutral-100">
               Contribution Activity
-            </span>
+            </MetricValue>
           </div>
-          <p className="text-xs text-neutral-500 mt-0.5 font-mono">
+          <MetricLabel className="mt-0.5 font-mono text-neutral-500">
             {totalContributions} contributions in the last {weeks} weeks
-          </p>
+          </MetricLabel>
         </div>
 
         {/* Legend Swatches */}
@@ -135,59 +168,70 @@ export function HeatmapChart({
         </div>
       </div>
 
-      {/* Grid Canvas */}
-      <div className="relative flex gap-2 overflow-x-auto max-w-full pb-2">
-        {/* Y-axis weekday labels */}
-        <div className="flex flex-col justify-between py-1 text-[10px] font-mono text-neutral-400">
-          {DAYS_OF_WEEK.map((d, i) => (
-            <span key={i}>{d}</span>
-          ))}
-        </div>
+      {/* Interactive Clip-Path Reveal Grid Canvas */}
+      <div
+        ref={containerRef}
+        onPointerMove={onPointerMove}
+        onPointerLeave={onPointerLeave}
+        onPointerEnter={onPointerEnter}
+        className="relative flex gap-2 overflow-x-auto max-w-full pb-2"
+      >
+        <motion.div
+          style={{ clipPath: chartXValueTemplate }}
+          className="flex gap-2 w-full"
+        >
+          {/* Y-axis weekday labels */}
+          <div className="flex flex-col justify-between py-1 text-[10px] font-mono text-neutral-400">
+            {DAYS_OF_WEEK.map((d, i) => (
+              <span key={i}>{d}</span>
+            ))}
+          </div>
 
-        {/* Week columns */}
-        <div className="flex gap-1.5">
-          {grid.map((col, cIdx) => (
-            <div key={cIdx} className="flex flex-col gap-1.5">
-              {col.map((day, rIdx) => {
-                const isDimmed =
-                  activeLegendLevel !== null &&
-                  day.level !== activeLegendLevel;
+          {/* Week columns */}
+          <div className="flex gap-1.5">
+            {grid.map((col, cIdx) => (
+              <div key={cIdx} className="flex flex-col gap-1.5">
+                {col.map((day, rIdx) => {
+                  const isDimmed =
+                    activeLegendLevel !== null &&
+                    day.level !== activeLegendLevel;
 
-                return (
-                  <motion.div
-                    key={rIdx}
-                    initial={{ scale: 0.95, opacity: 0 }}
-                    animate={{
-                      scale: isDimmed ? 0.8 : 1,
-                      opacity: isDimmed ? 0.2 : 1,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 25,
-                      delay: (cIdx * 7 + rIdx) * 0.001,
-                    }}
-                    whileHover={{ scale: 1.35 }}
-                    onMouseEnter={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      setHoveredCell({
-                        date: day.date,
-                        count: day.count,
-                        x: rect.left + rect.width / 2,
-                        y: rect.top,
-                      });
-                    }}
-                    onMouseLeave={() => setHoveredCell(null)}
-                    className="h-3 w-3 rounded-xs cursor-pointer transition-shadow"
-                    style={{
-                      backgroundColor: levelColors[day.level],
-                    }}
-                  />
-                );
-              })}
-            </div>
-          ))}
-        </div>
+                  return (
+                    <motion.div
+                      key={rIdx}
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{
+                        scale: isDimmed ? 0.8 : 1,
+                        opacity: isDimmed ? 0.2 : 1,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 25,
+                        delay: (cIdx * 7 + rIdx) * 0.001,
+                      }}
+                      whileHover={{ scale: 1.35 }}
+                      onMouseEnter={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        setHoveredCell({
+                          date: day.date,
+                          count: day.count,
+                          x: rect.left + rect.width / 2,
+                          y: rect.top,
+                        });
+                      }}
+                      onMouseLeave={() => setHoveredCell(null)}
+                      className="h-3 w-3 rounded-xs cursor-pointer transition-shadow"
+                      style={{
+                        backgroundColor: levelColors[day.level],
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       {/* Interactive Tooltip Card */}
@@ -217,3 +261,5 @@ export function HeatmapChart({
     </div>
   );
 }
+
+export default HeatmapChart;

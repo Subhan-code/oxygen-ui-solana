@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-export default function SkeletonReveal() {
+export function SkeletonReveal() {
   const [isRevealed, setIsRevealed] = useState(false);
 
   const toggleReveal = () => {
@@ -10,11 +10,11 @@ export default function SkeletonReveal() {
   };
 
   return (
-    <div className="flex h-[260px] w-full flex-col items-center justify-center gap-4 p-4">
+    <div className="flex h-[260px] w-full flex-col items-center justify-center gap-4 p-4 select-none">
       <button
         type="button"
         onClick={toggleReveal}
-        className="rounded-xl bg-zinc-900 px-4 py-2 text-xs font-semibold text-white shadow-xs transition-transform active:scale-95 dark:bg-white dark:text-zinc-900"
+        className="rounded-xl bg-zinc-900 px-4 py-2 text-xs font-semibold text-white shadow-xs transition-transform active:scale-95 dark:bg-white dark:text-zinc-900 cursor-pointer outline-none"
       >
         {isRevealed ? "Reset Skeleton" : "Reveal Content"}
       </button>
@@ -84,16 +84,26 @@ export default function SkeletonReveal() {
           animation: t-skel-pulse 1000ms ease-in-out infinite;
         }
         @keyframes t-skel-pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
         }
         @media (prefers-reduced-motion: reduce) {
-          .t-skel-skeleton, .t-skel-content {
+          .t-skel-skeleton,
+          .t-skel-content {
             transition: none !important;
           }
-          .t-skel-skeleton.is-pulsing > * { animation: none !important; }
+          .t-skel-skeleton.is-pulsing > * {
+            animation: none !important;
+          }
         }
       `}</style>
     </div>
   );
 }
+
+export default SkeletonReveal;

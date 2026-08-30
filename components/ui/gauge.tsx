@@ -129,13 +129,6 @@ export function Gauge({
         viewBox={`0 0 ${width} ${height}`}
         className="w-full h-auto overflow-visible"
       >
-        <defs>
-          <linearGradient id="gaugeActiveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor={activeGradient[0]} />
-            <stop offset="100%" stopColor={activeGradient[1]} />
-          </linearGradient>
-        </defs>
-
         {/* Inactive track notches */}
         {notches.map((n) => (
           <path
@@ -153,7 +146,7 @@ export function Gauge({
             <motion.path
               key={`act-${n.index}`}
               d={n.d}
-              fill="url(#gaugeActiveGradient)"
+              fill={activeGradient[0] || "#34C759"}
               fillOpacity={activeFillOpacity}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}

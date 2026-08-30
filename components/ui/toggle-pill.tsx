@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type TogglePillVariant =
@@ -79,6 +80,9 @@ export interface TogglePillProps
   defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;
   variant?: TogglePillVariant;
+  label?: string;
+  description?: string;
+  icon?: React.ReactNode;
   showGuides?: boolean;
   useCssTransition?: boolean;
   disabled?: boolean;
@@ -93,6 +97,9 @@ export function TogglePill({
   defaultChecked = false,
   onChange,
   variant = "monochrome-dark",
+  label,
+  description,
+  icon,
   showGuides = false,
   useCssTransition = false,
   disabled = false,
@@ -124,6 +131,75 @@ export function TogglePill({
     onChange?.(nextState);
   };
 
+  const pillControl = (
+    <div
+      role="switch"
+      aria-checked={isChecked}
+      tabIndex={disabled ? -1 : 0}
+      onClick={handleToggle}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleToggle();
+        }
+      }}
+      className={cn(
+        "relative h-[28px] w-[74px] shrink-0 cursor-pointer rounded-[14px] transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500",
+        useCssTransition && "transition-colors duration-240 ease-out"
+      )}
+      style={{ backgroundColor: trackColor }}
+    >
+      {useCssTransition || shouldReduceMotion ? (
+        <div
+          className="absolute top-[2.5px] left-[3px] h-[22px] w-[44px] rounded-[11px] shadow-[0_1px_2px_rgba(0,0,0,0.12)] transition-transform transition-colors duration-240 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+          style={{
+            backgroundColor: thumbColor,
+            transform: `translateX(${isChecked ? 24 : 0}px)`,
+          }}
+        />
+      ) : (
+        <motion.div
+          animate={{
+            x: isChecked ? 24 : 0,
+            backgroundColor: thumbColor,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 32,
+            mass: 0.8,
+          }}
+          className="absolute top-[2.5px] left-[3px] h-[22px] w-[44px] rounded-[11px] shadow-[0_1px_2px_rgba(0,0,0,0.12)] touch-none"
+        />
+      )}
+    </div>
+  );
+
+  if (label || description || icon) {
+    return (
+      <div
+        data-slot="root"
+        className={cn(
+          "flex w-full max-w-sm items-center justify-between gap-4 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 select-none",
+          disabled && "opacity-50 pointer-events-none",
+          className
+        )}
+        {...props}
+      >
+        <div className="flex items-start gap-3">
+          <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-950/50 dark:text-purple-400">
+            {icon || <Zap className="h-4 w-4" />}
+          </div>
+          <div className="flex flex-col">
+            {label && <span className="text-sm font-bold text-zinc-900 dark:text-zinc-100">{label}</span>}
+            {description && <span className="text-xs text-zinc-500 dark:text-zinc-400 leading-snug mt-0.5">{description}</span>}
+          </div>
+        </div>
+        {pillControl}
+      </div>
+    );
+  }
+
   return (
     <div
       data-slot="root"
@@ -134,7 +210,6 @@ export function TogglePill({
       )}
       {...props}
     >
-      {/* Visual Alignment Guides */}
       {showGuides && (
         <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-[21px] border border-dashed border-sky-500/40 rounded-2xl">
           <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-sky-500 text-white font-mono text-[9px] px-1.5 py-0.5 rounded-full">
@@ -148,50 +223,9 @@ export function TogglePill({
           </span>
         </div>
       )}
-
-      {/* 74x28px Track */}
-      <div
-        role="switch"
-        aria-checked={isChecked}
-        tabIndex={disabled ? -1 : 0}
-        onClick={handleToggle}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            handleToggle();
-          }
-        }}
-        className={cn(
-          "relative h-[28px] w-[74px] cursor-pointer rounded-[14px] transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500",
-          useCssTransition && "transition-colors duration-240 ease-out"
-        )}
-        style={{ backgroundColor: trackColor }}
-      >
-        {/* 44x22px Thumb Capsule */}
-        {useCssTransition || shouldReduceMotion ? (
-          <div
-            className="absolute top-[2.5px] left-[3px] h-[22px] w-[44px] rounded-[11px] shadow-[0_1px_2px_rgba(0,0,0,0.12)] transition-transform transition-colors duration-240 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
-            style={{
-              backgroundColor: thumbColor,
-              transform: `translateX(${isChecked ? 24 : 0}px)`,
-            }}
-          />
-        ) : (
-          <motion.div
-            animate={{
-              x: isChecked ? 24 : 0,
-              backgroundColor: thumbColor,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 500,
-              damping: 32,
-              mass: 0.8,
-            }}
-            className="absolute top-[2.5px] left-[3px] h-[22px] w-[44px] rounded-[11px] shadow-[0_1px_2px_rgba(0,0,0,0.12)] touch-none"
-          />
-        )}
-      </div>
+      {pillControl}
     </div>
   );
 }
+
+export default TogglePill;

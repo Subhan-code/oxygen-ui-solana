@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from '@radix-ui/react-icons';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from 'react';
 
 const transitionDebug = {

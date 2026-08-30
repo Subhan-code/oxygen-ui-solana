@@ -5,7 +5,7 @@ import { CryptoWalletMain } from "@/components/ui/crypto-wallet-main";
 
 export default function Demo() {
   return (
-    <div className="flex min-h-[600px] w-full items-center justify-center p-6 bg-zinc-950 transition-all duration-300">
+    <div className="flex min-h-[420px] w-full items-center justify-center p-6">
       <CryptoWalletMain />
     </div>
   );

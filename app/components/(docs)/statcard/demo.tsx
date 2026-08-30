@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
-import { StatCard } from "@/components/ui/sol/stat-card";
+import { StatCard } from "@/components/ui/stat-card";
 
 export default function Demo() {
   return (
-    <div className="flex min-h-[300px] w-full max-w-xs items-center justify-center p-6 bg-zinc-950/40 rounded-2xl">
-      <StatCard label="Total Volume" value="$1.24B" trend="up" />
+    <div className="flex min-h-[640px] w-full items-center justify-center p-6">
+      <div className="w-full max-w-xs">
+        <StatCard label="Total Value Locked" value="$482.5M" change="+8.4%" />
+      </div>
     </div>
   );
 }

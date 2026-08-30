@@ -21,7 +21,7 @@ export function CryptoWalletDrawer({
 }: CryptoWalletDrawerProps) {
   return (
     <motion.div
-      data-slot="root"
+      data-slot="crypto-wallet-drawer"
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", bounce: 0, duration: 0.35 }}
@@ -45,7 +45,7 @@ export function CryptoWalletDrawer({
           <button
             type="button"
             onClick={onClose}
-            className="p-1 text-zinc-400 hover:text-white transition-colors cursor-pointer active:scale-95"
+            className="flex size-11 items-center justify-center text-zinc-400 hover:text-white motion-safe:transition-colors cursor-pointer motion-safe:active:scale-[0.97]"
           >
             <X className="h-4 w-4" />
           </button>
@@ -64,7 +64,7 @@ export function CryptoWalletDrawer({
           <button
             key={item.label}
             type="button"
-            className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold text-zinc-300 hover:bg-zinc-900 transition-colors cursor-pointer active:scale-98"
+            className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold text-zinc-300 hover:bg-zinc-900 motion-safe:transition-colors cursor-pointer motion-safe:active:scale-[0.97] outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
           >
             <item.icon className="h-4 w-4 text-zinc-400" />
             <span>{item.label}</span>

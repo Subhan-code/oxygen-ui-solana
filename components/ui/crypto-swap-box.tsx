@@ -2,27 +2,33 @@
 
 import React, { useState } from "react"
 import { ArrowDown, Settings, ChevronDown } from "lucide-react"
+import { motion, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
+
+const SPRING_SWAP = { type: "spring" as const, duration: 0.3, bounce: 0 }
 
 export type CryptoSwapBoxProps =
   Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart">;
 
 export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
+  const reduceMotion = useReducedMotion()
   const [payAmount, setPayAmount] = useState("10")
   const [receiveAmount, setReceiveAmount] = useState("1425.00")
   const [payToken, setPayToken] = useState({ symbol: "SOL", name: "Solana", balance: "142.5" })
   const [receiveToken, setReceiveToken] = useState({ symbol: "USDC", name: "USD Coin (SPL)", balance: "12,500" })
+  const [flipped, setFlipped] = useState(false)
 
   const handleFlip = () => {
     setPayToken(receiveToken)
     setReceiveToken(payToken)
     setPayAmount(receiveAmount)
     setReceiveAmount(payAmount)
+    setFlipped((value) => !value)
   }
 
   return (
     <div
-      data-slot="root"
+      data-slot="crypto-swap-box"
       className={cn(
         "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-5 text-white shadow-xl border border-zinc-800 font-sans",
         className
@@ -38,7 +44,7 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
         </div>
         <button
           type="button"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+          className="flex size-11 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white motion-safe:transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
           <Settings className="h-4 w-4" />
         </button>
@@ -71,13 +77,22 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
         </div>
 
         <div className="flex justify-center -my-2.5 z-10 relative">
-          <button
+          <motion.button
             type="button"
             onClick={handleFlip}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-zinc-300 border border-zinc-700 hover:bg-zinc-800 transition-transform active:rotate-180 cursor-pointer shadow-md"
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
+            className="flex size-11 items-center justify-center rounded-full bg-zinc-900 text-zinc-300 border border-zinc-700 hover:bg-zinc-800 cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
           >
-            <ArrowDown className="h-4 w-4" />
-          </button>
+            <motion.span
+              animate={{ rotate: flipped ? 180 : 0 }}
+              transition={reduceMotion ? { duration: 0 } : SPRING_SWAP}
+              className="flex"
+              style={{ transformOrigin: "center center" }}
+            >
+              <ArrowDown className="h-4 w-4" />
+            </motion.span>
+          </motion.button>
         </div>
 
         <div className="rounded-2xl bg-zinc-900/80 p-3.5 border border-zinc-800">
@@ -113,7 +128,7 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
 
       <button
         type="button"
-        className="w-full rounded-2xl bg-white py-3 text-center text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition-colors shadow-md active:scale-98 cursor-pointer"
+        className="w-full h-12 rounded-2xl bg-white py-3 text-center text-xs font-bold text-zinc-950 hover:bg-zinc-200 motion-safe:transition-colors shadow-md motion-safe:active:scale-[0.97] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/50"
       >
         Swap Tokens
       </button>

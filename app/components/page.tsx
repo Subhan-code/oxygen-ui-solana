@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
-import ComponentCard from "@/components/gallery/ComponentCard";
+import ComponentsGallery from "@/components/gallery/ComponentsGallery";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import { components } from "@/lib/components";
 import { fetchStarCount } from "@/lib/github";
 import { SITE_KEYWORDS, componentsJsonLd } from "@/lib/seo";
+
+export const dynamic = "force-static";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Components",
@@ -27,26 +30,20 @@ export default async function ComponentsIndexPage() {
       />
       <GooeyNavbar stars={stars} />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-16 pt-32 sm:px-6 md:pt-40">
-        <header className="flex flex-col items-center gap-3 text-center">
-          <h1 className="max-w-2xl text-balance font-runde text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-            {components.length}+ Solana UI components &amp; primitives
+      <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-10 pt-24 sm:px-6 md:pt-28" suppressHydrationWarning>
+        <header className="flex flex-col items-center justify-center text-center max-w-2xl mx-auto mb-6 sm:mb-8" suppressHydrationWarning>
+          <span className="font-mono text-[11px] font-semibold tracking-wide text-[#0066FF] dark:text-[#0A84FF]">
+            Registry
+          </span>
+          <h1 className="mt-1 font-runde text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+            {components.length}+ Solana UI components and primitives
           </h1>
-          <p className="max-w-lg text-balance text-sm font-medium text-muted-foreground sm:text-base">
-            Reusable Solana UI building blocks for account interfaces, token displays, transaction states, and dApp dashboards. Install with shadcn CLI.{" "}
-            <span className="hidden [@media(hover:hover)]:inline">
-              <span className="text-[#0066FF]">[</span>
-              Hover to play video
-              <span className="text-[#0066FF]">]</span>
-            </span>
+          <p className="mt-2 max-w-lg text-xs sm:text-sm font-medium text-muted-foreground leading-relaxed">
+            Reusable building blocks for account interfaces, token displays, transaction states, and dApp dashboards. Filter by name or category below.
           </p>
         </header>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {components.map((item) => (
-            <ComponentCard key={item.href} item={item} />
-          ))}
-        </div>
+        <ComponentsGallery items={components} />
       </main>
 
       <Footer />

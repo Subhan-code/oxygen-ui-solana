@@ -29,7 +29,7 @@ export function CryptoWalletMain({
 
   return (
     <div
-      data-slot="root"
+      data-slot="crypto-wallet-main"
       className={cn(
         "relative mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 text-white shadow-xl border border-zinc-800/80 font-sans min-h-[620px]",
         className
@@ -48,7 +48,7 @@ export function CryptoWalletMain({
               type="button"
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "relative rounded-full px-3 py-1 text-xs font-semibold transition-colors cursor-pointer active:scale-95 duration-100",
+                "relative rounded-full px-3 py-1 text-xs font-semibold motion-safe:transition-colors cursor-pointer motion-safe:active:scale-[0.97] duration-100",
                 activeTab === tab ? "text-zinc-950" : "text-zinc-400 hover:text-zinc-200"
               )}
             >
@@ -56,7 +56,8 @@ export function CryptoWalletMain({
                 <motion.div
                   layoutId="wallet-main-nav-pill"
                   className="absolute inset-0 rounded-full bg-white"
-                  transition={{ type: "spring", bounce: 0, duration: 0.35 }}
+                  style={{ borderRadius: 999 }}
+                  transition={{ type: "spring", bounce: 0, duration: 0.2 }}
                 />
               )}
               <span className="relative z-10">{tab}</span>
@@ -64,7 +65,7 @@ export function CryptoWalletMain({
           ))}
         </nav>
 
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs cursor-pointer active:scale-95 transition-transform">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs cursor-pointer motion-safe:active:scale-[0.97] transition-transform">
           🌐
         </div>
       </div>
@@ -74,7 +75,7 @@ export function CryptoWalletMain({
           <button
             type="button"
             onClick={() => setAccountMenuOpen(!accountMenuOpen)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer active:scale-98"
+            className="flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-zinc-200 motion-safe:transition-colors cursor-pointer motion-safe:active:scale-[0.97]"
           >
             <span>{selectedAccount}</span>
             <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", accountMenuOpen && "rotate-180")} />
@@ -83,10 +84,12 @@ export function CryptoWalletMain({
           <AnimatePresence>
             {accountMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: -4 }}
+                key="main-account-menu"
+                initial={{ opacity: 0, scale: 0.96, y: -4 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: -4 }}
-                transition={{ type: "spring", bounce: 0, duration: 0.25 }}
+                exit={{ opacity: 0, scale: 0.96, y: -4 }}
+                transition={{ type: "spring", bounce: 0, duration: 0.2 }}
+                style={{ transformOrigin: "top left", borderRadius: 12 }}
                 className="absolute left-0 top-7 z-30 w-48 rounded-xl border border-zinc-800 bg-zinc-900 p-1.5 shadow-xl"
               >
                 {accounts.map((acc) => (
@@ -98,7 +101,7 @@ export function CryptoWalletMain({
                       setAccountMenuOpen(false)
                     }}
                     className={cn(
-                      "flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-xs font-medium transition-colors cursor-pointer active:scale-98",
+                      "flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-xs font-medium transition-colors cursor-pointer motion-safe:active:scale-[0.97]",
                       selectedAccount === acc ? "bg-zinc-800 text-white font-semibold" : "text-zinc-400 hover:bg-zinc-800/60"
                     )}
                   >
@@ -139,7 +142,7 @@ export function CryptoWalletMain({
         </div>
 
         <div className="space-y-2 mb-4">
-          <div className="flex items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3 transition-all hover:bg-zinc-900 active:scale-98">
+          <div className="flex items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3 motion-safe:transition-[background-color,transform] motion-safe:duration-150 hover:bg-zinc-900 motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-950/60 border border-purple-800/50 text-xs font-bold text-purple-300">
                 SOL
@@ -155,7 +158,7 @@ export function CryptoWalletMain({
             </div>
           </div>
 
-          <div className="flex items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3 transition-all hover:bg-zinc-900 active:scale-98">
+          <div className="flex items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-3 motion-safe:transition-[background-color,transform] motion-safe:duration-150 hover:bg-zinc-900 motion-safe:active:scale-[0.97]">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-950/60 border border-blue-800/50 text-blue-300 font-bold text-xs">
                 USDC
@@ -184,7 +187,7 @@ export function CryptoWalletMain({
         </div>
         <button
           type="button"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-colors cursor-pointer active:scale-95"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-colors cursor-pointer motion-safe:active:scale-[0.97]"
         >
           <Plus className="h-4 w-4" />
         </button>

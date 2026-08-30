@@ -45,20 +45,18 @@ function NavLink({ label, href, external }: FooterLink) {
 
 export default function Footer() {
   return (
-    <footer className="relative w-full p-1.5 md:p-2.5 my-4">
+    <footer className="relative w-full p-1.5 md:p-2.5 my-4" suppressHydrationWarning>
       <div
         className="relative flex min-h-[340px] md:min-h-[400px] w-full flex-col justify-between overflow-hidden rounded-[36px] md:rounded-[45px] border border-white/15 bg-[#09090b] text-white shadow-2xl"
         style={{ cornerShape: "squircle" } as React.CSSProperties}
+        suppressHydrationWarning
       >
         {/* Blue fire WebGL fluid wave canvas */}
         <FluidWave />
-        
-        {/* Top subtle blend gradient */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#09090b]/90 via-[#09090b]/40 to-transparent" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[96rem] flex-1 flex-col justify-between px-6 pt-7 sm:px-10 md:pt-9">
+        <div className="relative z-10 mx-auto flex w-full max-w-[96rem] flex-1 flex-col justify-between px-6 pt-7 sm:px-10 md:pt-9" suppressHydrationWarning>
           {/* Top header navigation */}
-          <div>
+          <div suppressHydrationWarning>
             <div className="flex flex-wrap items-center justify-between gap-4 pb-5">
               <Link href="/" className="flex h-fit w-fit items-center gap-2.5">
                 <img src="/logos/Oxygenui.svg" alt="" className="h-7 w-7" />
@@ -86,8 +84,9 @@ export default function Footer() {
           {/* Bottom copyright & utility links */}
           <div
             className={`flex flex-wrap items-center justify-between gap-3 pb-5 pt-3 text-xs ${MUTED} border-t border-white/10`}
+            suppressHydrationWarning
           >
-            <span className="font-medium">Oxygen-UI &copy; {new Date().getFullYear()}</span>
+            <span className="font-medium" suppressHydrationWarning>Oxygen-UI &copy; {new Date().getFullYear()}</span>
             <span className="flex items-center gap-3">
               {UTILITY_LINKS.map((link, index) => (
                 <Fragment key={link.href}>

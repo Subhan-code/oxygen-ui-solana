@@ -48,9 +48,11 @@ export default function DescriptionContent({
         <div className="flex flex-col gap-3">
           <SectionLabel as="h2">Dependencies</SectionLabel>
           <div className="flex flex-wrap gap-2">
-            {item.dependencies.map((dep) => (
-              <DependencyPill key={dep.name} name={dep.name} icon={dep.icon} />
-            ))}
+            {item.dependencies.map((dep) => {
+              const name = typeof dep === "string" ? dep : dep.name;
+              const icon = typeof dep === "string" ? undefined : dep.icon;
+              return <DependencyPill key={name} name={name} icon={icon} />;
+            })}
           </div>
         </div>
       )}
