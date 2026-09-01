@@ -24,7 +24,7 @@ export type BlurShimmerTextProps = {
 };
 
 export function BlurShimmerText({
-  as = motion.p,
+  as = motion.span,
   className,
   interval = 2.5,
   blur = 6,
@@ -33,7 +33,7 @@ export function BlurShimmerText({
   texts,
 }: BlurShimmerTextProps) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const Component = as as typeof motion.p;
+  const Component = (as || motion.span) as typeof motion.span;
 
   const resolvedVariants: Variants = variants ?? {
     initial: { filter: `blur(${blur}px)`, opacity: 0 },
@@ -56,7 +56,7 @@ export function BlurShimmerText({
   const duration = (transition.duration as number) || 0.6;
 
   return (
-    <div className={cn("inline-grid", className)}>
+    <span className={cn("inline-grid align-baseline", className)}>
       {texts.map((text, index) => (
         <span
           key={index}
@@ -97,7 +97,7 @@ export function BlurShimmerText({
           })}
         </Component>
       </AnimatePresence>
-    </div>
+    </span>
   );
 }
 

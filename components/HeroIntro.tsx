@@ -51,7 +51,7 @@ export default function HeroIntro({
         initial={hidden}
         animate={shown}
         transition={step(1)}
-        className="max-w-4xl text-balance font-runde text-3xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.5rem] md:leading-[1.12] lg:text-[3.85rem]"
+        className="max-w-3xl sm:max-w-4xl text-balance font-runde text-3xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.6rem] md:leading-[1.12] lg:text-[4rem]"
       >
         Craft premium{" "}
         <BlurShimmerText
@@ -64,7 +64,7 @@ export default function HeroIntro({
           ]}
           interval={3}
           blur={6}
-          className="text-white"
+          className="text-white inline-inline"
         />{" "}
         in minutes.
       </motion.h1>
