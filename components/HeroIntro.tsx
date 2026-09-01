@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { SPRING_UI } from "@/lib/ease";
+import { BlurShimmerText } from "@/components/ui/blur-shimmer-text";
 
 const spring = SPRING_UI;
 
@@ -52,7 +53,20 @@ export default function HeroIntro({
         transition={step(1)}
         className="max-w-3xl text-balance font-runde text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.6rem] md:leading-[1.08] lg:text-[4.25rem]"
       >
-        Craft premium <span className="text-white">Solana frontends</span> in minutes.
+        Craft premium{" "}
+        <BlurShimmerText
+          as={motion.span}
+          texts={[
+            "Solana frontends",
+            "dApp interfaces",
+            "wallet surfaces",
+            "swap terminals",
+          ]}
+          interval={3}
+          blur={6}
+          className="text-white"
+        />{" "}
+        in minutes.
       </motion.h1>
 
       <motion.p
