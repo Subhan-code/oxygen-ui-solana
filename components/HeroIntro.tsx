@@ -39,7 +39,7 @@ export default function HeroIntro({
         initial={hidden}
         animate={shown}
         transition={step(0)}
-        className="max-w-4xl text-balance font-runde text-3xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl md:text-[3.6rem] md:leading-[1.12] lg:text-[4rem]"
+        className="max-w-4xl text-balance font-runde text-3xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.6rem] md:leading-[1.12] lg:text-[4rem]"
       >
         Craft premium Solana frontends in minutes.
       </motion.h1>
@@ -48,7 +48,7 @@ export default function HeroIntro({
         initial={hidden}
         animate={shown}
         transition={step(1)}
-        className="mt-3.5 w-full max-w-xl mx-auto text-center font-medium text-zinc-600 dark:text-white/80 text-sm sm:text-base leading-relaxed"
+        className="mt-3.5 w-full max-w-xl mx-auto text-center font-medium text-white/80 text-sm sm:text-base leading-relaxed"
       >
         Open-source React primitives for Solana dApps. Copy-paste components you own, installed directly into your codebase via the shadcn CLI.
       </motion.p>
