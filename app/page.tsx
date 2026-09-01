@@ -35,6 +35,10 @@ export const metadata: Metadata = {
 import FeatureCardsSection from "@/components/FeatureCardsSection";
 import ScrollReveal from "@/components/ScrollReveal";
 
+// hero height config: customize HERO_MIN_HEIGHT and HERO_PADDING to your taste
+const HERO_MIN_HEIGHT = "min-h-[min(92vh,54rem)]";
+const HERO_PADDING = "py-24 sm:py-32 md:py-36";
+
 export default async function Home() {
   const stars = await fetchStarCount();
 
@@ -44,7 +48,7 @@ export default async function Home() {
 
       <section className="relative w-full p-1.5 md:p-2.5">
         <div
-          className="relative isolate flex min-h-[min(82vh,46rem)] w-full items-center overflow-hidden rounded-[36px] border border-black/10 text-white shadow-2xl dark:border-white/15 md:rounded-[45px]"
+          className={`relative isolate flex ${HERO_MIN_HEIGHT} w-full items-center overflow-hidden rounded-[36px] border border-black/10 text-white shadow-2xl dark:border-white/15 md:rounded-[45px]`}
           style={{ cornerShape: "squircle" } as React.CSSProperties}
         >
           <img
@@ -57,7 +61,7 @@ export default async function Home() {
             className="pointer-events-none absolute inset-0 bg-transparent dark:bg-black/55 dark:backdrop-blur-[1px]"
           />
 
-          <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center px-6 py-16 sm:py-24 md:py-28 text-center">
+          <div className={`relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center px-6 ${HERO_PADDING} text-center`}>
             <HeroIntro
               sub="Production-grade React primitives for Solana dApps, installed as code files via the shadcn CLI."
             >
