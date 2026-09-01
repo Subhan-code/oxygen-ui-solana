@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 };
 
 import FeatureCardsSection from "@/components/FeatureCardsSection";
+import MotionSkillsSection from "@/components/MotionSkillsSection";
 import ScrollReveal from "@/components/ScrollReveal";
 
 // hero height config: customize HERO_MIN_HEIGHT and HERO_PADDING to your taste
@@ -72,6 +73,7 @@ export default async function Home() {
       </section>
       <ComponentsShowcase />
       <FeatureCardsSection />
+      <MotionSkillsSection />
       <ScrollReveal>
         <BackersSection />
       </ScrollReveal>
