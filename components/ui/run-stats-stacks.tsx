@@ -4,33 +4,33 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-const runs = [
+const batches = [
   {
-    distance: "10.29 km",
-    pace: "5:14 /km",
-    time: "53m 49s",
+    volume: "$10,290",
+    fee: "0.00005 SOL",
+    status: "Confirmed",
   },
   {
-    distance: "12.75 km",
-    pace: "5:30 /km",
-    time: "01h 10m",
+    volume: "$12,750",
+    fee: "0.00005 SOL",
+    status: "Confirmed",
   },
   {
-    distance: "8.43 km",
-    pace: "5:00 /km",
-    time: "42m 15s",
+    volume: "$8,430",
+    fee: "0.00005 SOL",
+    status: "Finalized",
   },
   {
-    distance: "15.62 km",
-    pace: "5:20 /km",
-    time: "01h 23m",
+    volume: "$15,620",
+    fee: "0.00005 SOL",
+    status: "Confirmed",
   },
 ];
 
 const label = {
-  distance: "Distance",
-  pace: "Pace",
-  time: "Time",
+  volume: "Volume",
+  fee: "Priority Fee",
+  status: "Status",
 };
 
 const CARD_HEIGHT = 70;
@@ -48,10 +48,10 @@ export function RunStatsStacks({ className }: { className?: string }) {
         }}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {runs.map((run, i) => {
+        {batches.map((batch, i) => {
           return (
             <motion.div
-              className="absolute w-[260px] rounded-3xl border border-zinc-200/80 bg-zinc-100/90 px-4 py-3 backdrop-blur-2xl dark:border-zinc-800 dark:bg-zinc-900/90 shadow-xl"
+              className="absolute w-[280px] rounded-3xl border border-zinc-200/80 bg-zinc-100/90 px-4 py-3 backdrop-blur-2xl dark:border-zinc-800 dark:bg-zinc-900/90 shadow-xl"
               key={i}
               animate={isOpen ? "open" : "closed"}
               style={{
@@ -86,7 +86,7 @@ export function RunStatsStacks({ className }: { className?: string }) {
                         {label[key as keyof typeof label]}
                       </span>
                       <span className="font-semibold text-zinc-900 dark:text-white mt-0.5">
-                        {run[key as keyof typeof run]}
+                        {batch[key as keyof typeof batch]}
                       </span>
                     </div>
                   );

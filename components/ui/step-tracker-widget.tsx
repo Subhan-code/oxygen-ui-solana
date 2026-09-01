@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Check, Mail, Globe, FileText } from "lucide-react";
+import { Check, Zap, ShieldCheck, Cpu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface StepTrackerWidgetProps
@@ -14,15 +14,15 @@ export interface StepTrackerWidgetProps
 }
 
 export function StepTrackerWidget({
-  title = "Application Pipeline",
+  title = "Solana Txn Pipeline",
   totalSteps = 5,
   initialStep = 3,
   stepsInfo = [
-    "Reviewing application...",
-    "Screening phone call...",
-    "Writing summary...",
-    "Scheduling interview...",
-    "Final offer letter...",
+    "Preparing transaction payload...",
+    "Simulating contract state...",
+    "Requesting wallet signature...",
+    "Broadcasting to Solana RPC...",
+    "Transaction confirmed on-chain!",
   ],
   className,
   ...props
@@ -46,24 +46,21 @@ export function StepTrackerWidget({
       )}
       {...props}
     >
-      {/* Header Row with Overlapped App Icons */}
       <div className="flex items-center justify-between pb-6">
         <h3 className="text-xl font-bold tracking-tight">{title}</h3>
-        {/* Overlapped Circle App Badges */}
         <div className="flex items-center -space-x-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white shadow-md border-2 border-zinc-950 z-30">
-            <Mail className="h-4 w-4" />
+            <Zap className="h-4 w-4" />
           </div>
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-400 text-white shadow-md border-2 border-zinc-950 z-20">
-            <Globe className="h-4 w-4" />
+            <ShieldCheck className="h-4 w-4" />
           </div>
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 shadow-md border-2 border-zinc-950 z-10 font-bold text-xs">
-            <FileText className="h-4 w-4" />
+            <Cpu className="h-4 w-4" />
           </div>
         </div>
       </div>
 
-      {/* Step Node Connector Line */}
       <div className="relative my-2 flex items-center justify-between px-1">
         {Array.from({ length: totalSteps }).map((_, idx) => {
           const isCompleted = idx < currentStep;
@@ -71,7 +68,6 @@ export function StepTrackerWidget({
 
           return (
             <React.Fragment key={idx}>
-              {/* Step Circle Node */}
               <motion.button
                 type="button"
                 onClick={() => handleStepClick(idx)}
@@ -86,7 +82,6 @@ export function StepTrackerWidget({
                 {isCompleted && <Check className="h-5 w-5 stroke-[3]" />}
               </motion.button>
 
-              {/* Connecting Line Segment */}
               {!isLast && (
                 <div className="relative h-1 flex-1 mx-1 bg-blue-950 overflow-hidden rounded-full">
                   <motion.div
@@ -102,7 +97,6 @@ export function StepTrackerWidget({
         })}
       </div>
 
-      {/* Footer Info Row */}
       <div className="mt-6 flex items-center justify-between text-sm">
         <span className="font-medium text-zinc-400">
           {stepsInfo[currentStep - 1] || "Processing..."}
