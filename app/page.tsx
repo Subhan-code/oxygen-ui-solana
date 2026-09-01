@@ -44,7 +44,7 @@ export default async function Home() {
 
       <section className="relative w-full p-1.5 md:p-2.5">
         <div
-          className="relative isolate flex min-h-[min(92vh,54rem)] w-full items-center overflow-hidden rounded-[36px] border border-black/10 text-white shadow-2xl dark:border-white/15 md:rounded-[45px]"
+          className="relative isolate flex min-h-[min(92vh,54rem)] w-full items-center overflow-hidden rounded-[36px] border border-black/10 bg-[#F5F5F7] text-zinc-900 shadow-xl dark:border-white/15 dark:bg-[#1C1C1E] dark:text-white md:rounded-[45px]"
           style={{ cornerShape: "squircle" } as React.CSSProperties}
         >
           <img
@@ -54,7 +54,7 @@ export default async function Home() {
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-black/55 backdrop-blur-[1px]"
+            className="pointer-events-none absolute inset-0 bg-transparent dark:bg-black/55 dark:backdrop-blur-[1px]"
           />
 
           <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center px-6 py-24 sm:py-32 text-center">
