@@ -21,16 +21,18 @@ export type BlurShimmerTextProps = {
   transition?: Transition;
   variants?: Variants;
   texts: string[];
+  mode?: "char" | "word";
 };
 
 export function BlurShimmerText({
   as = motion.span,
   className,
-  interval = 2.5,
+  interval = 3.5,
   blur = 6,
   transition = { duration: 0.5 },
   variants,
   texts,
+  mode = "word",
 }: BlurShimmerTextProps) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const Component = (as || motion.span) as typeof motion.span;
@@ -54,32 +56,32 @@ export function BlurShimmerText({
   if (!texts || texts.length === 0) return null;
 
   const duration = (transition.duration as number) || 0.6;
+  const currentText = texts[currentIndex];
+  const items = mode === "word" ? currentText.split(" ") : currentText.split("");
 
   return (
-    <span className={cn("inline-grid align-baseline", className)}>
+    <span className={cn("grid w-full items-center justify-center text-center", className)}>
       {texts.map((text, index) => (
         <span
           key={index}
-          className="invisible col-start-1 row-start-1 block whitespace-nowrap"
+          className="invisible col-start-1 row-start-1 block w-full text-center leading-relaxed"
           aria-hidden="true"
         >
-          {text.split("").map((char, i) => (
-            <span key={i} className="inline-block whitespace-pre">
-              {char}
-            </span>
-          ))}
+          {text}
         </span>
       ))}
       <AnimatePresence mode="wait">
         <Component
           key={currentIndex}
-          className="col-start-1 row-start-1 block whitespace-nowrap"
+          className="col-start-1 row-start-1 block w-full text-center leading-relaxed"
           initial="initial"
           animate="animate"
           exit="exit"
         >
-          {texts[currentIndex].split("").map((char, i) => {
-            const staggerDelay = (i * duration) / texts[currentIndex].length;
+          {items.map((item, i) => {
+            const staggerDelay = (i * duration) / items.length;
+            const displayItem =
+              mode === "word" ? (i < items.length - 1 ? `${item} ` : item) : item;
 
             return (
               <motion.span
@@ -91,7 +93,7 @@ export function BlurShimmerText({
                 }}
                 className="inline-block whitespace-pre"
               >
-                {char}
+                {displayItem}
               </motion.span>
             );
           })}

@@ -50,10 +50,11 @@ export default function HeroIntro({
         initial={hidden}
         animate={shown}
         transition={step(1)}
-        className="mt-4 max-w-xl text-pretty font-medium text-white/80 sm:text-base md:text-lg leading-snug"
+        className="mt-4 w-full max-w-xl mx-auto flex items-center justify-center text-center font-medium text-white/80 sm:text-base md:text-lg leading-relaxed"
       >
         <BlurShimmerText
           as={motion.span}
+          mode="word"
           texts={[
             sub || "Production-grade React primitives for Solana dApps, installed as code files via shadcn CLI.",
             "Wallet cards, swap terminals, order books, and transaction feeds ready for production.",
@@ -61,7 +62,7 @@ export default function HeroIntro({
           ]}
           interval={4}
           blur={6}
-          className="text-white/80"
+          className="text-white/80 w-full"
         />
       </motion.p>
 
