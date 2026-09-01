@@ -10,26 +10,29 @@ import { cn } from "@/lib/utils";
 const FEATURES = [
   {
     title: "Source You Own",
-    description: "Copy-paste production React components directly into your codebase. Zero lock-in, full code ownership.",
-    tags: ["shadcn CLI", "Copy-Paste", "Full Control", "Zero Lock-in"],
+    description: "Copy-paste React primitives directly into your codebase. Zero third-party lock-in, full code ownership.",
+    tags: ["shadcn CLI", "React + TS", "Zero Lock-in", "Code Ownership"],
     cardBg: "bg-[#EAF4FF] dark:bg-[#0E2038]",
     tagBg: "bg-blue-500/10 text-blue-800 dark:bg-blue-400/15 dark:text-blue-200 border-blue-200/50 dark:border-blue-800/40",
+    action: "Explore Docs",
     href: "/docs/installation",
   },
   {
     title: "Motion That Feels Physical",
-    description: "Grounded in spring physics, squircles, gesture tracking, and 60 FPS composite animations.",
-    tags: ["Spring Physics", "Framer Motion", "Squircles", "60 FPS"],
+    description: "Engineered with Framer Motion, spring physics, dynamic squircles, and 60 FPS GPU composite performance.",
+    tags: ["Spring Physics", "Framer Motion", "Apple Squircles", "60 FPS GPU"],
     cardBg: "bg-[#F1EAFF] dark:bg-[#1E1438]",
     tagBg: "bg-purple-500/10 text-purple-800 dark:bg-purple-400/15 dark:text-purple-200 border-purple-200/50 dark:border-purple-800/40",
+    action: "Browse Motion",
     href: "/components",
   },
   {
     title: "Primitives Built for Solana",
-    description: "Wallet surfaces, swap terminals, order books, QR codes, and transaction feedback ready for Web3 dApps.",
-    tags: ["56 Components", "Solana dApps", "Wallet Cards", "Swap Terminals"],
+    description: "Tailored for Web3 dApps: wallet surfaces, swap terminals, order books, QR codes, and transaction feeds.",
+    tags: ["56 Components", "Solana dApps", "Wallet Surfaces", "Swap Terminals"],
     cardBg: "bg-[#E9FBF3] dark:bg-[#0C2A1E]",
     tagBg: "bg-emerald-500/10 text-emerald-800 dark:bg-emerald-400/15 dark:text-emerald-200 border-emerald-200/50 dark:border-emerald-800/40",
+    action: "Sol Components",
     href: "/sol-components",
   },
 ];
@@ -39,7 +42,7 @@ export default function FeatureCardsSection() {
 
   return (
     <section className="relative w-full px-4 py-10 md:py-16">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <header className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200/80 pb-4 dark:border-white/10">
           <div>
             <span className="font-mono text-[11px] font-semibold tracking-wide text-[#0066FF] dark:text-[#0A84FF]">
@@ -100,7 +103,7 @@ export default function FeatureCardsSection() {
 
                   <div className="flex items-center justify-between px-3.5 py-2.5 pt-3">
                     <span className="font-runde text-xs sm:text-sm font-bold text-zinc-900 dark:text-white tracking-tight">
-                      Explore
+                      {feature.action}
                     </span>
                     <div className="size-8 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 border border-black/5 dark:border-white/10 flex items-center justify-center text-zinc-700 dark:text-zinc-200 transition-colors duration-200 group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900">
                       <svg
