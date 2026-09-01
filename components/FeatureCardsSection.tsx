@@ -38,57 +38,57 @@ export default function FeatureCardsSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative w-full px-4 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200/80 pb-6 dark:border-white/10">
+    <section className="relative w-full px-4 py-10 md:py-16">
+      <div className="mx-auto max-w-5xl">
+        <header className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200/80 pb-4 dark:border-white/10">
           <div>
             <span className="font-mono text-[11px] font-semibold tracking-wide text-[#0066FF] dark:text-[#0A84FF]">
               Core Pillars
             </span>
-            <h2 className="mt-2 max-w-2xl font-runde text-2xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-3xl md:text-4xl">
+            <h2 className="mt-1.5 max-w-2xl font-runde text-xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-2xl md:text-3xl">
               Source you own, motion that feels physical, primitives built for Solana
             </h2>
           </div>
-          <span className="font-mono text-xs font-semibold text-zinc-400 select-none">
+          <span className="font-mono text-[11px] font-semibold text-zinc-400 select-none">
             OXYGEN UI
           </span>
         </header>
 
         <ScrollReveal>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((feature) => (
               <Link
                 key={feature.title}
                 href={feature.href}
-                className="group outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px]"
+                className="group outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[26px]"
               >
                 <motion.div
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                   transition={SPRING_PRESS}
-                  className="flex flex-col justify-between rounded-[32px] border border-zinc-200/90 dark:border-white/10 bg-white dark:bg-zinc-900/90 p-3 shadow-md transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl cursor-pointer h-full"
+                  className="flex flex-col justify-between rounded-[26px] border border-zinc-200/90 dark:border-white/10 bg-white dark:bg-zinc-900/90 p-2.5 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg cursor-pointer h-full"
                   style={{ cornerShape: "squircle" } as React.CSSProperties}
                 >
                   <div
                     className={cn(
-                      "flex flex-col justify-between rounded-[24px] p-6 space-y-6 min-h-[260px] transition-colors duration-300",
+                      "flex flex-col justify-between rounded-[20px] p-4.5 sm:p-5 space-y-4 min-h-[190px] sm:min-h-[210px] transition-colors duration-300",
                       feature.cardBg
                     )}
                   >
-                    <div className="space-y-2.5">
-                      <h3 className="font-runde text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                    <div className="space-y-1.5">
+                      <h3 className="font-runde text-lg font-bold tracking-tight text-zinc-900 dark:text-white sm:text-xl">
                         {feature.title}
                       </h3>
-                      <p className="text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                      <p className="text-xs font-medium text-zinc-600 dark:text-zinc-300 leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 pt-2">
+                    <div className="flex flex-wrap gap-1.5 pt-1">
                       {feature.tags.map((tag) => (
                         <span
                           key={tag}
                           className={cn(
-                            "rounded-xl px-3 py-1.5 text-xs font-semibold border backdrop-blur-md transition-colors",
+                            "rounded-lg px-2.5 py-1 text-[11px] font-semibold border backdrop-blur-md transition-colors",
                             feature.tagBg
                           )}
                         >
@@ -98,15 +98,15 @@ export default function FeatureCardsSection() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between px-4 py-3 pt-4">
-                    <span className="font-runde text-base font-bold text-zinc-900 dark:text-white tracking-tight">
+                  <div className="flex items-center justify-between px-3.5 py-2.5 pt-3">
+                    <span className="font-runde text-xs sm:text-sm font-bold text-zinc-900 dark:text-white tracking-tight">
                       Explore
                     </span>
-                    <div className="size-9 rounded-2xl bg-zinc-100 dark:bg-zinc-800/80 border border-black/5 dark:border-white/10 flex items-center justify-center text-zinc-700 dark:text-zinc-200 transition-colors duration-200 group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900">
+                    <div className="size-8 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 border border-black/5 dark:border-white/10 flex items-center justify-center text-zinc-700 dark:text-zinc-200 transition-colors duration-200 group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
+                        width="16"
+                        height="16"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
