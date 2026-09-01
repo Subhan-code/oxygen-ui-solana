@@ -5,31 +5,32 @@ import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { SPRING_PRESS } from "@/lib/ease";
 import ScrollReveal from "./ScrollReveal";
+import { cn } from "@/lib/utils";
 
-const PILLARS = [
+const FEATURES = [
   {
-    kicker: "01  CLI",
-    title: "The source is yours",
-    caption: "Copy the file",
-    badge: "shadcn CLI",
-    image: "/assets/card-arch.jpg",
+    title: "Source You Own",
+    description: "Copy-paste production React components directly into your codebase. Zero lock-in, full code ownership.",
+    tags: ["shadcn CLI", "Copy-Paste", "Full Control", "Zero Lock-in"],
+    cardBg: "bg-[#EAF4FF] dark:bg-[#0E2038]",
+    tagBg: "bg-blue-500/10 text-blue-800 dark:bg-blue-400/15 dark:text-blue-200 border-blue-200/50 dark:border-blue-800/40",
     href: "/docs/installation",
   },
   {
-    kicker: "02  CRAFT",
-    title: "Geometry that feels physical",
-    caption: "Squircles, springs",
-    badge: "60 FPS Motion",
-    image: "/assets/card-craft.jpg",
+    title: "Motion That Feels Physical",
+    description: "Grounded in spring physics, squircles, gesture tracking, and 60 FPS composite animations.",
+    tags: ["Spring Physics", "Framer Motion", "Squircles", "60 FPS"],
+    cardBg: "bg-[#F1EAFF] dark:bg-[#1E1438]",
+    tagBg: "bg-purple-500/10 text-purple-800 dark:bg-purple-400/15 dark:text-purple-200 border-purple-200/50 dark:border-purple-800/40",
     href: "/components",
   },
   {
-    kicker: "03  SOLANA",
-    title: "Primitives, not wrappers",
-    caption: "180+ components",
-    badge: "Solana Native",
-    image: "/assets/card-speed.jpg",
-    href: "/components",
+    title: "Primitives Built for Solana",
+    description: "Wallet surfaces, swap terminals, order books, QR codes, and transaction feedback ready for Web3 dApps.",
+    tags: ["56 Components", "Solana dApps", "Wallet Cards", "Swap Terminals"],
+    cardBg: "bg-[#E9FBF3] dark:bg-[#0C2A1E]",
+    tagBg: "bg-emerald-500/10 text-emerald-800 dark:bg-emerald-400/15 dark:text-emerald-200 border-emerald-200/50 dark:border-emerald-800/40",
+    href: "/sol-components",
   },
 ];
 
@@ -37,74 +38,92 @@ export default function FeatureCardsSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative w-full px-4 py-8 md:py-12">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-8 flex items-end justify-between border-b border-black/[0.08] pb-4 dark:border-white/10">
+    <section className="relative w-full px-4 py-16 md:py-24">
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200/80 pb-6 dark:border-white/10">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#0071E3]/20 bg-[#0071E3]/10 px-3.5 py-1 text-xs font-semibold text-[#0071E3] dark:text-[#0A84FF]">
-              Why it exists
+            <span className="font-mono text-[11px] font-semibold tracking-wide text-[#0066FF] dark:text-[#0A84FF]">
+              Core Pillars
             </span>
-            <h2 className="mt-2.5 max-w-lg font-runde text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+            <h2 className="mt-2 max-w-2xl font-runde text-2xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-3xl md:text-4xl">
               Source you own, motion that feels physical, primitives built for Solana
             </h2>
           </div>
-          <span className="hidden font-mono text-xs font-semibold text-slate-500 dark:text-zinc-400 sm:inline-block">
-            CRAFT
+          <span className="font-mono text-xs font-semibold text-zinc-400 select-none">
+            OXYGEN UI
           </span>
-        </div>
+        </header>
 
         <ScrollReveal>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {PILLARS.map((pillar) => (
-            <Link key={pillar.title} href={pillar.href} className="outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[28px]">
-              <motion.div
-                whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-                transition={SPRING_PRESS}
-                className="group relative flex flex-col overflow-hidden rounded-[28px] border border-black/[0.08] bg-[#F5F5F7]/80 text-slate-900 shadow-xl backdrop-blur-2xl dark:border-white/12 dark:bg-[#121216]/80 dark:text-white dark:shadow-2xl cursor-pointer"
-                style={{ cornerShape: "squircle" } as React.CSSProperties}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURES.map((feature) => (
+              <Link
+                key={feature.title}
+                href={feature.href}
+                className="group outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px]"
               >
-                <div className="lift-on-hover relative h-[190px] w-full overflow-hidden bg-[#003ED0] sm:h-[210px]">
-                  <img
-                    src={pillar.image}
-                    alt=""
-                    className="h-full w-full object-cover transition-transform duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 right-3 rounded-full border border-white/20 bg-black/40 px-2.5 py-1 text-[10px] font-mono font-semibold text-white backdrop-blur-md">
-                    {pillar.badge}
-                  </div>
-                </div>
-
-                <div className="flex min-h-[148px] flex-col justify-between p-5">
-                  <div>
-                    <p className="font-mono text-[11px] font-semibold tracking-wide text-[#0066FF] dark:text-[#0A84FF]">
-                      {pillar.kicker}
-                    </p>
-                    <h3 className="mt-1.5 font-runde text-lg font-bold leading-snug tracking-tight text-slate-900 dark:text-white sm:text-xl">
-                      {pillar.title}
-                    </h3>
-                  </div>
-
-                  <div className="flex items-center justify-between border-t border-black/[0.06] pt-3 dark:border-white/10">
-                    <div className="flex items-center gap-2">
-                      <img
-                        src="/logos/Oxygenui.svg"
-                        alt=""
-                        className="h-4.5 w-4.5 drop-shadow-xs"
-                      />
-                      <span className="font-runde text-xs font-bold tracking-tight text-slate-900 dark:text-white">
-                        Oxygen-UI
-                      </span>
+                <motion.div
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+                  transition={SPRING_PRESS}
+                  className="flex flex-col justify-between rounded-[32px] border border-zinc-200/90 dark:border-white/10 bg-white dark:bg-zinc-900/90 p-3 shadow-md transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl cursor-pointer h-full"
+                  style={{ cornerShape: "squircle" } as React.CSSProperties}
+                >
+                  <div
+                    className={cn(
+                      "flex flex-col justify-between rounded-[24px] p-6 space-y-6 min-h-[260px] transition-colors duration-300",
+                      feature.cardBg
+                    )}
+                  >
+                    <div className="space-y-2.5">
+                      <h3 className="font-runde text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                        {feature.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                        {feature.description}
+                      </p>
                     </div>
-                    <span className="font-mono text-[11px] font-semibold text-slate-500 dark:text-zinc-400">
-                      {pillar.caption}
-                    </span>
+
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {feature.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className={cn(
+                            "rounded-xl px-3 py-1.5 text-xs font-semibold border backdrop-blur-md transition-colors",
+                            feature.tagBg
+                          )}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            </Link>
-          ))}
-        </div>
+
+                  <div className="flex items-center justify-between px-4 py-3 pt-4">
+                    <span className="font-runde text-base font-bold text-zinc-900 dark:text-white tracking-tight">
+                      Explore
+                    </span>
+                    <div className="size-9 rounded-2xl bg-zinc-100 dark:bg-zinc-800/80 border border-black/5 dark:border-white/10 flex items-center justify-center text-zinc-700 dark:text-zinc-200 transition-colors duration-200 group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.25"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="transition-transform duration-200 group-hover:translate-x-0.5"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
         </ScrollReveal>
       </div>
     </section>
