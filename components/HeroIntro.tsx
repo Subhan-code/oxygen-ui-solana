@@ -51,7 +51,7 @@ export default function HeroIntro({
         initial={hidden}
         animate={shown}
         transition={step(1)}
-        className="max-w-3xl text-balance font-runde text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.6rem] md:leading-[1.08] lg:text-[4.25rem]"
+        className="max-w-4xl text-balance font-runde text-3xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.5rem] md:leading-[1.12] lg:text-[3.85rem]"
       >
         Craft premium{" "}
         <BlurShimmerText
@@ -73,7 +73,7 @@ export default function HeroIntro({
         initial={hidden}
         animate={shown}
         transition={step(2)}
-        className="mt-4 max-w-xl text-pretty font-medium text-white/80 sm:text-lg md:text-xl leading-relaxed"
+        className="mt-3.5 max-w-xl text-pretty font-medium text-white/80 sm:text-base md:text-lg leading-snug"
       >
         {sub}
       </motion.p>

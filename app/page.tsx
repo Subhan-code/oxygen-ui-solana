@@ -59,7 +59,7 @@ export default async function Home() {
 
           <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center px-6 py-24 sm:py-32 text-center">
             <HeroIntro
-              sub="Production-grade React primitives you own: wallet surfaces, swap terminals, and transaction flows, installed as files via the shadcn CLI."
+              sub="Production-grade React primitives for Solana dApps, installed as code files via the shadcn CLI."
             >
               <HeroCta />
             </HeroIntro>
