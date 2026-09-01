@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { SPRING_UI } from "@/lib/ease";
-import { BlurShimmerText } from "@/components/ui/blur-shimmer-text";
 
 const spring = SPRING_UI;
 
@@ -19,7 +18,6 @@ const riseReduced = {
 };
 
 export default function HeroIntro({
-  sub,
   children,
 }: {
   headline?: string;
@@ -36,12 +34,12 @@ export default function HeroIntro({
       : { ...spring, delay: index * STEP };
 
   return (
-    <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto">
+    <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
       <motion.h1
         initial={hidden}
         animate={shown}
         transition={step(0)}
-        className="max-w-3xl sm:max-w-4xl text-balance font-runde text-3xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.6rem] md:leading-[1.12] lg:text-[4rem]"
+        className="max-w-4xl text-balance font-runde text-3xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.6rem] md:leading-[1.12] lg:text-[4rem]"
       >
         Craft premium Solana frontends in minutes.
       </motion.h1>
@@ -50,27 +48,16 @@ export default function HeroIntro({
         initial={hidden}
         animate={shown}
         transition={step(1)}
-        className="mt-4 w-full max-w-xl mx-auto flex items-center justify-center text-center font-medium text-white/80 sm:text-base md:text-lg leading-relaxed"
+        className="mt-5 w-full max-w-2xl sm:max-w-3xl mx-auto text-center font-normal text-white/90 text-lg sm:text-xl md:text-2xl leading-relaxed"
       >
-        <BlurShimmerText
-          as={motion.span}
-          mode="word"
-          texts={[
-            sub || "Production-grade React primitives for Solana dApps, installed as code files via shadcn CLI.",
-            "Wallet cards, swap terminals, order books, and transaction feeds ready for production.",
-            "Copy-paste components tailored for Web3 dApps with Tailwind CSS and Motion.",
-          ]}
-          interval={4}
-          blur={6}
-          className="text-white/80 w-full"
-        />
+        100% free and fully open-source React primitives for Solana dApps. Copy-paste components you own, installed directly into your codebase via the shadcn CLI.
       </motion.p>
 
       <motion.div
         initial={hidden}
         animate={shown}
         transition={step(2)}
-        className="w-full flex justify-center mt-6"
+        className="w-full flex justify-center mt-8"
       >
         {children}
       </motion.div>

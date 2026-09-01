@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { getSolComponents } from "@/lib/sol-components";
+import { BlurShimmerText } from "@/components/ui/blur-shimmer-text";
 import ComponentCard from "./gallery/ComponentCard";
 import ViewAllCard from "./gallery/ViewAllCard";
 import ScrollReveal from "./ScrollReveal";
@@ -137,9 +138,20 @@ export default function ComponentsShowcase() {
           <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-foreground">
             56 Sol Components & Primitives
           </h2>
-          <p className="max-w-xl text-pretty text-sm font-medium text-muted-foreground sm:text-base md:text-lg">
-            Production-grade Solana React primitives organized into 7 core modules. Install any component with the shadcn CLI.
-          </p>
+          <div className="max-w-xl text-pretty text-sm font-medium text-muted-foreground sm:text-base md:text-lg">
+            <BlurShimmerText
+              as={motion.div}
+              mode="word"
+              texts={[
+                "Production-grade Solana React primitives organized into 7 core modules.",
+                "Fully open-source wallet cards, swap terminals, order books, and transaction feeds.",
+                "Copy-paste components installed directly into your dApp codebase with the shadcn CLI.",
+              ]}
+              interval={4.5}
+              blur={6}
+              className="w-full text-muted-foreground"
+            />
+          </div>
         </header>
 
         <ShowcaseTabs
