@@ -71,16 +71,16 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
   },
   {
     name: "Transactions & Activity",
-    description: "Transaction status, modals, receipts, tables, toasts, and history feeds.",
+    description: "Transaction status, pipelines, batch stacks, modals, receipts, tables, toasts, and history feeds.",
     components: [
       { name: "Solana Transaction Status", slug: "solanatransactionstatus" },
+      { name: "Solana Txn Pipeline", slug: "steptrackerwidget" },
+      { name: "Solana Batch Stacks", slug: "runstatsstacks" },
       { name: "Transaction Modal", slug: "transactionmodal" },
       { name: "Transaction Receipt", slug: "transactionreceipt" },
       { name: "Transaction Table", slug: "txntable" },
       { name: "Transaction Toast", slug: "txntoast" },
       { name: "Activity Feed", slug: "activityfeed" },
-      { name: "Timeline", slug: "timeline" },
-      { name: "Transaction Hash Display", slug: "valueflash" },
     ],
   },
   {
