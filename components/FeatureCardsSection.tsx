@@ -68,20 +68,20 @@ export default function FeatureCardsSection() {
                 <motion.div
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                   transition={SPRING_PRESS}
-                  className="flex flex-col justify-between rounded-[26px] border border-zinc-200/90 dark:border-white/10 bg-white dark:bg-zinc-900/90 p-2.5 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg cursor-pointer h-full"
+                  className="flex flex-col justify-between aspect-square rounded-[28px] border border-zinc-200/90 dark:border-white/10 bg-white dark:bg-zinc-900/90 p-3 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg cursor-pointer w-full"
                   style={{ cornerShape: "squircle" } as React.CSSProperties}
                 >
                   <div
                     className={cn(
-                      "flex flex-col justify-between rounded-[20px] p-4.5 sm:p-5 space-y-4 min-h-[190px] sm:min-h-[210px] transition-colors duration-300",
+                      "flex-1 flex flex-col justify-between rounded-[22px] p-5 space-y-4 transition-colors duration-300",
                       feature.cardBg
                     )}
                   >
-                    <div className="space-y-1.5">
-                      <h3 className="font-runde text-lg font-bold tracking-tight text-zinc-900 dark:text-white sm:text-xl">
+                    <div className="space-y-2">
+                      <h3 className="font-runde text-xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-2xl">
                         {feature.title}
                       </h3>
-                      <p className="text-xs font-medium text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                      <p className="text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-300 leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
@@ -105,7 +105,7 @@ export default function FeatureCardsSection() {
                     <span className="font-runde text-xs sm:text-sm font-bold text-zinc-900 dark:text-white tracking-tight">
                       {feature.action}
                     </span>
-                    <div className="size-8 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 border border-black/5 dark:border-white/10 flex items-center justify-center text-zinc-700 dark:text-zinc-200 transition-colors duration-200 group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900">
+                    <div className="size-8.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 border border-black/5 dark:border-white/10 flex items-center justify-center text-zinc-700 dark:text-zinc-200 transition-colors duration-200 group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
