@@ -2,7 +2,10 @@ import type { MetadataRoute } from "next";
 import { components } from "@/lib/components";
 import { SITE_URL } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 const lastModified = new Date();
+
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

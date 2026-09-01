@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { SPRING_UI } from "@/lib/ease";
-import { cn } from "@/lib/utils";
 
 const spring = SPRING_UI;
 
@@ -19,7 +18,6 @@ const riseReduced = {
 };
 
 export default function HeroIntro({
-  headline,
   sub,
   children,
 }: {
@@ -37,21 +35,31 @@ export default function HeroIntro({
       : { ...spring, delay: index * STEP };
 
   return (
-    <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-      <motion.h1
+    <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto">
+      <motion.div
         initial={hidden}
         animate={shown}
         transition={step(0)}
-        className="max-w-3xl text-balance font-runde text-4xl font-bold tracking-tight text-black dark:text-white sm:text-5xl md:text-[3.5rem] md:leading-[1.08] lg:text-[4rem]"
+        className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-xs font-semibold text-white backdrop-blur-xl shadow-xs"
       >
-        Craft premium <span className="text-[#0066FF] dark:text-[#0A84FF]">Solana frontends</span> in minutes.
+        <span className="inline-block size-2 rounded-full bg-[#0066FF] dark:bg-[#0A84FF]" />
+        Open Source Solana UI Primitives
+      </motion.div>
+
+      <motion.h1
+        initial={hidden}
+        animate={shown}
+        transition={step(1)}
+        className="max-w-3xl text-balance font-runde text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.6rem] md:leading-[1.08] lg:text-[4.25rem]"
+      >
+        Craft premium <span className="text-white">Solana frontends</span> in minutes.
       </motion.h1>
 
       <motion.p
         initial={hidden}
         animate={shown}
-        transition={step(1)}
-        className="mt-4 max-w-xl text-pretty font-medium text-black/65 dark:text-white/70 sm:text-lg md:text-xl leading-relaxed"
+        transition={step(2)}
+        className="mt-4 max-w-xl text-pretty font-medium text-white/80 sm:text-lg md:text-xl leading-relaxed"
       >
         {sub}
       </motion.p>
@@ -59,8 +67,8 @@ export default function HeroIntro({
       <motion.div
         initial={hidden}
         animate={shown}
-        transition={step(2)}
-        className="w-full flex justify-center"
+        transition={step(3)}
+        className="w-full flex justify-center mt-6"
       >
         {children}
       </motion.div>

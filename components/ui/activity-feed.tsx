@@ -3,10 +3,11 @@
 import { formatDistanceToNow } from "date-fns";
 import React from "react";
 import { motion, useReducedMotion } from "motion/react";
+import NumberFlow from "@number-flow/react";
 import { cn } from "@/lib/utils";
 
 const Skeleton = ({ className, ...props }: React.ComponentProps<"div">) => (
-  <div className={cn("animate-pulse rounded-md bg-primary/10", className)} {...props} />
+  <div className={cn("animate-pulse rounded-md bg-zinc-200 dark:bg-zinc-800", className)} {...props} />
 );
 
 type TokenIconProps = {
@@ -22,6 +23,7 @@ const TokenIcon = ({
   className = "",
   width,
   height,
+  src,
   ...props
 }: TokenIconProps) => {
   const [status, setStatus] = React.useState<"loading" | "loaded" | "error">(
@@ -33,7 +35,7 @@ const TokenIcon = ({
     return (
       <div
         className={cn(
-          "rounded-full inline-flex items-center justify-center font-medium text-muted-foreground bg-muted",
+          "rounded-full inline-flex items-center justify-center font-bold text-zinc-400 bg-zinc-200 dark:bg-zinc-800",
           className
         )}
         style={{ width, height, fontSize }}
@@ -52,9 +54,10 @@ const TokenIcon = ({
         />
       )}
       <img
+        src={src}
         alt={alt}
         className={cn(
-          "rounded-full block object-cover w-full h-full shadow-xs",
+          "rounded-full block object-cover w-full h-full border border-zinc-200 dark:border-zinc-800 shadow-xs",
           status === "loading" && "opacity-0",
           className
         )}
@@ -74,7 +77,7 @@ interface ActivityFeedProps extends React.HTMLAttributes<HTMLDivElement> {
     title: string;
     description?: string;
     timestamp: Date;
-    value?: string;
+    value?: string | number;
   }[];
 }
 
@@ -91,7 +94,7 @@ const ActivityFeed = ({ items, className, ...props }: ActivityFeedProps) => {
   if (items.length === 0) {
     return (
       <div
-        className={cn("text-center py-8 text-xs font-medium text-muted-foreground", className)}
+        className={cn("text-center py-8 text-xs font-semibold text-zinc-400", className)}
         suppressHydrationWarning
       >
         No recent activity
@@ -103,59 +106,67 @@ const ActivityFeed = ({ items, className, ...props }: ActivityFeedProps) => {
     <div
       data-slot="activity-feed"
       className={cn(
-        "flex flex-col rounded-3xl border border-black/10 dark:border-white/12",
-        "bg-white/70 dark:bg-[#1c1c1e]/80 backdrop-blur-2xl p-2 shadow-md select-none",
+        "flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800",
+        "bg-white dark:bg-zinc-950 p-2 shadow-xl select-none font-sans text-zinc-900 dark:text-zinc-100",
         className
       )}
       suppressHydrationWarning
       {...props}
     >
-      {items.map((item, i) => (
-        <motion.div
-          key={`${item.title}-${i}`}
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 6, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{
-            ...springRow,
-            delay: shouldReduceMotion ? 0 : i * 0.04,
-          }}
-          whileHover={shouldReduceMotion ? undefined : { scale: 1.01, backgroundColor: "rgba(0,0,0,0.03)" }}
-          whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
-          className={cn(
-            "flex items-center gap-3.5 py-3 px-3 rounded-2xl cursor-pointer transition-colors duration-140",
-            i < items.length - 1 && "border-b border-black/5 dark:border-white/5"
-          )}
-        >
-          {item.icon && (
-            <TokenIcon
-              src={item.icon}
-              alt={item.title}
-              width={34}
-              height={34}
-            />
-          )}
-          <div className="flex flex-col flex-1 min-w-0">
-            <span className="text-[13.5px] font-bold text-foreground tracking-tight truncate">
-              {item.title}
-            </span>
-            {item.description && (
-              <span className="text-xs text-muted-foreground truncate mt-0.5">
-                {item.description}
-              </span>
+      {items.map((item, i) => {
+        const isNumeric = typeof item.value === "number";
+
+        return (
+          <motion.div
+            key={`${item.title}-${i}`}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              ...springRow,
+              delay: shouldReduceMotion ? 0 : i * 0.04,
+            }}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
+            whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+            className={cn(
+              "flex items-center gap-3.5 py-3 px-3 rounded-xl cursor-pointer transition-colors duration-140 hover:bg-zinc-100/80 dark:hover:bg-zinc-900/80",
+              i < items.length - 1 && "border-b border-zinc-100 dark:border-zinc-900"
             )}
-          </div>
-          <div className="flex flex-col items-end shrink-0">
-            {item.value && (
-              <span className="text-xs font-bold text-foreground font-mono tracking-tight">
-                {item.value}
-              </span>
+          >
+            {item.icon && (
+              <TokenIcon
+                src={item.icon}
+                alt={item.title}
+                width={34}
+                height={34}
+              />
             )}
-            <span className="text-[11px] text-muted-foreground/80 mt-0.5 font-medium" suppressHydrationWarning>
-              {formatDistanceToNow(item.timestamp, { addSuffix: true })}
-            </span>
-          </div>
-        </motion.div>
-      ))}
+            <div className="flex flex-col flex-1 min-w-0">
+              <span className="text-sm font-bold text-zinc-900 dark:text-white tracking-tight truncate">
+                {item.title}
+              </span>
+              {item.description && (
+                <span className="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-0.5 font-medium">
+                  {item.description}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col items-end shrink-0">
+              {item.value !== undefined && (
+                <span className="text-xs font-bold text-zinc-900 dark:text-white font-mono tracking-tight">
+                  {isNumeric ? (
+                    <NumberFlow value={item.value as number} format={{ minimumFractionDigits: 2 }} />
+                  ) : (
+                    item.value
+                  )}
+                </span>
+              )}
+              <span className="text-[11px] text-zinc-400 font-mono mt-0.5" suppressHydrationWarning>
+                {formatDistanceToNow(item.timestamp, { addSuffix: true })}
+              </span>
+            </div>
+          </motion.div>
+        );
+      })}
     </div>
   );
 };

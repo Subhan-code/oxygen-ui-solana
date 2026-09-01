@@ -165,6 +165,35 @@ export default function RootLayout({
     >
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined') return;
+                var origError = console.error;
+                var EXT_PATTERNS = [
+                  'bis_skin_checked',
+                  'cz-shortcut-listen',
+                  'grammarly-extension',
+                  'data-new-gr-c-s-check-loaded',
+                  'data-gr-ext-installed',
+                  'chrome-extension://',
+                  'hydration-mismatch'
+                ];
+                console.error = function() {
+                  var args = Array.prototype.slice.call(arguments);
+                  var isExtErr = args.some(function(arg) {
+                    var str = typeof arg === 'string' ? arg : '';
+                    try { str = str || JSON.stringify(arg); } catch(e){}
+                    return EXT_PATTERNS.some(function(p) { return str.indexOf(p) !== -1; });
+                  });
+                  if (isExtErr) return;
+                  origError.apply(console, args);
+                };
+              })();
+            `,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd()) }}
         />

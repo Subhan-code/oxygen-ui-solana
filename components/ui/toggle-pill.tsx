@@ -6,12 +6,9 @@ import { Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type TogglePillVariant =
-  | "monochrome-dark"
-  | "monochrome-light"
   | "apple-ios"
-  | "linear-indigo"
-  | "spotify-green"
-  | "electric-blue";
+  | "monochrome-dark"
+  | "linear-indigo";
 
 export const TOGGLE_PILL_VARIANTS: Record<
   TogglePillVariant,
@@ -24,22 +21,6 @@ export const TOGGLE_PILL_VARIANTS: Record<
     inactiveThumb: string;
   }
 > = {
-  "monochrome-dark": {
-    name: "Monochrome Dark (Luxe)",
-    subtitle: "Minimalist",
-    activeTrack: "#ffffff",
-    inactiveTrack: "#27272a",
-    activeThumb: "#18181b",
-    inactiveThumb: "#71717a",
-  },
-  "monochrome-light": {
-    name: "Monochrome Light (Luxe)",
-    subtitle: "Minimalist",
-    activeTrack: "#18181b",
-    inactiveTrack: "#e4e4e7",
-    activeThumb: "#ffffff",
-    inactiveThumb: "#71717a",
-  },
   "apple-ios": {
     name: "Apple iOS Standard",
     subtitle: "Mobile System",
@@ -48,26 +29,18 @@ export const TOGGLE_PILL_VARIANTS: Record<
     activeThumb: "#ffffff",
     inactiveThumb: "#ffffff",
   },
+  "monochrome-dark": {
+    name: "Monochrome Dark",
+    subtitle: "Minimalist Luxe",
+    activeTrack: "#ffffff",
+    inactiveTrack: "#27272a",
+    activeThumb: "#18181b",
+    inactiveThumb: "#71717a",
+  },
   "linear-indigo": {
     name: "Linear App Indigo",
     subtitle: "Modern SaaS",
     activeTrack: "#6366f1",
-    inactiveTrack: "#27272a",
-    activeThumb: "#ffffff",
-    inactiveThumb: "#a1a1aa",
-  },
-  "spotify-green": {
-    name: "Spotify Vibrant Green",
-    subtitle: "Media",
-    activeTrack: "#1db954",
-    inactiveTrack: "#282828",
-    activeThumb: "#ffffff",
-    inactiveThumb: "#b3b3b3",
-  },
-  "electric-blue": {
-    name: "Electric Blue",
-    subtitle: "Modern SaaS",
-    activeTrack: "#0066ff",
     inactiveTrack: "#27272a",
     activeThumb: "#ffffff",
     inactiveThumb: "#a1a1aa",
@@ -96,7 +69,7 @@ export function TogglePill({
   checked: controlledChecked,
   defaultChecked = false,
   onChange,
-  variant = "monochrome-dark",
+  variant = "apple-ios",
   label,
   description,
   icon,
@@ -114,7 +87,7 @@ export function TogglePill({
   const isChecked = controlledChecked ?? internalChecked;
   const shouldReduceMotion = useReducedMotion();
 
-  const profile = TOGGLE_PILL_VARIANTS[variant];
+  const profile = TOGGLE_PILL_VARIANTS[variant] ?? TOGGLE_PILL_VARIANTS["apple-ios"];
   const trackColor = isChecked
     ? activeTrackColor ?? profile.activeTrack
     : inactiveTrackColor ?? profile.inactiveTrack;
@@ -144,7 +117,7 @@ export function TogglePill({
         }
       }}
       className={cn(
-        "relative h-[28px] w-[74px] shrink-0 cursor-pointer rounded-[14px] transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500",
+        "relative h-[28px] w-[74px] shrink-0 cursor-pointer rounded-[14px] transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 select-none",
         useCssTransition && "transition-colors duration-240 ease-out"
       )}
       style={{ backgroundColor: trackColor }}
@@ -180,16 +153,18 @@ export function TogglePill({
       <div
         data-slot="root"
         className={cn(
-          "flex w-full max-w-sm items-center justify-between gap-4 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 select-none",
+          "flex w-full max-w-sm items-center justify-between gap-4 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 select-none font-sans",
           disabled && "opacity-50 pointer-events-none",
           className
         )}
         {...props}
       >
-        <div className="flex items-start gap-3">
-          <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-950/50 dark:text-purple-400">
-            {icon || <Zap className="h-4 w-4" />}
-          </div>
+        <div className="flex items-center gap-3">
+          {icon && (
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-950/50 dark:text-purple-400">
+              {icon}
+            </div>
+          )}
           <div className="flex flex-col">
             {label && <span className="text-sm font-bold text-zinc-900 dark:text-zinc-100">{label}</span>}
             {description && <span className="text-xs text-zinc-500 dark:text-zinc-400 leading-snug mt-0.5">{description}</span>}
@@ -204,7 +179,7 @@ export function TogglePill({
     <div
       data-slot="root"
       className={cn(
-        "relative inline-flex items-center justify-center p-[21px] select-none",
+        "relative inline-flex items-center justify-center p-[21px] select-none font-sans",
         disabled && "opacity-50 pointer-events-none",
         className
       )}

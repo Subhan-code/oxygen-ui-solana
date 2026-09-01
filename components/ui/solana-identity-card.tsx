@@ -60,7 +60,8 @@ export function SolanaIdentityCard({
   address = "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
   handle = "@oxygenui",
   domain = "oxygen.sol",
-  avatarUrl,
+  avatarUrl = "/account-pfp.jpg",
+
   avatarEmoji = "🐸",
   cluster = "mainnet-beta",
   verified = true,

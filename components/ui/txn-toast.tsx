@@ -7,9 +7,9 @@ import {
   XCircleIcon,
   XIcon,
 } from "lucide-react";
-import { toast } from "sonner";
+import { toast, Toaster as Sonner, type ToasterProps } from "sonner";
 
-interface TxnToastProps {
+export interface TxnToastProps {
   title?: string;
   description?: string;
   signature?: string;
@@ -19,7 +19,7 @@ interface TxnToastProps {
 
 const statusConfig = {
   pending: {
-    icon: <Loader2Icon className="size-4 animate-spin text-muted-foreground" />,
+    icon: <Loader2Icon className="size-4 animate-spin text-zinc-400" />,
     defaultTitle: "Transaction pending",
     defaultDescription: "Waiting for confirmation...",
   },
@@ -54,13 +54,13 @@ const renderToast = (props: TxnToastProps, toastId: string | number) => {
     (signature ? `https://solscan.io/tx/${signature}` : undefined);
 
   return (
-    <div className="flex gap-3 w-[356px] rounded-lg border bg-background p-4 shadow-lg">
+    <div className="flex gap-3 w-[356px] rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 shadow-xl text-zinc-900 dark:text-zinc-100 font-sans">
       <div className="mt-0.5 shrink-0">{config.icon}</div>
       <div className="flex flex-1 flex-col gap-1">
-        <span className="text-sm font-medium">
+        <span className="text-xs font-bold tracking-tight">
           {title ?? config.defaultTitle}
         </span>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-xs text-zinc-500 dark:text-zinc-400">
           {description ?? config.defaultDescription}
         </span>
         {resolvedExplorerUrl && (
@@ -68,7 +68,7 @@ const renderToast = (props: TxnToastProps, toastId: string | number) => {
             href={resolvedExplorerUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1 text-[11px] font-mono text-sky-500 hover:underline transition-colors mt-0.5"
           >
             {signature ? truncateSignature(signature) : "View transaction"}
             <ExternalLinkIcon className="size-3" />
@@ -78,7 +78,7 @@ const renderToast = (props: TxnToastProps, toastId: string | number) => {
       <button
         type="button"
         onClick={() => toast.dismiss(toastId)}
-        className="shrink-0 mt-0.5 text-muted-foreground hover:text-foreground transition-colors"
+        className="shrink-0 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer outline-none"
       >
         <XIcon className="size-3.5" />
       </button>
@@ -103,5 +103,26 @@ txnToast.update = (id: string | number, props: TxnToastProps) => {
   });
 };
 
-export type { TxnToastProps };
+export const Toaster = ({ ...props }: ToasterProps) => {
+  return (
+    <Sonner
+      className="toaster group"
+      toastOptions={{
+        classNames: {
+          toast:
+            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
+          description: "group-[.toast]:text-muted-foreground",
+          actionButton:
+            "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+          cancelButton:
+            "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
+        },
+      }}
+      {...props}
+    />
+  );
+};
+
+export { toast };
 export { txnToast, txnToast as showTxnToast };
+

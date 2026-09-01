@@ -30,7 +30,9 @@ validateRegistry(registryItems);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["d3-scale", "d3-array", "recharts"],
   compress: true,
+
   poweredByHeader: false,
   reactStrictMode: true,
   eslint: {

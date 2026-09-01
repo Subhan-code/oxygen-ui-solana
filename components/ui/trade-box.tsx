@@ -30,9 +30,33 @@ function PopoverContent({
 import { Check, ChevronsUpDown, Search, WalletIcon } from "lucide-react";
 import React from "react";
 import { NumericFormat } from "react-number-format";
-import { Slider } from "@/components/ui/slider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
+
+
+import * as SliderPrimitive from "@radix-ui/react-slider";
+
+const Slider = React.forwardRef<
+  React.ElementRef<typeof SliderPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <SliderPrimitive.Root
+    ref={ref}
+    className={cn(
+      "relative flex w-full touch-none select-none items-center cursor-pointer",
+      className
+    )}
+    {...props}
+  >
+    <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+      <SliderPrimitive.Range className="absolute h-full bg-sky-500" />
+    </SliderPrimitive.Track>
+    <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-sky-500 bg-white ring-offset-white transition-transform active:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:bg-zinc-950 dark:ring-offset-zinc-950 shadow-md cursor-grab active:cursor-grabbing" />
+  </SliderPrimitive.Root>
+));
+Slider.displayName = SliderPrimitive.Root.displayName;
+
+
 
 const Button = ({ className, size, variant, ...props }: React.ComponentProps<"button"> & { size?: string; variant?: string }) => (
   <button className={cn("inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium motion-safe:transition-[transform,background-color,color] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-quad)] motion-safe:active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40 disabled:pointer-events-none disabled:opacity-50 h-11 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90", className)} {...props} />

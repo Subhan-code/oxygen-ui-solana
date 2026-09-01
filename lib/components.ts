@@ -20,6 +20,72 @@ export type ComponentProp = {
 export type ComponentItem = RegistryItem;
 export const components = REGISTRY;
 
+const BLOCK_SLUG_SET = new Set([
+  "accountcard",
+  "authcard",
+  "activityfeed",
+  "bankbalancecard",
+  "cardstack",
+  "cryptocheckoutcard",
+  "cryptoexplorecategories",
+  "cryptopredictioncandidatecard",
+  "cryptosalescandlestickchart",
+  "cryptosalessegmentedbars",
+  "cryptosalesverticalgraph",
+  "cryptosubscriptioncard",
+  "cryptoswapbox",
+  "cryptotradingterminal",
+  "cryptotvlanalyticschart",
+  "cryptotvlsparkbarwidget",
+  "cryptouserprofile",
+  "cryptowalletdashboard",
+  "cryptowalletdrawer",
+  "cryptowalletmain",
+  "cryptowalletmenusheet",
+  "cryptowalletsettings",
+  "familydialog",
+  "familydrawer",
+  "financialmetricsgrid",
+  "liquiditypoolcard",
+  "metrics01",
+  "notificationsstack",
+  "orderbook",
+  "orderform",
+  "poolcard",
+  "pooltable",
+  "positioncard",
+  "positiontable",
+  "pricechart",
+  "routesummary",
+  "runstatsstacks",
+  "secretkeywarningbox",
+  "segmentedprogresscard",
+  "solanaidentitycard",
+  "solananftcard",
+  "solanawalletcard",
+  "stakingcard",
+  "statcard",
+  "steptrackerwidget",
+  "tasksteps",
+  "timeline",
+  "tradebox",
+  "transactionmodal",
+  "transactionreceipt",
+  "txntable",
+  "underlayactionsheet",
+  "walletsheet",
+  "withdrawalcard",
+  "wizardsteps",
+]);
+
+export function isBlockComponent(item: ComponentItem): boolean {
+  return BLOCK_SLUG_SET.has(item.slug.toLowerCase());
+}
+
+export const blockComponents = REGISTRY.filter((item) => isBlockComponent(item));
+export const uiComponents = REGISTRY.filter((item) => !isBlockComponent(item));
+
+
 export {
   REGISTRY,
   REGISTRY_HOMEPAGE,
@@ -68,7 +134,7 @@ export function activeComponent(pathname: string): ComponentItem | undefined {
 }
 
 export function swatchProp(item?: ComponentItem): ComponentProp | undefined {
-  return item?.props?.find((p: any) => p.control === "swatch" && p.optionColors);
+  return item?.props?.find((p: ComponentProp) => p.control === "swatch" && p.optionColors);
 }
 
 export function cleanDefault(prop?: ComponentProp): string | undefined {

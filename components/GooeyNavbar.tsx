@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { label: "Home", href: "/" },
   { label: "Components", href: "/components" },
+  { label: "Sol Components", href: "/sol-components" },
+  { label: "Blocks", href: "/blocks" },
   { label: "Docs", href: "/docs/installation" },
 ];
 
@@ -88,7 +90,8 @@ export default function GooeyNavbar({ stars }: { stars?: number | null }) {
 
   useEffect(() => {
     document.body.style.overflow = "";
-    setMenuOpen(false);
+    const timer = requestAnimationFrame(() => setMenuOpen(false));
+    return () => cancelAnimationFrame(timer);
   }, [pathname]);
 
   useEffect(() => {

@@ -17,7 +17,7 @@ export default function DesktopShell({
   const [infoOpen, setInfoOpen] = useState(false);
 
   return (
-    <div className="relative h-full">
+    <div className="relative h-full" suppressHydrationWarning>
       <Sidebar open={navOpen} setOpen={setNavOpen} />
       <DescriptionPanel open={infoOpen} setOpen={setInfoOpen} />
 
@@ -29,10 +29,12 @@ export default function DesktopShell({
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className="h-full"
+        suppressHydrationWarning
       >
         <div
           className="relative z-0 flex h-full w-full flex-col items-center justify-center overflow-auto rounded-[45px] bg-card p-4 transition-all duration-300"
           style={{ cornerShape: "squircle" } as React.CSSProperties}
+          suppressHydrationWarning
         >
           {children}
         </div>
@@ -40,3 +42,4 @@ export default function DesktopShell({
     </div>
   );
 }
+

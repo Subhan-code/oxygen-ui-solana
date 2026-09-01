@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spotlight-input",
+  "title": "Spotlight Input",
+  "description": "Input container with cursor tracking spotlight glow.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/spotlight-input.tsx",
+      "content": "\"use client\";\n\nimport React, { useRef, useState } from \"react\";\nimport { Search } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface SpotlightInputProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"onDrag\" | \"onDragStart\" | \"onDragEnd\" | \"onAnimationStart\"> {\n  label?: string;\n  icon?: React.ReactNode;\n  spotlightColor?: string;\n}\n\nexport function SpotlightInput({\n  label,\n  icon = <Search className=\"h-4 w-4 text-zinc-400\" />,\n  spotlightColor = \"rgba(0, 102, 255, 0.25)\",\n  className,\n  placeholder = \"Search or type command...\",\n  ...props\n}: SpotlightInputProps) {\n  const divRef = useRef<HTMLDivElement>(null);\n  const [position, setPosition] = useState({ x: 0, y: 0 });\n  const [opacity, setOpacity] = useState(0);\n\n  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {\n    if (!divRef.current) return;\n    const rect = divRef.current.getBoundingClientRect();\n    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });\n  };\n\n  const handleMouseEnter = () => setOpacity(1);\n  const handleMouseLeave = () => setOpacity(0);\n\n  return (\n    <div className=\"w-full max-w-sm font-sans select-none space-y-1.5\">\n      {label && <label className=\"text-xs font-bold text-zinc-500 uppercase tracking-wider\">{label}</label>}\n      <div\n        ref={divRef}\n        onMouseMove={handleMouseMove}\n        onMouseEnter={handleMouseEnter}\n        onMouseLeave={handleMouseLeave}\n        className={cn(\n          \"relative flex items-center gap-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/90 px-3.5 py-2.5 shadow-xs transition-all overflow-hidden focus-within:ring-2 focus-within:ring-[#0066FF]/40\",\n          className\n        )}\n      >\n        <div\n          className=\"pointer-events-none absolute -inset-px transition-opacity duration-300 rounded-2xl\"\n          style={{\n            opacity,\n            background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`,\n          }}\n        />\n        <span className=\"shrink-0 relative z-10\">{icon}</span>\n        <input\n          placeholder={placeholder}\n          className=\"w-full bg-transparent text-xs font-medium text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 outline-none border-none relative z-10\"\n          {...props}\n        />\n      </div>\n    </div>\n  );\n}\n\nexport default SpotlightInput;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

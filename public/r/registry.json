@@ -20,7 +20,28 @@
       ]
     },
     {
+      "name": "progress-ring",
+
+      "type": "registry:ui",
+      "title": "Progress Ring",
+      "description": "Circular SVG progress ring widget.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/progress-ring.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "solana-wallet-card",
+
+
       "type": "registry:ui",
       "title": "Solana Wallet Card",
       "description": "A light glassmorphic wallet card featuring overlapping token avatars, PnL percentage badge, and Swap/Send action buttons.",
@@ -114,27 +135,8 @@
       ]
     },
     {
-      "name": "popover-slide-selector",
-      "type": "registry:ui",
-      "title": "Followers Popover",
-      "description": "A follower popover menu that reveals a horizontal avatar list on click.",
-      "dependencies": [
-        "motion",
-        "@radix-ui/react-icons",
-        "@radix-ui/react-popover"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/popover-slide-selector.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "family-popover-menu",
+
       "type": "registry:ui",
       "title": "Family Popover",
       "description": "A circular trigger button that expands into a smooth menu card.",
@@ -172,58 +174,9 @@
       ]
     },
     {
-      "name": "button-gooey",
-      "type": "registry:ui",
-      "title": "Gooey Button",
-      "description": "A call to action button with a gooey trailing arrow bubble on hover.",
-      "dependencies": [
-        "@radix-ui/react-icons",
-        "motion"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/button-gooey.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "input-border-spotlight",
-      "type": "registry:ui",
-      "title": "Spotlight Input",
-      "description": "An input container with a radial cursor-tracking spotlight border glow.",
-      "dependencies": [],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/input-border-spotlight.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "skeleton-reveal",
-      "type": "registry:ui",
-      "title": "Skeleton Reveal",
-      "description": "A skeleton placeholder loading shimmer that cross-fades into content.",
-      "dependencies": [],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/skeleton-reveal.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "error-state-shake",
+
+
       "type": "registry:ui",
       "title": "Error Shake",
       "description": "An input validation error animation with multi-segment keyframe shake.",
@@ -266,24 +219,6 @@
       "files": [
         {
           "path": "components/ui/success-check.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "notification-badge",
-      "type": "registry:ui",
-      "title": "Notification Badge",
-      "description": "An animated notification count badge that pops and slides into trigger position.",
-      "dependencies": [
-        "@radix-ui/react-icons"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/notification-badge.tsx",
           "type": "registry:ui"
         }
       ]
@@ -346,26 +281,8 @@
       ]
     },
     {
-      "name": "solana-network-health",
-      "type": "registry:ui",
-      "title": "Network Health",
-      "description": "A Solana RPC cluster health monitor displaying ping latency, TPS throughput, and epoch progress.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/solana-network-health.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "solana-nft-card",
+
       "type": "registry:ui",
       "title": "NFT Card",
       "description": "A Solana NFT asset showcase card featuring floor price, rarity rank, and trait attributes.",
@@ -384,25 +301,7 @@
       ]
     },
     {
-      "name": "solana-swap-card",
-      "type": "registry:ui",
-      "title": "Swap Card",
-      "description": "A Solana token swap interface with token selection, rate calculation, and flip animation.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/solana-swap-card.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
+
       "name": "crypto-wallet-dashboard",
       "type": "registry:ui",
       "title": "Wallet Dashboard",
@@ -440,120 +339,8 @@
       ]
     },
     {
-      "name": "crypto-explore-hub",
-      "type": "registry:ui",
-      "title": "Explore Hub",
-      "description": "A market explore hub featuring category filter pills, watchlist assets, trending tokens list, and news feed.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-explore-hub.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-cookie-banner",
-      "type": "registry:ui",
-      "title": "Cookie Banner",
-      "description": "A floating cookie policy consent dialog with customizable action pills and header bar.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-cookie-banner.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-project-progress",
-      "type": "registry:ui",
-      "title": "Project Progress",
-      "description": "A project completion progress widget with dual segmented bar meters and weekly momentum indicator.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-project-progress.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-progress-ring",
-      "type": "registry:ui",
-      "title": "Progress Ring",
-      "description": "A circular SVG glow progress ring widget with expandable radial speed-dial action menu.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-progress-ring.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-sales-chart",
-      "type": "registry:ui",
-      "title": "Sales Chart",
-      "description": "A sales analytics summary card supporting candlestick, segmented status levels, and vertical bar chart views.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-sales-chart.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-trader-leaderboard",
-      "type": "registry:ui",
-      "title": "Leaderboard",
-      "description": "A trader leaderboard and trending dApp directory featuring rank badges and follow toggles.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-trader-leaderboard.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "crypto-trading-terminal",
+
       "type": "registry:ui",
       "title": "Trading Terminal",
       "description": "A dark crypto trading workspace with inline token swap, interactive balance chart, and multi-wallet asset cards.",
@@ -644,25 +431,8 @@
       ]
     },
     {
-      "name": "crypto-explore-news",
-      "type": "registry:ui",
-      "title": "Explore News",
-      "description": "A market explore card featuring search input, watchlist assets, and ecosystem news feed.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-explore-news.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "crypto-explore-categories",
+
       "type": "registry:ui",
       "title": "Explore Categories",
       "description": "An explore categories hub with category pills, trending SPL tokens list, and oracle footnotes.",
@@ -718,134 +488,9 @@
       ]
     },
     {
-      "name": "crypto-prediction-quick-grid",
-      "type": "registry:ui",
-      "title": "Quick Grid",
-      "description": "A 5-minute quick prediction markets grid featuring countdown timers and higher or lower tiles.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-prediction-quick-grid.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-prediction-tab-selector",
-      "type": "registry:ui",
-      "title": "Tab Selector",
-      "description": "A horizontal category pill selector for prediction market categories.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-prediction-tab-selector.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-prediction-search-bar",
-      "type": "registry:ui",
-      "title": "Search Bar",
-      "description": "A search header bar with filter controls for prediction markets.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-prediction-search-bar.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-prediction-odds-row",
-      "type": "registry:ui",
-      "title": "Odds Row",
-      "description": "A market candidate odds row with progress bar indicator and vote button.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-prediction-odds-row.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-up-down-target-line",
-      "type": "registry:ui",
-      "title": "Target Line",
-      "description": "A binary options chart component highlighting target threshold level and payout multiplier.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-up-down-target-line.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-up-down-upcoming-carousel",
-      "type": "registry:ui",
-      "title": "Upcoming Carousel",
-      "description": "An upcoming binary options rounds carousel displaying round IDs and start times.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-up-down-upcoming-carousel.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "crypto-speed-dial-action-menu",
-      "type": "registry:ui",
-      "title": "Speed Dial",
-      "description": "A radial speed dial quick action menu unfolding action buttons.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-speed-dial-action-menu.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "crypto-sales-candlestick-chart",
+
+
       "type": "registry:ui",
       "title": "Candlestick Chart",
       "description": "A sales analytics card featuring candlestick sparkline bars with green glow.",
@@ -937,26 +582,8 @@
       ]
     },
     {
-      "name": "crypto-token-details-screen",
-      "type": "registry:ui",
-      "title": "Token Details",
-      "description": "A token detail view displaying live price line chart, position holdings, and live chat status.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-token-details-screen.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "toggle-pill",
+
       "type": "registry:ui",
       "title": "Toggle Pill",
       "description": "A 74x28px toggle track with 44x22px sliding capsule thumb supporting spring physics, CSS transitions, and styling presets.",
@@ -1010,69 +637,9 @@
       ]
     },
     {
-      "name": "click-to-copy",
-      "type": "registry:ui",
-      "title": "Click To Copy",
-      "description": "Click To Copy component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/click-to-copy.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "command-palette",
-      "type": "registry:ui",
-      "title": "Command Palette",
-      "description": "Command Palette component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/command-palette.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "cooldown-button",
-      "type": "registry:ui",
-      "title": "Cooldown Button",
-      "description": "Cooldown Button component for Oxygen UI.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/cooldown-button.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "copy-button",
-      "type": "registry:ui",
-      "title": "Copy Button",
-      "description": "Copy Button component for Oxygen UI.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/copy-button.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "crypto-checkout-card",
+
+
       "type": "registry:ui",
       "title": "Checkout Card",
       "description": "Crypto Checkout Card component for Oxygen UI.",
@@ -1096,19 +663,8 @@
       ]
     },
     {
-      "name": "event-tag-pills",
-      "type": "registry:ui",
-      "title": "Event Pills",
-      "description": "Event Tag Pills component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/event-tag-pills.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "family-dialog",
+
       "type": "registry:ui",
       "title": "Family Dialog",
       "description": "Family Dialog component for Oxygen UI.",
@@ -1132,19 +688,8 @@
       ]
     },
     {
-      "name": "floating-action-button",
-      "type": "registry:ui",
-      "title": "Action Button",
-      "description": "Floating Action Button component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/floating-action-button.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "gauge",
+
       "type": "registry:ui",
       "title": "Gauge",
       "description": "Gauge component for Oxygen UI.",
@@ -1156,49 +701,7 @@
       ]
     },
     {
-      "name": "glass-filter",
-      "type": "registry:ui",
-      "title": "Glass Filter",
-      "description": "Glass Filter component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/glass-filter.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "heatmap-chart",
-      "type": "registry:ui",
-      "title": "Heatmap Chart",
-      "description": "Heatmap Chart component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/heatmap-chart.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "hold-to-confirm",
-      "type": "registry:ui",
-      "title": "Hold Button",
-      "description": "Hold To Confirm component for Oxygen UI.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/hold-to-confirm.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
+
       "name": "liquid-radio",
       "type": "registry:ui",
       "title": "Liquid Radio",
@@ -1211,19 +714,8 @@
       ]
     },
     {
-      "name": "logo-carousel",
-      "type": "registry:ui",
-      "title": "Logo Carousel",
-      "description": "Logo Carousel component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/logo-carousel.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "marquee",
+
       "type": "registry:ui",
       "title": "Marquee",
       "description": "Marquee component for Oxygen UI.",
@@ -1343,26 +835,8 @@
       ]
     },
     {
-      "name": "evil-buttons-group",
-      "type": "registry:ui",
-      "title": "Evil Buttons Showcase",
-      "description": "A suite of 10 interactive button micro-interactions built with Framer Motion, spring physics, and Apple UI design.",
-      "dependencies": [
-        "motion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/evil-buttons-group.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "action-box",
+
       "type": "registry:ui",
       "title": "Action Box",
       "description": "A Solana token action card supporting deposits, withdrawals, and customizable metadata rows.",
@@ -1506,25 +980,8 @@
       ]
     },
     {
-      "name": "token-combobox",
-      "type": "registry:ui",
-      "title": "Token Combobox",
-      "description": "A searchable SPL token dropdown combobox selector with token icons.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/token-combobox.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "token-command",
+
       "type": "registry:ui",
       "title": "Token Command",
       "description": "A modal token search command palette for rapid asset selection.",
@@ -1560,25 +1017,8 @@
       ]
     },
     {
-      "name": "token-icon",
-      "type": "registry:ui",
-      "title": "Token Icon",
-      "description": "An SPL token avatar component with fallback skeleton loader.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/token-icon.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "token-input",
+
       "type": "registry:ui",
       "title": "Token Input",
       "description": "A numeric token amount input field combined with token selector button.",
@@ -1688,25 +1128,8 @@
       ]
     },
     {
-      "name": "health-bar",
-      "type": "registry:ui",
-      "title": "Health Bar",
-      "description": "A progress safety indicator for lending positions",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/health-bar.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "order-form",
+
       "type": "registry:ui",
       "title": "Order Form",
       "description": "A trading order form component with TP/SL parameters",
@@ -1809,22 +1232,6 @@
       "files": [
         {
           "path": "components/ui/wallet-sheet.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "skeleton",
-      "type": "registry:ui",
-      "title": "Skeleton",
-      "description": "An animated placeholder card for loading content states.",
-      "dependencies": [],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/skeleton.tsx",
           "type": "registry:ui"
         }
       ]

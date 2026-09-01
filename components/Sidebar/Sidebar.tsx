@@ -48,9 +48,9 @@ const Sidebar = ({
   }, [open, setOpen]);
 
   return (
-    <div className="pointer-events-none absolute left-0 top-0 z-40 h-full">
+    <div className="pointer-events-none absolute left-0 top-0 z-40 h-full" suppressHydrationWarning>
       {/* Top Header Controls: Independent Free-Floating Toggle Button & Breadcrumb Path */}
-      <div className="pointer-events-auto absolute top-4 left-4 z-50 flex items-center gap-3">
+      <div className="pointer-events-auto absolute top-4 left-4 z-50 flex items-center gap-3" suppressHydrationWarning>
         <button
           ref={buttonRef}
           type="button"
@@ -74,6 +74,7 @@ const Sidebar = ({
         animate={{ x: open ? 0 : -PANEL_SHIFT }}
         transition={{ type: "spring", stiffness: 320, damping: 32 }}
         className="pointer-events-auto bg-black text-white dark:bg-black dark:text-white border-0 border-none relative flex h-full w-[320px] flex-col overflow-y-auto overflow-x-clip rounded-3xl pl-4 pr-2 text-[15px] tracking-tight shadow-2xl no-scrollbar will-change-transform"
+        suppressHydrationWarning
       >
         <SidebarList onNavigate={handleNavigateClose} isOpen={open} />
       </motion.div>

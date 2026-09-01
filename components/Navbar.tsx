@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 
 const LINKS = [
   { label: "Components", href: "/components" },
+  { label: "Sol Components", href: "/sol-components" },
+  { label: "Blocks", href: "/blocks" },
   { label: "Sponsors", href: "/#sponsors" },
 ];
 

@@ -88,10 +88,12 @@ export default function BreadcrumbPath({
       aria-label="breadcrumb"
       data-slot="breadcrumb"
       className="hidden sm:block select-none"
+      suppressHydrationWarning
     >
       <ol
         data-slot="breadcrumb-list"
         className="text-muted-foreground flex flex-nowrap whitespace-nowrap items-center gap-1.5 text-sm sm:gap-2 select-none overflow-hidden max-w-full"
+        suppressHydrationWarning
       >
         <li
           data-slot="breadcrumb-item"

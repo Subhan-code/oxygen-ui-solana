@@ -127,4 +127,80 @@ export function MultipleStateButton({
   );
 }
 
+export interface CooldownButtonProps extends React.ComponentProps<typeof motion.button> {
+  cooldownTime?: number;
+  label?: string;
+}
+
+
+
+export function CooldownButton({
+  cooldownTime = 5,
+  label = "Request Code",
+  className,
+  onClick,
+  ...props
+}: CooldownButtonProps) {
+  const [seconds, setSeconds] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
+
+  React.useEffect(() => {
+    if (seconds <= 0) return;
+    const timer = setInterval(() => setSeconds((prev) => prev - 1), 1000);
+    return () => clearInterval(timer);
+  }, [seconds]);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (seconds > 0) return;
+    setSeconds(cooldownTime);
+    onClick?.(e);
+  };
+
+  return (
+    <motion.button
+      type="button"
+      whileHover={shouldReduceMotion || seconds > 0 ? undefined : { scale: 1.02 }}
+      whileTap={shouldReduceMotion || seconds > 0 ? undefined : { scale: 0.97 }}
+      transition={springButton}
+      onClick={handleClick}
+      disabled={seconds > 0}
+      className={cn(
+        "relative flex h-11 items-center justify-center overflow-hidden rounded-xl px-4 text-xs font-bold transition-all cursor-pointer outline-none border font-sans select-none",
+        seconds > 0
+          ? "bg-zinc-100 dark:bg-zinc-900 text-zinc-400 border-zinc-200 dark:border-zinc-800 cursor-not-allowed"
+          : "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/80 shadow-xs",
+        className
+      )}
+      {...props}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {seconds > 0 ? (
+          <motion.span
+            key="cooldown"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0, y: -10 }}
+            transition={{ duration: 0.15 }}
+            className="flex items-center gap-1.5 font-mono"
+          >
+            <span>Resend in</span>
+            <span className="font-bold text-sky-500">{seconds}s</span>
+          </motion.span>
+        ) : (
+          <motion.span
+            key="active"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0, y: -10 }}
+            transition={{ duration: 0.15 }}
+          >
+            {label}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
+  );
+}
+
 export default MultipleStateButton;
+

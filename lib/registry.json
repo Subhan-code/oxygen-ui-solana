@@ -480,22 +480,6 @@
     "href": "/components/cryptodownloadheader"
   },
   {
-    "id": "31",
-    "slug": "cryptocookiebanner",
-    "title": "Cookie Banner",
-    "group": "Markets & Trading Hubs",
-    "name": "Cookie Banner",
-    "category": "Markets & Trading Hubs",
-    "registry": "Markets & Trading Hubs",
-    "file": "components/ui/crypto-cookie-banner.tsx",
-    "thumb": "/thumbs/cryptocookiebanner.webp",
-    "description": "A floating cookie policy consent dialog with customizable action pills and header bar.",
-    "source": "https://github.com/Subhan-code/oxygen_ui/blob/main/components/ui/crypto-cookie-banner.tsx",
-    "interaction": "Click Accept or Reject to dismiss the consent banner, or click policy links to view terms.",
-    "usage": "import { CryptoCookieBanner } from \"@/components/ui/crypto-cookie-banner\"\n\nexport function Demo() {\n  return <CryptoCookieBanner />\n}",
-    "href": "/components/cryptocookiebanner"
-  },
-  {
     "id": "32",
     "slug": "cryptotvlanalytics",
     "title": "TVL Analytics",
@@ -558,22 +542,6 @@
     "interaction": "Candlestick bars animate entrance on load.",
     "usage": "import { CryptoSalesCandlestickChart } from \"@/components/ui/crypto-sales-candlestick-chart\"\n\nexport function Demo() {\n  return <CryptoSalesCandlestickChart />\n}",
     "href": "/components/cryptosalescandlestickchart"
-  },
-  {
-    "id": "36",
-    "slug": "cryptosaleschart",
-    "title": "Sales Chart",
-    "group": "Analytics & Data Charts",
-    "name": "Sales Chart",
-    "category": "Analytics & Data Charts",
-    "registry": "Analytics & Data Charts",
-    "file": "components/ui/crypto-sales-chart.tsx",
-    "thumb": "/thumbs/cryptosaleschart.webp",
-    "description": "A sales analytics summary card supporting candlestick, segmented status levels, and vertical bar chart views.",
-    "source": "https://github.com/Subhan-code/oxygen_ui/blob/main/components/ui/crypto-sales-chart.tsx",
-    "interaction": "Toggle top view mode buttons to switch chart rendering between candlestick, segmented, and bar modes.",
-    "usage": "import { CryptoSalesChart } from \"@/components/ui/crypto-sales-chart\"\n\nexport function Demo() {\n  return <CryptoSalesChart />\n}",
-    "href": "/components/cryptosaleschart"
   },
   {
     "id": "37",
@@ -1328,22 +1296,6 @@
     "href": "/components/multistatebadge"
   },
   {
-    "id": "84",
-    "slug": "notificationbadge",
-    "title": "Notification Badge",
-    "group": "Progress & Feedback",
-    "name": "Notification Badge",
-    "category": "Progress & Feedback",
-    "registry": "Progress & Feedback",
-    "file": "components/ui/notification-badge.tsx",
-    "thumb": "/thumbs/notificationbadge.webp",
-    "description": "An animated notification count badge that pops and slides into trigger position.",
-    "source": "https://github.com/Subhan-code/oxygen_ui/blob/main/components/ui/notification-badge.tsx",
-    "interaction": "Click the bell button to toggle the pop and scale badge animation.",
-    "usage": "import NotificationBadge from \"@/components/ui/notification-badge\"\n\nexport function Demo() {\n  return <NotificationBadge />\n}",
-    "href": "/components/notificationbadge"
-  },
-  {
     "id": "85",
     "slug": "notificationsstack",
     "title": "Notifications",
@@ -1902,5 +1854,54 @@
     "interaction": "",
     "usage": "",
     "href": "/components/walletsheet"
+  },
+  {
+    "id": "182",
+    "slug": "metrics01",
+    "title": "Metrics 01",
+    "group": "Special",
+    "name": "Metrics 01",
+    "category": "Special",
+    "registry": "Special",
+    "file": "components/ui/metrics-01.tsx",
+    "thumb": "/thumbs/metrics01.webp",
+    "description": "A metrics section with a line chart, summary metrics, and date range header.",
+    "source": "https://github.com/Subhan-code/oxygen_ui/blob/main/components/ui/metrics-01.tsx",
+    "interaction": "Interactive analytics insights display with line chart visualization.",
+    "usage": "import { Metrics01 } from \"@/components/ui/metrics-01\"",
+    "href": "/components/metrics01"
+  },
+  {
+    "id": "183",
+    "slug": "socialproof01",
+    "title": "Social Proof 01",
+    "group": "Special",
+    "name": "Social Proof 01",
+    "category": "Special",
+    "registry": "Special",
+    "file": "components/ui/social-proof-01.tsx",
+    "thumb": "/thumbs/socialproof01.webp",
+    "description": "A social proof section featuring interactive company logos carousel.",
+    "source": "https://github.com/Subhan-code/oxygen_ui/blob/main/components/ui/social-proof-01.tsx",
+    "interaction": "Interactive logo carousel with responsive grid layout.",
+    "usage": "import { SocialProof01 } from \"@/components/ui/social-proof-01\"",
+    "href": "/components/socialproof01"
+  },
+  {
+    "id": "184",
+    "slug": "clippathtabs",
+    "title": "Clip-Path Tabs",
+    "group": "Navigation, Layout & Overlays",
+    "name": "Clip-Path Tabs",
+    "category": "Navigation, Layout & Overlays",
+    "registry": "Navigation, Layout & Overlays",
+    "file": "components/ui/clip-path-tabs.tsx",
+
+    "thumb": "/thumbs/clippathtabs.webp",
+    "description": "Tab transition animation powered by CSS clip-path inset masking for seamless color and pill movement.",
+    "source": "https://github.com/Subhan-code/oxygen_ui/blob/main/components/ui/clip-path-tabs.tsx",
+    "interaction": "Seamless tab selection animation using clip-path inset masking.",
+    "usage": "import { ClipPathTabs } from \"@/components/ui/clip-path-tabs\"",
+    "href": "/components/clippathtabs"
   }
 ]

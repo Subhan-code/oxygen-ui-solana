@@ -58,9 +58,12 @@ export function CryptoUserProfile({
       </div>
 
       <div className="flex items-center justify-between mb-5 px-1">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 border border-blue-500 text-lg font-bold text-white shadow-sm">
-          ⚡
-        </div>
+        <img
+          src="/account-pfp.jpg"
+          alt={username}
+          className="h-12 w-12 rounded-full object-cover border border-sky-500/50 shadow-md shrink-0"
+        />
+
 
         <div className="flex flex-1 justify-around ml-3 text-center">
           <div>

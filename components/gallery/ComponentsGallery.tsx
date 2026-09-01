@@ -5,8 +5,9 @@ import { motion, useReducedMotion } from "motion/react";
 import type { ComponentItem } from "@/lib/components";
 import { GROUP_TAXONOMY, type GroupInfo } from "@/lib/groups";
 import ComponentCard from "./ComponentCard";
-import { SPRING_LAYOUT } from "@/lib/ease";
 import { cn } from "@/lib/utils";
+
+
 
 export interface ComponentsGalleryProps {
   items: ComponentItem[];
@@ -27,8 +28,8 @@ function GalleryCategoryTabs({
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="w-full flex justify-center py-1">
-      <div className="flex items-center justify-center gap-1.5 flex-wrap max-w-4xl p-1 bg-transparent">
+    <div className="relative w-full max-w-5xl py-1">
+      <div className="flex items-center justify-center gap-1.5 flex-wrap p-1 select-none">
         {categories.map((cat) => {
           const isSelected = selectedCategory === cat.id;
           return (
@@ -37,7 +38,7 @@ function GalleryCategoryTabs({
               type="button"
               onClick={() => onSelect(cat.id)}
               className={cn(
-                "relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-xl transition-colors duration-150 select-none whitespace-nowrap cursor-pointer",
+                "relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-xl transition-colors duration-150 whitespace-nowrap cursor-pointer",
                 isSelected
                   ? "text-zinc-900 dark:text-white"
                   : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
@@ -46,15 +47,22 @@ function GalleryCategoryTabs({
               {isSelected && !reduceMotion && (
                 <motion.span
                   layoutId="gallery-category-pill"
-                  transition={{ duration: 0.35, ease: [0.19, 1, 0.22, 1] }}
-                  className="absolute inset-0 rounded-xl bg-zinc-200/90 dark:bg-white/15 border border-zinc-300/60 dark:border-white/10 shadow-xs"
+                  transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                  className="absolute inset-0 rounded-xl bg-zinc-200/90 dark:bg-white/15 border border-zinc-300/80 dark:border-white/15 shadow-xs"
                 />
               )}
               {isSelected && reduceMotion && (
-                <span className="absolute inset-0 rounded-xl bg-zinc-200/90 dark:bg-white/15 border border-zinc-300/60 dark:border-white/10 shadow-xs" />
+                <span className="absolute inset-0 rounded-xl bg-zinc-200/90 dark:bg-white/15 border border-zinc-300/80 dark:border-white/15 shadow-xs" />
               )}
               <span className="relative z-10">{cat.name}</span>
-              <span className="relative z-10 text-[10px] font-mono opacity-70">
+              <span
+                className={cn(
+                  "relative z-10 text-[10px] font-mono px-1.5 py-0.5 rounded-md transition-colors",
+                  isSelected
+                    ? "bg-zinc-300/90 dark:bg-white/25 text-zinc-900 dark:text-white font-bold"
+                    : "bg-zinc-200/70 dark:bg-zinc-800/80 text-zinc-500 dark:text-zinc-400"
+                )}
+              >
                 {cat.count}
               </span>
             </button>
@@ -65,12 +73,29 @@ function GalleryCategoryTabs({
   );
 }
 
+
 export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<ViewMode>("group");
   const [orderMode, setOrderMode] = useState<OrderMode>("default");
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const reduceMotion = useReducedMotion();
+
+  // Keyboard shortcut listener (Cmd+K / slash)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        (e.key === "k" && (e.metaKey || e.ctrlKey)) ||
+        (e.key === "/" && document.activeElement?.tagName !== "INPUT")
+      ) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // Filter items by search query and category
   const filteredItems = useMemo(() => {
@@ -166,11 +191,10 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
 
   return (
     <div className="w-full relative space-y-6" suppressHydrationWarning>
-      {/* Controls Section */}
+      {/* Controls Area */}
       <div className="w-full flex flex-col gap-3 py-2 bg-transparent">
-        {/* Top Row: Search Bar + View/Order Mode Switchers centered */}
+        {/* Top Controls Row */}
         <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-          {/* Search Bar with subtle hover/focus width expansion */}
           <div className="relative w-full sm:w-80 lg:w-96 hover:sm:w-96 hover:lg:w-[420px] focus-within:sm:w-96 focus-within:lg:w-[420px] shrink-0 transition-all duration-300 ease-out">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -189,6 +213,7 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
               <path d="m21 21-4.3-4.3" />
             </svg>
             <input
+              ref={searchInputRef}
               id="components-search-input"
               name="components-search-input"
               type="search"
@@ -199,79 +224,71 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-10 pl-10 pr-9 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/70 text-xs font-medium text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 border border-black/10 dark:border-white/10 shadow-xs focus:outline-none focus:ring-2 focus:ring-[#0066FF]/30 dark:focus:ring-[#0A84FF]/30 transition-all duration-300"
             />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-zinc-400 hover:text-zinc-900 dark:hover:text-white cursor-pointer rounded-full bg-zinc-200 dark:bg-zinc-800 size-4.5 flex items-center justify-center"
-              >
-                ✕
-              </button>
-            )}
           </div>
 
-          {/* View Mode & Order Mode Switchers */}
           <div className="flex items-center gap-2 shrink-0">
-            <div className="flex items-center h-9 p-1 rounded-xl bg-zinc-100/60 dark:bg-zinc-900/60 border border-black/5 dark:border-white/10 shadow-2xs">
-              {(["group", "grid"] as const).map((mode) => (
-                <button
-                  key={mode}
-                  type="button"
-                  onClick={() => setViewMode(mode)}
-                  className={cn(
-                    "relative px-3 h-full text-xs font-semibold rounded-lg transition-colors duration-150 cursor-pointer select-none",
-                    viewMode === mode
-                      ? "text-zinc-900 dark:text-white"
-                      : "text-zinc-500 hover:text-zinc-900 dark:hover:text-white"
-                  )}
-                >
-                  {viewMode === mode && !reduceMotion && (
-                    <motion.span
-                      layoutId="gallery-view-mode-pill"
-                      transition={{ duration: 0.35, ease: [0.19, 1, 0.22, 1] }}
-                      className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-xs -z-0"
-                    />
-                  )}
-                  {viewMode === mode && reduceMotion && (
-                    <span className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-xs -z-0" />
-                  )}
-                  <span className="relative z-10 capitalize">{mode === "group" ? "Taxonomy" : "Flat Grid"}</span>
-                </button>
-              ))}
+            <div className="flex items-center h-9 p-1 rounded-xl bg-zinc-100/80 dark:bg-zinc-900/80 border border-black/5 dark:border-white/10 shadow-2xs">
+              {(["group", "grid"] as const).map((mode) => {
+                const isSelected = viewMode === mode;
+                return (
+                  <button
+                    key={mode}
+                    type="button"
+                    onClick={() => setViewMode(mode)}
+                    className={cn(
+                      "relative px-3.5 h-full text-xs font-semibold rounded-lg transition-colors duration-150 cursor-pointer select-none flex items-center justify-center",
+                      isSelected
+                        ? "text-zinc-900 dark:text-white"
+                        : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+                    )}
+                  >
+                    {isSelected && (
+                      <motion.span
+                        layoutId="gallery-view-mode-pill"
+                        transition={{ duration: 0.25, ease: [0.19, 1, 0.22, 1] }}
+                        className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-2xs"
+                      />
+                    )}
+                    <span className="relative z-10 capitalize">
+                      {mode === "group" ? "Taxonomy" : "Flat Grid"}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
-            <div className="flex items-center h-9 p-1 rounded-xl bg-zinc-100/60 dark:bg-zinc-900/60 border border-black/5 dark:border-white/10 shadow-2xs">
-              {(["default", "newest"] as const).map((order) => (
-                <button
-                  key={order}
-                  type="button"
-                  onClick={() => setOrderMode(order)}
-                  className={cn(
-                    "relative px-3 h-full text-xs font-semibold rounded-lg transition-colors duration-150 cursor-pointer select-none",
-                    orderMode === order
-                      ? "text-zinc-900 dark:text-white"
-                      : "text-zinc-500 hover:text-zinc-900 dark:hover:text-white"
-                  )}
-                >
-                  {orderMode === order && !reduceMotion && (
-                    <motion.span
-                      layoutId="gallery-order-mode-pill"
-                      transition={{ duration: 0.35, ease: [0.19, 1, 0.22, 1] }}
-                      className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-xs -z-0"
-                    />
-                  )}
-                  {orderMode === order && reduceMotion && (
-                    <span className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-xs -z-0" />
-                  )}
-                  <span className="relative z-10 capitalize">{order}</span>
-                </button>
-              ))}
+            <div className="flex items-center h-9 p-1 rounded-xl bg-zinc-100/80 dark:bg-zinc-900/80 border border-black/5 dark:border-white/10 shadow-2xs">
+              {(["default", "newest"] as const).map((order) => {
+                const isSelected = orderMode === order;
+                return (
+                  <button
+                    key={order}
+                    type="button"
+                    onClick={() => setOrderMode(order)}
+                    className={cn(
+                      "relative px-3.5 h-full text-xs font-semibold rounded-lg transition-colors duration-150 cursor-pointer select-none flex items-center justify-center",
+                      isSelected
+                        ? "text-zinc-900 dark:text-white"
+                        : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+                    )}
+                  >
+                    {isSelected && (
+                      <motion.span
+                        layoutId="gallery-order-mode-pill"
+                        transition={{ duration: 0.25, ease: [0.19, 1, 0.22, 1] }}
+                        className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-2xs"
+                      />
+                    )}
+                    <span className="relative z-10 capitalize">{order}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
 
-        {/* Bottom Row (Below it): Centered Group Filter Tags */}
-        <div className="w-full pt-1">
+        {/* Category Filter Pills & Tags Bar */}
+        <div className="w-full pt-1 flex justify-center">
           <GalleryCategoryTabs
             categories={categories}
             selectedCategory={selectedCategory}
@@ -280,46 +297,33 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
         </div>
       </div>
 
-      {/* Results Counter Header */}
-      <div className="flex items-center justify-between pb-2 pt-2 border-b border-black/5 dark:border-white/10">
-        <span className="text-xs font-mono font-semibold text-zinc-500 dark:text-zinc-400">
-          Showing <span className="text-zinc-900 dark:text-white font-bold">{filteredItems.length}</span> components
-        </span>
-        {searchQuery && (
-          <button
-            type="button"
-            onClick={() => setSearchQuery("")}
-            className="text-xs text-[#0066FF] dark:text-[#0A84FF] hover:underline font-medium cursor-pointer"
-          >
-            Clear filter
-          </button>
-        )}
-      </div>
 
-      {/* Component Grid / Grouped Sections */}
-      {filteredItems.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-black/10 dark:border-white/10 py-20 text-center my-10 bg-zinc-50/50 dark:bg-zinc-900/30">
-          <div className="size-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
-            🔍
+
+
+      {/* Component Gallery Grid / Sections */}
+      <div className="flex flex-col space-y-16 pb-24">
+        {filteredItems.length === 0 ? (
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-black/10 dark:border-white/10 py-16 text-center bg-zinc-50/50 dark:bg-zinc-900/30">
+            <div className="size-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 text-lg mb-3 shadow-2xs">
+              🔍
+            </div>
+            <h3 className="font-bold text-sm text-foreground">No components matched your filter</h3>
+            <p className="text-xs text-muted-foreground mt-1 max-w-sm">
+              Try adjusting your search query or reset category filters.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery("");
+                setSelectedCategory("all");
+              }}
+              className="mt-4 px-4 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-semibold cursor-pointer active:scale-95 transition-transform"
+            >
+              Reset Filters
+            </button>
           </div>
-          <h3 className="font-bold text-sm text-foreground">No components matched your search</h3>
-          <p className="text-xs text-muted-foreground mt-1 max-w-sm">
-            Try adjusting your search query or switching to another category.
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              setSearchQuery("");
-              setSelectedCategory("all");
-            }}
-            className="mt-4 px-4 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-semibold cursor-pointer active:scale-95 transition-transform"
-          >
-            Reset Filters
-          </button>
-        </div>
-      ) : viewMode === "group" && groupedSections.length > 0 ? (
-        <div className="flex flex-col space-y-16 pb-24">
-          {groupedSections.map(({ group, items: groupItems }) => (
+        ) : viewMode === "group" && groupedSections.length > 0 ? (
+          groupedSections.map(({ group, items: groupItems }) => (
             <section
               key={group.name}
               id={group.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
@@ -334,25 +338,25 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
                     </sup>
                   </h3>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  {group.description}
-                </p>
+                <p className="text-xs text-muted-foreground">{group.description}</p>
               </div>
+
               <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {groupItems.map((item) => (
                   <ComponentCard key={item.href} item={item} />
                 ))}
               </div>
             </section>
-          ))}
-        </div>
-      ) : (
-        <div className="grid w-full grid-cols-1 gap-4 pb-24 sm:grid-cols-2 lg:grid-cols-3">
-          {sortedItems.map((item) => (
-            <ComponentCard key={item.href} item={item} />
-          ))}
-        </div>
-      )}
+          ))
+        ) : (
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {sortedItems.map((item) => (
+              <ComponentCard key={item.href} item={item} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+

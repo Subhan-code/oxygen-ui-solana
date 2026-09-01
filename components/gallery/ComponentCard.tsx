@@ -41,18 +41,19 @@ export const ComponentCard = memo(function ComponentCard({
       onMouseLeave={() => setActive(false)}
       onFocus={() => setActive(true)}
       onBlur={() => setActive(false)}
-      whileTap={reduceMotion ? undefined : { scale: 0.97 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
       transition={SPRING_PRESS}
       className={cn(
         "group relative flex cursor-pointer flex-col overflow-hidden rounded-[22px] p-3 h-[265px]",
         "bg-zinc-100/70 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-900/90",
-        "border border-black/[0.08] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20",
-        "hover:shadow-lg will-change-transform outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40 select-none",
+        "border border-black/[0.08] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 hover:shadow-lg",
+        "will-change-transform outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40 select-none",
         large && "lg:h-full",
         className
       )}
       style={{ cornerShape: "squircle" } as React.CSSProperties}
     >
+      {/* Live Preview Container */}
       <div
         className="lift-on-hover relative w-full flex-1 overflow-hidden rounded-[16px] border border-black/5 dark:border-white/5 bg-background"
         style={{ cornerShape: "squircle" } as React.CSSProperties}
@@ -68,6 +69,7 @@ export const ComponentCard = memo(function ComponentCard({
         )}
       </div>
 
+      {/* Card Footer Info */}
       <div className="flex items-center justify-between gap-2 px-1.5 pt-2.5">
         <div className="flex items-center gap-2 truncate min-w-0">
           <p className="font-semibold text-xs sm:text-sm text-foreground truncate group-hover:text-[#0066FF] dark:group-hover:text-[#0A84FF] motion-safe:transition-colors motion-safe:duration-200">
@@ -103,3 +105,5 @@ export const ComponentCard = memo(function ComponentCard({
 });
 
 export default ComponentCard;
+
+

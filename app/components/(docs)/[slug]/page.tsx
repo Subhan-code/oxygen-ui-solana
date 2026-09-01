@@ -4,7 +4,11 @@ import { DemoRenderer } from "@/components/DemoRenderer";
 import { getAllSlugs, getComponentBySlug } from "@/lib/registry";
 import { componentJsonLd, componentPageMetadata } from "@/lib/seo";
 
+export const dynamic = "force-static";
+export const dynamicParams = true;
+
 export function generateStaticParams() {
+
   return getAllSlugs().map((slug) => ({ slug }));
 }
 

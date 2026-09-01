@@ -1,57 +1,56 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { components } from "@/lib/components";
+import { getSolComponents } from "@/lib/sol-components";
 import ComponentCard from "./gallery/ComponentCard";
 import ViewAllCard from "./gallery/ViewAllCard";
 import ScrollReveal from "./ScrollReveal";
-import { SPRING_LAYOUT, SPRING_PRESS } from "@/lib/ease";
 import { cn } from "@/lib/utils";
 
 const SHOWCASE_TABS = [
   {
     id: "all",
-    label: "All",
+    label: "All 56 Sol Components",
     slugs: [
-      "cryptowalletdashboard",
-      "solanaswapcard",
-      "cryptotradingterminal",
+      "qrcode",
+      "solanawalletcard",
+      "cryptoswapbox",
       "solanaidentitycard",
-      "holdtoconfirm",
+      "tradebuttons",
     ],
   },
   {
-    id: "wallets",
-    label: "Wallets",
+    id: "account",
+    label: "Account & Identity",
     slugs: [
+      "qrcode",
+      "accountcard",
+      "solanaidentitycard",
       "solanawalletcard",
-      "walletmodal",
-      "walletsheet",
-      "authcard",
       "multiwalletswitcher",
     ],
   },
   {
-    id: "defi",
-    label: "DeFi",
+    id: "trading",
+    label: "Swap & Trading",
     slugs: [
-      "swapwidget",
-      "tradebox",
-      "liquiditypoolcard",
+      "cryptoswapbox",
       "orderbook",
-      "leverageslider",
+      "orderform",
+      "tradebuttons",
+      "slippageselector",
     ],
   },
   {
-    id: "trading",
-    label: "Trading",
+    id: "tokens",
+    label: "Tokens & Assets",
     slugs: [
-      "cryptotradingterminal",
-      "candlestickchart",
-      "depthchart",
-      "orderbook",
-      "positionslist",
+      "solanatokencard",
+      "solananftcard",
+      "tokeninput",
+      "tokenpair",
+      "tokencommand",
     ],
   },
 ];
@@ -103,14 +102,15 @@ function ShowcaseTabs({
 
 export default function ComponentsShowcase() {
   const [activeTab, setActiveTab] = useState("all");
-  const reduceMotion = useReducedMotion();
+
+  const sol56Items = getSolComponents();
 
   const currentTab =
     SHOWCASE_TABS.find((t) => t.id === activeTab) || SHOWCASE_TABS[0];
 
   const showcaseItems = currentTab.slugs
     .map((slug) =>
-      components.find(
+      sol56Items.find(
         (c) =>
           c.slug === slug ||
           c.href === `/components/${slug}` ||
@@ -122,7 +122,7 @@ export default function ComponentsShowcase() {
   const displayList =
     showcaseItems.length >= 4
       ? showcaseItems.slice(0, 5)
-      : components.slice(0, 5);
+      : sol56Items.slice(0, 5);
 
   const heroItem = displayList[0];
   const gridItems = displayList.slice(1, 5);
@@ -132,13 +132,13 @@ export default function ComponentsShowcase() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <header className="flex flex-col items-start gap-3 text-left">
           <span className="font-mono text-[11px] font-semibold tracking-wide text-[#0066FF] dark:text-[#0A84FF]">
-            Registry
+            Sol 56 Catalog
           </span>
-          <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            {components.length}+ Solana components and primitives
+          <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-foreground">
+            56 Sol Components & Primitives
           </h2>
           <p className="max-w-xl text-pretty text-sm font-medium text-muted-foreground sm:text-base md:text-lg">
-            Wallet surfaces, token pickers, swap terminals, and transaction states. Add any of them with the shadcn CLI.
+            Production-grade Solana React primitives organized into 7 core modules. Install any component with the shadcn CLI.
           </p>
         </header>
 
@@ -168,7 +168,7 @@ export default function ComponentsShowcase() {
             />
           ))}
           <ViewAllCard
-            count={components.length}
+            count={56}
             className="sm:col-span-2 lg:col-span-1"
           />
         </div>

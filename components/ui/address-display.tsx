@@ -59,20 +59,23 @@ export const AddressDisplay = ({
   return (
     <span
       data-slot="address-display"
-      className={cn("inline-flex items-center gap-1.5 select-none", className)}
+      className={cn(
+        "inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-zinc-100 select-none shadow-xs font-sans",
+        className
+      )}
       {...props}
     >
-      <span className="font-mono text-xs sm:text-sm text-muted-foreground tracking-tight">
+      <span className="font-mono text-xs font-semibold tracking-tight">
         {displayed}
       </span>
       {copyable && (
         <motion.button
           type="button"
-          whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
-          whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
+          whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
+          whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}
           transition={springIcon}
           onClick={handleCopy}
-          className="p-1 rounded-md text-muted-foreground hover:text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-primary/40"
+          className="p-1 rounded-md text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-sky-500/40"
           aria-label="Copy address"
         >
           <AnimatePresence mode="wait" initial={false}>
@@ -104,13 +107,13 @@ export const AddressDisplay = ({
       )}
       {fullUrl && (
         <motion.a
-          whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
-          whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
+          whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
+          whileTap={shouldReduceMotion ? undefined : { scale: 0.95 }}
           transition={springIcon}
           href={fullUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-1 rounded-md text-muted-foreground hover:text-foreground transition-colors cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-primary/40"
+          className="p-1 rounded-md text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-sky-500/40"
           aria-label="View in explorer"
         >
           <ExternalLinkIcon className="size-3.5" />
@@ -120,4 +123,77 @@ export const AddressDisplay = ({
   );
 };
 
+export interface CopyButtonProps extends React.ComponentProps<typeof motion.button> {
+  textToCopy: string;
+  label?: string;
+  copiedLabel?: string;
+}
+
+
+
+export const CopyButton = ({
+  textToCopy,
+  label = "Copy",
+  copiedLabel = "Copied!",
+  className,
+  ...props
+}: CopyButtonProps) => {
+  const [copied, setCopied] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      console.error("Failed to copy text to clipboard");
+    }
+  }, [textToCopy]);
+
+  return (
+    <motion.button
+      type="button"
+      whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+      whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
+      transition={springIcon}
+      onClick={handleCopy}
+      className={cn(
+        "inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs font-semibold text-zinc-900 dark:text-zinc-100 shadow-xs cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 font-sans",
+        className
+      )}
+      {...props}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {copied ? (
+          <motion.span
+            key="copied"
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.12 }}
+            className="flex items-center gap-1.5 text-emerald-500"
+          >
+            <CheckIcon className="size-3.5" />
+            <span>{copiedLabel}</span>
+          </motion.span>
+        ) : (
+          <motion.span
+            key="copy"
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.12 }}
+            className="flex items-center gap-1.5"
+          >
+            <CopyIcon className="size-3.5 text-zinc-400" />
+            <span>{label}</span>
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
+  );
+};
+
 export default AddressDisplay;
+

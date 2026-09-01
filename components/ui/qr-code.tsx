@@ -231,6 +231,8 @@ export function QRCode({
 
   const glareX = useTransform(smoothMouseX, [0, 1], [0, 100]);
   const glareY = useTransform(smoothMouseY, [0, 1], [0, 100]);
+  const glarePosLeft = useTransform(glareX, [0, 100], ["-30%", "30%"]);
+  const glarePosTop = useTransform(glareY, [0, 100], ["-30%", "30%"]);
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!enableTilt || !containerRef.current) return;
@@ -475,8 +477,8 @@ export function QRCode({
                 style={{
                   background:
                     "radial-gradient(circle at center, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.12) 35%, transparent 70%)",
-                  left: useTransform(glareX, [0, 100], ["-30%", "30%"]),
-                  top: useTransform(glareY, [0, 100], ["-30%", "30%"]),
+                  left: glarePosLeft,
+                  top: glarePosTop,
                 }}
               />
             </motion.div>
