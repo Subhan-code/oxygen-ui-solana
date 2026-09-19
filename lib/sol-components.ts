@@ -40,6 +40,7 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
       { name: "Token Pair", slug: "tokenpair" },
       { name: "Token Icon Group", slug: "tokenicongroup" },
       { name: "Token Command", slug: "tokencommand" },
+      { name: "Crypto Price Pills", slug: "cryptopricepills" },
       { name: "Balance Display", slug: "balancedisplay" },
     ],
   },
@@ -113,6 +114,7 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
       { name: "Draw Checkbox", slug: "drawcheckbox" },
       { name: "Spinning Counter", slug: "spinningcounter" },
       { name: "Animated Number Flow", slug: "animatednumberflow" },
+      { name: "Oxygen UI Pill", slug: "oxygenuipill" },
     ],
   },
 ];

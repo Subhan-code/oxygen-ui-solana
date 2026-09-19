@@ -1678,6 +1678,36 @@ export const REGISTRY: RegistryItem[] = [
     interaction: "Tap share button to copy event link, and click join button to toggle RSVP status.",
     usage: `import { SolanaEventCard } from "@/components/ui/solana-event-card"`,
     href: "/components/solanaeventcard"
+  },
+  {
+    id: "203",
+    slug: "cryptopricepills",
+    title: "Crypto Price Pills",
+    group: "Tokens & Assets",
+    name: "Crypto Price Pills",
+    category: "Tokens & Assets",
+    registry: "Tokens & Assets",
+    file: "components/ui/crypto-price-pills.tsx",
+    description: "Vertical stacked cryptocurrency token price pills with active spring elevation, token icons, and 24h market performance badges.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-price-pills.tsx`,
+    interaction: "Click token pills to toggle active focus with smooth spring elevation.",
+    usage: `import { CryptoPricePills } from "@/components/ui/crypto-price-pills"`,
+    href: "/components/cryptopricepills"
+  },
+  {
+    id: "204",
+    slug: "oxygenuipill",
+    title: "Oxygen UI Pill",
+    group: "Interactive & Dynamic",
+    name: "Oxygen UI Pill",
+    category: "Interactive & Dynamic",
+    registry: "Interactive & Dynamic",
+    file: "components/ui/oxygen-ui-pill.tsx",
+    description: "Vibrant electric blue brand pill capsule featuring the rotating Oxygen UI turbine emblem and modern capsule styling.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/oxygen-ui-pill.tsx`,
+    interaction: "Hover spring scale, turbine logo rotation, and reactive activation.",
+    usage: `import { OxygenUiPill } from "@/components/ui/oxygen-ui-pill"`,
+    href: "/components/oxygenuipill"
   }
 ];
 

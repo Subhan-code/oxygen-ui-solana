@@ -9,6 +9,7 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "cardstack": () => import("@/app/components/(docs)/cardstack/demo"),
 
   "cryptocheckoutcard": () => import("@/app/components/(docs)/cryptocheckoutcard/demo"),
+  "cryptopricepills": () => import("@/app/components/(docs)/cryptopricepills/demo"),
 
   "cryptoexplorecategories": () => import("@/app/components/(docs)/cryptoexplorecategories/demo"),
   "cryptopredictioncandidatecard": () => import("@/app/components/(docs)/cryptopredictioncandidatecard/demo"),
@@ -51,6 +52,7 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "orderbook": () => import("@/app/components/(docs)/orderbook/demo"),
   "orderform": () => import("@/app/components/(docs)/orderform/demo"),
   "otpinput": () => import("@/app/components/(docs)/otpinput/demo"),
+  "oxygenuipill": () => import("@/app/components/(docs)/oxygenuipill/demo"),
   "passwordinput": () => import("@/app/components/(docs)/passwordinput/demo"),
   "poolcard": () => import("@/app/components/(docs)/poolcard/demo"),
   "pooltable": () => import("@/app/components/(docs)/pooltable/demo"),
