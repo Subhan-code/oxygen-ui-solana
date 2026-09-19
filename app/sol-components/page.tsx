@@ -38,7 +38,7 @@ export default async function SolComponentsPage() {
             Sol Components Catalog
           </h1>
           <p className="mt-2 max-w-lg text-xs sm:text-sm font-medium text-muted-foreground leading-relaxed">
-            The official catalog of 56 production-grade Solana components organized across 7 core modules, each with exactly 8 components.
+            The official catalog of production-grade Solana components organized across core dApp modules.
           </p>
         </header>
 

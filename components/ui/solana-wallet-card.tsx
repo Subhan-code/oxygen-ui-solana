@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, Copy, ArrowUpRight, ArrowRightLeft, Plus } from "lucide-react";
+import { Check, Copy, ArrowUp, Repeat, Plus } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import solana from "thesvg/solana";
 import ethereum from "thesvg/ethereum";
@@ -175,11 +175,9 @@ export function SolanaWalletCard({
           onClick={() => triggerAction("Swap", onSwap)}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center justify-center gap-2.5 rounded-3xl border border-zinc-200/80 bg-white py-3.5 px-4 font-bold text-zinc-900 shadow-xs motion-safe:transition-[border-color,box-shadow,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-[#1a2130] dark:text-white dark:hover:border-zinc-700 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
+          className="flex items-center justify-center gap-2 rounded-3xl border border-zinc-200/80 bg-white py-3 px-4 font-bold text-zinc-900 shadow-xs motion-safe:transition-[border-color,box-shadow,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-[#1a2130] dark:text-white dark:hover:border-zinc-700 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#eff3f8] text-zinc-700 dark:bg-[#252e42] dark:text-zinc-200">
-            <ArrowRightLeft className="h-3.5 w-3.5" />
-          </div>
+          <Repeat className="h-4 w-4 text-[#0066FF] dark:text-[#0A84FF]" />
           <span className="text-sm font-bold tracking-tight">Swap</span>
         </motion.button>
 
@@ -189,11 +187,9 @@ export function SolanaWalletCard({
           onClick={() => triggerAction("Send", onSend)}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center justify-center gap-2.5 rounded-3xl border border-zinc-200/80 bg-white py-3.5 px-4 font-bold text-zinc-900 shadow-xs motion-safe:transition-[border-color,box-shadow,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-[#1a2130] dark:text-white dark:hover:border-zinc-700 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
+          className="flex items-center justify-center gap-2 rounded-3xl border border-zinc-200/80 bg-white py-3 px-4 font-bold text-zinc-900 shadow-xs motion-safe:transition-[border-color,box-shadow,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-[#1a2130] dark:text-white dark:hover:border-zinc-700 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#eff3f8] text-zinc-700 dark:bg-[#252e42] dark:text-zinc-200">
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </div>
+          <ArrowUp className="h-4 w-4 text-[#0066FF] dark:text-[#0A84FF]" />
           <span className="text-sm font-bold tracking-tight">Send</span>
         </motion.button>
       </div>

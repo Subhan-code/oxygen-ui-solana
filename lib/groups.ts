@@ -9,6 +9,7 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
     name: "Tokens & Assets",
     description: "Token lists, inputs, pairs, market cap badges.",
     slugs: [
+      "solanaeventcard",
       "solanatokencard",
       "tokencommand",
       "tokenicongroup",
@@ -27,6 +28,7 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
       "multiwalletswitcher",
       "solanaidentitycard",
       "solanawalletcard",
+      "walletcard",
       "walletsheet",
     ],
   },
@@ -36,7 +38,7 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
     slugs: [
       "cryptoswapbox",
       "cryptotradingterminal",
-
+      "multichainswap",
       "leverageslider",
       "orderbook",
       "orderform",
@@ -198,7 +200,9 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
   {
     name: "Visual / Motion primitives",
     description: "Look-and-feel helpers that wrap other components.",
-    slugs: [],
+    slugs: [
+      "digitswap",
+    ],
   },
   {
     name: "Special",

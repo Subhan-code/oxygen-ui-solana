@@ -38,15 +38,15 @@ export function SlippageSelector({
 
   return (
     <div
-      className={cn("flex flex-col gap-2 rounded-2xl border border-zinc-800 bg-zinc-900/90 p-3 shadow-xl backdrop-blur-xl", className)}
+      className={cn("flex flex-col gap-2.5 rounded-[28px] border border-black/10 dark:border-white/10 bg-white dark:bg-black p-4 shadow-2xl backdrop-blur-xl text-zinc-900 dark:text-white select-none", className)}
       data-slot="slippage-selector"
       {...props}
     >
-      <div className="flex items-center justify-between text-xs text-zinc-400">
-        <span className="flex items-center gap-1.5 font-medium">
-          <Settings2 className="h-3.5 w-3.5 text-purple-400" /> Max Slippage Tolerance
+      <div className="flex items-center justify-between text-xs">
+        <span className="flex items-center gap-1.5 font-runde font-semibold text-zinc-600 dark:text-zinc-400">
+          <Settings2 className="h-3.5 w-3.5 text-sky-500 dark:text-sky-400" /> Max Slippage Tolerance
         </span>
-        <span className="font-mono text-zinc-200 font-semibold">{value}%</span>
+        <span className="font-mono text-zinc-900 dark:text-white font-bold">{value}%</span>
       </div>
 
       <div className="flex items-center gap-1.5">
@@ -58,20 +58,12 @@ export function SlippageSelector({
               type="button"
               onClick={() => handleSelectOption(opt)}
               className={cn(
-                "relative flex-1 h-11 rounded-xl text-xs font-mono font-semibold border motion-safe:transition-colors motion-safe:duration-150 outline-none focus-visible:ring-2 focus-visible:ring-purple-500/40",
+                "relative flex-1 h-10 rounded-xl text-xs font-mono font-semibold border motion-safe:transition-colors motion-safe:duration-150 outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 cursor-pointer",
                 active
-                  ? "text-white border-purple-500"
-                  : "border-zinc-800 bg-zinc-950/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200"
+                  ? "bg-zinc-900 text-white border-zinc-900 dark:bg-white dark:text-zinc-950 dark:border-white shadow-xs"
+                  : "border-black/5 dark:border-white/10 bg-zinc-100/80 dark:bg-[#0a0a0a] text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-[#141414] hover:text-zinc-900 dark:hover:text-white"
               )}
             >
-              {active && (
-                <motion.span
-                  layoutId="slippage-active"
-                  className="absolute inset-0 rounded-xl bg-purple-600 shadow-md shadow-purple-500/20"
-                  style={{ borderRadius: 12 }}
-                  transition={{ type: "spring", duration: 0.2, bounce: 0 }}
-                />
-              )}
               <span className="relative z-10">{opt}%</span>
             </button>
           )
@@ -85,13 +77,13 @@ export function SlippageSelector({
             onFocus={() => setIsCustom(true)}
             onChange={handleCustomChange}
             className={cn(
-              "w-full h-11 rounded-xl border py-1.5 px-2 text-center text-xs font-mono font-semibold motion-safe:transition-colors motion-safe:duration-150 bg-zinc-950/60 outline-none placeholder:text-zinc-600 focus-visible:ring-2 focus-visible:ring-purple-500/40",
+              "w-full h-10 rounded-xl border py-1.5 px-2 text-center text-xs font-mono font-semibold motion-safe:transition-colors motion-safe:duration-150 bg-zinc-100/80 dark:bg-[#0a0a0a] outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus-visible:ring-2 focus-visible:ring-sky-500/40",
               isCustom
-                ? "border-purple-500 text-white bg-purple-500/10"
-                : "border-zinc-800 text-zinc-300 hover:border-zinc-700"
+                ? "border-sky-500 text-zinc-900 dark:text-white bg-sky-500/10"
+                : "border-black/5 dark:border-white/10 text-zinc-800 dark:text-zinc-200 hover:border-black/20 dark:hover:border-white/20"
             )}
           />
-          <span className="pointer-events-none absolute right-2 top-1.5 text-xs text-zinc-500">%</span>
+          <span className="pointer-events-none absolute right-2 top-2.5 text-xs text-zinc-400 font-mono">%</span>
         </div>
       </div>
     </div>

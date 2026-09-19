@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface TradeButtonsProps {
@@ -22,65 +21,80 @@ const TradeButtons = ({
 }: TradeButtonsProps) => {
   const [internalValue, setInternalValue] = React.useState(defaultValue);
   const currentValue = value ?? internalValue;
+  const reduceMotion = useReducedMotion();
 
-  const handleValueChange = (newValue: string) => {
-    if (!newValue) return;
+  const handleSelect = (newValue: string) => {
     setInternalValue(newValue);
     onValueChange?.(newValue);
   };
 
   return (
-    <ToggleGroup
-      type="single"
-      variant="outline"
-      spacing={2}
-      value={currentValue}
-      onValueChange={handleValueChange}
-      className={cn("w-full", className)}
+    <div
+      role="group"
+      aria-label="Trade direction selector"
+      data-slot="trade-buttons"
+      className={cn(
+        "flex w-full items-center gap-1 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-black p-1 select-none shadow-xs",
+        className
+      )}
     >
-      <ToggleGroupItem
-        value="long"
-        aria-label={`Toggle ${labels[0]}`}
+      {/* Long Button (Green when active) */}
+      <button
+        type="button"
+        role="radio"
+        aria-checked={currentValue === "long"}
+        onClick={() => handleSelect("long")}
         className={cn(
-          "relative flex-1 shrink motion-safe:transition-colors",
+          "relative flex-1 py-2 px-4 rounded-xl font-runde text-xs font-bold transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 cursor-pointer text-center",
           currentValue === "long"
-            ? "text-emerald-500 border-emerald-500/25 hover:text-emerald-500 data-[state=on]:text-emerald-500"
-            : "hover:bg-muted/80",
+            ? "text-white"
+            : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#121214]"
         )}
       >
         {currentValue === "long" && (
           <motion.span
-            layoutId="trade-buttons-active"
-            className="absolute inset-0 bg-emerald-500/15"
-            style={{ borderRadius: 6 }}
-            transition={{ type: "spring", duration: 0.2, bounce: 0 }}
+            layoutId="trade-btn-active"
+            className="absolute inset-0 rounded-xl bg-emerald-500 shadow-sm shadow-emerald-500/25"
+            transition={
+              reduceMotion
+                ? { duration: 0.1 }
+                : { type: "spring", stiffness: 500, damping: 32 }
+            }
           />
         )}
         <span className="relative z-10">{labels[0]}</span>
-      </ToggleGroupItem>
-      <ToggleGroupItem
-        value="short"
-        aria-label={`Toggle ${labels[1]}`}
+      </button>
+
+      {/* Short Button (Red when active) */}
+      <button
+        type="button"
+        role="radio"
+        aria-checked={currentValue === "short"}
+        onClick={() => handleSelect("short")}
         className={cn(
-          "relative flex-1 shrink motion-safe:transition-colors",
+          "relative flex-1 py-2 px-4 rounded-xl font-runde text-xs font-bold transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-rose-500/40 cursor-pointer text-center",
           currentValue === "short"
-            ? "text-red-400 border-red-400/25 hover:text-red-400 data-[state=on]:text-red-400"
-            : "hover:bg-muted/80",
+            ? "text-white"
+            : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#121214]"
         )}
       >
         {currentValue === "short" && (
           <motion.span
-            layoutId="trade-buttons-active"
-            className="absolute inset-0 bg-red-400/15"
-            style={{ borderRadius: 6 }}
-            transition={{ type: "spring", duration: 0.2, bounce: 0 }}
+            layoutId="trade-btn-active"
+            className="absolute inset-0 rounded-xl bg-rose-500 shadow-sm shadow-rose-500/25"
+            transition={
+              reduceMotion
+                ? { duration: 0.1 }
+                : { type: "spring", stiffness: 500, damping: 32 }
+            }
           />
         )}
         <span className="relative z-10">{labels[1]}</span>
-      </ToggleGroupItem>
-    </ToggleGroup>
+      </button>
+    </div>
   );
 };
 
 export type { TradeButtonsProps };
 export { TradeButtons };
+export default TradeButtons;

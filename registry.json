@@ -1235,6 +1235,62 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "wallet-card",
+      "type": "registry:ui",
+      "title": "Wallet Card",
+      "description": "Wallet overview card with morphing account switcher, expandable search bar, cascading balance, and action buttons.",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/wallet-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "digit-swap",
+      "type": "registry:ui",
+      "title": "Digit Swap",
+      "description": "Fixed-slot digits and mask glyphs that roll on change with controllable direction, stagger, and suffix emphasis.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/digit-swap.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "solana-event-card",
+      "type": "registry:ui",
+      "title": "Solana Event Card",
+      "description": "An atmospheric Solana event card featuring a date badge, frosted glass share trigger, attendee avatars, and join action.",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/solana-event-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

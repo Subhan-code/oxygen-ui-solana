@@ -29,6 +29,7 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "cryptowalletmain": () => import("@/app/components/(docs)/cryptowalletmain/demo"),
   "cryptowalletmenusheet": () => import("@/app/components/(docs)/cryptowalletmenusheet/demo"),
   "cryptowalletsettings": () => import("@/app/components/(docs)/cryptowalletsettings/demo"),
+  "digitswap": () => import("@/app/components/(docs)/digitswap/demo"),
   "errorstateshake": () => import("@/app/components/(docs)/errorstateshake/demo"),
   "familydialog": () => import("@/app/components/(docs)/familydialog/demo"),
   "familydrawer": () => import("@/app/components/(docs)/familydrawer/demo"),
@@ -43,6 +44,7 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "liquiditypoolcard": () => import("@/app/components/(docs)/liquiditypoolcard/demo"),
   "marquee": () => import("@/app/components/(docs)/marquee/demo"),
 
+  "multichainswap": () => import("@/app/components/(docs)/multichainswap/demo"),
   "multistatebadge": () => import("@/app/components/(docs)/multistatebadge/demo"),
   "multiwalletswitcher": () => import("@/app/components/(docs)/multiwalletswitcher/demo"),
   "notificationsstack": () => import("@/app/components/(docs)/notificationsstack/demo"),
@@ -125,6 +127,8 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "valueflash": () => import("@/app/components/(docs)/valueflash/demo"),
   "logomarquee": () => import("@/app/components/(docs)/logomarquee/demo"),
   "presenceavatars": () => import("@/app/components/(docs)/presenceavatars/demo"),
+  "walletcard": () => import("@/app/components/(docs)/walletcard/demo"),
+  "solanaeventcard": () => import("@/app/components/(docs)/solanaeventcard/demo"),
 };
 
 

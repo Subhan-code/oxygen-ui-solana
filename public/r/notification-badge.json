@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "notification-badge",
+  "title": "Notification Badge",
+  "description": "An animated notification count badge that pops and slides into trigger position.",
+  "dependencies": [
+    "@radix-ui/react-icons"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/notification-badge.tsx",
+      "content": "\"use client\";\r\n\r\nimport React, { useState } from \"react\";\r\nimport { BellIcon } from \"@radix-ui/react-icons\";\r\n\r\nexport default function NotificationBadge() {\r\n  const [isOpen, setIsOpen] = useState(true);\r\n\r\n  const toggleBadge = () => {\r\n    setIsOpen(!isOpen);\r\n  };\r\n\r\n  return (\r\n    <div className=\"flex h-[200px] w-full items-center justify-center p-4\">\r\n      <button\r\n        type=\"button\"\r\n        onClick={toggleBadge}\r\n        className=\"relative flex h-12 w-12 items-center justify-center rounded-2xl border border-zinc-200 bg-white shadow-xs transition-transform active:scale-95 dark:border-zinc-800 dark:bg-zinc-900\"\r\n        aria-label=\"Notifications\"\r\n      >\r\n        <BellIcon className=\"h-6 w-6 text-zinc-700 dark:text-zinc-300\" />\r\n        <span className=\"t-badge\" data-open={isOpen}>\r\n          <span className=\"t-badge-dot flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[11px] font-bold text-white shadow-xs\">\r\n            3\r\n          </span>\r\n        </span>\r\n      </button>\r\n\r\n      <style jsx>{`\r\n        .t-badge {\r\n          position: absolute;\r\n          top: -4px;\r\n          right: -4px;\r\n          pointer-events: none;\r\n          will-change: transform;\r\n        }\r\n        .t-badge[data-open=\"true\"] {\r\n          animation: t-badge-slide-in 260ms cubic-bezier(0.22, 1, 0.36, 1);\r\n        }\r\n        .t-badge-dot {\r\n          display: flex;\r\n          transform-origin: center;\r\n          transform: scale(1);\r\n          opacity: 1;\r\n          filter: blur(0);\r\n          transition:\r\n            transform 500ms cubic-bezier(0.34, 1.36, 0.64, 1),\r\n            opacity 400ms cubic-bezier(0.34, 1.36, 0.64, 1),\r\n            filter 500ms cubic-bezier(0.34, 1.36, 0.64, 1);\r\n          will-change: transform, opacity, filter;\r\n        }\r\n        .t-badge[data-open=\"false\"] .t-badge-dot {\r\n          transform: scale(0.95);\r\n          opacity: 0;\r\n          filter: blur(2px);\r\n          transition:\r\n            transform 180ms cubic-bezier(0.4, 0, 0.2, 1),\r\n            opacity 180ms cubic-bezier(0.4, 0, 0.2, 1),\r\n            filter 180ms cubic-bezier(0.4, 0, 0.2, 1);\r\n        }\r\n        @keyframes t-badge-slide-in {\r\n          from { transform: translate(-8.2px, 12.4px); }\r\n          to { transform: translate(0, 0); }\r\n        }\r\n        @media (prefers-reduced-motion: reduce) {\r\n          .t-badge, .t-badge-dot { animation: none !important; transition: none !important; }\r\n        }\r\n      `}</style>\r\n    </div>\r\n  );\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

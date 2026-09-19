@@ -79,29 +79,29 @@ export function MultiWalletSwitcher({
         aria-expanded={open}
         aria-haspopup="listbox"
         onClick={() => setOpen((value) => !value)}
-        className="flex w-full items-center justify-between rounded-2xl border border-zinc-800 bg-zinc-900/90 p-3 shadow-xl backdrop-blur-xl motion-safe:transition-[border-color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] hover:border-zinc-700 motion-safe:active:scale-[0.97] outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50"
+        className="flex w-full items-center justify-between rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-black p-3 shadow-xl backdrop-blur-xl motion-safe:transition-[border-color,transform] motion-safe:duration-150 hover:border-black/20 dark:hover:border-white/20 motion-safe:active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
-            <Wallet className="h-4 w-4" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 dark:bg-[#0a0a0a] text-zinc-900 dark:text-white border border-black/5 dark:border-white/10">
+            <Wallet className="h-4 w-4 text-sky-500 dark:text-sky-400" />
           </div>
           <div className="text-left">
             <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-sm text-zinc-100">
+              <span className="font-runde font-bold text-sm text-zinc-900 dark:text-white">
                 {activeWallet.name}
               </span>
               {activeWallet.isHardware && (
-                <Shield className="h-3 w-3 text-amber-400" />
+                <Shield className="h-3 w-3 text-amber-500 dark:text-amber-400" />
               )}
             </div>
-            <span className="font-mono text-xs text-zinc-400">
+            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
               {activeWallet.address} • {activeWallet.balanceSol} SOL
             </span>
           </div>
         </div>
         <ChevronDown
           className={cn(
-            "h-4 w-4 text-zinc-400 motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)]",
+            "h-4 w-4 text-zinc-400 motion-safe:transition-transform motion-safe:duration-150",
             open && "rotate-180",
           )}
         />
@@ -121,9 +121,9 @@ export function MultiWalletSwitcher({
             }
             transition={{ duration: 0.16, ease: EASE_OUT_EXPO }}
             style={{ transformOrigin: "top center", borderRadius: 16 }}
-            className="absolute left-0 mt-2 w-full rounded-2xl border border-zinc-800 bg-zinc-900/95 p-2 shadow-2xl backdrop-blur-2xl z-50"
+            className="absolute left-0 mt-2 w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-black p-2 shadow-2xl backdrop-blur-2xl z-50 text-zinc-900 dark:text-white"
           >
-            <div className="px-3 py-1.5 text-[11px] font-medium tracking-wider text-zinc-500 uppercase">
+            <div className="px-3 py-1.5 font-runde text-[11px] font-semibold tracking-wider text-zinc-500 uppercase">
               Derived Sub-Accounts
             </div>
 
@@ -141,26 +141,26 @@ export function MultiWalletSwitcher({
                       setOpen(false);
                     }}
                     className={cn(
-                      "flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left motion-safe:transition-colors motion-safe:duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40",
+                      "flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left motion-safe:transition-colors motion-safe:duration-150 outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 cursor-pointer",
                       isSelected
-                        ? "bg-purple-500/10 text-white border border-purple-500/20"
-                        : "text-zinc-300 hover:bg-zinc-800/60 hover:text-white",
+                        ? "bg-zinc-100 dark:bg-[#0a0a0a] text-zinc-900 dark:text-white border border-black/5 dark:border-white/10"
+                        : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-[#121214] hover:text-zinc-900 dark:hover:text-white",
                     )}
                   >
                     <div className="text-left">
-                      <div className="flex items-center gap-1.5 font-medium text-xs">
+                      <div className="flex items-center gap-1.5 font-runde font-bold text-xs">
                         <span>{w.name}</span>
                         {w.isHardware && (
-                          <span className="text-[10px] bg-amber-500/10 text-amber-400 px-1.5 py-0.2 rounded border border-amber-500/20">
+                          <span className="text-[10px] bg-amber-500/10 text-amber-500 dark:text-amber-400 px-1.5 py-0.2 rounded border border-amber-500/20 font-sans">
                             Ledger
                           </span>
                         )}
                       </div>
-                      <span className="font-mono text-[11px] text-zinc-400">
+                      <span className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
                         {w.address} • {w.balanceSol} SOL
                       </span>
                     </div>
-                    {isSelected && <Check className="h-4 w-4 text-purple-400" />}
+                    {isSelected && <Check className="h-4 w-4 text-sky-500 dark:text-sky-400" />}
                   </button>
                 );
               })}
@@ -172,7 +172,7 @@ export function MultiWalletSwitcher({
                 onAddAccount?.();
                 setOpen(false);
               }}
-              className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-zinc-800 py-2 text-xs font-medium text-zinc-400 hover:border-zinc-700 hover:text-zinc-200 motion-safe:transition-colors"
+              className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-black/10 dark:border-white/10 py-2 font-runde text-xs font-semibold text-zinc-500 dark:text-zinc-400 hover:border-black/20 dark:hover:border-white/20 hover:text-zinc-900 dark:hover:text-zinc-200 motion-safe:transition-colors cursor-pointer"
             >
               <Plus className="h-3.5 w-3.5" /> Derive New Account
             </button>

@@ -14,6 +14,7 @@ const SHOWCASE_TABS = [
     id: "all",
     label: "All 56 Sol Components",
     slugs: [
+      "walletcard",
       "qrcode",
       "solanawalletcard",
       "cryptoswapbox",
@@ -25,6 +26,7 @@ const SHOWCASE_TABS = [
     id: "account",
     label: "Account & Identity",
     slugs: [
+      "walletcard",
       "qrcode",
       "accountcard",
       "solanaidentitycard",

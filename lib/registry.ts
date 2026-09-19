@@ -1618,6 +1618,66 @@ export const REGISTRY: RegistryItem[] = [
     interaction: "Interactive presence join/leave spring animations and overflow selection.",
     usage: `import { PresenceAvatars, usePresence } from "@/components/ui/presence-avatars"`,
     href: "/components/presenceavatars"
+  },
+  {
+    id: "199",
+    slug: "digitswap",
+    title: "Digit Swap",
+    group: "Core Primitives",
+    name: "Digit Swap",
+    category: "Core Primitives",
+    registry: "Core Primitives",
+    file: "components/ui/digit-swap.tsx",
+    description: "Fixed-slot numeric and glyph transition with rolling entrance, spring easing, and direction controls.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/digit-swap.tsx`,
+    interaction: "Interactive numerical value roll transitions.",
+    usage: `import { DigitSwap } from "@/components/ui/digit-swap"`,
+    href: "/components/digitswap"
+  },
+  {
+    id: "200",
+    slug: "multichainswap",
+    title: "Multi-Chain Swap",
+    group: "Swap, Trade & Orders",
+    name: "Multi-Chain Swap",
+    category: "Swap, Trade & Orders",
+    registry: "Swap, Trade & Orders",
+    file: "components/ui/multi-chain-swap.tsx",
+    description: "Cross-chain swap widget with chain and token selectors, morphing drawer, animated flip and quote.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/multi-chain-swap.tsx`,
+    interaction: "Token selection, reverse flip, amount estimation, and quote review.",
+    usage: `import { MultiChainSwap } from "@/components/ui/multi-chain-swap"`,
+    href: "/components/multichainswap"
+  },
+  {
+    id: "201",
+    slug: "walletcard",
+    title: "Wallet Card",
+    group: "Wallet & Identity",
+    name: "Wallet Card",
+    category: "Wallet & Identity",
+    registry: "Wallet & Identity",
+    file: "components/ui/wallet-card.tsx",
+    description: "Wallet overview card with morphing account switcher, expandable search bar, cascading balance, and action buttons.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/wallet-card.tsx`,
+    interaction: "Account morphing dropdown, search expansion, balance privacy reveal, and action clicks.",
+    usage: `import { WalletCard } from "@/components/ui/wallet-card"`,
+    href: "/components/walletcard"
+  },
+  {
+    id: "202",
+    slug: "solanaeventcard",
+    title: "Solana Event Card",
+    group: "Tokens & Assets",
+    name: "Solana Event Card",
+    category: "Tokens & Assets",
+    registry: "Tokens & Assets",
+    file: "components/ui/solana-event-card.tsx",
+    description: "An atmospheric Solana event card featuring a date badge, frosted glass share trigger, attendee avatars, and join action.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/solana-event-card.tsx`,
+    interaction: "Tap share button to copy event link, and click join button to toggle RSVP status.",
+    usage: `import { SolanaEventCard } from "@/components/ui/solana-event-card"`,
+    href: "/components/solanaeventcard"
   }
 ];
 

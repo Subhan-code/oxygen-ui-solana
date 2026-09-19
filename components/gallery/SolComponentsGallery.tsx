@@ -160,7 +160,7 @@ export default function SolComponentsGallery() {
               type="search"
               autoComplete="off"
               suppressHydrationWarning
-              placeholder="Search 56 Sol components by name..."
+              placeholder={`Search ${allSolComponents.length} Sol components by name...`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-10 pl-10 pr-9 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/70 text-xs font-medium text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 border border-black/10 dark:border-white/10 shadow-xs focus:outline-none focus:ring-2 focus:ring-[#0066FF]/30 dark:focus:ring-[#0A84FF]/30 transition-all duration-300"

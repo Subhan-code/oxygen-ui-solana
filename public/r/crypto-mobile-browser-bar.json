@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crypto-mobile-browser-bar",
+  "title": "Browser Bar",
+  "description": "A Web3 mobile browser control bar with tab counter, URL status, and navigation actions.",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/crypto-mobile-browser-bar.tsx",
+      "content": "\"use client\"\n\nimport React from \"react\"\nimport { motion, useReducedMotion } from \"motion/react\"\nimport { ChevronLeft, MoreVertical, X, Lock } from \"lucide-react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CryptoMobileBrowserBarProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onDrag\" | \"onDragStart\" | \"onDragEnd\" | \"onAnimationStart\"> {\n  url?: string\n  tabCount?: number\n  onBack?: () => void\n  onMore?: () => void\n  onClose?: () => void\n  onTabClick?: () => void\n}\n\nexport function CryptoMobileBrowserBar({\n  url = \"oxygenui.com\",\n  tabCount = 3,\n  onBack,\n  onMore,\n  onClose,\n  onTabClick,\n  className,\n  ...props\n}: CryptoMobileBrowserBarProps) {\n  const reduceMotion = useReducedMotion()\n\n  return (\n    <motion.div\n      data-slot=\"crypto-mobile-browser-bar\"\n      initial={reduceMotion ? false : { opacity: 0, y: 15 }}\n      animate={{ opacity: 1, y: 0 }}\n      transition={{ type: \"spring\", stiffness: 350, damping: 25 }}\n      className={cn(\n        \"relative flex w-full max-w-sm flex-col overflow-hidden rounded-3xl bg-zinc-950 p-3 text-white shadow-2xl border border-zinc-800/90 font-sans backdrop-blur-xl\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"flex items-center gap-2.5 w-full\">\n        <motion.button\n          whileHover={reduceMotion ? {} : { scale: 1.05 }}\n          whileTap={reduceMotion ? {} : { scale: 0.95 }}\n          type=\"button\"\n          onClick={onTabClick}\n          className=\"flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-zinc-900 border border-zinc-800 text-sm font-bold text-white hover:bg-zinc-800 transition-colors cursor-pointer\"\n          aria-label=\"View open tabs\"\n        >\n          {tabCount}\n        </motion.button>\n\n        <div className=\"flex h-11 flex-1 items-center justify-between rounded-full bg-zinc-900 px-3.5 border border-zinc-800/80\">\n          <button\n            type=\"button\"\n            onClick={onBack}\n            className=\"text-zinc-400 hover:text-white transition-colors cursor-pointer p-1\"\n            aria-label=\"Go back\"\n          >\n            <ChevronLeft className=\"h-4 w-4\" />\n          </button>\n          <div className=\"flex items-center gap-1.5 px-2\">\n            <Lock className=\"h-3 w-3 text-emerald-400\" />\n            <span className=\"text-xs font-semibold tracking-tight leading-tight text-zinc-200 truncate max-w-[140px]\">\n              {url}\n            </span>\n          </div>\n          <button\n            type=\"button\"\n            onClick={onMore}\n            className=\"text-zinc-400 hover:text-white transition-colors cursor-pointer p-1\"\n            aria-label=\"More options\"\n          >\n            <MoreVertical className=\"h-4 w-4\" />\n          </button>\n        </div>\n\n        <motion.button\n          whileHover={reduceMotion ? {} : { scale: 1.05 }}\n          whileTap={reduceMotion ? {} : { scale: 0.95 }}\n          type=\"button\"\n          onClick={onClose}\n          className=\"flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer\"\n          aria-label=\"Close browser\"\n        >\n          <X className=\"h-4 w-4\" />\n        </motion.button>\n      </div>\n    </motion.div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

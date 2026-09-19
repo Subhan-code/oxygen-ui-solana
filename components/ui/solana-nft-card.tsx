@@ -1,152 +1,170 @@
 "use client";
 
-import React, { useState } from "react";
-import { ExternalLink, Sparkles, Tag, Verified } from "lucide-react";
+import React from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { DigitSwap } from "@/components/motion/digit-swap";
 import { cn } from "@/lib/utils";
 
-export type NftAttribute = {
-  traitType: string;
-  value: string;
-  rarityPct?: number;
+export type NftDistribution = {
+  primary: number;
+  secondary: number;
 };
 
 export interface SolanaNftCardProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"
+  > {
   name?: string;
   collectionName?: string;
   imageUrl?: string;
+  rarity?: string;
+  price?: string | number;
+  currency?: string;
+  topBid?: string | number;
+  rarityRank?: string | number;
+  rarityPercentile?: string;
+  lastSale?: string | number;
+  avgEarnings?: string;
+  distribution?: NftDistribution;
   floorPriceSol?: number;
-  rarityRank?: number;
-  attributes?: NftAttribute[];
-  verified?: boolean;
-  mintAddress?: string;
+  authorPfpUrl?: string;
 }
 
-const DEFAULT_ATTRIBUTES: NftAttribute[] = [
-  { traitType: "Background", value: "Cyber Purple", rarityPct: 4.2 },
-  { traitType: "Eyes", value: "Laser Red", rarityPct: 1.8 },
-  { traitType: "Clothes", value: "Solana Hoodie", rarityPct: 8.5 },
-  { traitType: "Head", value: "Halo", rarityPct: 2.1 },
-];
-
 export function SolanaNftCard({
-  name = "Mad Lad #4821",
-  collectionName = "Mad Lads",
-  imageUrl = "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=500&auto=format&fit=crop&q=80",
-  floorPriceSol = 142.5,
-  rarityRank = 312,
-  attributes = DEFAULT_ATTRIBUTES,
-  verified = true,
-  mintAddress = "7xKX...gAsU",
+  name = "SPHERE #088",
+  collectionName = "GENESIS ORBIT",
+  imageUrl = "/images/nft-avatar.jpg",
+  authorPfpUrl = "/images/author-pfp.jpg",
+  rarity = "Uncommon",
+  price,
+  currency = "SOL",
+  topBid = "2.15",
+  rarityRank = "#142",
+  floorPriceSol,
   className,
   ...props
 }: SolanaNftCardProps) {
   const reduceMotion = useReducedMotion();
-  const [showTraits, setShowTraits] = useState(false);
 
-  const solscanUrl = `https://solscan.io/token/${mintAddress}`;
+  const displayPrice =
+    price !== undefined
+      ? price
+      : floorPriceSol !== undefined
+        ? floorPriceSol
+        : "2.4";
+
+  const displayCurrency =
+    price !== undefined ? currency : floorPriceSol !== undefined ? "SOL" : currency;
 
   return (
-    <div
+    <motion.div
       data-slot="solana-nft-card"
+      whileHover={reduceMotion ? {} : { y: -4 }}
+      transition={{ type: "spring", stiffness: 350, damping: 24 }}
       className={cn(
-        "relative flex w-full max-w-sm flex-col overflow-hidden rounded-3xl border border-black/5 bg-white/70 shadow-xs backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/80",
-        className
+        "group relative flex w-full max-w-[340px] flex-col overflow-hidden rounded-[36px] bg-[#0e1013] p-3.5 shadow-2xl ring-1 ring-white/10 select-none",
+        className,
       )}
       {...props}
     >
-      <div className="relative aspect-square w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+      {/* Artwork container */}
+      <div className="relative aspect-square w-full overflow-hidden rounded-[26px] bg-[#1a44c2]">
         <img
           src={imageUrl}
           alt={name}
-          className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
 
-        <div className="absolute top-3 left-3 flex items-center gap-1 rounded-full bg-black/60 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-md">
-          <Sparkles className="h-3 w-3 text-amber-400" />
-          <span>Rank #{rarityRank}</span>
-        </div>
+        {/* Top rarity pill */}
+        {rarity && (
+          <div className="absolute top-3 left-1/2 -translate-x-1/2">
+            <div className="flex h-7 items-center justify-center rounded-full bg-blue-600/80 px-5 shadow-[0_0_14px_rgba(59,130,246,0.4)] ring-1 ring-blue-300/30 backdrop-blur-md select-none">
+              <span className="text-[12px] font-semibold tracking-wide text-white">
+                {rarity}
+              </span>
+            </div>
+          </div>
+        )}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-end">
+          {/* Left bottom concave fillet */}
+          <svg
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+            className="pointer-events-none -mr-[0.5px] h-4 w-4 shrink-0 fill-[#0e1013]"
+          >
+            <path d="M 0,16 L 16,16 L 16,0 A 16,16 0 0,1 0,16 Z" />
+          </svg>
 
-        <a
-          href={solscanUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition-opacity hover:opacity-80"
-          title="View Mint on Solscan"
-        >
-          <ExternalLink className="h-3.5 w-3.5" />
-        </a>
+          {/* Price pill tab */}
+          <div className="flex h-9 items-center justify-center rounded-t-[18px] bg-[#0e1013] px-6">
+            <span className="inline-flex items-center gap-1.5 text-[15px] font-bold tracking-wide text-white">
+              <DigitSwap value={displayPrice} />
+              <span>{displayCurrency}</span>
+            </span>
+          </div>
+
+          {/* Right bottom concave fillet */}
+          <svg
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+            className="pointer-events-none -ml-[0.5px] h-4 w-4 shrink-0 fill-[#0e1013]"
+          >
+            <path d="M 0,0 L 0,16 L 16,16 A 16,16 0 0,1 0,0 Z" />
+          </svg>
+        </div>
       </div>
 
-      <div className="flex flex-col gap-3 p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="font-runde text-base font-bold text-zinc-900 dark:text-white">
-                {name}
-              </span>
-              {verified && (
-                <Verified className="h-4 w-4 text-purple-500 fill-purple-500/20" />
-              )}
-            </div>
-            <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+      {/* Information section */}
+      <div className="px-1.5 pt-4 pb-1">
+        <div className="flex items-center gap-3">
+          {authorPfpUrl && (
+            <img
+              src={authorPfpUrl}
+              alt={collectionName}
+              className="size-11 shrink-0 rounded-xl object-cover ring-2 ring-white/15 shadow-md transition-transform duration-300 group-hover:scale-105"
+            />
+          )}
+          <div className="flex min-w-0 flex-col">
+            <h3 className="truncate text-lg font-bold tracking-tight text-white leading-snug">
+              {name}
+            </h3>
+            <span className="truncate text-xs font-semibold tracking-wider text-zinc-400 uppercase">
               {collectionName}
             </span>
           </div>
-
-          <div className="flex flex-col items-end">
-            <span className="text-[10px] font-medium text-zinc-400 uppercase">
-              Floor Price
-            </span>
-            <span className="font-mono text-sm font-bold text-zinc-900 dark:text-white">
-              {floorPriceSol} <span className="text-xs text-purple-500">SOL</span>
-            </span>
-          </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setShowTraits(!showTraits)}
-          className="flex items-center justify-between rounded-xl bg-zinc-100/70 px-3 py-2 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-200/80 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800"
-        >
-          <div className="flex items-center gap-1.5">
-            <Tag className="h-3.5 w-3.5 text-purple-500" />
-            <span>Attributes &amp; Traits</span>
+        {/* Useful & aesthetic NFT market stats container */}
+        <div className="mt-4 flex items-center justify-between rounded-[22px] bg-gradient-to-b from-[#171920] to-[#121419] px-4 py-3 ring-1 ring-white/[0.06] shadow-inner">
+          <div className="flex flex-col">
+            <span className="text-[10px] font-bold tracking-wider text-zinc-400 uppercase">
+              Top Offer
+            </span>
+            <div className="mt-1 flex items-baseline gap-1">
+              <span className="text-base font-bold text-white tracking-tight tabular-nums inline-flex items-center">
+                <DigitSwap value={topBid} />
+              </span>
+              <span className="text-xs font-bold text-zinc-400">{displayCurrency}</span>
+            </div>
           </div>
-          <span className="font-mono text-[11px] text-purple-600 dark:text-purple-400">
-            {showTraits ? "Hide" : "Show"} ({attributes.length})
-          </span>
-        </button>
 
-        {showTraits && (
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            transition={{ type: "spring", stiffness: 350, damping: 20 }}
-            className="grid grid-cols-2 gap-2 pt-1"
-          >
-            {attributes.map((attr) => (
-              <div
-                key={attr.traitType}
-                className="flex flex-col gap-0.5 rounded-xl border border-zinc-200/60 bg-white/50 p-2 dark:border-zinc-800 dark:bg-zinc-800/40"
-              >
-                <span className="text-[10px] font-medium text-zinc-400 uppercase">
-                  {attr.traitType}
-                </span>
-                <span className="font-runde text-xs font-semibold text-zinc-900 dark:text-white">
-                  {attr.value}
-                </span>
-                {attr.rarityPct && (
-                  <span className="font-mono text-[10px] text-purple-500">
-                    {attr.rarityPct}% have this
-                  </span>
-                )}
-              </div>
-            ))}
-          </motion.div>
-        )}
+          <div className="h-7 w-px bg-white/10" />
+
+          <div className="flex flex-col items-end">
+            <span className="text-[10px] font-bold tracking-wider text-zinc-400 uppercase">
+              Rarity Rank
+            </span>
+            <div className="mt-1 flex items-center">
+              <span className="text-base font-bold text-white tracking-tight tabular-nums inline-flex items-center">
+                <DigitSwap value={rarityRank} />
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
+
+export default SolanaNftCard;

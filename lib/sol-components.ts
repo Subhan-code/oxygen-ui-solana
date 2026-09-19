@@ -20,6 +20,7 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
       { name: "Account Card", slug: "accountcard" },
       { name: "Solana Identity Card", slug: "solanaidentitycard" },
       { name: "Solana Wallet Card", slug: "solanawalletcard" },
+      { name: "Wallet Card", slug: "walletcard" },
       { name: "Address Display", slug: "addressdisplay" },
       { name: "Multi Wallet Switcher", slug: "multiwalletswitcher" },
       { name: "Wallet Connect Button", slug: "walletsheet" },
@@ -33,6 +34,7 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
     components: [
       { name: "Solana Token Card", slug: "solanatokencard" },
       { name: "Solana NFT Card", slug: "solananftcard" },
+      { name: "Solana Event Card", slug: "solanaeventcard" },
       { name: "Token Input", slug: "tokeninput" },
       { name: "Token List Item", slug: "tokenlistitem" },
       { name: "Token Pair", slug: "tokenpair" },
@@ -46,6 +48,7 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
     description: "DEX execution UI, order books, forms, fees, and leverage controls.",
     components: [
       { name: "Crypto Swap Box", slug: "cryptoswapbox" },
+      { name: "Multi-Chain Swap", slug: "multichainswap" },
       { name: "Trade Buttons", slug: "tradebuttons" },
       { name: "Order Book", slug: "orderbook" },
       { name: "Order Form", slug: "orderform" },
@@ -102,6 +105,7 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
     description: "Fundamental input controls, buttons, counters, and motion primitives.",
     components: [
       { name: "Button", slug: "uxbutton" },
+      { name: "Digit Swap", slug: "digitswap" },
       { name: "Toggle Pill", slug: "togglepill" },
       { name: "Toggle Group", slug: "togglegroup" },
       { name: "OTP Input", slug: "otpinput" },

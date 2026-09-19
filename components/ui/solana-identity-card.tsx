@@ -3,18 +3,14 @@
 import React, { useState } from "react";
 import {
   Check,
-  Copy,
   ChevronDown,
   QrCode,
   Search,
-  Send,
+  ArrowUp,
+  ArrowDownToLine,
   Repeat,
-  DollarSign,
+  CreditCard,
   ShieldCheck,
-  Wallet,
-  TrendingUp,
-  TrendingDown,
-  Grid,
 } from "lucide-react";
 import solana from "thesvg/solana";
 import usdc from "thesvg/usdc";
@@ -131,7 +127,7 @@ export function SolanaIdentityCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       className={cn(
-        "relative flex w-full max-w-sm flex-col overflow-hidden rounded-[38px] border border-white/10 bg-[#1C1C1E] p-6 text-white shadow-2xl backdrop-blur-2xl font-sans select-none",
+        "relative flex w-full max-w-sm flex-col overflow-hidden rounded-[38px] border border-black/10 dark:border-white/10 bg-white dark:bg-black p-6 text-zinc-900 dark:text-white shadow-2xl backdrop-blur-2xl font-sans select-none",
         className
       )}
       {...props}
@@ -139,40 +135,32 @@ export function SolanaIdentityCard({
       {/* Top Header Bar */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-3">
-          {/* Avatar */}
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-950/80 border border-blue-500/40 text-lg shadow-inner">
+          {/* Avatar without badge */}
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl overflow-hidden ring-1 ring-black/5 dark:ring-white/10 shadow-sm bg-zinc-800 text-lg">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
                 alt={handle}
-                className="h-full w-full rounded-full object-cover"
+                className="h-full w-full object-cover"
               />
             ) : (
               <span>{avatarEmoji}</span>
-            )}
-            {verified && (
-              <span
-                title="Verified Solana Account"
-                className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-blue-500 text-white shadow"
-              >
-                <ShieldCheck className="h-2.5 w-2.5 stroke-[3]" />
-              </span>
             )}
           </div>
 
           {/* User info & Range selector */}
           <div className="flex flex-col">
-            <span className="text-xs font-semibold text-zinc-300 tracking-wide">
+            <span className="font-runde text-xs font-semibold text-zinc-400 tracking-wide">
               {handle}
             </span>
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setRangeOpen(!rangeOpen)}
-                className="flex items-center gap-1 text-[13px] font-bold text-white hover:text-blue-400 transition-colors cursor-pointer"
+                className="flex items-center gap-1 font-runde text-[13px] font-bold text-zinc-900 dark:text-white hover:text-sky-500 dark:hover:text-sky-400 transition-colors cursor-pointer"
               >
                 <span>{selectedRange}</span>
-                <ChevronDown className={cn("h-3.5 w-3.5 text-blue-400 transition-transform duration-200", rangeOpen && "rotate-180")} />
+                <ChevronDown className={cn("h-3.5 w-3.5 text-zinc-400 transition-transform duration-200", rangeOpen && "rotate-180")} />
               </button>
 
               {/* Range Dropdown */}
@@ -183,7 +171,7 @@ export function SolanaIdentityCard({
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute top-full left-0 z-30 mt-1.5 w-44 rounded-2xl border border-blue-900/60 bg-zinc-950/95 p-1.5 shadow-2xl backdrop-blur-xl"
+                    className="absolute top-full left-0 z-30 mt-1.5 w-44 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-black p-1.5 shadow-2xl backdrop-blur-xl"
                   >
                     {ranges.map((r) => (
                       <button
@@ -194,8 +182,10 @@ export function SolanaIdentityCard({
                           setRangeOpen(false);
                         }}
                         className={cn(
-                          "w-full rounded-xl px-3 py-1.5 text-left text-xs font-medium transition-colors cursor-pointer",
-                          selectedRange === r ? "bg-blue-600/30 text-blue-300 font-bold border border-blue-500/30" : "text-zinc-300 hover:bg-blue-950/50"
+                          "w-full rounded-xl px-3 py-1.5 text-left font-runde text-xs font-medium transition-colors cursor-pointer",
+                          selectedRange === r
+                            ? "bg-zinc-100 dark:bg-[#141416] text-zinc-900 dark:text-white font-bold"
+                            : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-[#101012] hover:text-zinc-900 dark:hover:text-white"
                         )}
                       >
                         {r}
@@ -216,16 +206,16 @@ export function SolanaIdentityCard({
             whileHover={reduceMotion ? undefined : { scale: 1.02 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             title="Scan QR / Copy Address"
-            className="flex h-9 w-9 items-center justify-center rounded-2xl bg-zinc-900/90 border border-blue-900/50 text-blue-300 hover:text-white hover:border-blue-500/50 transition-colors cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center rounded-2xl bg-zinc-100 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-black/10 dark:hover:border-white/20 transition-colors cursor-pointer"
           >
-            {copied ? <Check className="h-4 w-4 text-blue-400" /> : <QrCode className="h-4 w-4" />}
+            {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <QrCode className="h-4 w-4" />}
           </motion.button>
           <motion.button
             type="button"
             whileHover={reduceMotion ? undefined : { scale: 1.02 }}
             whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             title="Search transactions"
-            className="flex h-9 w-9 items-center justify-center rounded-2xl bg-zinc-900/90 border border-blue-900/50 text-blue-300 hover:text-white hover:border-blue-500/50 transition-colors cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center rounded-2xl bg-zinc-100 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-black/10 dark:hover:border-white/20 transition-colors cursor-pointer"
           >
             <Search className="h-4 w-4" />
           </motion.button>
@@ -237,15 +227,15 @@ export function SolanaIdentityCard({
         <motion.h1
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
-          className="font-runde text-4xl font-extrabold tracking-tight text-white sm:text-5xl"
+          className="font-runde text-4xl font-black tracking-tight text-zinc-900 dark:text-white sm:text-5xl"
         >
           {totalFiatBalance}
         </motion.h1>
 
         {/* Day PnL Pill */}
-        <div className="mt-2.5 inline-flex items-center gap-2 rounded-full bg-blue-950/80 border border-blue-500/40 px-3.5 py-1 text-xs font-semibold text-blue-400 shadow-sm">
+        <div className="mt-2.5 inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3.5 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
           <span>{dayChangeFiat}</span>
-          <span className="rounded-md bg-blue-500/25 px-1.5 py-0.5 text-[11px] font-bold text-blue-200">
+          <span className="rounded-md bg-emerald-500/20 px-1.5 py-0.5 text-[11px] font-bold text-emerald-700 dark:text-emerald-300">
             {dayChangePercent}
           </span>
         </div>
@@ -258,7 +248,7 @@ export function SolanaIdentityCard({
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            className="mb-4 rounded-xl bg-blue-600/20 border border-blue-500/40 py-1.5 text-center text-xs font-semibold text-blue-300"
+            className="mb-4 rounded-xl bg-zinc-100 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 py-1.5 text-center text-xs font-semibold text-zinc-800 dark:text-zinc-200"
           >
             Triggered {activeAction} action
           </motion.div>
@@ -266,19 +256,17 @@ export function SolanaIdentityCard({
       </AnimatePresence>
 
       {/* Quick Action Grid (4 Buttons) */}
-      <div className="grid grid-cols-4 gap-3 mb-6">
+      <div className="grid grid-cols-4 gap-2.5 mb-6">
         {/* Receive */}
         <motion.button
           type="button"
           onClick={() => handleAction("Receive", onReceive)}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
+          className="flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-zinc-100/80 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 py-3.5 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200/90 dark:hover:bg-[#141414] hover:text-zinc-950 dark:hover:text-white motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 cursor-pointer shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/40">
-            <Grid className="h-4 w-4" />
-          </div>
-          <span className="text-xs font-semibold tracking-tight">Receive</span>
+          <ArrowDownToLine className="h-4.5 w-4.5 text-sky-500 dark:text-sky-400" />
+          <span className="font-runde text-[11px] font-semibold tracking-tight">Receive</span>
         </motion.button>
 
         {/* Send */}
@@ -287,12 +275,10 @@ export function SolanaIdentityCard({
           onClick={() => handleAction("Send", onSend)}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
+          className="flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-zinc-100/80 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 py-3.5 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200/90 dark:hover:bg-[#141414] hover:text-zinc-950 dark:hover:text-white motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 cursor-pointer shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/40">
-            <Send className="h-4 w-4 -rotate-45" />
-          </div>
-          <span className="text-xs font-semibold tracking-tight">Send</span>
+          <ArrowUp className="h-4.5 w-4.5 text-sky-500 dark:text-sky-400" />
+          <span className="font-runde text-[11px] font-semibold tracking-tight">Send</span>
         </motion.button>
 
         {/* Swap */}
@@ -301,12 +287,10 @@ export function SolanaIdentityCard({
           onClick={() => handleAction("Swap", onSwap)}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
+          className="flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-zinc-100/80 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 py-3.5 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200/90 dark:hover:bg-[#141414] hover:text-zinc-950 dark:hover:text-white motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 cursor-pointer shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/40">
-            <Repeat className="h-4 w-4" />
-          </div>
-          <span className="text-xs font-semibold tracking-tight">Swap</span>
+          <Repeat className="h-4.5 w-4.5 text-sky-500 dark:text-sky-400" />
+          <span className="font-runde text-[11px] font-semibold tracking-tight">Swap</span>
         </motion.button>
 
         {/* Buy */}
@@ -315,37 +299,35 @@ export function SolanaIdentityCard({
           onClick={() => handleAction("Buy", onBuy)}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-zinc-900/90 border border-blue-900/50 py-3.5 text-zinc-300 hover:bg-blue-950/60 hover:text-white hover:border-blue-500/50 motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 motion-safe:ease-[var(--ease-out-expo)] cursor-pointer shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40"
+          className="flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-zinc-100/80 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 py-3.5 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200/90 dark:hover:bg-[#141414] hover:text-zinc-950 dark:hover:text-white motion-safe:transition-[background-color,border-color,color,transform] motion-safe:duration-150 cursor-pointer shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/40">
-            <DollarSign className="h-4 w-4" />
-          </div>
-          <span className="text-xs font-semibold tracking-tight">Buy</span>
+          <CreditCard className="h-4.5 w-4.5 text-sky-500 dark:text-sky-400" />
+          <span className="font-runde text-[11px] font-semibold tracking-tight">Buy</span>
         </motion.button>
       </div>
 
       {/* Asset Cards Stack */}
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         {assets.map((asset) => (
           <motion.div
             key={asset.symbol}
-            whileHover={{ scale: 1.02, x: 2 }}
+            whileHover={{ scale: 1.01, x: 2 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="flex items-center justify-between rounded-2xl border border-blue-900/50 bg-zinc-900/80 p-4 motion-safe:transition-[background-color,border-color] motion-safe:duration-150 hover:bg-zinc-900 hover:border-blue-500/40 cursor-pointer shadow-sm"
+            className="flex items-center justify-between rounded-2xl border border-black/5 dark:border-white/10 bg-zinc-100/80 dark:bg-[#0a0a0a] p-3.5 motion-safe:transition-[background-color,border-color] motion-safe:duration-150 hover:bg-zinc-200/90 dark:hover:bg-[#141414] cursor-pointer shadow-xs"
           >
             {/* Left: Full-cover Token Icon + Name & Amount */}
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-3">
               <div
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl overflow-hidden bg-zinc-900 shadow-md [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl overflow-hidden bg-zinc-900 shadow-xs [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover"
                 dangerouslySetInnerHTML={{
                   __html: asset.symbol === "SOL" ? solana.svg : usdc.svg,
                 }}
               />
               <div className="flex flex-col">
-                <span className="text-sm font-bold text-white leading-tight">
+                <span className="font-runde text-sm font-bold text-zinc-900 dark:text-white leading-tight">
                   {asset.name}
                 </span>
-                <span className="text-xs font-semibold text-zinc-400 mt-0.5">
+                <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-0.5">
                   {asset.amount}
                 </span>
               </div>
@@ -353,13 +335,13 @@ export function SolanaIdentityCard({
 
             {/* Right: Fiat Value & Change */}
             <div className="flex flex-col items-end">
-              <span className="text-sm font-extrabold text-white leading-tight">
+              <span className="font-runde text-sm font-extrabold text-zinc-900 dark:text-white leading-tight">
                 {asset.fiatValue}
               </span>
               <span
                 className={cn(
                   "text-xs font-semibold mt-0.5",
-                  asset.isPositive ? "text-blue-400" : "text-rose-400"
+                  asset.isPositive ? "text-emerald-500 dark:text-emerald-400" : "text-rose-500 dark:text-rose-400"
                 )}
               >
                 {asset.change}
