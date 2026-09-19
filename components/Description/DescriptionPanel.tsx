@@ -62,7 +62,7 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
           </button>
         </Tooltip>
 
-        {item?.registry && (
+        {(item?.registry || item?.file || item?.slug) && (
           <Tooltip label={codeOpen ? "Hide code" : "Get code"}>
             <button
               type="button"
@@ -88,7 +88,14 @@ export function DescriptionPanel({ open, setOpen }: DescriptionPanelProps) {
       >
 
         <div className="no-scrollbar flex flex-1 flex-col overflow-y-auto">
-          <DescriptionContent item={item} className="p-8 pt-60" />
+          <DescriptionContent
+            item={item}
+            onOpenCode={() => {
+              setOpen(true);
+              setCodeOpen(true);
+            }}
+            className="p-8 pt-60"
+          />
         </div>
 
         <CodeDrawer

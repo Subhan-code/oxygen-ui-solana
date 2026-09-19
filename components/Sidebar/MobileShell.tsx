@@ -31,9 +31,13 @@ export default function MobileShell({
           <DescriptionContent item={item} showSourceHint={false} />
         </div>
 
-        {item?.registry && (
+        {(item?.registry || item?.file || item?.slug) && (
           <div className={cn(CARD, "p-6")}>
-            <SourceSection key={item.registry} registry={item.registry} />
+            <SourceSection
+              key={item.slug || item.registry}
+              registry={item.slug || item.registry || ""}
+              file={item.file}
+            />
           </div>
         )}
       </div>

@@ -30,14 +30,11 @@ export default async function ComponentsPage() {
       <GooeyNavbar stars={stars} />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-10 pt-24 sm:px-6 md:pt-28" suppressHydrationWarning>
-        <header className="flex flex-col items-center justify-center text-center max-w-2xl mx-auto mb-6 sm:mb-8">
-          <span className="font-mono text-[11px] font-semibold tracking-wide text-[#0066FF] dark:text-[#0A84FF]">
-            Registry
-          </span>
-          <h1 className="mt-1 font-runde text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+        <header className="flex flex-col items-center justify-center text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <h1 className="font-runde text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             Components
           </h1>
-          <p className="mt-2 max-w-lg text-xs sm:text-sm font-medium text-muted-foreground leading-relaxed">
+          <p className="mt-3 max-w-lg text-xs sm:text-sm font-medium text-muted-foreground leading-relaxed">
             The official catalog of production-grade Solana components organized across core dApp modules.
           </p>
         </header>

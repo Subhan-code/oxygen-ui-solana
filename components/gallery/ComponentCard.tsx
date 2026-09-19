@@ -75,29 +75,15 @@ export const ComponentCard = memo(function ComponentCard({
           <p className="font-semibold text-xs sm:text-sm text-foreground truncate group-hover:text-[#0066FF] dark:group-hover:text-[#0A84FF] motion-safe:transition-colors motion-safe:duration-200">
             {item.name}
           </p>
-          {item.group && (
-            <span className="hidden sm:inline-flex items-center rounded-md bg-zinc-200/60 dark:bg-white/10 px-2 py-0.5 text-[10px] font-mono font-medium text-zinc-600 dark:text-zinc-400 shrink-0">
-              {item.group}
-            </span>
-          )}
         </div>
-        <div className="flex items-center gap-1.5 shrink-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="size-3.5 text-muted-foreground/60 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[#0066FF] dark:group-hover:text-[#0A84FF] motion-safe:transition-[opacity,transform,color] motion-safe:duration-200 will-change-transform"
-            aria-hidden="true"
-          >
-            <path d="M7 17L17 7" />
-            <path d="M7 7h10v10" />
-          </svg>
+        <div className="relative flex h-6 min-w-6 shrink-0 items-center justify-center rounded-md px-1">
+          {/* resting: subtle ring */}
+          <span className="absolute inset-0 rounded-md border border-black/10 dark:border-white/10 opacity-100 motion-safe:transition-all motion-safe:duration-200 group-hover:opacity-0" />
+          {/* hover: filled chip */}
+          <span className="absolute inset-0 rounded-md bg-zinc-900 dark:bg-white opacity-0 motion-safe:transition-all motion-safe:duration-200 group-hover:opacity-100" />
+          <span className="relative z-10 font-mono text-[10px] font-bold leading-none text-zinc-400 dark:text-zinc-500 motion-safe:transition-colors motion-safe:duration-200 group-hover:text-white dark:group-hover:text-zinc-900">
+            {item.id}
+          </span>
         </div>
       </div>
     </motion.div>
@@ -105,5 +91,3 @@ export const ComponentCard = memo(function ComponentCard({
 });
 
 export default ComponentCard;
-
-

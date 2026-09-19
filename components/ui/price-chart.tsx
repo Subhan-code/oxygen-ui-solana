@@ -39,7 +39,7 @@ const PriceChart = ({ title, description, change = null, series, className }: Pr
   return (
     <div
       className={cn(
-        "flex min-h-0 flex-1 flex-col gap-4 rounded-xl border bg-card p-4 overflow-hidden",
+        "flex min-h-0 flex-1 flex-col gap-4 rounded-xl border border-white/10 bg-black p-4 overflow-hidden text-white",
         className
       )}
     >

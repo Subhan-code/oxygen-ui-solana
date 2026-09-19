@@ -8,25 +8,11 @@ export const dynamic = "force-static";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Installation & Integration Guide",
+  title: "Installation — Oxygen UI",
   description:
-    "Learn how to set up Oxygen UI in your Next.js, Vite, or React Solana project using the shadcn CLI.",
+    "Add production-grade Solana React components to your project using the shadcn CLI.",
   alternates: {
     canonical: "/docs/installation",
-  },
-  openGraph: {
-    title: "Installation & Integration Guide — Oxygen UI",
-    description:
-      "Learn how to set up Oxygen UI in your Next.js, Vite, or React Solana project using the shadcn CLI.",
-    url: "/docs/installation",
-    images: ["/ogimage.webp"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Installation & Integration Guide — Oxygen UI",
-    description:
-      "Learn how to set up Oxygen UI in your Next.js, Vite, or React Solana project using the shadcn CLI.",
-    images: ["/ogimage.webp"],
   },
 };
 
@@ -37,88 +23,68 @@ export default async function InstallationPage() {
     <>
       <GooeyNavbar stars={stars} />
 
-      <main className="mx-auto w-full max-w-4xl flex-1 px-5 pb-24 pt-32 sm:px-6 md:pt-40">
-        <header className="flex flex-col gap-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-400 w-fit">
-            Documentation &amp; Setup Guide
-          </div>
-          <h1 className="font-runde text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Installation &amp; Integration Guide
+      <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 pt-28 sm:px-6 md:pt-36">
+        <header className="flex flex-col gap-2">
+          <h1 className="font-runde text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
+            Installation
           </h1>
-          <p className="text-base text-muted-foreground sm:text-lg">
-            Complete walkthrough for integrating Oxygen UI components into your Solana React application.
+          <p className="text-sm text-muted-foreground sm:text-base">
+            Add production-ready Solana primitives directly to your codebase. You own the code.
           </p>
         </header>
 
-        <hr className="my-8 border-neutral-800" />
-
-        {/* Quickstart via Shadcn */}
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold font-runde">1. Quickstart (shadcn CLI)</h2>
-          <p className="text-sm text-muted-foreground">
-            Oxygen UI components are distributed via the official shadcn CLI registry. You can add any component directly into your codebase with a single command:
-          </p>
-          <div className="relative rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm">
-            <div className="flex items-center justify-between text-neutral-300">
-              <code>npx shadcn add oxygen/solana-swap-card</code>
-              <CopyButton value="npx shadcn add oxygen/solana-swap-card" />
-            </div>
-          </div>
-        </section>
-
-        {/* Framework Setup */}
-        <section className="mt-12 space-y-6">
-          <h2 className="text-2xl font-bold font-runde">2. Framework Setup</h2>
-
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-blue-400">A. Next.js (App Router)</h3>
-            <p className="text-sm text-muted-foreground">
-              Create a Next.js project with Tailwind CSS and TypeScript:
+        <div className="mt-8 space-y-10">
+          {/* CLI Install */}
+          <section className="space-y-3">
+            <h2 className="font-runde text-base font-semibold text-foreground">
+              1. Add via shadcn CLI
+            </h2>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Install any Oxygen component directly into your project:
             </p>
-            <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm">
-              <code>npx create-next-app@latest my-solana-app --typescript --tailwind --eslint</code>
+            <div className="relative rounded-2xl border border-black/10 dark:border-white/10 bg-zinc-100/70 dark:bg-zinc-900/60 p-4 font-mono text-xs sm:text-sm">
+              <div className="flex items-center justify-between gap-2 text-foreground">
+                <code className="overflow-x-auto">npx shadcn add oxygen/solana-swap-card</code>
+                <CopyButton value="npx shadcn add oxygen/solana-swap-card" />
+              </div>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Initialize shadcn UI in your project:
+          </section>
+
+          {/* Solana Peer Dependencies */}
+          <section className="space-y-3">
+            <h2 className="font-runde text-base font-semibold text-foreground">
+              2. Peer Dependencies
+            </h2>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Ensure you have the standard Solana wallet and web3 libraries installed:
             </p>
-            <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm">
-              <code>npx shadcn@latest init</code>
+            <div className="relative rounded-2xl border border-black/10 dark:border-white/10 bg-zinc-100/70 dark:bg-zinc-900/60 p-4 font-mono text-xs sm:text-sm">
+              <div className="flex items-center justify-between gap-2 text-foreground">
+                <code className="overflow-x-auto">npm i @solana/web3.js @solana/wallet-adapter-react @solana/wallet-adapter-react-ui</code>
+                <CopyButton value="npm i @solana/web3.js @solana/wallet-adapter-react @solana/wallet-adapter-react-ui" />
+              </div>
             </div>
-          </div>
+          </section>
 
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-purple-400">B. Vite + React</h3>
-            <p className="text-sm text-muted-foreground">
-              Initialize a React project using Vite:
+          {/* Integration */}
+          <section className="space-y-3">
+            <h2 className="font-runde text-base font-semibold text-foreground">
+              3. Import &amp; Render
+            </h2>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Once added, import the component directly from your local components directory:
             </p>
-            <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm">
-              <code>npm create vite@latest my-solana-dapp -- --template react-ts</code>
+            <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-zinc-100/70 dark:bg-zinc-900/60 p-4 font-mono text-xs text-muted-foreground">
+              <pre className="overflow-x-auto text-foreground">
+                <code>{`import { SolanaSwapCard } from "@/components/oxygen/solana-swap-card";
+
+export default function Swap() {
+  return <SolanaSwapCard />;
+}`}</code>
+              </pre>
             </div>
-          </div>
-        </section>
-
-        {/* Solana Wallet Adapter Integration */}
-        <section className="mt-12 space-y-4">
-          <h2 className="text-2xl font-bold font-runde">3. Solana Wallet Adapter Setup</h2>
-          <p className="text-sm text-muted-foreground">
-            Oxygen UI primitives seamlessly pair with `@solana/wallet-adapter-react` and `@solana/web3.js`:
-          </p>
-          <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-neutral-300">
-            <code>npm install @solana/web3.js @solana/wallet-adapter-react @solana/wallet-adapter-react-ui @solana/wallet-adapter-wallets</code>
-          </div>
-        </section>
-
-        {/* Community & Feedback */}
-        <section className="mt-12 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-6">
-          <h3 className="text-xl font-bold font-runde text-blue-400">Community &amp; Feedback</h3>
-          <p className="mt-2 text-sm text-neutral-300">
-            Found a bug or need a specific Solana primitive? Oxygen UI is driven by community feedback. Check out our{" "}
-            <a href="https://github.com/Subhan-code/oxygen-ui-solana/blob/main/FEEDBACK.md" target="_blank" rel="noreferrer" className="underline font-semibold text-white">
-              Feedback &amp; Contribution Guidelines
-            </a>{" "}
-            or open an issue on GitHub.
-          </p>
-        </section>
+          </section>
+        </div>
       </main>
 
       <Footer />

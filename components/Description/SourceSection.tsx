@@ -6,7 +6,13 @@ import { ChevronDown } from "lucide-react";
 import PanelCode from "./PanelCode";
 import { fetchSource, SOURCE_LOADING } from "./fetchSource";
 
-export default function SourceSection({ registry }: { registry: string }) {
+export default function SourceSection({
+  registry,
+  file,
+}: {
+  registry: string;
+  file?: string;
+}) {
   const [open, setOpen] = useState(false);
   const [code, setCode] = useState<string | null>(null);
 
@@ -15,7 +21,7 @@ export default function SourceSection({ registry }: { registry: string }) {
     setOpen(next);
     if (!next || code) return;
     setCode(SOURCE_LOADING);
-    setCode(await fetchSource(registry));
+    setCode(await fetchSource(registry, file));
   };
 
   return (

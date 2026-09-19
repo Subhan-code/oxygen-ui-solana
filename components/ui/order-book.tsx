@@ -54,12 +54,12 @@ const OrderBook = ({ bids, asks, className }: OrderBookProps) => {
     <div
       data-slot="order-book"
       className={cn(
-        "w-full flex flex-col overflow-hidden rounded-lg border bg-card text-card-foreground",
+        "w-full flex flex-col overflow-hidden rounded-lg border border-white/10 bg-black text-white",
         className,
       )}
     >
       {/* Column headers */}
-      <div className="grid grid-cols-3 px-3 py-2 text-xs text-muted-foreground border-b">
+      <div className="grid grid-cols-3 px-3 py-2 text-xs text-white/40 border-b border-white/10">
         <span>Price</span>
         <span className="text-right">Size</span>
         <span className="text-right">Total</span>
@@ -80,10 +80,10 @@ const OrderBook = ({ bids, asks, className }: OrderBookProps) => {
                 <span className="text-red-400 font-medium tabular-nums">
                   {ask.price.toFixed(2)}
                 </span>
-                <span className="text-right text-muted-foreground tabular-nums">
+                <span className="text-right text-white/50 tabular-nums">
                   {formatSize(ask.size)}
                 </span>
-                <span className="text-right text-muted-foreground tabular-nums">
+                <span className="text-right text-white/50 tabular-nums">
                   {formatSize(total)}
                 </span>
               </div>
@@ -93,14 +93,14 @@ const OrderBook = ({ bids, asks, className }: OrderBookProps) => {
       </div>
 
       {/* Spread / mid price */}
-      <div className="grid grid-cols-3 px-3 py-2 border-y">
+      <div className="grid grid-cols-3 px-3 py-2 border-y border-white/10">
         <span className="text-lg font-semibold text-emerald-500 tabular-nums">
           {midPrice.toFixed(2)}
         </span>
-        <span className="text-right text-xs text-muted-foreground self-center">
+        <span className="text-right text-xs text-white/40 self-center">
           Spread
         </span>
-        <span className="text-right text-xs text-muted-foreground self-center tabular-nums">
+        <span className="text-right text-xs text-white/40 self-center tabular-nums">
           {spread.toFixed(2)} ({spreadPercent.toFixed(3)}%)
         </span>
       </div>
@@ -120,10 +120,10 @@ const OrderBook = ({ bids, asks, className }: OrderBookProps) => {
                 <span className="text-emerald-500 font-medium tabular-nums">
                   {bid.price.toFixed(2)}
                 </span>
-                <span className="text-right text-muted-foreground tabular-nums">
+                <span className="text-right text-white/50 tabular-nums">
                   {formatSize(bid.size)}
                 </span>
-                <span className="text-right text-muted-foreground tabular-nums">
+                <span className="text-right text-white/50 tabular-nums">
                   {formatSize(total)}
                 </span>
               </div>

@@ -5,29 +5,72 @@ import { motion, useReducedMotion } from "motion/react";
 import { getSolComponents } from "@/lib/sol-components";
 import ScrollReveal from "./ScrollReveal";
 
+function ShowcaseCard({
+  href,
+  title,
+  imageSrc,
+  imageAlt,
+  className,
+  reduceMotion,
+}: {
+  href: string;
+  title: string;
+  imageSrc: string;
+  imageAlt: string;
+  className?: string;
+  reduceMotion: boolean | null;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`group block h-full outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px] ${className ?? ""}`}
+    >
+      <motion.div
+        whileHover={reduceMotion ? undefined : { y: -3 }}
+        transition={{ duration: 0.2 }}
+        className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-sm transition-all hover:shadow-md hover:border-zinc-300 dark:border-white/10 dark:bg-zinc-900/90 dark:hover:border-white/20 h-full aspect-square"
+        style={{ cornerShape: "squircle" } as React.CSSProperties}
+      >
+        <div className="flex items-center justify-between">
+          <h3 className="font-runde text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-white">
+            {title}
+          </h3>
+          <div className="flex size-8 items-center justify-center rounded-[10px] bg-zinc-900 text-white transition-all duration-200 group-hover:bg-black group-hover:scale-105 dark:bg-white dark:text-zinc-900 dark:group-hover:bg-zinc-100 shrink-0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="size-4">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </div>
+        </div>
+        <div
+          className="mt-3 relative w-full flex-1 overflow-hidden rounded-[20px] border border-black/5 dark:border-white/5 bg-zinc-950 flex items-center justify-center"
+          style={{ cornerShape: "squircle" } as React.CSSProperties}
+        >
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </motion.div>
+    </Link>
+  );
+}
+
 export default function ComponentsShowcase() {
   const reduceMotion = useReducedMotion();
   const allSolItems = getSolComponents();
 
-  const nftItem =
-    allSolItems.find((c) => c.slug === "solananftcard") ||
-    allSolItems[0];
-
-  const balanceItem =
-    allSolItems.find((c) => c.slug === "balancedisplay") ||
-    allSolItems[1];
-
-  const stepItem =
-    allSolItems.find((c) => c.slug === "steptrackerwidget") ||
-    allSolItems[2];
-
-  const eventItem =
-    allSolItems.find((c) => c.slug === "solanaeventcard") ||
-    allSolItems[3];
+  const nftItem = allSolItems.find((c) => c.slug === "solananftcard") || allSolItems[0];
+  const balanceItem = allSolItems.find((c) => c.slug === "balancedisplay") || allSolItems[1];
+  const eventItem = allSolItems.find((c) => c.slug === "solanaeventcard") || allSolItems[3];
+  const stepItem = allSolItems.find((c) => c.slug === "steptrackerwidget") || allSolItems[2];
+  const tokenItem = allSolItems.find((c) => c.slug === "solanatokencard") || allSolItems[4];
 
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24">
-      {/* Header section: centered title */}
+      {/* Header */}
       <div className="mx-auto flex max-w-2xl flex-col items-center pb-10 text-center">
         <h2 className="font-runde text-3xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-4xl">
           56+ Solana components
@@ -39,129 +82,43 @@ export default function ComponentsShowcase() {
 
       <ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-          {/* Cell 1: Solana NFT Card (Square) */}
-          <Link
+
+          {/* Row 1 — three square cards */}
+          <ShowcaseCard
             href={nftItem ? nftItem.href : "/components"}
-            className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px]"
-          >
-            <motion.div
-              whileHover={reduceMotion ? undefined : { y: -3 }}
-              transition={{ duration: 0.2 }}
-              className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-sm transition-all hover:shadow-md hover:border-zinc-300 dark:border-white/10 dark:bg-zinc-900/90 dark:hover:border-white/20 h-full aspect-square"
-              style={{ cornerShape: "squircle" } as React.CSSProperties}
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-runde text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-white">
-                  Solana NFT Card
-                </h3>
-                <div className="flex size-8 items-center justify-center rounded-[10px] bg-zinc-900 text-white transition-all duration-200 group-hover:bg-black group-hover:scale-105 dark:bg-white dark:text-zinc-900 dark:group-hover:bg-zinc-100 shrink-0">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="size-4">
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </div>
-              </div>
+            title="Solana NFT Card"
+            imageSrc="/showcase/solana-nft-card.png"
+            imageAlt="Solana NFT Card"
+            reduceMotion={reduceMotion}
+          />
 
-              {/* Showcase Image Preview */}
-              <div
-                className="mt-3 relative w-full flex-1 overflow-hidden rounded-[20px] border border-black/5 dark:border-white/5 bg-zinc-950 flex items-center justify-center"
-                style={{ cornerShape: "squircle" } as React.CSSProperties}
-              >
-                <img
-                  src="/showcase/solana-nft-card.png"
-                  alt="Solana NFT Card"
-                  className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </motion.div>
-          </Link>
-
-          {/* Cell 2: Balance Display (Square) */}
-          <Link
+          <ShowcaseCard
             href={balanceItem ? balanceItem.href : "/components"}
-            className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px]"
-          >
-            <motion.div
-              whileHover={reduceMotion ? undefined : { y: -3 }}
-              transition={{ duration: 0.2 }}
-              className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-sm transition-all hover:shadow-md hover:border-zinc-300 dark:border-white/10 dark:bg-zinc-900/90 dark:hover:border-white/20 h-full aspect-square"
-              style={{ cornerShape: "squircle" } as React.CSSProperties}
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-runde text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-white">
-                  Balance Display
-                </h3>
-                <div className="flex size-8 items-center justify-center rounded-[10px] bg-zinc-900 text-white transition-all duration-200 group-hover:bg-black group-hover:scale-105 dark:bg-white dark:text-zinc-900 dark:group-hover:bg-zinc-100 shrink-0">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="size-4">
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </div>
-              </div>
+            title="Balance Display"
+            imageSrc="/showcase/balance-display.png"
+            imageAlt="Balance Display"
+            reduceMotion={reduceMotion}
+          />
 
-              {/* Showcase Image Preview */}
-              <div
-                className="mt-3 relative w-full flex-1 overflow-hidden rounded-[20px] border border-black/5 dark:border-white/5 bg-zinc-950 flex items-center justify-center"
-                style={{ cornerShape: "squircle" } as React.CSSProperties}
-              >
-                <img
-                  src="/showcase/balance-display.png"
-                  alt="Balance Display"
-                  className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </motion.div>
-          </Link>
-
-          {/* Cell 3: Solana Event Card (Square) */}
-          <Link
+          <ShowcaseCard
             href={eventItem ? eventItem.href : "/components"}
-            className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px]"
-          >
-            <motion.div
-              whileHover={reduceMotion ? undefined : { y: -3 }}
-              transition={{ duration: 0.2 }}
-              className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-sm transition-all hover:shadow-md hover:border-zinc-300 dark:border-white/10 dark:bg-zinc-900/90 dark:hover:border-white/20 h-full aspect-square"
-              style={{ cornerShape: "squircle" } as React.CSSProperties}
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-runde text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-white">
-                  Solana Event Card
-                </h3>
-                <div className="flex size-8 items-center justify-center rounded-[10px] bg-zinc-900 text-white transition-all duration-200 group-hover:bg-black group-hover:scale-105 dark:bg-white dark:text-zinc-900 dark:group-hover:bg-zinc-100 shrink-0">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="size-4">
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </div>
-              </div>
+            title="Solana Event Card"
+            imageSrc="/showcase/solana-event-card.png"
+            imageAlt="Solana Event Card"
+            reduceMotion={reduceMotion}
+          />
 
-              {/* Showcase Image Preview */}
-              <div
-                className="mt-3 relative w-full flex-1 overflow-hidden rounded-[20px] border border-black/5 dark:border-white/5 bg-zinc-950 flex items-center justify-center"
-                style={{ cornerShape: "squircle" } as React.CSSProperties}
-              >
-                <img
-                  src="/showcase/solana-event-card.png"
-                  alt="Solana Event Card"
-                  className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </motion.div>
-          </Link>
+          {/* Row 2 — three cells: Step Tracker | View All (center) | Token Card */}
 
-          {/* Cell 4: Step Tracker Widget (Rectangle - 2 columns wide) */}
+          {/* Cell 4: Step Tracker Widget */}
           <Link
             href={stepItem ? stepItem.href : "/components"}
-            className="group block outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px] md:col-span-2 lg:col-span-2"
+            className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px]"
           >
             <motion.div
               whileHover={reduceMotion ? undefined : { y: -3 }}
               transition={{ duration: 0.2 }}
-              className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-sm transition-all hover:shadow-md hover:border-zinc-300 dark:border-white/10 dark:bg-zinc-900/90 dark:hover:border-white/20 h-[210px] sm:h-[220px]"
+              className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-sm transition-all hover:shadow-md hover:border-zinc-300 dark:border-white/10 dark:bg-zinc-900/90 dark:hover:border-white/20 h-[210px] sm:h-[230px]"
               style={{ cornerShape: "squircle" } as React.CSSProperties}
             >
               <div className="flex items-center justify-between">
@@ -174,8 +131,6 @@ export default function ComponentsShowcase() {
                   </svg>
                 </div>
               </div>
-
-              {/* Showcase Image Preview */}
               <div
                 className="mt-3 relative w-full flex-1 min-h-0 overflow-hidden rounded-[20px] border border-black/5 dark:border-white/5 bg-zinc-950 flex items-center justify-center"
                 style={{ cornerShape: "squircle" } as React.CSSProperties}
@@ -191,37 +146,85 @@ export default function ComponentsShowcase() {
             </motion.div>
           </Link>
 
-          {/* Cell 5: View all 56 components CTA card */}
+          {/* Cell 5 (center on desktop): View all 56 components CTA */}
           <Link
             href="/components"
             tabIndex={0}
-            className="group relative flex h-[210px] sm:h-[220px] flex-col justify-between overflow-hidden rounded-[32px] bg-[#0066FF] p-5 sm:p-6 text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-out hover:bg-[#0052CC] outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:col-span-2 lg:col-span-1"
+            className="group relative flex h-[210px] sm:h-[230px] flex-col items-center justify-center overflow-hidden rounded-[32px] bg-[#0066FF] text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-colors duration-200 ease-out hover:bg-[#0052CC] outline-none focus-visible:ring-2 focus-visible:ring-white/70"
             style={{ cornerShape: "squircle" } as React.CSSProperties}
           >
+            {/* SVG positioned at the top edge, cropped so only its bottom half shows */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-20 -right-20 h-80 w-80 opacity-25 [filter:brightness(0)_invert(1)]"
+              className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-56 opacity-25 [filter:brightness(0)_invert(1)] transition-transform duration-300 ease-out group-hover:-translate-y-[45%]"
               src="/logos/Oxygenui.svg"
             />
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              xmlns="http://www.w3.org/2000/svg"
-              className="relative h-8 w-8 motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              aria-hidden="true"
-            >
-              <path d="M7 17 17 7M8 7h9v9" />
-            </svg>
-            <span className="lift-on-hover relative font-runde text-2xl font-bold tracking-tight">
-              View all<br />56 components
-            </span>
+
+            {/* Centered content on a single line */}
+            <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pt-10 sm:pt-12">
+              <span className="font-runde text-xs font-semibold uppercase tracking-widest text-white/70">
+                Browse the full catalog
+              </span>
+              <div className="mt-2 flex items-center justify-center gap-2">
+                <span className="font-runde text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">
+                  View all 56 components
+                </span>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
           </Link>
+
+          {/* Cell 6: Solana Token Card */}
+          <Link
+            href={tokenItem ? tokenItem.href : "/components"}
+            className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px]"
+          >
+            <motion.div
+              whileHover={reduceMotion ? undefined : { y: -3 }}
+              transition={{ duration: 0.2 }}
+              className="relative flex flex-col justify-between overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-sm transition-all hover:shadow-md hover:border-zinc-300 dark:border-white/10 dark:bg-zinc-900/90 dark:hover:border-white/20 h-[210px] sm:h-[230px]"
+              style={{ cornerShape: "squircle" } as React.CSSProperties}
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="font-runde text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-white">
+                  Solana Token Card
+                </h3>
+                <div className="flex size-8 items-center justify-center rounded-[10px] bg-zinc-900 text-white transition-all duration-200 group-hover:bg-black group-hover:scale-105 dark:bg-white dark:text-zinc-900 dark:group-hover:bg-zinc-100 shrink-0">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="size-4">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </div>
+              </div>
+              <div
+                className="mt-3 relative w-full flex-1 min-h-0 overflow-hidden rounded-[20px] border border-black/5 dark:border-white/5 bg-zinc-950 flex items-center justify-center"
+                style={{ cornerShape: "squircle" } as React.CSSProperties}
+              >
+                {/* live preview fallback text since no static image exists */}
+                <div className="flex flex-col items-center gap-2 text-center px-4">
+                  <div className="size-10 rounded-full bg-gradient-to-br from-[#9945FF] to-[#14F195] flex items-center justify-center text-white text-lg font-bold">
+                    S
+                  </div>
+                  <span className="text-xs font-semibold text-white/80">SOL</span>
+                  <span className="text-[10px] font-mono text-white/40">Solana Token Card</span>
+                </div>
+              </div>
+            </motion.div>
+          </Link>
+
         </div>
       </ScrollReveal>
     </section>

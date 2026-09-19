@@ -8,66 +8,8 @@ import { cn } from "@/lib/utils";
 
 type OrderMode = "default" | "newest";
 
-function SolCategoryTabs({
-  categories,
-  selectedCategory,
-  onSelect,
-}: {
-  categories: { id: string; name: string; count: number }[];
-  selectedCategory: string;
-  onSelect: (id: string) => void;
-}) {
-  const reduceMotion = useReducedMotion();
-
-  return (
-    <div className="relative w-full max-w-5xl py-1">
-      <div className="flex items-center justify-center gap-1.5 flex-wrap p-1 select-none">
-        {categories.map((cat) => {
-          const isSelected = selectedCategory === cat.id;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => onSelect(cat.id)}
-              className={cn(
-                "relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-xl transition-colors duration-150 whitespace-nowrap cursor-pointer",
-                isSelected
-                  ? "text-zinc-900 dark:text-white"
-                  : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
-              )}
-            >
-              {isSelected && !reduceMotion && (
-                <motion.span
-                  layoutId="sol-category-pill"
-                  transition={{ type: "spring", stiffness: 450, damping: 35 }}
-                  className="absolute inset-0 rounded-xl bg-zinc-200/90 dark:bg-white/15 border border-zinc-300/80 dark:border-white/15 shadow-xs"
-                />
-              )}
-              {isSelected && reduceMotion && (
-                <span className="absolute inset-0 rounded-xl bg-zinc-200/90 dark:bg-white/15 border border-zinc-300/80 dark:border-white/15 shadow-xs" />
-              )}
-              <span className="relative z-10">{cat.name}</span>
-              <span
-                className={cn(
-                  "relative z-10 text-[10px] font-mono px-1.5 py-0.5 rounded-md transition-colors",
-                  isSelected
-                    ? "bg-zinc-300/90 dark:bg-white/25 text-zinc-900 dark:text-white font-bold"
-                    : "bg-zinc-200/70 dark:bg-zinc-800/80 text-zinc-500 dark:text-zinc-400"
-                )}
-              >
-                {cat.count}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 export default function SolComponentsGallery() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [orderMode, setOrderMode] = useState<OrderMode>("default");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -83,31 +25,19 @@ export default function SolComponentsGallery() {
         e.preventDefault();
         searchInputRef.current?.focus();
       }
+      if (e.key === "Escape") {
+        setSearchQuery("");
+        searchInputRef.current?.blur();
+      }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const categoryTabList = useMemo(() => {
-    return [
-      { id: "all", name: "All Sol Components", count: allSolComponents.length },
-      ...solCategories.map((cat) => ({
-        id: cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-        name: cat.name,
-        count: cat.items.length,
-      })),
-    ];
-  }, [solCategories, allSolComponents]);
-
   const filteredCategories = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
     return solCategories
       .map((cat) => {
-        const catId = cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-        if (selectedCategory !== "all" && selectedCategory !== catId) {
-          return null;
-        }
-
         let items = cat.items.filter((item) => {
           if (!q) return true;
           return (
@@ -117,114 +47,125 @@ export default function SolComponentsGallery() {
             item.slug.toLowerCase().includes(q)
           );
         });
-
-        if (orderMode === "newest") {
-          items = [...items].reverse();
-        }
-
+        if (orderMode === "newest") items = [...items].reverse();
         if (items.length === 0) return null;
-
-        return {
-          ...cat,
-          items,
-        };
+        return { ...cat, items };
       })
       .filter((cat): cat is SolCategory => cat !== null);
-  }, [solCategories, searchQuery, selectedCategory, orderMode]);
+  }, [solCategories, searchQuery, orderMode]);
+
+  const isSearching = searchQuery.trim().length > 0;
+  const hasResults = filteredCategories.length > 0;
 
   return (
     <div className="w-full relative space-y-6" suppressHydrationWarning>
-      <div className="w-full flex flex-col gap-3 py-2 bg-transparent">
-        <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-          <div className="relative w-full sm:w-80 lg:w-96 hover:sm:w-96 hover:lg:w-[420px] focus-within:sm:w-96 focus-within:lg:w-[420px] shrink-0 transition-all duration-300 ease-out">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-zinc-400 pointer-events-none"
-              aria-hidden="true"
+      {/* Controls */}
+      <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 py-2">
+        {/* Search */}
+        <div className="relative w-full sm:w-80 lg:w-96 shrink-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-zinc-400 pointer-events-none"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input
+            ref={searchInputRef}
+            id="sol-components-search-input"
+            name="sol-components-search-input"
+            type="text"
+            autoComplete="off"
+            suppressHydrationWarning
+            placeholder={`Search ${allSolComponents.length} Sol components by name...`}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full h-10 pl-10 pr-9 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/70 text-xs font-medium text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 border border-black/10 dark:border-white/10 shadow-xs focus:outline-none focus:ring-2 focus:ring-[#0066FF]/30 dark:focus:ring-[#0A84FF]/30 transition-all duration-200 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
+          />
+          {isSearching && (
+            <button
+              type="button"
+              aria-label="Clear search"
+              onClick={() => { setSearchQuery(""); searchInputRef.current?.focus(); }}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 flex size-5 items-center justify-center rounded-full bg-zinc-300/80 dark:bg-zinc-700/80 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-400/80 dark:hover:bg-zinc-600/80 transition-colors duration-150"
             >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-            <input
-              ref={searchInputRef}
-              id="sol-components-search-input"
-              name="sol-components-search-input"
-              type="search"
-              autoComplete="off"
-              suppressHydrationWarning
-              placeholder={`Search ${allSolComponents.length} Sol components by name...`}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-10 pl-10 pr-9 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/70 text-xs font-medium text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 border border-black/10 dark:border-white/10 shadow-xs focus:outline-none focus:ring-2 focus:ring-[#0066FF]/30 dark:focus:ring-[#0A84FF]/30 transition-all duration-300"
-            />
-          </div>
-
-          <div className="flex items-center h-9 p-1 rounded-xl bg-zinc-100/80 dark:bg-zinc-900/80 border border-black/5 dark:border-white/10 shadow-2xs">
-            {(["default", "newest"] as const).map((order) => {
-              const isSelected = orderMode === order;
-              return (
-                <button
-                  key={order}
-                  type="button"
-                  onClick={() => setOrderMode(order)}
-                  className={cn(
-                    "relative px-3.5 h-full text-xs font-semibold rounded-lg transition-colors duration-150 cursor-pointer select-none flex items-center justify-center",
-                    isSelected
-                      ? "text-zinc-900 dark:text-white"
-                      : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
-                  )}
-                >
-                  {isSelected && (
-                    <motion.span
-                      layoutId="sol-gallery-order-mode-pill"
-                      transition={{ duration: 0.25, ease: [0.19, 1, 0.22, 1] }}
-                      className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-2xs"
-                    />
-                  )}
-                  <span className="relative z-10 capitalize">{order}</span>
-                </button>
-              );
-            })}
-          </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="size-3" aria-hidden="true">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          )}
         </div>
 
-        <div className="w-full pt-1 flex justify-center">
-          <SolCategoryTabs
-            categories={categoryTabList}
-            selectedCategory={selectedCategory}
-            onSelect={setSelectedCategory}
-          />
+        {/* Order toggle */}
+        <div className="flex items-center h-9 p-1 rounded-xl bg-zinc-100/80 dark:bg-zinc-900/80 border border-black/5 dark:border-white/10 shadow-2xs shrink-0">
+          {(["default", "newest"] as const).map((order) => {
+            const isSelected = orderMode === order;
+            return (
+              <button
+                key={order}
+                type="button"
+                onClick={() => setOrderMode(order)}
+                className={cn(
+                  "relative px-3.5 h-full text-xs font-semibold rounded-lg transition-colors duration-150 cursor-pointer select-none flex items-center justify-center",
+                  isSelected
+                    ? "text-zinc-900 dark:text-white"
+                    : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+                )}
+              >
+                {isSelected && (
+                  <motion.span
+                    layoutId="sol-gallery-order-mode-pill"
+                    transition={{ duration: 0.25, ease: [0.19, 1, 0.22, 1] }}
+                    className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-2xs"
+                  />
+                )}
+                <span className="relative z-10 capitalize">{order}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
+      {/* Gallery */}
       <div className="flex flex-col space-y-16 pb-24">
-        {filteredCategories.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-black/10 dark:border-white/10 py-16 text-center bg-zinc-50/50 dark:bg-zinc-900/30">
-            <div className="size-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 text-lg mb-3 shadow-2xs">
-              🔍
+        {!hasResults ? (
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-black/10 dark:border-white/10 py-20 text-center bg-zinc-50/50 dark:bg-zinc-900/30 gap-4">
+            <div className="size-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-2xl shadow-2xs">
+              💡
             </div>
-            <h3 className="font-bold text-sm text-foreground">No components matched your filter</h3>
-            <p className="text-xs text-muted-foreground mt-1 max-w-sm">
-              Try adjusting your search query or reset category filters.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSearchQuery("");
-                setSelectedCategory("all");
-              }}
-              className="mt-4 px-4 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-semibold cursor-pointer active:scale-95 transition-transform"
-            >
-              Reset Filters
-            </button>
+            <div className="space-y-1.5">
+              <h3 className="font-bold text-sm text-foreground">Have a component in mind?</h3>
+              <p className="text-xs text-muted-foreground max-w-xs leading-relaxed">
+                No match for <span className="font-semibold text-foreground">&ldquo;{searchQuery}&rdquo;</span> — need it added? Pin me or tag me on X.
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="px-4 py-2 rounded-xl bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 text-xs font-semibold cursor-pointer active:scale-95 transition-transform"
+              >
+                Clear search
+              </button>
+              <a
+                href="https://x.com/intent/tweet?text=Hey%20%40uxdotsol%20can%20you%20add%20this%20component%20to%20Oxygen%20UI%3F"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-semibold cursor-pointer active:scale-95 transition-transform"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="size-3.5" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+                Tag me on X
+              </a>
+            </div>
           </div>
         ) : (
           filteredCategories.map((cat) => (
@@ -244,7 +185,6 @@ export default function SolComponentsGallery() {
                 </div>
                 <p className="text-xs text-muted-foreground">{cat.description}</p>
               </div>
-
               <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {cat.items.map((item) => (
                   <ComponentCard key={`${cat.name}-${item.slug}`} item={item} />

@@ -43,9 +43,9 @@ function BackersSection() {
   return (
     <section
       id="sponsors"
-      className="mx-auto flex w-full max-w-5xl scroll-mt-24 flex-col items-center gap-12 px-6 pt-24 pb-16 text-center md:pt-32"
+      className="mx-auto flex w-full max-w-6xl scroll-mt-24 flex-col items-start gap-10 px-6 pt-24 pb-16 md:pt-32"
     >
-      <header className="flex flex-col items-center gap-2 max-w-2xl">
+      <header className="flex flex-col items-start gap-2">
         <h2 className="font-runde text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
           Sponsors &amp; Ecosystem
         </h2>
@@ -55,41 +55,59 @@ function BackersSection() {
       </header>
 
       {/* atmosphere tier */}
-      <div className="flex w-full flex-col items-center gap-3">
+      <div className="flex w-full flex-col items-start gap-3">
         <span className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground/70">
           Atmosphere
         </span>
-        <a
-          href="https://solana.com"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Solana Foundation India"
-          className="group relative flex h-28 w-full max-w-lg items-center justify-center rounded-[28px] border border-black/5 bg-card/60 px-6 py-4 backdrop-blur-xl transition-all duration-200 ease-out hover:border-black/15 hover:bg-card hover:shadow-md dark:border-white/10 dark:bg-muted/60 dark:hover:border-white/20 dark:hover:bg-muted sm:h-34"
-          style={{ cornerShape: "squircle" } as React.CSSProperties}
-        >
-          <Image
-            src="/logos/solana-foundation-india-dark.png"
-            alt="Solana Foundation India"
-            width={400}
-            height={110}
-            className="h-14 sm:h-18 w-auto max-w-[80%] max-h-[70%] object-contain transition-transform duration-200 group-hover:scale-105 dark:hidden"
-          />
-          <Image
-            src="/logos/solana-foundation-india.png"
-            alt="Solana Foundation India"
-            width={400}
-            height={110}
-            className="hidden h-14 sm:h-18 w-auto max-w-[80%] max-h-[70%] object-contain transition-transform duration-200 group-hover:scale-105 dark:block"
-          />
-        </a>
+        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 max-w-3xl">
+          <a
+            href="https://solana.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Solana Foundation India"
+            className="group relative flex h-28 w-full items-center justify-start rounded-[28px] border border-black/5 bg-card/60 px-6 py-4 backdrop-blur-xl transition-all duration-200 ease-out hover:border-black/15 hover:bg-card hover:shadow-md dark:border-white/10 dark:bg-muted/60 dark:hover:border-white/20 dark:hover:bg-muted sm:h-34"
+            style={{ cornerShape: "squircle" } as React.CSSProperties}
+          >
+            <Image
+              src="/logos/solana-foundation-india-dark.png"
+              alt="Solana Foundation India"
+              width={400}
+              height={110}
+              className="h-14 sm:h-18 w-auto max-w-[80%] max-h-[70%] object-contain transition-transform duration-200 group-hover:scale-105 dark:hidden"
+            />
+            <Image
+              src="/logos/solana-foundation-india.png"
+              alt="Solana Foundation India"
+              width={400}
+              height={110}
+              className="hidden h-14 sm:h-18 w-auto max-w-[80%] max-h-[70%] object-contain transition-transform duration-200 group-hover:scale-105 dark:block"
+            />
+          </a>
+          {/* empty atmosphere slot */}
+          <a
+            href={SPONSOR_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Become an Atmosphere sponsor"
+            className="group relative flex h-28 w-full items-center justify-center rounded-[28px] border border-dashed border-black/8 bg-card/20 px-6 py-4 transition-all duration-200 ease-out hover:border-black/20 hover:bg-card/40 dark:border-white/8 dark:bg-muted/10 dark:hover:border-white/15 dark:hover:bg-muted/20 sm:h-34"
+            style={{ cornerShape: "squircle" } as React.CSSProperties}
+          >
+            <span className="flex items-center gap-2 text-xs font-medium text-muted-foreground/50 transition-colors duration-200 group-hover:text-foreground">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" xmlns="http://www.w3.org/2000/svg" className="size-3.5 transition-transform duration-200 group-hover:rotate-90" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              Become a sponsor
+            </span>
+          </a>
+        </div>
       </div>
 
       {/* orbit tier */}
-      <div className="flex w-full flex-col items-center gap-3">
+      <div className="flex w-full flex-col items-start gap-3">
         <span className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground/70">
           Orbit
         </span>
-        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3 max-w-4xl mx-auto">
+        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
           {[0, 1, 2].map((i) => (
             <a
               key={i}
@@ -145,10 +163,8 @@ export default async function Home() {
             className="pointer-events-none absolute inset-0 bg-transparent dark:bg-black/55 dark:backdrop-blur-[1px]"
           />
           <div className={`relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center px-6 ${HERO_PADDING} text-center`}>
-            <HeroIntro
-              sub="Production-grade React primitives for Solana dApps, installed as code files via the shadcn CLI."
-            >
-              <HeroCta />
+            <HeroIntro>
+              <HeroCta stars={stars} />
             </HeroIntro>
           </div>
         </div>

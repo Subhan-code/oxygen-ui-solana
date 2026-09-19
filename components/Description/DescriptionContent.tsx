@@ -1,5 +1,6 @@
 "use client";
 
+import { CodeXml } from "lucide-react";
 import { type ComponentItem, PANEL_INFO } from "@/lib/components";
 import { cn } from "@/lib/utils";
 import CopyButton from "../CopyButton";
@@ -13,6 +14,7 @@ import { MailIcon, XIcon } from "./icons";
 type DescriptionContentProps = {
   item?: ComponentItem;
   showSourceHint?: boolean;
+  onOpenCode?: () => void;
   className?: string;
 };
 
@@ -33,6 +35,7 @@ function SectionLabel({
 export default function DescriptionContent({
   item,
   showSourceHint = true,
+  onOpenCode,
   className,
 }: DescriptionContentProps) {
   return (
@@ -90,12 +93,22 @@ export default function DescriptionContent({
         </div>
       )}
 
-      {item?.registry && showSourceHint && (
+      {showSourceHint && (item?.registry || item?.file || item?.slug) && (
         <div className="flex flex-col gap-3">
           <SectionLabel as="h2">Source Code</SectionLabel>
           <p className="text-sm leading-relaxed text-foreground/70">
             {PANEL_INFO.sourceHint}
           </p>
+          {onOpenCode && (
+            <button
+              type="button"
+              onClick={onOpenCode}
+              className="mt-1 inline-flex w-fit cursor-pointer items-center gap-2 rounded-xl border border-input bg-card px-4 py-2 text-xs font-semibold text-foreground shadow-xs hover:bg-muted transition-colors"
+            >
+              <CodeXml className="size-4 text-[#0066FF] dark:text-[#0A84FF]" />
+              <span>View full component code</span>
+            </button>
+          )}
         </div>
       )}
 

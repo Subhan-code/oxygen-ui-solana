@@ -10,7 +10,7 @@ const Button = ({ className, size, variant, ...props }: React.ComponentProps<"bu
 
 
 const Separator = ({ className, ...props }: React.ComponentProps<"div">) => (
-  <div className={cn("shrink-0 bg-border h-[1px] w-full", className)} {...props} />
+  <div className={cn("shrink-0 bg-white/10 h-[1px] w-full", className)} {...props} />
 );
 
 interface DetailRow {
@@ -40,7 +40,7 @@ const OrderInput = React.forwardRef<HTMLInputElement, React.ComponentProps<"inpu
     <input
       ref={ref}
       className={cn(
-        "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-9 w-full rounded-md border border-white/15 bg-white/5 px-3 py-1 text-sm text-white shadow-xs transition-colors placeholder:text-white/30 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-white/30 disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
       {...props}
@@ -127,10 +127,10 @@ const OrderForm = ({
   };
 
   return (
-    <div className={cn("rounded-xl border bg-card text-card-foreground shadow-xs p-6 flex flex-col gap-6 w-full max-w-sm", className)}>
+    <div className={cn("rounded-xl border border-white/10 bg-black text-white shadow-xs p-6 flex flex-col gap-6 w-full max-w-sm", className)}>
       <div className="flex flex-col gap-1.5">
         <h3 className="text-xl font-semibold tracking-tight">{title}</h3>
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="text-sm text-white/50">{description}</p>
       </div>
       <div className="flex flex-col gap-4">
         {/* Details summary */}
