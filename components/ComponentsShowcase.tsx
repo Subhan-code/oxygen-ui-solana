@@ -158,23 +158,25 @@ export default function ComponentsShowcase() {
               <span className="font-runde text-xs font-semibold uppercase tracking-widest text-white/70">
                 Browse the full catalog
               </span>
-              <div className="mt-2 flex items-center justify-center gap-1.5">
-                <span className="font-runde text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">
+              <div className="mt-2 flex items-center justify-center">
+                <span className="font-runde text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap transition-transform duration-300 ease-out group-hover:-translate-x-1">
                   View all 56+ components
                 </span>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-5 shrink-0 opacity-0 -translate-x-2 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-0"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                <span className="inline-flex w-0 overflow-hidden opacity-0 transition-all duration-300 ease-out group-hover:w-6 group-hover:opacity-100 group-hover:pl-1.5">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="size-5 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
               </div>
             </div>
 
