@@ -66,7 +66,7 @@ export default function ComponentsShowcase() {
   const balanceItem = allSolItems.find((c) => c.slug === "balancedisplay") || allSolItems[1];
   const eventItem = allSolItems.find((c) => c.slug === "solanaeventcard") || allSolItems[3];
   const stepItem = allSolItems.find((c) => c.slug === "steptrackerwidget") || allSolItems[2];
-  const tokenItem = allSolItems.find((c) => c.slug === "solanatokencard") || allSolItems[4];
+  const segmentedItem = allSolItems.find((c) => c.slug === "cryptosalessegmentedbars" || c.slug === "segmentedprogresscard") || allSolItems[4];
 
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24">
@@ -146,30 +146,21 @@ export default function ComponentsShowcase() {
             </motion.div>
           </Link>
 
-          {/* Cell 5 (center on desktop): View all 56 components CTA */}
+          {/* Cell 5 (center on desktop): View all 56+ components CTA */}
           <Link
             href="/components"
             tabIndex={0}
-            className="group relative flex h-[210px] sm:h-[230px] flex-col items-center justify-center overflow-hidden rounded-[32px] bg-[#0066FF] text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-colors duration-200 ease-out hover:bg-[#0052CC] outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+            className="group relative flex h-[210px] sm:h-[230px] flex-col justify-between overflow-hidden rounded-[32px] bg-[#0066FF] text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-colors duration-200 ease-out hover:bg-[#0052CC] outline-none focus-visible:ring-2 focus-visible:ring-white/70"
             style={{ cornerShape: "squircle" } as React.CSSProperties}
           >
-            {/* SVG positioned at the top edge, cropped so only its bottom half shows */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              aria-hidden="true"
-              className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-56 opacity-25 [filter:brightness(0)_invert(1)] transition-transform duration-300 ease-out group-hover:-translate-y-[45%]"
-              src="/logos/Oxygenui.svg"
-            />
-
-            {/* Centered content on a single line */}
-            <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pt-10 sm:pt-12">
+            {/* Top: text and arrow that reveals on hover */}
+            <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pt-7 sm:pt-8 w-full">
               <span className="font-runde text-xs font-semibold uppercase tracking-widest text-white/70">
                 Browse the full catalog
               </span>
-              <div className="mt-2 flex items-center justify-center gap-2">
+              <div className="mt-2 flex items-center justify-center gap-1.5">
                 <span className="font-runde text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">
-                  View all 56 components
+                  View all 56+ components
                 </span>
                 <svg
                   viewBox="0 0 24 24"
@@ -179,18 +170,29 @@ export default function ComponentsShowcase() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1"
+                  className="size-5 shrink-0 opacity-0 -translate-x-2 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-0"
                   aria-hidden="true"
                 >
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </div>
             </div>
+
+            {/* Bottom: SVG positioned at bottom edge */}
+            <div className="relative flex-1 overflow-hidden flex items-end justify-center pointer-events-none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                aria-hidden="true"
+                className="w-48 sm:w-56 translate-y-1/2 opacity-25 [filter:brightness(0)_invert(1)] transition-transform duration-300 ease-out group-hover:translate-y-[42%]"
+                src="/logos/Oxygenui.svg"
+              />
+            </div>
           </Link>
 
-          {/* Cell 6: Solana Token Card */}
+          {/* Cell 6: Segmented Metrics */}
           <Link
-            href={tokenItem ? tokenItem.href : "/components"}
+            href={segmentedItem ? segmentedItem.href : "/components"}
             className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/50 rounded-[32px]"
           >
             <motion.div
@@ -201,7 +203,7 @@ export default function ComponentsShowcase() {
             >
               <div className="flex items-center justify-between">
                 <h3 className="font-runde text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-white">
-                  Solana Token Card
+                  Segmented Metrics
                 </h3>
                 <div className="flex size-8 items-center justify-center rounded-[10px] bg-zinc-900 text-white transition-all duration-200 group-hover:bg-black group-hover:scale-105 dark:bg-white dark:text-zinc-900 dark:group-hover:bg-zinc-100 shrink-0">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="size-4">
@@ -213,14 +215,14 @@ export default function ComponentsShowcase() {
                 className="mt-3 relative w-full flex-1 min-h-0 overflow-hidden rounded-[20px] border border-black/5 dark:border-white/5 bg-zinc-950 flex items-center justify-center"
                 style={{ cornerShape: "squircle" } as React.CSSProperties}
               >
-                {/* live preview fallback text since no static image exists */}
-                <div className="flex flex-col items-center gap-2 text-center px-4">
-                  <div className="size-10 rounded-full bg-gradient-to-br from-[#9945FF] to-[#14F195] flex items-center justify-center text-white text-lg font-bold">
-                    S
-                  </div>
-                  <span className="text-xs font-semibold text-white/80">SOL</span>
-                  <span className="text-[10px] font-mono text-white/40">Solana Token Card</span>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/showcase/segment-bar.png"
+                  alt="Segmented Metrics"
+                  className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.03]"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </motion.div>
           </Link>

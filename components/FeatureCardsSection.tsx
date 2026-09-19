@@ -39,10 +39,7 @@ export default function FeatureCardsSection() {
       <div className="mx-auto max-w-6xl">
         <header className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200/80 pb-4 dark:border-white/10">
           <div>
-            <span className="font-mono text-[11px] font-semibold tracking-wide text-[#0066FF] dark:text-[#0A84FF]">
-              Core Pillars
-            </span>
-            <h2 className="mt-1.5 max-w-2xl font-runde text-xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-2xl md:text-3xl">
+            <h2 className="font-runde text-xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-2xl md:text-3xl">
               Source you own, motion that feels physical, primitives built for Solana
             </h2>
           </div>
