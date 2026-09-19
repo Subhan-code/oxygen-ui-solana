@@ -33,7 +33,6 @@ export const metadata: Metadata = {
 };
 
 import FeatureCardsSection from "@/components/FeatureCardsSection";
-import MotionSkillsSection from "@/components/MotionSkillsSection";
 import ScrollReveal from "@/components/ScrollReveal";
 
 // hero height config: customize HERO_MIN_HEIGHT and HERO_PADDING to your taste
@@ -73,7 +72,6 @@ export default async function Home() {
       </section>
       <ComponentsShowcase />
       <FeatureCardsSection />
-      <MotionSkillsSection />
       <ScrollReveal>
         <BackersSection />
       </ScrollReveal>
@@ -92,7 +90,6 @@ type Backer = {
   cardHeight: string;
 };
 
-// mintlify's wordmark has a far larger x-height and sits higher in its artboard, so it needs its own size
 const BACKERS: Backer[] = [
   {
     name: "Solana Foundation India",
@@ -100,13 +97,6 @@ const BACKERS: Backer[] = [
     lightSrc: "/logos/solana-foundation-india-dark.png",
     darkSrc: "/logos/solana-foundation-india.png",
     cardHeight: "h-12 sm:h-16 max-h-[85%]",
-  },
-  {
-    name: "Mintlify",
-    href: "https://mintlify.com",
-    lightSrc: "/logos/mintlifydark.png",
-    darkSrc: "/logos/mintlifylight.png",
-    cardHeight: "h-8 sm:h-9",
   },
 ];
 
@@ -181,7 +171,7 @@ function BackersSection() {
       <h2 className="max-w-2xl text-balance font-runde text-3xl font-bold tracking-tight sm:text-4xl">
         Supported by Solana Foundation India Grants and ecosystem backers
       </h2>
-      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 max-w-2xl mx-auto">
         {BACKERS.map((backer) => (
           <a
             key={backer.name}

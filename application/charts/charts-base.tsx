@@ -5,7 +5,7 @@ import type { Props as LegendContentProps } from "recharts/types/component/Defau
 import type { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 import type { Props as DotProps } from "recharts/types/shape/Dot";
 
-import { cx } from "@/utils/cx";
+import { cn as cx } from "@/lib/utils";
 
 export const selectEvenlySpacedItems = <T extends readonly unknown[]>(
   dataArray: T,

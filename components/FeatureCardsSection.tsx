@@ -24,7 +24,7 @@ const FEATURES = [
     cardBg: "bg-[#F1EAFF] dark:bg-[#1E1438]",
     tagBg: "bg-purple-500/10 text-purple-800 dark:bg-purple-400/15 dark:text-purple-200 border-purple-200/50 dark:border-purple-800/40",
     action: "Browse Motion",
-    href: "/components",
+    href: "/sol-components",
   },
   {
     title: "Primitives Built for Solana",

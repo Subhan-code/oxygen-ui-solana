@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 
 const LINKS = [
   { label: "Home", href: "/" },
-  { label: "Components", href: "/components" },
   { label: "Sol Components", href: "/sol-components" },
   { label: "Blocks", href: "/blocks" },
   { label: "Docs", href: "/docs/installation" },
