@@ -129,7 +129,7 @@ export function installCommand(
 ): string | null {
   if (!item) return null;
   const registryName = item.registry || item.slug;
-  return `${PM_EXECUTORS[pm]} shadcn@latest add Subhan-code/oxygen_ui/${registryName}`;
+  return `${PM_EXECUTORS[pm]} shadcn add oxygen/${registryName}`;
 }
 
 export function activeComponent(pathname: string): ComponentItem | undefined {

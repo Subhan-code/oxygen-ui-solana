@@ -11,27 +11,21 @@ const FEATURES = [
   {
     title: "Source You Own",
     description: "Copy-paste React primitives directly into your codebase. Zero third-party lock-in, full code ownership.",
-    tags: ["shadcn CLI", "React + TS", "Zero Lock-in", "Code Ownership"],
     cardBg: "bg-[#EAF4FF] dark:bg-[#0E2038]",
-    tagBg: "bg-blue-500/10 text-blue-800 dark:bg-blue-400/15 dark:text-blue-200 border-blue-200/50 dark:border-blue-800/40",
     action: "Explore Docs",
     href: "/docs/installation",
   },
   {
     title: "Motion That Feels Physical",
     description: "Engineered with Framer Motion, spring physics, dynamic squircles, and 60 FPS GPU composite performance.",
-    tags: ["Spring Physics", "Framer Motion", "Apple Squircles", "60 FPS GPU"],
     cardBg: "bg-[#F1EAFF] dark:bg-[#1E1438]",
-    tagBg: "bg-purple-500/10 text-purple-800 dark:bg-purple-400/15 dark:text-purple-200 border-purple-200/50 dark:border-purple-800/40",
     action: "Browse Motion",
     href: "/components",
   },
   {
     title: "Primitives Built for Solana",
     description: "Tailored for Web3 dApps: wallet surfaces, swap terminals, order books, QR codes, and transaction feeds.",
-    tags: ["56 Components", "Solana dApps", "Wallet Surfaces", "Swap Terminals"],
     cardBg: "bg-[#E9FBF3] dark:bg-[#0C2A1E]",
-    tagBg: "bg-emerald-500/10 text-emerald-800 dark:bg-emerald-400/15 dark:text-emerald-200 border-emerald-200/50 dark:border-emerald-800/40",
     action: "Components",
     href: "/components",
   },
@@ -68,36 +62,22 @@ export default function FeatureCardsSection() {
                 <motion.div
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                   transition={SPRING_PRESS}
-                  className="flex flex-col justify-between aspect-square rounded-[28px] border border-zinc-200/90 dark:border-white/10 bg-white dark:bg-zinc-900/90 p-3 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg cursor-pointer w-full"
+                  className="flex flex-col justify-between min-h-[190px] sm:min-h-[205px] rounded-[28px] border border-zinc-200/90 dark:border-white/10 bg-white dark:bg-zinc-900/90 p-3 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg cursor-pointer w-full"
                   style={{ cornerShape: "squircle" } as React.CSSProperties}
                 >
                   <div
                     className={cn(
-                      "flex-1 flex flex-col justify-between rounded-[22px] p-5 space-y-4 transition-colors duration-300",
+                      "flex-1 flex flex-col justify-between rounded-[22px] p-5 space-y-2 transition-colors duration-300",
                       feature.cardBg
                     )}
                   >
-                    <div className="space-y-2">
-                      <h3 className="font-runde text-xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-2xl">
+                    <div className="space-y-1.5">
+                      <h3 className="font-runde text-lg sm:text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
                         {feature.title}
                       </h3>
                       <p className="text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-300 leading-relaxed">
                         {feature.description}
                       </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {feature.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className={cn(
-                            "rounded-lg px-2.5 py-1 text-[11px] font-semibold border backdrop-blur-md transition-colors",
-                            feature.tagBg
-                          )}
-                        >
-                          {tag}
-                        </span>
-                      ))}
                     </div>
                   </div>
 

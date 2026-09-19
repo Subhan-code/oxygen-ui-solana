@@ -6,12 +6,11 @@ import { Squircle } from "@squircle-js/react";
 import { motion, useReducedMotion } from "motion/react";
 import useMeasure from "react-use-measure";
 import CopyButton from "@/components/CopyButton";
-import { REGISTRY_REPO } from "@/lib/components";
 import { SPRING_LAYOUT, SPRING_PRESS } from "@/lib/ease";
 import { cn } from "@/lib/utils";
 
-const FEATURED = "bounce-sidebar";
-const INSTALL_COMMAND = `npx shadcn@latest add ${REGISTRY_REPO}/${FEATURED}`;
+const FEATURED = "solana-wallet-card";
+const INSTALL_COMMAND = `npx shadcn add oxygen/${FEATURED}`;
 
 const spring = SPRING_LAYOUT;
 
@@ -80,7 +79,7 @@ export default function HeroCta({ className }: { className?: string }) {
           className="relative h-12 max-w-full flex-row-reverse gap-2 pl-4 pr-4 text-white/50 hover:text-white sm:pl-5"
         >
           <code className="overflow-x-auto whitespace-nowrap font-mono text-xs font-semibold text-white sm:text-sm">
-            npx shadcn@latest add {REGISTRY_REPO}
+            npx shadcn add oxygen
             <span className="font-normal text-white/50">/{FEATURED}</span>
           </code>
         </CopyButton>

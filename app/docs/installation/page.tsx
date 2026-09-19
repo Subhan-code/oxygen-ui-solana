@@ -60,8 +60,8 @@ export default async function InstallationPage() {
           </p>
           <div className="relative rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm">
             <div className="flex items-center justify-between text-neutral-300">
-              <code>npx shadcn@latest add Subhan-code/oxygen_ui/solana-swap-card</code>
-              <CopyButton value="npx shadcn@latest add Subhan-code/oxygen_ui/solana-swap-card" />
+              <code>npx shadcn add oxygen/solana-swap-card</code>
+              <CopyButton value="npx shadcn add oxygen/solana-swap-card" />
             </div>
           </div>
         </section>

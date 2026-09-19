@@ -13,7 +13,8 @@ export default function Demo() {
       <SolanaNftCard
         name="SPHERE #088"
         collectionName="GENESIS ORBIT"
-        imageUrl="/images/nft-avatar.jpg"
+        imageUrl="/assets/nft-artwork.jpg"
+        authorPfpUrl="/assets/nft-pfp.jpg"
         rarity="Uncommon"
         price="2.4"
         currency="SOL"

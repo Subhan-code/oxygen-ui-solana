@@ -34,7 +34,7 @@ export function GET() {
     "Install any component into a React / Next.js project:",
     "",
     "```",
-    "npx shadcn@latest add Subhan-code/oxygen_ui/<component-name>",
+    "npx shadcn add oxygen/<component-name>",
     "```",
     "",
     `Source code for all components: ${REGISTRY_HOMEPAGE}`,

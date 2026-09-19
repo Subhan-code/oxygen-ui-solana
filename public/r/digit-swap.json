@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "digit-swap",
+  "title": "Digit Swap",
+  "description": "Fixed-slot digits and mask glyphs that roll on change with controllable direction, stagger, and suffix emphasis.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/digit-swap.tsx",
+      "content": "export * from \"@/components/motion/digit-swap\";\r\nexport { DigitSwap as default } from \"@/components/motion/digit-swap\";\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

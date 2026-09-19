@@ -107,7 +107,7 @@ export function CryptoPricePills({
     <div
       role="radiogroup"
       aria-label="Crypto Price Pills"
-      className={cn("flex flex-col gap-3 w-full max-w-sm mx-auto select-none", className)}
+      className={cn("flex flex-col gap-3 w-full max-w-[280px] mx-auto select-none", className)}
     >
       {items.map((token) => {
         const isSelected = activeId === token.id;

@@ -34,8 +34,8 @@ export interface SolanaNftCardProps
 export function SolanaNftCard({
   name = "SPHERE #088",
   collectionName = "GENESIS ORBIT",
-  imageUrl = "/images/nft-avatar.jpg",
-  authorPfpUrl = "/images/author-pfp.jpg",
+  imageUrl = "/assets/nft-artwork.jpg",
+  authorPfpUrl = "/assets/nft-pfp.jpg",
   rarity = "Uncommon",
   price,
   currency = "SOL",
@@ -46,6 +46,16 @@ export function SolanaNftCard({
   ...props
 }: SolanaNftCardProps) {
   const reduceMotion = useReducedMotion();
+  const [imgSrc, setImgSrc] = React.useState(imageUrl);
+  const [authorSrc, setAuthorSrc] = React.useState(authorPfpUrl);
+
+  React.useEffect(() => {
+    setImgSrc(imageUrl || "/assets/nft-artwork.jpg");
+  }, [imageUrl]);
+
+  React.useEffect(() => {
+    setAuthorSrc(authorPfpUrl || "/assets/nft-pfp.jpg");
+  }, [authorPfpUrl]);
 
   const displayPrice =
     price !== undefined
@@ -71,8 +81,9 @@ export function SolanaNftCard({
       {/* Artwork container */}
       <div className="relative aspect-square w-full overflow-hidden rounded-[26px] bg-[#1a44c2]">
         <img
-          src={imageUrl}
+          src={imgSrc}
           alt={name}
+          onError={() => setImgSrc("/assets/nft-artwork.jpg")}
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
 
@@ -118,10 +129,11 @@ export function SolanaNftCard({
       {/* Information section */}
       <div className="px-1.5 pt-4 pb-1">
         <div className="flex items-center gap-3">
-          {authorPfpUrl && (
+          {authorSrc && (
             <img
-              src={authorPfpUrl}
+              src={authorSrc}
               alt={collectionName}
+              onError={() => setAuthorSrc("/assets/nft-pfp.jpg")}
               className="size-11 shrink-0 rounded-xl object-cover ring-2 ring-white/15 shadow-md transition-transform duration-300 group-hover:scale-105"
             />
           )}

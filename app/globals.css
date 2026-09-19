@@ -37,7 +37,7 @@
   --sidebar-accent-foreground: #000000;
   --sidebar-border: rgba(60, 60, 67, 0.18);
   --sidebar-ring: #007AFF;
-  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  --font-sans: var(--font-open-runde), -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
   --font-serif: Source Serif 4, serif;
   --font-mono: JetBrains Mono, monospace;
   --radius: 0.5rem;
@@ -120,7 +120,7 @@
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: rgba(235, 235, 245, 0.18);
   --sidebar-ring: #0A84FF;
-  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  --font-sans: var(--font-open-runde), -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
   --font-serif: Source Serif 4, serif;
   --font-mono: JetBrains Mono, monospace;
   --radius: 0.5rem;
@@ -190,7 +190,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-sans: var(--font-inter), Inter, sans-serif;
+  --font-sans: var(--font-open-runde), sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-serif);
   --font-cal: var(--font-cal-sans), sans-serif;

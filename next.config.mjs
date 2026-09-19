@@ -52,6 +52,15 @@ const nextConfig = {
       { protocol: "https", hostname: "solana.com" },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/sol-components",
+        destination: "/components",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {

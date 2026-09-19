@@ -33,7 +33,7 @@ npx shadcn@latest add Subhan-code/oxygen_ui/{component-name}
 For example:
 
 ```bash
-npx shadcn@latest add Subhan-code/oxygen_ui/bounce-sidebar
+npx shadcn@latest add Subhan-code/oxygen_ui/solana-wallet-card
 ```
 
 Browse every component, with live previews and props, at [oxygenui.com/components](https://oxygenui.com/components).

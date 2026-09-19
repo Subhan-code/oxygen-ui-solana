@@ -17,7 +17,7 @@ export default function Demo() {
         </p>
       </div>
 
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-[280px]">
         <CryptoPricePills onSelect={setSelected} />
       </div>
 
