@@ -95,7 +95,7 @@ export default function LiveComponentPreview({ item }: { item: ComponentItem }) 
           observer.disconnect();
         }
       },
-      { rootMargin: "250px 0px" }
+      { rootMargin: "50px 0px" }
     );
     observer.observe(containerRef.current);
     return () => observer.disconnect();

@@ -31,16 +31,13 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
     <Link
       ref={isActive ? activeRef : undefined}
       href={component.href}
-      prefetch={true}
+      prefetch={false}
       onClick={onNavigate}
       title={`${numStr} ${component.name}`}
       className="group relative flex items-center min-w-0 max-w-full my-0.5"
     >
-      <motion.div
-        whileHover={{ x: 2 }}
-        whileTap={{ scale: 0.98 }}
-        transition={springTransition}
-        className={`relative flex w-full items-center justify-between rounded-xl px-3 py-1.5 transition-colors cursor-pointer ${
+      <div
+        className={`relative flex w-full items-center justify-between rounded-xl px-3 py-1.5 transition-all duration-150 ease-out cursor-pointer hover:translate-x-0.5 active:scale-[0.985] ${
           isActive
             ? "bg-sky-500/15 border border-sky-500/30 text-white font-semibold shadow-sm backdrop-blur-md"
             : "text-zinc-400 hover:text-zinc-100 hover:bg-white/5 font-medium"
@@ -60,7 +57,7 @@ const ProximityScaleItem = memo(function ProximityScaleItem({
             {component.name}
           </span>
         </span>
-      </motion.div>
+      </div>
     </Link>
   );
 });

@@ -12,48 +12,6 @@ import { SITE_KEYWORDS, siteJsonLd } from "@/lib/seo";
 import ScrollLockCleaner from "@/components/ScrollLockCleaner";
 import "./globals.css";
 
-if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  const origConsoleError = console.error;
-  const EXTENSION_PATTERNS = [
-    "bis_skin_checked",
-    "cz-shortcut-listen",
-    "grammarly-extension",
-    "data-new-gr-c-s-check-loaded",
-    "data-gr-ext-installed",
-    "chrome-extension://",
-    "M_ID",
-  ];
-  console.error = (...args: unknown[]) => {
-    const isExtensionError = args.some((arg) => {
-      if (typeof arg === "string") {
-        return EXTENSION_PATTERNS.some((pattern) => arg.includes(pattern));
-      }
-      try {
-        const str = JSON.stringify(arg);
-        return EXTENSION_PATTERNS.some((pattern) => str.includes(pattern));
-      } catch {
-        return false;
-      }
-    });
-    if (isExtensionError) return;
-    origConsoleError(...args);
-  };
-
-  window.addEventListener(
-    "error",
-    (event) => {
-      if (
-        event.filename?.includes("chrome-extension://") ||
-        event.error?.stack?.includes("chrome-extension://") ||
-        (typeof event.message === "string" && event.message.includes("M_ID"))
-      ) {
-        event.stopImmediatePropagation();
-      }
-    },
-    true
-  );
-}
-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],

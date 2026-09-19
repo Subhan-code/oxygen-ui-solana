@@ -11,26 +11,7 @@ export default function SidebarShell({
 }: {
   children: React.ReactNode;
 }) {
-  const [mounted, setMounted] = useState(false);
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <PreviewControlsProvider>
-        <div
-          className="relative h-full w-full overflow-hidden rounded-[45px] bg-card p-4"
-          style={{ cornerShape: "squircle" } as React.CSSProperties}
-          suppressHydrationWarning
-        >
-          {children}
-        </div>
-      </PreviewControlsProvider>
-    );
-  }
 
   return (
     <PreviewControlsProvider>

@@ -32,7 +32,7 @@ export default function DesktopShell({
         suppressHydrationWarning
       >
         <div
-          className="relative z-0 flex h-full w-full flex-col items-center justify-center overflow-auto rounded-[45px] bg-card p-4 transition-all duration-300"
+          className="relative z-0 flex h-full w-full flex-col items-center justify-center overflow-auto rounded-[45px] bg-card p-4 transition-colors duration-150"
           style={{ cornerShape: "squircle" } as React.CSSProperties}
           suppressHydrationWarning
         >
