@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 
 const HERO_MIN_HEIGHT = "min-h-[min(92vh,54rem)]";
 const HERO_PADDING = "py-24 sm:py-32 md:py-36";
-const SPONSOR_URL = "https://github.com/Subhan-code/oxygen_ui";
+const SPONSOR_URL = "https://github.com/Subhan-code/oxygen-ui-solana";
 
 function BackersSection() {
   return (

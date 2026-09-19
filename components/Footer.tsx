@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 import FluidWave from "./FluidWave";
 
-const GITHUB_URL = "https://github.com/Subhan-code/oxygen_ui";
+const GITHUB_URL = "https://github.com/Subhan-code/oxygen-ui-solana";
 const X_URL = "https://x.com/SubhanHQ";
 
 type FooterLink = { label: string; href: string; external?: boolean };

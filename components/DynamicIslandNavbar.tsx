@@ -16,7 +16,7 @@ const LINKS = [
   { label: "Docs", href: "/docs/installation" },
 ];
 
-const GITHUB_URL = "https://github.com/Subhan-code/oxygen_ui";
+const GITHUB_URL = "https://github.com/Subhan-code/oxygen-ui-solana";
 
 function GithubCutoutIcon({ className }: { className?: string }) {
   return (

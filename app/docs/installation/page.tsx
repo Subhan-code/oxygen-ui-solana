@@ -113,7 +113,7 @@ export default async function InstallationPage() {
           <h3 className="text-xl font-bold font-runde text-blue-400">Community &amp; Feedback</h3>
           <p className="mt-2 text-sm text-neutral-300">
             Found a bug or need a specific Solana primitive? Oxygen UI is driven by community feedback. Check out our{" "}
-            <a href="https://github.com/Subhan-code/oxygen_ui/blob/main/FEEDBACK.md" target="_blank" rel="noreferrer" className="underline font-semibold text-white">
+            <a href="https://github.com/Subhan-code/oxygen-ui-solana/blob/main/FEEDBACK.md" target="_blank" rel="noreferrer" className="underline font-semibold text-white">
               Feedback &amp; Contribution Guidelines
             </a>{" "}
             or open an issue on GitHub.

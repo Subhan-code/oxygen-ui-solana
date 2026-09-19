@@ -13,7 +13,7 @@ const LINKS = [
   { label: "Sponsors", href: "/#sponsors" },
 ];
 
-const GITHUB_URL = "https://github.com/Subhan-code/oxygen_ui";
+const GITHUB_URL = "https://github.com/Subhan-code/oxygen-ui-solana";
 const X_URL = "https://x.com/SubhanHQ";
 
 const XIcon = ({ className }: { className?: string }) => (

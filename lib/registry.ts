@@ -21,8 +21,8 @@ export interface RegistryItem {
   href: string;
 }
 
-export const REGISTRY_REPO = "Subhan-code/oxygen_ui";
-export const REGISTRY_HOMEPAGE = "https://github.com/Subhan-code/oxygen_ui";
+export const REGISTRY_REPO = "Subhan-code/oxygen-ui-solana";
+export const REGISTRY_HOMEPAGE = "https://github.com/Subhan-code/oxygen-ui-solana";
 
 export function validateRegistry(items: RegistryItem[]): void {
   const titles = new Set<string>();

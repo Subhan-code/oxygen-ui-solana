@@ -9,4 +9,4 @@ export const SITE_TAGLINE = "Oxygen UI: Open-Source Solana UI Library";
 export const SITE_DESCRIPTION =
   "Oxygen UI is an open-source Solana UI library providing reusable React components, web3 frontend primitives, account interfaces, token displays, and transaction states for Solana applications.";
 
-export const SITE_REPO = "https://github.com/Subhan-code/oxygen_ui";
+export const SITE_REPO = "https://github.com/Subhan-code/oxygen-ui-solana";
