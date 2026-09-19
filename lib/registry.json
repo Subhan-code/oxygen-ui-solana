@@ -1008,38 +1008,6 @@
     "href": "/components/familypopovermenu"
   },
   {
-    "id": "66",
-    "slug": "otpinput",
-    "title": "OTP Input",
-    "group": "Inputs & Form Controls",
-    "name": "OTP Input",
-    "category": "Inputs & Form Controls",
-    "registry": "Inputs & Form Controls",
-    "file": "components/ui/otp-input.tsx",
-    "thumb": "/thumbs/otpinput.webp",
-    "description": "A one-time-code input whose characters roll into place behind a caret that slides from slot to slot.",
-    "source": "https://github.com/Subhan-code/oxygen_ui/blob/main/components/ui/otp-input.tsx",
-    "interaction": "",
-    "usage": "",
-    "href": "/components/otpinput"
-  },
-  {
-    "id": "67",
-    "slug": "passwordinput",
-    "title": "Password Input",
-    "group": "Inputs & Form Controls",
-    "name": "Password Input",
-    "category": "Inputs & Form Controls",
-    "registry": "Inputs & Form Controls",
-    "file": "components/ui/password-input.tsx",
-    "thumb": "/thumbs/passwordinput.webp",
-    "description": "Password Input component for Oxygen UI.",
-    "source": "https://github.com/Subhan-code/oxygen_ui/components/ui/password-input.tsx",
-    "interaction": "",
-    "usage": "",
-    "href": "/components/passwordinput"
-  },
-  {
     "id": "68",
     "slug": "inputborderspotlight",
     "title": "Spotlight Input",

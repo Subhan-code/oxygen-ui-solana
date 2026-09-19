@@ -157,7 +157,7 @@ export default function DynamicIslandNavbar({
   const islandPillStyle = { borderRadius: 9999 };
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-7 z-50 flex justify-center px-4 sm:top-8">
+    <header className="pointer-events-none fixed inset-x-0 top-6 z-50 px-4 sm:px-6 md:px-8 sm:top-7">
       <motion.nav
         layout={!reduceMotion}
         animate={{
@@ -165,319 +165,323 @@ export default function DynamicIslandNavbar({
           y: scrolled ? -2 : 0,
         }}
         transition={{ type: "spring", stiffness: 320, damping: 25 }}
-        className="pointer-events-auto relative flex items-center justify-center gap-4 sm:gap-6 md:gap-7"
+        className="relative flex w-full items-center justify-between"
       >
-        {/* left island: brand */}
-        <motion.div
-          layout={!reduceMotion}
-          transition={brandSpring}
-          whileHover={reduceMotion ? undefined : { scale: 1.02 }}
-          whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-          style={islandPillStyle}
-          className="flex h-12 shrink-0 items-center overflow-hidden bg-black text-white"
-        >
-          <Link
-            href="/"
-            className="flex h-full items-center gap-2.5 px-4"
-            aria-label="Oxygen-UI Home"
+        {/* left island: brand on left viewport edge */}
+        <div className="flex flex-1 items-center justify-start pointer-events-none">
+          <motion.div
+            layout={!reduceMotion}
+            transition={brandSpring}
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+            style={islandPillStyle}
+            className="pointer-events-auto flex h-12 shrink-0 items-center overflow-hidden bg-black text-white shadow-lg shadow-black/10"
           >
-            <Image
-              src="/logos/Oxygenui.svg"
-              alt=""
-              width={20}
-              height={20}
-              className="h-5 w-5 shrink-0"
-              priority
-            />
-            <span className="font-medium tracking-tight text-sm text-white">
-              Oxygen-UI
-            </span>
-          </Link>
-        </motion.div>
-
-        {/* desktop center island: nav */}
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              key="center-nav"
-              layout={!reduceMotion}
-              initial={
-                reduceMotion
-                  ? false
-                  : {
-                      opacity: 0,
-                      scaleX: 0.05,
-                      scaleY: 0.6,
-                      x: -80,
-                      filter: "blur(4px)",
-                      transformOrigin: "left center",
-                    }
-              }
-              animate={{
-                opacity: 1,
-                scaleX: 1,
-                scaleY: 1,
-                x: 0,
-                filter: "blur(0px)",
-              }}
-              exit={{
-                opacity: 0,
-                scaleX: 0.05,
-                x: -80,
-                filter: "blur(4px)",
-              }}
-              transition={navSpring}
-              whileHover={reduceMotion ? undefined : { scale: 1.01 }}
-              style={islandPillStyle}
-              className="hidden h-12 items-center overflow-hidden bg-black px-2.5 text-white md:flex"
+            <Link
+              href="/"
+              className="flex h-full items-center gap-2.5 px-4"
+              aria-label="Oxygen-UI Home"
             >
-              {LINKS.map((link, idx) => {
-                const isExact = pathname === link.href;
-                const isSub =
-                  link.href !== "/" && pathname.startsWith(link.href);
-                const isActive =
-                  link.href === "/components"
-                    ? pathname === "/components"
-                    : isExact || isSub;
+              <Image
+                src="/logos/Oxygenui.svg"
+                alt=""
+                width={20}
+                height={20}
+                className="h-5 w-5 shrink-0"
+                priority
+              />
+              <span className="font-medium tracking-tight text-sm text-white">
+                Oxygen-UI
+              </span>
+            </Link>
+          </motion.div>
+        </div>
 
-                return (
-                  <div key={link.label} className="flex items-center">
-                    {idx > 0 && (
-                      <span
-                        className="h-3.5 w-px bg-white/15"
-                        aria-hidden="true"
-                      />
-                    )}
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        "px-3.5 text-[13px] font-medium transition-colors duration-150 ease-out whitespace-nowrap",
-                        isActive
-                          ? "text-white font-semibold"
-                          : "text-white/60 hover:text-white",
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  </div>
-                );
-              })}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* desktop right cluster: github + x + theme control */}
-        <AnimatePresence>
-          {expanded && (
-            <div className="hidden items-center gap-2 md:flex">
-              {/* github pill with star morph animation on hover */}
-              <motion.a
-                key="right-github"
+        {/* desktop center island: nav links */}
+        <div className="hidden md:flex items-center justify-center pointer-events-none">
+          <AnimatePresence>
+            {expanded && (
+              <motion.div
+                key="center-nav"
                 layout={!reduceMotion}
-                href={GITHUB_URL}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`GitHub repository, ${displayStars} stars`}
-                onMouseEnter={() => setStarHovered(true)}
-                onMouseLeave={() => setStarHovered(false)}
-                onFocus={() => setStarHovered(true)}
-                onBlur={() => setStarHovered(false)}
                 initial={
                   reduceMotion
                     ? false
                     : {
                         opacity: 0,
-                        scale: 0.2,
-                        x: -180,
+                        scaleX: 0.2,
+                        scaleY: 0.6,
+                        y: -8,
                         filter: "blur(4px)",
                       }
                 }
                 animate={{
                   opacity: 1,
-                  scale: 1,
-                  x: 0,
+                  scaleX: 1,
+                  scaleY: 1,
+                  y: 0,
                   filter: "blur(0px)",
                 }}
                 exit={{
                   opacity: 0,
-                  scale: 0.2,
-                  x: -180,
+                  scaleX: 0.2,
+                  y: -8,
                   filter: "blur(4px)",
                 }}
-                transition={{ ...smallSpring, delay: 0.05 }}
-                whileHover={reduceMotion ? undefined : { scale: 1.04 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.96 }}
+                transition={navSpring}
+                whileHover={reduceMotion ? undefined : { scale: 1.01 }}
                 style={islandPillStyle}
-                className="flex h-12 items-center gap-2 overflow-hidden bg-black px-3.5 text-white"
+                className="pointer-events-auto flex h-12 items-center overflow-hidden bg-black px-2.5 text-white shadow-lg shadow-black/10"
               >
-                <span className="relative flex h-5 w-5 items-center justify-center">
-                  <motion.span
-                    initial={false}
-                    animate={{
-                      scale: starHovered ? 0.2 : 1,
-                      opacity: starHovered ? 0 : 1,
-                      rotate: reduceMotion ? 0 : starHovered ? -60 : 0,
-                      filter: starHovered ? "blur(3px)" : "blur(0px)",
-                    }}
-                    transition={
-                      reduceMotion
-                        ? { duration: 0 }
-                        : { type: "spring", stiffness: 320, damping: 18 }
-                    }
+                {LINKS.map((link, idx) => {
+                  const isExact = pathname === link.href;
+                  const isSub =
+                    link.href !== "/" && pathname.startsWith(link.href);
+                  const isActive =
+                    link.href === "/components"
+                      ? pathname === "/components"
+                      : isExact || isSub;
+
+                  return (
+                    <div key={link.label} className="flex items-center">
+                      {idx > 0 && (
+                        <span
+                          className="h-3.5 w-px bg-white/15"
+                          aria-hidden="true"
+                        />
+                      )}
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          "px-3.5 text-[13px] font-medium transition-colors duration-150 ease-out whitespace-nowrap",
+                          isActive
+                            ? "text-white font-semibold"
+                            : "text-white/60 hover:text-white",
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* right cluster on right viewport edge: github + x + theme control */}
+        <div className="flex flex-1 items-center justify-end pointer-events-none">
+          <AnimatePresence>
+            {expanded && (
+              <div className="pointer-events-auto hidden items-center gap-2 md:flex">
+                {/* github pill with star morph animation on hover */}
+                <motion.a
+                  key="right-github"
+                  layout={!reduceMotion}
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`GitHub repository, ${displayStars} stars`}
+                  onMouseEnter={() => setStarHovered(true)}
+                  onMouseLeave={() => setStarHovered(false)}
+                  onFocus={() => setStarHovered(true)}
+                  onBlur={() => setStarHovered(false)}
+                  initial={
+                    reduceMotion
+                      ? false
+                      : {
+                          opacity: 0,
+                          scale: 0.4,
+                          x: 20,
+                          filter: "blur(4px)",
+                        }
+                  }
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    x: 0,
+                    filter: "blur(0px)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.4,
+                    x: 20,
+                    filter: "blur(4px)",
+                  }}
+                  transition={{ ...smallSpring, delay: 0.05 }}
+                  whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.96 }}
+                  style={islandPillStyle}
+                  className="flex h-12 items-center gap-2 overflow-hidden bg-black px-3.5 text-white shadow-lg shadow-black/10"
+                >
+                  <span className="relative flex h-5 w-5 items-center justify-center">
+                    <motion.span
+                      initial={false}
+                      animate={{
+                        scale: starHovered ? 0.2 : 1,
+                        opacity: starHovered ? 0 : 1,
+                        rotate: reduceMotion ? 0 : starHovered ? -60 : 0,
+                        filter: starHovered ? "blur(3px)" : "blur(0px)",
+                      }}
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { type: "spring", stiffness: 320, damping: 18 }
+                      }
+                      className="flex items-center justify-center"
+                    >
+                      <GithubCutoutIcon className="h-4.5 w-4.5 text-white" />
+                    </motion.span>
+
+                    <motion.span
+                      initial={false}
+                      animate={{
+                        scale: starHovered ? 1 : 0.2,
+                        opacity: starHovered ? 1 : 0,
+                        rotate: reduceMotion ? 0 : starHovered ? 0 : -140,
+                        filter: starHovered ? "blur(0px)" : "blur(3px)",
+                      }}
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { type: "spring", stiffness: 340, damping: 15 }
+                      }
+                      className="absolute inset-0 flex items-center justify-center text-[#FFC83D]"
+                    >
+                      <StarIcon className="h-5 w-5" />
+                    </motion.span>
+
+                    <motion.span
+                      initial={false}
+                      animate={{
+                        scale: starHovered && !reduceMotion ? 1 : 0,
+                        opacity: starHovered ? 1 : 0,
+                        rotate: starHovered ? 0 : -90,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 360,
+                        damping: 14,
+                        delay: 0.08,
+                      }}
+                      className="pointer-events-none absolute -right-1.5 -top-1 text-[#FFE9A8]"
+                    >
+                      <SparkleIcon className="h-2 w-2" />
+                    </motion.span>
+
+                    <motion.span
+                      initial={false}
+                      animate={{
+                        scale: starHovered && !reduceMotion ? 1 : 0,
+                        opacity: starHovered ? 1 : 0,
+                        rotate: starHovered ? 0 : 90,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 360,
+                        damping: 14,
+                        delay: 0.14,
+                      }}
+                      className="pointer-events-none absolute -bottom-1 -left-1.5 text-[#FFE9A8]"
+                    >
+                      <SparkleIcon className="h-1.5 w-1.5" />
+                    </motion.span>
+                  </span>
+
+                  <span
+                    className={cn(
+                      "font-medium text-[13px] tabular-nums transition-colors duration-200",
+                      starHovered ? "text-[#FFE9A8]" : "text-white",
+                    )}
+                  >
+                    {displayStars}
+                  </span>
+                </motion.a>
+
+                {/* X (Twitter) pill */}
+                <motion.a
+                  key="right-x"
+                  layout={!reduceMotion}
+                  href="https://x.com/SubhanHQ"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="X (Twitter)"
+                  initial={
+                    reduceMotion
+                      ? false
+                      : {
+                          opacity: 0,
+                          scale: 0.4,
+                          x: 20,
+                          filter: "blur(4px)",
+                        }
+                  }
+                  animate={{ opacity: 1, scale: 1, x: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, scale: 0.4, x: 20, filter: "blur(4px)" }}
+                  transition={{ ...navSpring, delay: 0.08 }}
+                  whileHover={reduceMotion ? undefined : { scale: 1.06 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+                  style={islandPillStyle}
+                  className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white shadow-lg shadow-black/10"
+                >
+                  <XIcon className="h-4 w-4 text-white" />
+                </motion.a>
+
+                {/* theme toggle pill */}
+                <motion.button
+                  key="right-theme"
+                  layout={!reduceMotion}
+                  type="button"
+                  onClick={() => setTheme(isDark ? "light" : "dark")}
+                  aria-label="Toggle theme"
+                  initial={
+                    reduceMotion
+                      ? false
+                      : {
+                          opacity: 0,
+                          scale: 0.4,
+                          x: 20,
+                          filter: "blur(4px)",
+                        }
+                  }
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    x: 0,
+                    filter: "blur(0px)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.4,
+                    x: 20,
+                    filter: "blur(4px)",
+                  }}
+                  transition={{ ...themeSpring, delay: 0.1 }}
+                  whileHover={reduceMotion ? undefined : { scale: 1.08 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.92 }}
+                  style={islandPillStyle}
+                  className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white shadow-lg shadow-black/10"
+                >
+                  <motion.div
+                    animate={{ rotate: mounted && !isDark ? 180 : 0 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 20 }}
                     className="flex items-center justify-center"
                   >
-                    <GithubCutoutIcon className="h-4.5 w-4.5 text-white" />
-                  </motion.span>
+                    <HalfShadedCircleIcon className="h-5 w-5 text-white" />
+                  </motion.div>
+                </motion.button>
+              </div>
+            )}
+          </AnimatePresence>
 
-                  <motion.span
-                    initial={false}
-                    animate={{
-                      scale: starHovered ? 1 : 0.2,
-                      opacity: starHovered ? 1 : 0,
-                      rotate: reduceMotion ? 0 : starHovered ? 0 : -140,
-                      filter: starHovered ? "blur(0px)" : "blur(3px)",
-                    }}
-                    transition={
-                      reduceMotion
-                        ? { duration: 0 }
-                        : { type: "spring", stiffness: 340, damping: 15 }
-                    }
-                    className="absolute inset-0 flex items-center justify-center text-[#FFC83D]"
-                  >
-                    <StarIcon className="h-5 w-5" />
-                  </motion.span>
-
-                  <motion.span
-                    initial={false}
-                    animate={{
-                      scale: starHovered && !reduceMotion ? 1 : 0,
-                      opacity: starHovered ? 1 : 0,
-                      rotate: starHovered ? 0 : -90,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 360,
-                      damping: 14,
-                      delay: 0.08,
-                    }}
-                    className="pointer-events-none absolute -right-1.5 -top-1 text-[#FFE9A8]"
-                  >
-                    <SparkleIcon className="h-2 w-2" />
-                  </motion.span>
-
-                  <motion.span
-                    initial={false}
-                    animate={{
-                      scale: starHovered && !reduceMotion ? 1 : 0,
-                      opacity: starHovered ? 1 : 0,
-                      rotate: starHovered ? 0 : 90,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 360,
-                      damping: 14,
-                      delay: 0.14,
-                    }}
-                    className="pointer-events-none absolute -bottom-1 -left-1.5 text-[#FFE9A8]"
-                  >
-                    <SparkleIcon className="h-1.5 w-1.5" />
-                  </motion.span>
-                </span>
-
-                <span
-                  className={cn(
-                    "font-medium text-[13px] tabular-nums transition-colors duration-200",
-                    starHovered ? "text-[#FFE9A8]" : "text-white",
-                  )}
-                >
-                  {displayStars}
-                </span>
-              </motion.a>
-
-              {/* X (Twitter) pill */}
-              <motion.a
-                key="right-x"
-                layout={!reduceMotion}
-                href="https://x.com/SubhanHQ"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="X (Twitter)"
-                initial={
-                  reduceMotion
-                    ? false
-                    : {
-                        opacity: 0,
-                        scale: 0.2,
-                        x: -240,
-                        filter: "blur(4px)",
-                      }
-                }
-                animate={{ opacity: 1, scale: 1, x: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 0.2, x: -240, filter: "blur(4px)" }}
-                transition={{ ...navSpring, delay: 0.08 }}
-                whileHover={reduceMotion ? undefined : { scale: 1.06 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.94 }}
-                style={islandPillStyle}
-                className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white"
-              >
-                <XIcon className="h-4 w-4 text-white" />
-              </motion.a>
-
-              {/* theme toggle pill */}
-              <motion.button
-                key="right-theme"
-                layout={!reduceMotion}
-                type="button"
-                onClick={() => setTheme(isDark ? "light" : "dark")}
-                aria-label="Toggle theme"
-                initial={
-                  reduceMotion
-                    ? false
-                    : {
-                        opacity: 0,
-                        scale: 0.2,
-                        x: -240,
-                        filter: "blur(4px)",
-                      }
-                }
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  x: 0,
-                  filter: "blur(0px)",
-                }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.2,
-                  x: -240,
-                  filter: "blur(4px)",
-                }}
-                transition={{ ...themeSpring, delay: 0.1 }}
-                whileHover={reduceMotion ? undefined : { scale: 1.08 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.92 }}
-                style={islandPillStyle}
-                className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white"
-              >
-                <motion.div
-                  animate={{ rotate: mounted && !isDark ? 180 : 0 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 20 }}
-                  className="flex items-center justify-center"
-                >
-                  <HalfShadedCircleIcon className="h-5 w-5 text-white" />
-                </motion.div>
-              </motion.button>
-            </div>
-          )}
-        </AnimatePresence>
-
-        {/* mobile actions */}
-        <AnimatePresence>
-          {expanded && (
-            <div className="flex items-center gap-2 md:hidden">
-              <motion.a
-                layout={!reduceMotion}
-                href={GITHUB_URL}
-                target="_blank"
+          {/* mobile actions */}
+          <AnimatePresence>
+            {expanded && (
+              <div className="pointer-events-auto flex items-center gap-2 md:hidden">
+                <motion.a
+                  layout={!reduceMotion}
+                  href={GITHUB_URL}
+                  target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
                 onMouseEnter={() => setStarHovered(true)}
@@ -591,6 +595,7 @@ export default function DynamicIslandNavbar({
             </div>
           )}
         </AnimatePresence>
+        </div>
       </motion.nav>
 
       {/* mobile drawer menu */}
@@ -601,7 +606,7 @@ export default function DynamicIslandNavbar({
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: -8, filter: "blur(6px)" }}
             transition={{ type: "spring", stiffness: 320, damping: 24 }}
-            className="pointer-events-auto fixed inset-x-4 top-24 z-40 rounded-3xl bg-black/95 p-5 shadow-2xl backdrop-blur-2xl md:hidden"
+            className="pointer-events-auto fixed inset-x-4 top-20 z-40 rounded-3xl bg-black/95 p-5 shadow-2xl backdrop-blur-2xl md:hidden"
           >
             <div className="flex flex-col gap-3">
               {LINKS.map((link) => (

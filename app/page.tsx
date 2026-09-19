@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   },
 };
 
-const HERO_MIN_HEIGHT = "min-h-[min(92vh,54rem)]";
-const HERO_PADDING = "py-24 sm:py-32 md:py-36";
+const HERO_MIN_HEIGHT = "min-h-[min(88vh,52rem)]";
+const HERO_PADDING = "py-20 sm:py-28 md:py-32";
 const SPONSOR_URL = "https://github.com/Subhan-code/oxygen-ui-solana";
 
 function BackersSection() {
@@ -129,7 +129,7 @@ export default async function Home() {
     <>
       <DynamicIslandNavbar stars={stars} />
 
-      <section className="relative w-full p-1.5 md:p-2.5">
+      <section className="relative w-full px-1.5 pb-1.5 pt-20 sm:px-2.5 sm:pb-2.5 sm:pt-24 md:pt-24">
         <div
           className={`relative isolate flex ${HERO_MIN_HEIGHT} w-full items-center overflow-hidden rounded-[36px] border border-black/10 text-white shadow-2xl dark:border-white/15 md:rounded-[45px]`}
           style={{ cornerShape: "squircle" } as React.CSSProperties}

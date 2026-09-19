@@ -656,36 +656,6 @@ export const REGISTRY: RegistryItem[] = [
     href: "/components/orderform"
   },
   {
-    id: "94",
-    slug: "otpinput",
-    title: "Otp Input",
-    group: "Inputs, Forms & Selectors",
-    name: "Otp Input",
-    category: "Inputs, Forms & Selectors",
-    registry: "Inputs, Forms & Selectors",
-    file: "components/ui/otp-input.tsx",
-    description: "High performance Apple-styled Otp Input component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/otp-input.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { OtpInput } from "@/components/ui/otp-input.tsx"`,
-    href: "/components/otpinput"
-  },
-  {
-    id: "95",
-    slug: "passwordinput",
-    title: "Password Input",
-    group: "Inputs, Forms & Selectors",
-    name: "Password Input",
-    category: "Inputs, Forms & Selectors",
-    registry: "Inputs, Forms & Selectors",
-    file: "components/ui/password-input.tsx",
-    description: "High performance Apple-styled Password Input component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/password-input.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { PasswordInput } from "@/components/ui/password-input.tsx"`,
-    href: "/components/passwordinput"
-  },
-  {
     id: "96",
     slug: "poolcard",
     title: "Pool Card",
@@ -1633,36 +1603,6 @@ export const REGISTRY: RegistryItem[] = [
     interaction: "Interactive numerical value roll transitions.",
     usage: `import { DigitSwap } from "@/components/ui/digit-swap"`,
     href: "/components/digitswap"
-  },
-  {
-    id: "200",
-    slug: "multichainswap",
-    title: "Multi-Chain Swap",
-    group: "Swap, Trade & Orders",
-    name: "Multi-Chain Swap",
-    category: "Swap, Trade & Orders",
-    registry: "Swap, Trade & Orders",
-    file: "components/ui/multi-chain-swap.tsx",
-    description: "Cross-chain swap widget with chain and token selectors, morphing drawer, animated flip and quote.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/multi-chain-swap.tsx`,
-    interaction: "Token selection, reverse flip, amount estimation, and quote review.",
-    usage: `import { MultiChainSwap } from "@/components/ui/multi-chain-swap"`,
-    href: "/components/multichainswap"
-  },
-  {
-    id: "201",
-    slug: "walletcard",
-    title: "Wallet Card",
-    group: "Wallet & Identity",
-    name: "Wallet Card",
-    category: "Wallet & Identity",
-    registry: "Wallet & Identity",
-    file: "components/ui/wallet-card.tsx",
-    description: "Wallet overview card with morphing account switcher, expandable search bar, cascading balance, and action buttons.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/wallet-card.tsx`,
-    interaction: "Account morphing dropdown, search expansion, balance privacy reveal, and action clicks.",
-    usage: `import { WalletCard } from "@/components/ui/wallet-card"`,
-    href: "/components/walletcard"
   },
   {
     id: "202",

@@ -45,15 +45,12 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "liquiditypoolcard": () => import("@/app/components/(docs)/liquiditypoolcard/demo"),
   "marquee": () => import("@/app/components/(docs)/marquee/demo"),
 
-  "multichainswap": () => import("@/app/components/(docs)/multichainswap/demo"),
   "multistatebadge": () => import("@/app/components/(docs)/multistatebadge/demo"),
   "multiwalletswitcher": () => import("@/app/components/(docs)/multiwalletswitcher/demo"),
   "notificationsstack": () => import("@/app/components/(docs)/notificationsstack/demo"),
   "orderbook": () => import("@/app/components/(docs)/orderbook/demo"),
   "orderform": () => import("@/app/components/(docs)/orderform/demo"),
-  "otpinput": () => import("@/app/components/(docs)/otpinput/demo"),
   "oxygenuipill": () => import("@/app/components/(docs)/oxygenuipill/demo"),
-  "passwordinput": () => import("@/app/components/(docs)/passwordinput/demo"),
   "poolcard": () => import("@/app/components/(docs)/poolcard/demo"),
   "pooltable": () => import("@/app/components/(docs)/pooltable/demo"),
   "positioncard": () => import("@/app/components/(docs)/positioncard/demo"),
@@ -129,7 +126,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "valueflash": () => import("@/app/components/(docs)/valueflash/demo"),
   "logomarquee": () => import("@/app/components/(docs)/logomarquee/demo"),
   "presenceavatars": () => import("@/app/components/(docs)/presenceavatars/demo"),
-  "walletcard": () => import("@/app/components/(docs)/walletcard/demo"),
   "solanaeventcard": () => import("@/app/components/(docs)/solanaeventcard/demo"),
 };
 

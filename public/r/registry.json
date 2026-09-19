@@ -80,24 +80,6 @@
       ]
     },
     {
-      "name": "otp-input",
-      "type": "registry:ui",
-      "title": "OTP Input",
-      "description": "A one-time-code input whose characters roll into place behind a caret that slides from slot to slot.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/otp-input.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "input-morph-message",
       "type": "registry:ui",
       "title": "Morph Input",
@@ -751,18 +733,6 @@
       ]
     },
     {
-      "name": "password-input",
-      "type": "registry:ui",
-      "title": "Password Input",
-      "description": "Password Input component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/password-input.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "qr-code",
       "type": "registry:ui",
       "title": "QR Code",
@@ -1232,25 +1202,6 @@
       "files": [
         {
           "path": "components/ui/wallet-sheet.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "wallet-card",
-      "type": "registry:ui",
-      "title": "Wallet Card",
-      "description": "Wallet overview card with morphing account switcher, expandable search bar, cascading balance, and action buttons.",
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/wallet-card.tsx",
           "type": "registry:ui"
         }
       ]
