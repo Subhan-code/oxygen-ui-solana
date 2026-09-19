@@ -8,7 +8,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { label: "Sol Components", href: "/sol-components" },
+  { label: "Components", href: "/components" },
   { label: "Blocks", href: "/blocks" },
   { label: "Sponsors", href: "/#sponsors" },
 ];

@@ -24,7 +24,7 @@ const FEATURES = [
     cardBg: "bg-[#F1EAFF] dark:bg-[#1E1438]",
     tagBg: "bg-purple-500/10 text-purple-800 dark:bg-purple-400/15 dark:text-purple-200 border-purple-200/50 dark:border-purple-800/40",
     action: "Browse Motion",
-    href: "/sol-components",
+    href: "/components",
   },
   {
     title: "Primitives Built for Solana",
@@ -32,8 +32,8 @@ const FEATURES = [
     tags: ["56 Components", "Solana dApps", "Wallet Surfaces", "Swap Terminals"],
     cardBg: "bg-[#E9FBF3] dark:bg-[#0C2A1E]",
     tagBg: "bg-emerald-500/10 text-emerald-800 dark:bg-emerald-400/15 dark:text-emerald-200 border-emerald-200/50 dark:border-emerald-800/40",
-    action: "Sol Components",
-    href: "/sol-components",
+    action: "Components",
+    href: "/components",
   },
 ];
 

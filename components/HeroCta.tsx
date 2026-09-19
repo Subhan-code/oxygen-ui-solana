@@ -100,7 +100,7 @@ export default function HeroCta({ className }: { className?: string }) {
           bgClassName="bg-[#0066FF] shadow-[0_0_20px_rgba(0,102,255,0.35)] transition-all duration-150 ease-out group-hover:bg-[#0052CC] group-hover:shadow-[0_0_25px_rgba(0,102,255,0.5)]"
         />
         <Link
-          href="/sol-components"
+          href="/components"
           className="relative flex h-12 items-center px-6 text-sm font-semibold font-runde text-white outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0066FF]"
         >
           Browse components

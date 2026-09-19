@@ -9,7 +9,7 @@ type FooterLink = { label: string; href: string; external?: boolean };
 
 const LINKS: FooterLink[] = [
   { label: "Home", href: "/" },
-  { label: "Sol Components", href: "/sol-components" },
+  { label: "Components", href: "/components" },
   { label: "Docs & Installation", href: "/docs/installation" },
   { label: "GitHub", href: GITHUB_URL, external: true },
   { label: "X / Twitter", href: X_URL, external: true },

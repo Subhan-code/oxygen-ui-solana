@@ -100,11 +100,11 @@ export default function BreadcrumbPath({
           className="inline-flex items-center gap-1.5 shrink-0"
         >
           <MagneticBreadcrumbTab
-            href="/sol-components"
+            href="/components"
             dataSlot="breadcrumb-link"
             className="text-foreground/60 hover:text-foreground hover:bg-accent"
           >
-            Sol Components
+            Components
           </MagneticBreadcrumbTab>
         </li>
         <li
