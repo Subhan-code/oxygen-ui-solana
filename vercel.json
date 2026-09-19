@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npx -y shadcn@latest build && next build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "nodeVersion": "22"
+}
