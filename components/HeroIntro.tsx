@@ -14,7 +14,7 @@ const rise = {
 
 const riseReduced = {
   hidden: { opacity: 0 },
-  shown: { opacity: 1 },
+  shown: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
 };
 
 const SMART_TITLE_PHRASES = [
@@ -41,7 +41,13 @@ export default function HeroIntro({
   const shown = reduceMotion ? riseReduced.shown : rise.shown;
   const step = (index: number) =>
     reduceMotion
-      ? { duration: 0.2, ease: [0.19, 1, 0.22, 1] as const }
+      ? {
+          duration: 0.2,
+          ease: [0.19, 1, 0.22, 1] as const,
+          y: { duration: 0 },
+          scale: { duration: 0 },
+          filter: { duration: 0 },
+        }
       : { ...spring, delay: index * STEP };
 
   return (
