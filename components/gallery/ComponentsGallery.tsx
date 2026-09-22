@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ComponentItem } from "@/lib/components";
 import { GROUP_TAXONOMY } from "@/lib/groups";
 import ComponentCard from "./ComponentCard";
@@ -19,7 +19,6 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
   const [viewMode, setViewMode] = useState<ViewMode>("group");
   const [orderMode, setOrderMode] = useState<OrderMode>("default");
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -256,7 +255,7 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
                 </div>
                 <p className="text-xs text-muted-foreground">{group.description}</p>
               </div>
-              <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {groupItems.map((item) => (
                   <ComponentCard key={item.href} item={item} />
                 ))}
@@ -264,7 +263,7 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
             </section>
           ))
         ) : (
-          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {sortedItems.map((item) => (
               <ComponentCard key={item.href} item={item} />
             ))}

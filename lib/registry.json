@@ -1202,9 +1202,9 @@
   {
     "id": "80",
     "slug": "runstatsstacks",
-    "title": "Stats Stack",
+    "title": "Solana Batch Stacks",
     "group": "Progress & Feedback",
-    "name": "Stats Stack",
+    "name": "Solana Batch Stacks",
     "category": "Progress & Feedback",
     "registry": "Progress & Feedback",
     "file": "components/ui/run-stats-stacks.tsx",
@@ -1264,22 +1264,6 @@
     "href": "/components/multistatebadge"
   },
   {
-    "id": "85",
-    "slug": "notificationsstack",
-    "title": "Notifications",
-    "group": "Progress & Feedback",
-    "name": "Notifications",
-    "category": "Progress & Feedback",
-    "registry": "Progress & Feedback",
-    "file": "components/ui/notifications-stack.tsx",
-    "thumb": "/thumbs/notificationsstack.webp",
-    "description": "Notifications Stack component for Oxygen UI.",
-    "source": "https://github.com/Subhan-code/oxygen_ui/components/ui/notifications-stack.tsx",
-    "interaction": "",
-    "usage": "",
-    "href": "/components/notificationsstack"
-  },
-  {
     "id": "86",
     "slug": "skeletonreveal",
     "title": "Skeleton Reveal",
@@ -1298,9 +1282,9 @@
   {
     "id": "87",
     "slug": "cardstack",
-    "title": "Card Stack",
+    "title": "Solana Card Stack",
     "group": "Cards & Layout Primitives",
-    "name": "Card Stack",
+    "name": "Solana Card Stack",
     "category": "Cards & Layout Primitives",
     "registry": "Cards & Layout Primitives",
     "file": "components/ui/card-stack.tsx",

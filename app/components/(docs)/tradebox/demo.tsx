@@ -9,7 +9,8 @@ export default function Demo() {
       <div className="w-full max-w-md">
         <TradeBox
           tokens={[
-            { icon: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png", symbol: "SOL" }
+            { icon: "/tokens/sol.svg", symbol: "SOL" },
+            { icon: "/tokens/usdc.svg", symbol: "USDC" },
           ]}
         />
       </div>

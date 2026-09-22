@@ -28,7 +28,7 @@ export default function ViewAllCard({
       style={{ cornerShape: "squircle" } as React.CSSProperties}
     >
       <img
-        src="/logos/Oxygenui.svg"
+        src="/logos/Oxygenui-shadow.svg"
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-20 -right-20 h-80 w-80 opacity-25 [filter:brightness(0)_invert(1)]"

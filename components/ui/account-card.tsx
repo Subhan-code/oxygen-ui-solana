@@ -50,7 +50,7 @@ export const AccountCard = React.forwardRef<HTMLDivElement, AccountCardProps>(
     {
       address = "MFv2hWf31Z9kbCa1snEPYctwafyhdvnV7FZnsebVacA",
       snsDomain = "solanadev.sol",
-      avatarUrl = "/account-pfp.jpg",
+      avatarUrl = "/assets/nft-pfp.jpg",
       tier,
       isVerified,
       balanceSol = 142.85,

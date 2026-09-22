@@ -719,18 +719,7 @@
           "type": "registry:ui"
         }
       ]
-    },
-    {
-      "name": "notifications-stack",
-      "type": "registry:ui",
-      "title": "Notifications",
-      "description": "Notifications Stack component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/notifications-stack.tsx",
-          "type": "registry:ui"
-        }
-      ]
+
     },
     {
       "name": "qr-code",

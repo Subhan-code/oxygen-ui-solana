@@ -133,8 +133,8 @@ export function SolanaEventCard({
 
         {/* Bottom Details & Action */}
         <div className="mt-auto pt-10">
-          {/* Event Title in editorial serif font */}
-          <h3 className="font-serif text-[26px] font-normal leading-[1.18] tracking-tight text-white drop-shadow-sm">
+          {/* Event Title */}
+          <h3 className="font-sans text-[24px] font-bold leading-[1.18] tracking-tight text-white drop-shadow-sm">
             {title}
           </h3>
 

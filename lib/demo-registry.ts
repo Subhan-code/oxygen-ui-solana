@@ -47,7 +47,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
 
   "multistatebadge": () => import("@/app/components/(docs)/multistatebadge/demo"),
   "multiwalletswitcher": () => import("@/app/components/(docs)/multiwalletswitcher/demo"),
-  "notificationsstack": () => import("@/app/components/(docs)/notificationsstack/demo"),
   "orderbook": () => import("@/app/components/(docs)/orderbook/demo"),
   "orderform": () => import("@/app/components/(docs)/orderform/demo"),
   "oxygenuipill": () => import("@/app/components/(docs)/oxygenuipill/demo"),
@@ -88,7 +87,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "successcheck": () => import("@/app/components/(docs)/successcheck/demo"),
   "timeline": () => import("@/app/components/(docs)/timeline/demo"),
 
-  "togglegroup": () => import("@/app/components/(docs)/togglegroup/demo"),
   "togglepill": () => import("@/app/components/(docs)/togglepill/demo"),
   "tokencommand": () => import("@/app/components/(docs)/tokencommand/demo"),
   "tokenicongroup": () => import("@/app/components/(docs)/tokenicongroup/demo"),
@@ -116,7 +114,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "metrics01": () => import("@/app/components/(docs)/metrics01/demo"),
   "bankbalancecard": () => import("@/app/components/(docs)/bankbalancecard/demo"),
   "withdrawalcard": () => import("@/app/components/(docs)/withdrawalcard/demo"),
-  "animatednumberflow": () => import("@/app/components/(docs)/animatednumberflow/demo"),
 
   "verificationbadges": () => import("@/app/components/(docs)/verificationbadges/demo"),
   "floatinglabel": () => import("@/app/components/(docs)/floatinglabel/demo"),
@@ -124,7 +121,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "tasksteps": () => import("@/app/components/(docs)/tasksteps/demo"),
   "wizardsteps": () => import("@/app/components/(docs)/wizardsteps/demo"),
   "valueflash": () => import("@/app/components/(docs)/valueflash/demo"),
-  "logomarquee": () => import("@/app/components/(docs)/logomarquee/demo"),
   "presenceavatars": () => import("@/app/components/(docs)/presenceavatars/demo"),
   "solanaeventcard": () => import("@/app/components/(docs)/solanaeventcard/demo"),
 };

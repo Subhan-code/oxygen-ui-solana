@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { getSolCategories, type SolCategory } from "@/lib/sol-components";
 import ComponentCard from "./ComponentCard";
 import { cn } from "@/lib/utils";
@@ -185,7 +185,7 @@ export default function SolComponentsGallery() {
                 </div>
                 <p className="text-xs text-muted-foreground">{cat.description}</p>
               </div>
-              <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {cat.items.map((item) => (
                   <ComponentCard key={`${cat.name}-${item.slug}`} item={item} />
                 ))}

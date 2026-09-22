@@ -135,7 +135,7 @@ export default function LiveComponentPreview({ item }: { item: ComponentItem }) 
   return (
     <div
       ref={containerRef}
-      className="relative flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950/90 p-2 select-none"
+      className="relative flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950/90 p-2 select-none font-sans"
       suppressHydrationWarning
     >
       <div

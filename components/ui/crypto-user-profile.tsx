@@ -59,7 +59,7 @@ export function CryptoUserProfile({
 
       <div className="flex items-center justify-between mb-5 px-1">
         <img
-          src="/account-pfp.jpg"
+          src="/assets/nft-pfp.jpg"
           alt={username}
           className="h-12 w-12 rounded-full object-cover border border-sky-500/50 shadow-md shrink-0"
         />

@@ -100,4 +100,5 @@ export function RunStatsStacks({ className }: { className?: string }) {
   );
 }
 
+export const SolanaBatchStacks = RunStatsStacks;
 export default RunStatsStacks;

@@ -3,6 +3,8 @@
 import React, { useState } from "react"
 import { ArrowDown, Settings, ChevronDown } from "lucide-react"
 import { motion, useReducedMotion } from "motion/react"
+import solana from "thesvg/solana"
+import usdc from "thesvg/usdc"
 import { cn } from "@/lib/utils"
 
 const SPRING_SWAP = { type: "spring" as const, duration: 0.3, bounce: 0 }
@@ -67,9 +69,12 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
               type="button"
               className="flex items-center gap-1.5 rounded-full bg-zinc-800 px-3 py-1.5 text-xs font-bold text-white hover:bg-zinc-700 transition-colors cursor-pointer border border-zinc-700"
             >
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-700 font-bold text-[10px] text-white">
-                {payToken.symbol[0]}
-              </div>
+              <div
+                className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full overflow-hidden [&>svg]:h-full [&>svg]:w-full"
+                dangerouslySetInnerHTML={{
+                  __html: payToken.symbol === "SOL" ? solana.svg : usdc.svg,
+                }}
+              />
               <span>{payToken.symbol}</span>
               <ChevronDown className="h-3.5 w-3.5 text-zinc-400" />
             </button>
@@ -111,9 +116,12 @@ export function CryptoSwapBox({ className, ...props }: CryptoSwapBoxProps) {
               type="button"
               className="flex items-center gap-1.5 rounded-full bg-zinc-800 px-3 py-1.5 text-xs font-bold text-white hover:bg-zinc-700 transition-colors cursor-pointer border border-zinc-700"
             >
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-900/60 font-bold text-[10px] text-blue-300">
-                {receiveToken.symbol[0]}
-              </div>
+              <div
+                className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full overflow-hidden [&>svg]:h-full [&>svg]:w-full"
+                dangerouslySetInnerHTML={{
+                  __html: receiveToken.symbol === "SOL" ? solana.svg : usdc.svg,
+                }}
+              />
               <span>{receiveToken.symbol}</span>
               <ChevronDown className="h-3.5 w-3.5 text-zinc-400" />
             </button>

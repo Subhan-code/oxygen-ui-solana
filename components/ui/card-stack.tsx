@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Sparkles, Shield, Key, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface CardItem {
@@ -11,7 +10,6 @@ export interface CardItem {
   badge: string;
   description: string;
   accent: string;
-  icon: React.ElementType;
 }
 
 const DEFAULT_CARDS: CardItem[] = [
@@ -21,7 +19,6 @@ const DEFAULT_CARDS: CardItem[] = [
     badge: "EVENT TICKET",
     description: "All-access developer pass for Solana Breakpoint in Dubai with exclusive workshop entries.",
     accent: "bg-purple-600",
-    icon: Sparkles,
   },
   {
     id: 2,
@@ -29,7 +26,6 @@ const DEFAULT_CARDS: CardItem[] = [
     badge: "MEV REBATE",
     description: "Zero slippage fees and priority transaction routing across all Solana liquidity pools.",
     accent: "bg-emerald-600",
-    icon: Shield,
   },
   {
     id: 3,
@@ -37,7 +33,6 @@ const DEFAULT_CARDS: CardItem[] = [
     badge: "SECURITY",
     description: "Ed25519 hardware key authentication for multi-sig vault approvals and staking.",
     accent: "bg-amber-600",
-    icon: Key,
   },
   {
     id: 4,
@@ -45,7 +40,6 @@ const DEFAULT_CARDS: CardItem[] = [
     badge: "BADGE",
     description: "Top 1% builder badge granted for outstanding contributions to Solana core tools.",
     accent: "bg-blue-600",
-    icon: Award,
   },
 ];
 
@@ -67,7 +61,6 @@ export function CardStack({ className }: { className?: string }) {
       className={cn("relative h-60 w-full max-w-sm flex items-center justify-center select-none", className)}
     >
       {cards.map((card, index) => {
-        const Icon = card.icon;
         return (
           <motion.div
             key={card.id}
@@ -90,7 +83,6 @@ export function CardStack({ className }: { className?: string }) {
                 <span className="rounded-full bg-purple-100 px-2.5 py-0.5 text-[10px] font-bold text-purple-700 dark:bg-purple-950 dark:text-purple-300">
                   {card.badge}
                 </span>
-                <Icon className="h-4 w-4 text-zinc-400" />
               </div>
               <h4 className="mt-3 text-base font-bold text-zinc-900 dark:text-white leading-tight">
                 {card.title}
@@ -111,4 +103,5 @@ export function CardStack({ className }: { className?: string }) {
   );
 }
 
+export const SolanaCardStack = CardStack;
 export default CardStack;

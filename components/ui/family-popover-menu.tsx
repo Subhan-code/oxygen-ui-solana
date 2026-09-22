@@ -1,11 +1,7 @@
 "use client";
 
-import {
-  EnvelopeClosedIcon,
-  GearIcon,
-  HeartIcon,
-  PlusIcon,
-} from "@radix-ui/react-icons";
+import { PlusIcon } from "@radix-ui/react-icons";
+import { User, ArrowLeftRight, Settings } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import React, { RefObject, useState } from "react";
 import useClickOutside from "@/lib/hooks/useClickOutside";
@@ -62,19 +58,19 @@ export function FamilyPopoverMenu({ className }: { className?: string }) {
 
   const items = [
     {
+      title: "Account",
+      text: "Manage your wallet and profile",
+      icon: User,
+    },
+    {
+      title: "Transactions",
+      text: "View recent activity and transfers",
+      icon: ArrowLeftRight,
+    },
+    {
       title: "Settings",
-      text: "Adjust your preferences",
-      icon: GearIcon,
-    },
-    {
-      title: "Messages",
-      text: "View your messages",
-      icon: EnvelopeClosedIcon,
-    },
-    {
-      title: "Favorites",
-      text: "Manage your favorites",
-      icon: HeartIcon,
+      text: "Adjust preferences and security",
+      icon: Settings,
     },
   ];
 

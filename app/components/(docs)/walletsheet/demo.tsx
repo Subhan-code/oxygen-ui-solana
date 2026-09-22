@@ -5,7 +5,7 @@ import { WalletSheet } from "@/components/ui/wallet-sheet";
 
 const MOCK_TOKENS = [
   {
-    icon: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
+    icon: "/tokens/sol.svg",
     name: "Solana",
     symbol: "SOL",
     balance: "42.50",
@@ -13,7 +13,7 @@ const MOCK_TOKENS = [
     change: "+5.2%",
   },
   {
-    icon: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png",
+    icon: "/tokens/usdc.svg",
     name: "USD Coin",
     symbol: "USDC",
     balance: "1,250.00",

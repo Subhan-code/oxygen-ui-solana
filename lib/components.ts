@@ -17,67 +17,24 @@ export type ComponentProp = {
   description: string;
 };
 
+import { SOL_CATEGORY_DEFINITIONS } from "./sol-components";
+
 export type ComponentItem = RegistryItem;
 export const components = REGISTRY;
 
-const BLOCK_SLUG_SET = new Set([
-  "accountcard",
-  "authcard",
-  "activityfeed",
-  "bankbalancecard",
-  "cardstack",
-  "cryptocheckoutcard",
-  "cryptoexplorecategories",
-  "cryptopredictioncandidatecard",
-  "cryptosalescandlestickchart",
-  "cryptosalessegmentedbars",
-  "cryptosalesverticalgraph",
-  "cryptosubscriptioncard",
-  "cryptoswapbox",
-  "cryptotradingterminal",
-  "cryptotvlanalyticschart",
-  "cryptotvlsparkbarwidget",
-  "cryptouserprofile",
-  "cryptowalletdashboard",
-  "cryptowalletdrawer",
-  "cryptowalletmain",
-  "cryptowalletmenusheet",
-  "cryptowalletsettings",
-  "familydialog",
-  "familydrawer",
-  "financialmetricsgrid",
-  "liquiditypoolcard",
-  "metrics01",
-  "notificationsstack",
-  "orderbook",
-  "orderform",
-  "poolcard",
-  "pooltable",
-  "positioncard",
-  "positiontable",
-  "pricechart",
-  "routesummary",
-  "runstatsstacks",
-  "secretkeywarningbox",
-  "segmentedprogresscard",
-  "solanaidentitycard",
-  "solananftcard",
-  "solanaeventcard",
-  "solanawalletcard",
-  "stakingcard",
-  "statcard",
-  "steptrackerwidget",
-  "tasksteps",
-  "timeline",
-  "tradebox",
-  "transactionmodal",
-  "transactionreceipt",
-  "txntable",
-  "underlayactionsheet",
-  "walletsheet",
-  "withdrawalcard",
-  "wizardsteps",
-]);
+// official components shown in the /components catalog
+export const COMPONENT_SLUG_SET = new Set(
+  SOL_CATEGORY_DEFINITIONS.flatMap((cat) =>
+    cat.components.map((c) => c.slug.toLowerCase()),
+  ),
+);
+
+// strictly divided application blocks with zero overlap with components
+export const BLOCK_SLUG_SET = new Set(
+  REGISTRY.map((item) => item.slug.toLowerCase()).filter(
+    (slug) => !COMPONENT_SLUG_SET.has(slug),
+  ),
+);
 
 export function isBlockComponent(item: ComponentItem): boolean {
   return BLOCK_SLUG_SET.has(item.slug.toLowerCase());

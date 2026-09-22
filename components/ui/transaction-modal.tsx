@@ -24,8 +24,8 @@ export interface TransactionModalProps {
 }
 
 const DEFAULT_DIFFS: BalanceDiffItem[] = [
-  { tokenSymbol: "SOL", diffAmount: -1.5, tokenIcon: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png" },
-  { tokenSymbol: "USDC", diffAmount: +224.80, tokenIcon: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png" },
+  { tokenSymbol: "SOL", diffAmount: -1.5, tokenIcon: "/tokens/sol.svg" },
+  { tokenSymbol: "USDC", diffAmount: +224.80, tokenIcon: "/tokens/usdc.svg" },
 ]
 
 export function TransactionModal({

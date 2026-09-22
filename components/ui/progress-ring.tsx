@@ -51,7 +51,7 @@ export function ProgressRing({
   max = 100,
   size = 140,
   strokeWidth = 10,
-  label = "Progress",
+  label = "Epoch Sync",
   sublabel,
   showPercent = true,
   colorPreset = "sky",
@@ -121,4 +121,5 @@ export function ProgressRing({
   );
 }
 
+export const SolanaProgressRing = ProgressRing;
 export default ProgressRing;

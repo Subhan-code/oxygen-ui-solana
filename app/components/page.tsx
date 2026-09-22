@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Components | Oxygen-UI",
   description:
-    "Explore the official 56 locked Solana UI components catalog for Oxygen UI: production-grade React components for Solana dApps categorized into 7 core modules.",
+    "Explore the official Solana UI components catalog for Oxygen UI: production-grade React components for Solana dApps categorized into core modules.",
   keywords: SITE_KEYWORDS,
   alternates: {
     canonical: "/components",

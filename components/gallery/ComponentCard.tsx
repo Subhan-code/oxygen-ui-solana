@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, memo } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import type { ComponentItem } from "@/lib/components";
 import { SPRING_PRESS } from "@/lib/ease";
@@ -8,9 +9,10 @@ import { cn } from "@/lib/utils";
 import PreviewVideo from "./PreviewVideo";
 import LiveComponentPreview from "./LiveComponentPreview";
 
+const MotionLink = motion.create(Link);
+
 export const ComponentCard = memo(function ComponentCard({
   item,
-  large = false,
   autoPlay = false,
   className,
 }: {
@@ -22,41 +24,66 @@ export const ComponentCard = memo(function ComponentCard({
   const [active, setActive] = useState(false);
   const reduceMotion = useReducedMotion();
 
+  const idDisplay = item.id
+    ? item.id.startsWith("#")
+      ? item.id
+      : `#${item.id.padStart(2, "0")}`
+    : "";
+
   return (
-    <motion.div
-      onClick={(e) => {
-        if (e.defaultPrevented) return;
-        window.open(item.href, "_blank", "noopener,noreferrer");
-      }}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          window.open(item.href, "_blank", "noopener,noreferrer");
-        }
-      }}
-      tabIndex={0}
-      role="link"
+    <MotionLink
+      href={item.href}
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label={`View ${item.name} component`}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
-      onFocus={() => setActive(true)}
-      onBlur={() => setActive(false)}
+      onMouseDown={(e) => {
+        if (e.button === 1) {
+          // middle click: stop propagation so Framer Motion does not intercept, but do not preventDefault
+          e.stopPropagation();
+        }
+      }}
+      onAuxClick={(e) => {
+        if (e.button === 1) {
+          // middle click: let browser natively open link in new tab
+          e.stopPropagation();
+        }
+      }}
+      whileHover={reduceMotion ? undefined : { y: -3 }}
       whileTap={reduceMotion ? undefined : { scale: 0.98 }}
       transition={SPRING_PRESS}
       className={cn(
-        "group relative flex cursor-pointer flex-col overflow-hidden rounded-[22px] p-3 h-[265px]",
-        "bg-zinc-100/70 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-900/90",
-        "border border-black/[0.08] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 hover:shadow-lg",
-        "will-change-transform outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40 select-none",
-        large && "lg:h-full",
+        "group relative flex aspect-square w-full cursor-pointer flex-col overflow-hidden rounded-[30px] sm:rounded-[34px] bg-black p-3 sm:p-4 border border-[#18191d] hover:border-neutral-700 shadow-xl transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]/40 select-none",
         className
       )}
       style={{ cornerShape: "squircle" } as React.CSSProperties}
     >
-      {/* Live Preview Container */}
+      {/* top edge header with title and number revealed on hover */}
       <div
-        className="lift-on-hover relative w-full flex-1 overflow-hidden rounded-[16px] border border-black/5 dark:border-white/5 bg-background"
-        style={{ cornerShape: "squircle" } as React.CSSProperties}
+        className={cn(
+          "absolute top-0 inset-x-0 z-20 flex items-center justify-between px-4 sm:px-5 pt-3 sm:pt-3.5 pointer-events-none opacity-0",
+          reduceMotion
+            ? "group-hover:opacity-100 group-focus-visible:opacity-100"
+            : "-translate-y-1.5 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 transition-all duration-300 ease-out"
+        )}
+      >
+        <span className="text-white text-sm sm:text-base font-bold tracking-tight truncate font-runde">
+          {item.title || item.name}
+        </span>
+        <span className="font-mono text-xs sm:text-sm font-semibold text-zinc-400 shrink-0 ml-2.5 tabular-nums">
+          {idDisplay}
+        </span>
+      </div>
+
+      {/* preview body / video card — decreases top size on hover to reveal title and number */}
+      <div
+        className={cn(
+          "relative w-full h-full flex items-center justify-center overflow-hidden pointer-events-none rounded-[20px] sm:rounded-[24px]",
+          reduceMotion
+            ? "group-hover:mt-8 sm:group-hover:mt-9 group-hover:h-[calc(100%-2rem)] sm:group-hover:h-[calc(100%-2.25rem)] group-focus-visible:mt-8 sm:group-focus-visible:mt-9 group-focus-visible:h-[calc(100%-2rem)] sm:group-focus-visible:h-[calc(100%-2.25rem)]"
+            : "transition-all duration-300 ease-out group-hover:mt-8 sm:group-hover:mt-9 group-hover:h-[calc(100%-2rem)] sm:group-hover:h-[calc(100%-2.25rem)] group-focus-visible:mt-8 sm:group-focus-visible:mt-9 group-focus-visible:h-[calc(100%-2rem)] sm:group-focus-visible:h-[calc(100%-2.25rem)]"
+        )}
       >
         {item.preview ? (
           <PreviewVideo
@@ -68,25 +95,7 @@ export const ComponentCard = memo(function ComponentCard({
           <LiveComponentPreview item={item} />
         )}
       </div>
-
-      {/* Card Footer Info */}
-      <div className="flex items-center justify-between gap-2 px-1.5 pt-2.5">
-        <div className="flex items-center gap-2 truncate min-w-0">
-          <p className="font-semibold text-xs sm:text-sm text-foreground truncate group-hover:text-[#0066FF] dark:group-hover:text-[#0A84FF] motion-safe:transition-colors motion-safe:duration-200">
-            {item.name}
-          </p>
-        </div>
-        <div className="relative flex h-6 min-w-6 shrink-0 items-center justify-center rounded-md px-1">
-          {/* resting: subtle ring */}
-          <span className="absolute inset-0 rounded-md border border-black/10 dark:border-white/10 opacity-100 motion-safe:transition-all motion-safe:duration-200 group-hover:opacity-0" />
-          {/* hover: filled chip */}
-          <span className="absolute inset-0 rounded-md bg-zinc-900 dark:bg-white opacity-0 motion-safe:transition-all motion-safe:duration-200 group-hover:opacity-100" />
-          <span className="relative z-10 font-mono text-[10px] font-bold leading-none text-zinc-400 dark:text-zinc-500 motion-safe:transition-colors motion-safe:duration-200 group-hover:text-white dark:group-hover:text-zinc-900">
-            {item.id}
-          </span>
-        </div>
-      </div>
-    </motion.div>
+    </MotionLink>
   );
 });
 

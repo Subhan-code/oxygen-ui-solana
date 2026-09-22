@@ -165,16 +165,16 @@ export const REGISTRY: RegistryItem[] = [
   {
     id: "13",
     slug: "cardstack",
-    title: "Card Stack",
+    title: "Solana Card Stack",
     group: "Navigation, Layout & Overlays",
-    name: "Card Stack",
+    name: "Solana Card Stack",
     category: "Navigation, Layout & Overlays",
     registry: "Navigation, Layout & Overlays",
     file: "components/ui/card-stack.tsx",
-    description: "High performance Apple-styled Card Stack component for Solana & Web3 applications.",
+    description: "High performance Apple-styled Solana Card Stack component for displaying Web3 passes, event tickets, and badges.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/card-stack.tsx`,
     interaction: "Interactive component preview.",
-    usage: `import { CardStack } from "@/components/ui/card-stack.tsx"`,
+    usage: `import { SolanaCardStack } from "@/components/ui/card-stack.tsx"`,
     href: "/components/cardstack"
   },
 
@@ -611,21 +611,6 @@ export const REGISTRY: RegistryItem[] = [
     href: "/components/multiwalletswitcher"
   },
   {
-    id: "91",
-    slug: "notificationsstack",
-    title: "Notifications Stack",
-    group: "Feedback, Status & Notifications",
-    name: "Notifications Stack",
-    category: "Feedback, Status & Notifications",
-    registry: "Feedback, Status & Notifications",
-    file: "components/ui/notifications-stack.tsx",
-    description: "High performance Apple-styled Notifications Stack component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/notifications-stack.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { NotificationsStack } from "@/components/ui/notifications-stack.tsx"`,
-    href: "/components/notificationsstack"
-  },
-  {
     id: "92",
     slug: "orderbook",
     title: "Order Book",
@@ -796,16 +781,16 @@ export const REGISTRY: RegistryItem[] = [
   {
     id: "109",
     slug: "runstatsstacks",
-    title: "Run Stats Stacks",
-    group: "Engagement & Gamification",
-    name: "Run Stats Stacks",
-    category: "Engagement & Gamification",
-    registry: "Engagement & Gamification",
+    title: "Solana Batch Stacks",
+    group: "Transactions & Activity",
+    name: "Solana Batch Stacks",
+    category: "Transactions & Activity",
+    registry: "Transactions & Activity",
     file: "components/ui/run-stats-stacks.tsx",
-    description: "High performance Apple-styled Run Stats Stacks component for Solana & Web3 applications.",
+    description: "High performance Apple-styled Solana Batch Stacks component displaying volume, priority fees, and confirmation statuses for Solana & Web3 applications.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/run-stats-stacks.tsx`,
     interaction: "Interactive component preview.",
-    usage: `import { RunStatsStacks } from "@/components/ui/run-stats-stacks.tsx"`,
+    usage: `import { SolanaBatchStacks } from "@/components/ui/run-stats-stacks.tsx"`,
     href: "/components/runstatsstacks"
   },
   {
@@ -1069,21 +1054,6 @@ export const REGISTRY: RegistryItem[] = [
     href: "/components/timeline"
   },
   {
-    id: "137",
-    slug: "togglegroup",
-    title: "Toggle Group",
-    group: "Inputs, Forms & Selectors",
-    name: "Toggle Group",
-    category: "Inputs, Forms & Selectors",
-    registry: "Inputs, Forms & Selectors",
-    file: "components/ui/toggle-group.tsx",
-    description: "High performance Apple-styled Toggle Group component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/toggle-group.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { ToggleGroup } from "@/components/ui/toggle-group.tsx"`,
-    href: "/components/togglegroup"
-  },
-  {
     id: "138",
     slug: "togglepill",
     title: "Toggle Pill",
@@ -1316,16 +1286,16 @@ export const REGISTRY: RegistryItem[] = [
   {
     id: "164",
     slug: "progressring",
-    title: "Progress Ring",
+    title: "Solana Progress Ring",
     group: "Charts & Metrics",
-    name: "Progress Ring",
+    name: "Solana Progress Ring",
     category: "Charts & Metrics",
     registry: "Charts & Metrics",
     file: "components/ui/progress-ring.tsx",
-    description: "High performance Apple-styled Progress Ring component for Solana & Web3 applications.",
+    description: "High performance Apple-styled Solana Progress Ring component for tracking node sync, epoch progress, and validator metrics.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/progress-ring.tsx`,
     interaction: "Interactive component preview.",
-    usage: `import { ProgressRing } from "@/components/ui/progress-ring.tsx"`,
+    usage: `import { SolanaProgressRing } from "@/components/ui/progress-ring.tsx"`,
     href: "/components/progressring"
   },
 
@@ -1455,21 +1425,6 @@ export const REGISTRY: RegistryItem[] = [
 
 
   {
-    id: "190",
-    slug: "animatednumberflow",
-    title: "Animated Number Flow",
-    group: "Special",
-    name: "Animated Number Flow",
-    category: "Special",
-    registry: "Special",
-    file: "components/ui/animated-number-flow.tsx",
-    description: "Skiper37 Animated Number Flow component combining NumberFlow with Framer Motion for countdown, spring counter, random ticker, and motion value transitions.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/animated-number-flow.tsx`,
-    interaction: "Interactive countdown controls, scroll viewport triggers, and animated number transitions.",
-    usage: `import { Skiper37 } from "@/components/ui/animated-number-flow"`,
-    href: "/components/animatednumberflow"
-  },
-  {
     id: "191",
     slug: "verificationbadges",
     title: "Verification Badges",
@@ -1558,21 +1513,6 @@ export const REGISTRY: RegistryItem[] = [
     interaction: "Dynamic value mutation flash animations.",
     usage: `import { ValueFlash, useValueFlash } from "@/components/ui/value-flash"`,
     href: "/components/valueflash"
-  },
-  {
-    id: "197",
-    slug: "logomarquee",
-    title: "Logo Marquee",
-    group: "Special",
-    name: "Logo Marquee",
-    category: "Special",
-    registry: "Special",
-    file: "components/ui/logo-marquee.tsx",
-    description: "Continuous infinite looping logo marquee banner with pause-on-hover/focus interaction, resize observer auto-wrap, and left/right drift directions.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/logo-marquee.tsx`,
-    interaction: "Continuous marquee drift with pointer and focus pause controls.",
-    usage: `import { LogoMarquee, useLogoMarquee } from "@/components/ui/logo-marquee"`,
-    href: "/components/logomarquee"
   },
   {
     id: "198",

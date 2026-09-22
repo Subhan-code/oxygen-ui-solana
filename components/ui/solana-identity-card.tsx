@@ -56,7 +56,7 @@ export function SolanaIdentityCard({
   address = "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
   handle = "@oxygenui",
   domain = "oxygen.sol",
-  avatarUrl = "/account-pfp.jpg",
+  avatarUrl = "/assets/nft-pfp.jpg",
 
   avatarEmoji = "🐸",
   cluster = "mainnet-beta",

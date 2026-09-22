@@ -184,10 +184,10 @@ export default function ComponentsShowcase() {
             <div className="relative flex-1 overflow-hidden flex items-end justify-center pointer-events-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                alt=""
+                alt="Oxygen UI"
                 aria-hidden="true"
-                className="w-48 sm:w-56 translate-y-1/2 opacity-25 [filter:brightness(0)_invert(1)] transition-transform duration-300 ease-out group-hover:translate-y-[42%]"
-                src="/logos/Oxygenui.svg"
+                className="w-44 sm:w-52 translate-y-1/3 transition-transform duration-300 ease-out group-hover:translate-y-[25%] drop-shadow-2xl"
+                src="/logos/Oxygenui-shadow.svg"
               />
             </div>
           </Link>

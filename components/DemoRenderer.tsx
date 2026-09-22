@@ -94,18 +94,20 @@ export function DemoRenderer({ slug }: DemoRendererProps) {
 
   return (
     <DemoErrorBoundary slug={slug}>
-      <Suspense
-        fallback={
-          <div className="flex min-h-[300px] w-full items-center justify-center rounded-3xl border border-zinc-800/80 bg-zinc-950/40 p-8">
-            <div className="flex items-center gap-2.5 text-xs text-zinc-400 font-mono">
-              <span className="size-3.5 rounded-full border-2 border-sky-500 border-t-transparent animate-spin" />
-              Loading component preview...
+      <div className="w-full font-sans flex items-center justify-center">
+        <Suspense
+          fallback={
+            <div className="flex min-h-[300px] w-full items-center justify-center rounded-3xl border border-zinc-800/80 bg-zinc-950/40 p-8">
+              <div className="flex items-center gap-2.5 text-xs text-zinc-400 font-mono">
+                <span className="size-3.5 rounded-full border-2 border-sky-500 border-t-transparent animate-spin" />
+                Loading component preview...
+              </div>
             </div>
-          </div>
-        }
-      >
-        <LazyDemo />
-      </Suspense>
+          }
+        >
+          <LazyDemo />
+        </Suspense>
+      </div>
     </DemoErrorBoundary>
   );
 }
