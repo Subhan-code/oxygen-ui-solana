@@ -4,9 +4,9 @@ import DynamicIslandNavbar from "@/components/DynamicIslandNavbar";
 import { fetchStarCount } from "@/lib/github";
 import HeroCta from "@/components/HeroCta";
 import HeroIntro from "@/components/HeroIntro";
-import ComponentsShowcase from "@/components/ComponentsShowcase";
 import Footer from "@/components/Footer";
 import FeatureCardsSection from "@/components/FeatureCardsSection";
+import ProjectIntroSection from "@/components/ProjectIntroSection";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const dynamic = "force-static";
@@ -101,41 +101,6 @@ function BackersSection() {
           </a>
         </div>
       </div>
-
-      {/* orbit tier */}
-      <div className="flex w-full flex-col items-start gap-3">
-        <span className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground/70">
-          Orbit
-        </span>
-        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
-          {[0, 1, 2].map((i) => (
-            <a
-              key={i}
-              href={SPONSOR_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="group relative flex h-28 w-full items-center justify-center rounded-[24px] border border-dashed border-black/10 bg-card/30 p-4 transition-all duration-200 ease-out hover:border-black/25 hover:bg-card/60 dark:border-white/10 dark:bg-muted/20 dark:hover:border-white/20 dark:hover:bg-muted/50 sm:h-32"
-              style={{ cornerShape: "squircle" } as React.CSSProperties}
-            >
-              <span className="flex items-center gap-2 text-xs font-medium text-muted-foreground/60 transition-colors duration-200 group-hover:text-foreground">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-3.5 transition-transform duration-200 group-hover:rotate-90"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-                Waiting to be sponsored
-              </span>
-            </a>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
@@ -170,7 +135,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <ComponentsShowcase />
+      <ProjectIntroSection />
       <FeatureCardsSection />
       <ScrollReveal>
         <BackersSection />

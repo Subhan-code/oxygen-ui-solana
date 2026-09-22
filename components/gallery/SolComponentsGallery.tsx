@@ -1,21 +1,60 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
-import { motion } from "motion/react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import Link from "next/link";
+import { X, Search } from "lucide-react";
 import { getSolCategories, type SolCategory } from "@/lib/sol-components";
-import ComponentCard from "./ComponentCard";
+import type { ComponentItem } from "@/lib/components";
+import LiveComponentPreview from "./LiveComponentPreview";
+import PreviewVideo from "./PreviewVideo";
 import { cn } from "@/lib/utils";
 
-type OrderMode = "default" | "newest";
+function ComponentCard({ item }: { item: ComponentItem }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-1.5 group select-none">
+      <div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className={cn(
+          "relative aspect-[16/10] w-full overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-zinc-950/80 p-2 sm:p-3",
+          "transition-all duration-200 hover:border-white/25 hover:bg-zinc-900/40 hover:shadow-lg flex items-center justify-center cursor-pointer"
+        )}
+      >
+        <Link
+          href={item.href}
+          aria-label={item.title || item.name}
+          className="absolute inset-0 z-20"
+        />
+
+        <div className="relative w-full h-full flex items-center justify-center pointer-events-none select-none">
+          {item.preview ? (
+            <PreviewVideo
+              src={item.preview}
+              playing={isHovered}
+              autoPlay={false}
+            />
+          ) : (
+            <LiveComponentPreview item={item} />
+          )}
+        </div>
+      </div>
+
+      <span className="text-[11px] font-normal text-zinc-400 group-hover:text-zinc-200 transition-colors truncate px-0.5">
+        {item.title || item.name}
+      </span>
+    </div>
+  );
+}
 
 export default function SolComponentsGallery() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [orderMode, setOrderMode] = useState<OrderMode>("default");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const solCategories = useMemo(() => getSolCategories(), []);
-  const allSolComponents = useMemo(() => solCategories.flatMap((c) => c.items), [solCategories]);
 
+  // keyboard shortcut listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
@@ -38,159 +77,89 @@ export default function SolComponentsGallery() {
     const q = searchQuery.toLowerCase().trim();
     return solCategories
       .map((cat) => {
-        let items = cat.items.filter((item) => {
+        const items = cat.items.filter((item) => {
           if (!q) return true;
           return (
             item.name.toLowerCase().includes(q) ||
             item.title.toLowerCase().includes(q) ||
             item.description.toLowerCase().includes(q) ||
-            item.slug.toLowerCase().includes(q)
+            item.slug.toLowerCase().includes(q) ||
+            (item.group && item.group.toLowerCase().includes(q))
           );
         });
-        if (orderMode === "newest") items = [...items].reverse();
         if (items.length === 0) return null;
         return { ...cat, items };
       })
       .filter((cat): cat is SolCategory => cat !== null);
-  }, [solCategories, searchQuery, orderMode]);
-
-  const isSearching = searchQuery.trim().length > 0;
-  const hasResults = filteredCategories.length > 0;
+  }, [solCategories, searchQuery]);
 
   return (
-    <div className="w-full relative space-y-6" suppressHydrationWarning>
-      {/* Controls */}
-      <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 py-2">
-        {/* Search */}
-        <div className="relative w-full sm:w-80 lg:w-96 shrink-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-zinc-400 pointer-events-none"
-            aria-hidden="true"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
+    <div className="w-full flex flex-col gap-10" suppressHydrationWarning>
+      {/* header stack */}
+      <div className="flex flex-col gap-3 items-center text-center max-w-2xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white font-runde">
+          Engineered for Solana Interfaces
+        </h1>
+
+        <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-lg">
+          Composable, micro-animated React components tailored for high-speed dApps, SPL token flows, and decentralized trading protocols.
+        </p>
+
+        {/* search filter */}
+        <div className="relative w-full max-w-md mt-2">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-zinc-500 pointer-events-none" />
           <input
             ref={searchInputRef}
-            id="sol-components-search-input"
-            name="sol-components-search-input"
             type="text"
-            autoComplete="off"
-            suppressHydrationWarning
-            placeholder={`Search ${allSolComponents.length} Sol components by name...`}
+            placeholder="Search Solana components (Press / or ⌘K)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-10 pl-10 pr-9 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/70 text-xs font-medium text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 border border-black/10 dark:border-white/10 shadow-xs focus:outline-none focus:ring-2 focus:ring-[#0066FF]/30 dark:focus:ring-[#0A84FF]/30 transition-all duration-200 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
+            className="w-full h-10 pl-10 pr-9 rounded-xl bg-zinc-900/80 border border-white/10 text-xs text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-sky-500/50"
           />
-          {isSearching && (
+          {searchQuery && (
             <button
               type="button"
-              aria-label="Clear search"
-              onClick={() => { setSearchQuery(""); searchInputRef.current?.focus(); }}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 flex size-5 items-center justify-center rounded-full bg-zinc-300/80 dark:bg-zinc-700/80 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-400/80 dark:hover:bg-zinc-600/80 transition-colors duration-150"
+              onClick={() => setSearchQuery("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="size-3" aria-hidden="true">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
+              <X className="size-3.5" />
             </button>
           )}
         </div>
-
-        {/* Order toggle */}
-        <div className="flex items-center h-9 p-1 rounded-xl bg-zinc-100/80 dark:bg-zinc-900/80 border border-black/5 dark:border-white/10 shadow-2xs shrink-0">
-          {(["default", "newest"] as const).map((order) => {
-            const isSelected = orderMode === order;
-            return (
-              <button
-                key={order}
-                type="button"
-                onClick={() => setOrderMode(order)}
-                className={cn(
-                  "relative px-3.5 h-full text-xs font-semibold rounded-lg transition-colors duration-150 cursor-pointer select-none flex items-center justify-center",
-                  isSelected
-                    ? "text-zinc-900 dark:text-white"
-                    : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
-                )}
-              >
-                {isSelected && (
-                  <motion.span
-                    layoutId="sol-gallery-order-mode-pill"
-                    transition={{ duration: 0.25, ease: [0.19, 1, 0.22, 1] }}
-                    className="absolute inset-0 rounded-lg bg-white dark:bg-white/15 border border-black/5 dark:border-white/10 shadow-2xs"
-                  />
-                )}
-                <span className="relative z-10 capitalize">{order}</span>
-              </button>
-            );
-          })}
-        </div>
       </div>
 
-      {/* Gallery */}
-      <div className="flex flex-col space-y-16 pb-24">
-        {!hasResults ? (
-          <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-black/10 dark:border-white/10 py-20 text-center bg-zinc-50/50 dark:bg-zinc-900/30 gap-4">
-            <div className="size-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-2xl shadow-2xs">
-              💡
-            </div>
-            <div className="space-y-1.5">
-              <h3 className="font-bold text-sm text-foreground">Have a component in mind?</h3>
-              <p className="text-xs text-muted-foreground max-w-xs leading-relaxed">
-                No match for <span className="font-semibold text-foreground">&ldquo;{searchQuery}&rdquo;</span> — need it added? Pin me or tag me on X.
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="px-4 py-2 rounded-xl bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 text-xs font-semibold cursor-pointer active:scale-95 transition-transform"
-              >
-                Clear search
-              </button>
-              <a
-                href="https://x.com/intent/tweet?text=Hey%20%40uxdotsol%20can%20you%20add%20this%20component%20to%20Oxygen%20UI%3F"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-semibold cursor-pointer active:scale-95 transition-transform"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="size-3.5" aria-hidden="true">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-                Tag me on X
-              </a>
-            </div>
+      {/* divider */}
+      <div role="separator" aria-orientation="horizontal" className="h-px w-full bg-white/10" />
+
+      {/* category sections */}
+      <div className="flex flex-col gap-8 sm:gap-10">
+        {filteredCategories.length === 0 ? (
+          <div className="py-16 text-center text-xs text-zinc-400">
+            No components match &ldquo;{searchQuery}&rdquo;.
           </div>
         ) : (
-          filteredCategories.map((cat) => (
-            <section
-              key={cat.name}
-              id={cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-              className="space-y-6"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b border-zinc-200/80 dark:border-white/10 pb-3 text-left">
-                <div className="flex items-baseline gap-1.5">
-                  <h3 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-2xl font-runde flex items-baseline">
+          filteredCategories.map((cat, index) => (
+            <React.Fragment key={cat.id}>
+              {index > 0 && (
+                <div role="separator" aria-orientation="horizontal" className="h-px w-full bg-white/10" />
+              )}
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xs sm:text-sm font-semibold tracking-wide text-zinc-300 uppercase font-runde">
                     {cat.name}
-                    <sup className="ml-1 text-xs sm:text-sm font-mono font-normal text-zinc-400 dark:text-zinc-500 tracking-normal select-none">
-                      [{cat.items.length}]
-                    </sup>
-                  </h3>
+                  </h2>
+                  <span className="text-[11px] font-mono text-zinc-500">
+                    [{cat.items.length}]
+                  </span>
                 </div>
-                <p className="text-xs text-muted-foreground">{cat.description}</p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                  {cat.items.map((item) => (
+                    <ComponentCard key={`${cat.id}-${item.slug}`} item={item} />
+                  ))}
+                </div>
               </div>
-              <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {cat.items.map((item) => (
-                  <ComponentCard key={`${cat.name}-${item.slug}`} item={item} />
-                ))}
-              </div>
-            </section>
+            </React.Fragment>
           ))
         )}
       </div>

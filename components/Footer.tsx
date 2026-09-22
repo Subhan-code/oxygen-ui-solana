@@ -44,7 +44,38 @@ function NavLink({ label, href, external }: FooterLink) {
 
 export default function Footer() {
   return (
-    <footer className="w-full px-4 pb-6 pt-2 md:px-6" suppressHydrationWarning>
+    <footer className="w-full px-4 pb-6 pt-2 md:px-6 flex flex-col gap-5" suppressHydrationWarning>
+      {/* cta card */}
+      <div
+        className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-zinc-950 p-6 sm:p-8 md:p-10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6"
+      >
+        <div className="flex flex-col gap-2 text-center sm:text-left">
+          <span className="font-runde text-xl sm:text-2xl font-bold tracking-tight text-white">
+            Have a component in mind which can be added here?
+          </span>
+          <p className="text-xs sm:text-sm text-zinc-400 max-w-lg leading-relaxed">
+            Suggest a component, feature request, or custom Solana UI pattern. DM me or mail me anytime.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3 shrink-0">
+          <a
+            href={X_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="h-10 px-4 rounded-xl bg-white text-zinc-950 font-medium text-xs sm:text-sm hover:bg-zinc-200 transition-colors shadow-sm inline-flex items-center justify-center cursor-pointer active:scale-95"
+          >
+            DM on X
+          </a>
+          <a
+            href="mailto:syedsubhan.dev@gmail.com"
+            className="h-10 px-4 rounded-xl bg-white/5 border border-white/10 text-white font-medium text-xs sm:text-sm hover:bg-white/10 hover:border-white/20 transition-colors inline-flex items-center justify-center cursor-pointer active:scale-95"
+          >
+            Mail me
+          </a>
+        </div>
+      </div>
+
       <div
         className="relative w-full overflow-hidden rounded-[32px] border border-white/10 bg-[#09090b] text-white shadow-2xl md:rounded-[40px]"
         style={{ cornerShape: "squircle" } as React.CSSProperties}

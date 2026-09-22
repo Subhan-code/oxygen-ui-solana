@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
-import { DemoRenderer } from "@/components/DemoRenderer";
-import { getAllSlugs, getComponentBySlug } from "@/lib/registry";
+import ComponentStudio from "@/components/playground/ComponentStudio";
+import { getAllSlugs, getComponentBySlug, REGISTRY } from "@/lib/registry";
 import { componentJsonLd, componentPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-static";
 export const dynamicParams = true;
 
 export function generateStaticParams() {
-
   return getAllSlugs().map((slug) => ({ slug }));
 }
 
@@ -23,7 +22,7 @@ export async function generateMetadata({
     return componentPageMetadata(href);
   } catch {
     return {
-      title: "Component | Oxygen UI",
+      title: "Component Studio | Oxygen UI",
     };
   }
 }
@@ -48,7 +47,7 @@ export default async function ComponentSlugPage({
   return (
     <>
       <JsonLd data={componentJsonLd(href)} />
-      <DemoRenderer slug={slug} />
+      <ComponentStudio item={item} allComponents={REGISTRY} />
     </>
   );
 }

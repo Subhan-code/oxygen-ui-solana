@@ -32,33 +32,6 @@ function GithubCutoutIcon({ className }: { className?: string }) {
   );
 }
 
-function StarIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 800 800"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M305.105 180.279C347.327 104.538 368.437 66.6667 400 66.6667C431.563 66.6667 452.673 104.537 494.893 180.279L505.817 199.874C517.817 221.398 523.813 232.16 533.17 239.26C542.523 246.361 554.17 248.997 577.47 254.268L598.683 259.068C680.67 277.619 721.667 286.894 731.42 318.258C741.173 349.62 713.227 382.303 657.33 447.663L642.87 464.573C626.987 483.147 619.043 492.433 615.47 503.923C611.9 515.413 613.1 527.803 615.5 552.587L617.687 575.147C626.137 662.353 630.363 705.957 604.83 725.34C579.293 744.723 540.91 727.05 464.143 691.707L444.283 682.56C422.47 672.517 411.563 667.493 400 667.493C388.437 667.493 377.53 672.517 355.717 682.56L335.857 691.707C259.089 727.05 220.706 744.723 195.172 725.34C169.637 705.957 173.863 662.353 182.313 575.147L184.499 552.587C186.901 527.803 188.102 515.413 184.529 503.923C180.956 492.433 173.014 483.147 157.131 464.573L142.67 447.663C86.7749 382.303 58.8272 349.62 68.5806 318.258C78.3339 286.894 119.329 277.619 201.318 259.068L222.53 254.268C245.828 248.997 257.478 246.361 266.831 239.26C276.185 232.16 282.184 221.398 294.182 199.874L305.105 180.279Z" />
-    </svg>
-  );
-}
-
-function SparkleIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5L12 0z" />
-    </svg>
-  );
-}
 
 function HalfShadedCircleIcon({ className }: { className?: string }) {
   return (
@@ -102,7 +75,9 @@ export default function DynamicIslandNavbar({
   const [mounted, setMounted] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [starHovered, setStarHovered] = useState(false);
+  const [logoHovered, setLogoHovered] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+  const [xHovered, setXHovered] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -167,37 +142,55 @@ export default function DynamicIslandNavbar({
         transition={{ type: "spring", stiffness: 320, damping: 25 }}
         className="relative flex w-full items-center justify-between"
       >
-        {/* left island: brand on left viewport edge */}
+        {/* left island: brand with logo hover animation */}
         <div className="flex flex-1 items-center justify-start pointer-events-none">
           <motion.div
             layout={!reduceMotion}
             transition={brandSpring}
             whileHover={reduceMotion ? undefined : { scale: 1.02 }}
             whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+            onMouseEnter={() => setLogoHovered(true)}
+            onMouseLeave={() => setLogoHovered(false)}
             style={islandPillStyle}
-            className="pointer-events-auto flex h-12 shrink-0 items-center overflow-hidden bg-black text-white shadow-lg shadow-black/10"
+            className="group pointer-events-auto flex h-12 shrink-0 items-center overflow-hidden bg-black/95 text-white shadow-xl shadow-black/20 ring-1 ring-white/15 backdrop-blur-2xl transition-all duration-300 hover:ring-blue-500/40 hover:shadow-[0_0_24px_rgba(0,102,255,0.25)]"
           >
             <Link
               href="/"
               className="flex h-full items-center gap-2.5 px-4"
               aria-label="Oxygen-UI Home"
             >
-              <Image
-                src="/logos/Oxygenui.svg"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 shrink-0"
-                priority
-              />
-              <span className="font-medium tracking-tight text-sm text-white">
+              <motion.div
+                animate={{
+                  rotate: reduceMotion ? 0 : logoHovered ? 180 : 0,
+                  scale: reduceMotion ? 1 : logoHovered ? 1.15 : 1,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 340,
+                  damping: 18,
+                }}
+                className="relative flex items-center justify-center"
+              >
+                <Image
+                  src="/logos/Oxygenui.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className={cn(
+                    "h-5 w-5 shrink-0 transition-all duration-300",
+                    logoHovered && "drop-shadow-[0_0_10px_rgba(0,102,255,0.85)]",
+                  )}
+                  priority
+                />
+              </motion.div>
+              <span className="font-medium tracking-tight text-sm text-white transition-colors duration-200 group-hover:text-blue-100">
                 Oxygen-UI
               </span>
             </Link>
           </motion.div>
         </div>
 
-        {/* desktop center island: nav links */}
+        {/* desktop center island: recreated from scratch with physical sliding highlight */}
         <div className="hidden md:flex items-center justify-center pointer-events-none">
           <AnimatePresence>
             {expanded && (
@@ -209,10 +202,10 @@ export default function DynamicIslandNavbar({
                     ? false
                     : {
                         opacity: 0,
-                        scaleX: 0.2,
+                        scaleX: 0.3,
                         scaleY: 0.6,
-                        y: -8,
-                        filter: "blur(4px)",
+                        y: -10,
+                        filter: "blur(6px)",
                       }
                 }
                 animate={{
@@ -224,16 +217,15 @@ export default function DynamicIslandNavbar({
                 }}
                 exit={{
                   opacity: 0,
-                  scaleX: 0.2,
-                  y: -8,
-                  filter: "blur(4px)",
+                  scaleX: 0.3,
+                  y: -10,
+                  filter: "blur(6px)",
                 }}
                 transition={navSpring}
-                whileHover={reduceMotion ? undefined : { scale: 1.01 }}
                 style={islandPillStyle}
-                className="pointer-events-auto flex h-12 items-center overflow-hidden bg-black px-2.5 text-white shadow-lg shadow-black/10"
+                className="pointer-events-auto relative flex h-12 items-center rounded-full bg-black/95 px-2 text-white shadow-xl shadow-black/20 ring-1 ring-white/15 backdrop-blur-2xl"
               >
-                {LINKS.map((link, idx) => {
+                {LINKS.map((link) => {
                   const isExact = pathname === link.href;
                   const isSub =
                     link.href !== "/" && pathname.startsWith(link.href);
@@ -241,27 +233,39 @@ export default function DynamicIslandNavbar({
                     link.href === "/components"
                       ? pathname === "/components"
                       : isExact || isSub;
+                  const isHovered = hoveredNav === link.href;
 
                   return (
-                    <div key={link.label} className="flex items-center">
-                      {idx > 0 && (
-                        <span
-                          className="h-3.5 w-px bg-white/15"
-                          aria-hidden="true"
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      onMouseEnter={() => setHoveredNav(link.href)}
+                      onMouseLeave={() => setHoveredNav(null)}
+                      onFocus={() => setHoveredNav(link.href)}
+                      onBlur={() => setHoveredNav(null)}
+                      className={cn(
+                        "relative flex h-8 items-center px-3.5 text-[13px] font-medium transition-colors duration-200 select-none whitespace-nowrap",
+                        isActive ? "text-white font-semibold" : "text-white/65 hover:text-white",
+                      )}
+                    >
+                      {((hoveredNav && isHovered) || (!hoveredNav && isActive)) && (
+                        <motion.span
+                          layoutId="center-nav-pill-highlight"
+                          transition={{
+                            type: "spring",
+                            stiffness: 420,
+                            damping: 30,
+                          }}
+                          className={cn(
+                            "absolute inset-0 rounded-full",
+                            isActive && !hoveredNav
+                              ? "bg-white/15 ring-1 ring-white/20"
+                              : "bg-white/10 ring-1 ring-white/10",
+                          )}
                         />
                       )}
-                      <Link
-                        href={link.href}
-                        className={cn(
-                          "px-3.5 text-[13px] font-medium transition-colors duration-150 ease-out whitespace-nowrap",
-                          isActive
-                            ? "text-white font-semibold"
-                            : "text-white/60 hover:text-white",
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    </div>
+                      <span className="relative z-10">{link.label}</span>
+                    </Link>
                   );
                 })}
               </motion.div>
@@ -274,7 +278,7 @@ export default function DynamicIslandNavbar({
           <AnimatePresence>
             {expanded && (
               <div className="pointer-events-auto hidden items-center gap-2 md:flex">
-                {/* github pill with star morph animation on hover */}
+                {/* github button without star morph animation */}
                 <motion.a
                   key="right-github"
                   layout={!reduceMotion}
@@ -282,10 +286,6 @@ export default function DynamicIslandNavbar({
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`GitHub repository, ${displayStars} stars`}
-                  onMouseEnter={() => setStarHovered(true)}
-                  onMouseLeave={() => setStarHovered(false)}
-                  onFocus={() => setStarHovered(true)}
-                  onBlur={() => setStarHovered(false)}
                   initial={
                     reduceMotion
                       ? false
@@ -312,93 +312,15 @@ export default function DynamicIslandNavbar({
                   whileHover={reduceMotion ? undefined : { scale: 1.04 }}
                   whileTap={reduceMotion ? undefined : { scale: 0.96 }}
                   style={islandPillStyle}
-                  className="flex h-12 items-center gap-2 overflow-hidden bg-black px-3.5 text-white shadow-lg shadow-black/10"
+                  className="group relative flex h-12 items-center gap-2 rounded-full bg-black/95 px-3.5 text-white shadow-xl shadow-black/20 ring-1 ring-white/15 backdrop-blur-2xl transition-all duration-200 hover:ring-white/30 hover:bg-black"
                 >
-                  <span className="relative flex h-5 w-5 items-center justify-center">
-                    <motion.span
-                      initial={false}
-                      animate={{
-                        scale: starHovered ? 0.2 : 1,
-                        opacity: starHovered ? 0 : 1,
-                        rotate: reduceMotion ? 0 : starHovered ? -60 : 0,
-                        filter: starHovered ? "blur(3px)" : "blur(0px)",
-                      }}
-                      transition={
-                        reduceMotion
-                          ? { duration: 0 }
-                          : { type: "spring", stiffness: 320, damping: 18 }
-                      }
-                      className="flex items-center justify-center"
-                    >
-                      <GithubCutoutIcon className="h-4.5 w-4.5 text-white" />
-                    </motion.span>
-
-                    <motion.span
-                      initial={false}
-                      animate={{
-                        scale: starHovered ? 1 : 0.2,
-                        opacity: starHovered ? 1 : 0,
-                        rotate: reduceMotion ? 0 : starHovered ? 0 : -140,
-                        filter: starHovered ? "blur(0px)" : "blur(3px)",
-                      }}
-                      transition={
-                        reduceMotion
-                          ? { duration: 0 }
-                          : { type: "spring", stiffness: 340, damping: 15 }
-                      }
-                      className="absolute inset-0 flex items-center justify-center text-[#FFC83D]"
-                    >
-                      <StarIcon className="h-5 w-5" />
-                    </motion.span>
-
-                    <motion.span
-                      initial={false}
-                      animate={{
-                        scale: starHovered && !reduceMotion ? 1 : 0,
-                        opacity: starHovered ? 1 : 0,
-                        rotate: starHovered ? 0 : -90,
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 360,
-                        damping: 14,
-                        delay: 0.08,
-                      }}
-                      className="pointer-events-none absolute -right-1.5 -top-1 text-[#FFE9A8]"
-                    >
-                      <SparkleIcon className="h-2 w-2" />
-                    </motion.span>
-
-                    <motion.span
-                      initial={false}
-                      animate={{
-                        scale: starHovered && !reduceMotion ? 1 : 0,
-                        opacity: starHovered ? 1 : 0,
-                        rotate: starHovered ? 0 : 90,
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 360,
-                        damping: 14,
-                        delay: 0.14,
-                      }}
-                      className="pointer-events-none absolute -bottom-1 -left-1.5 text-[#FFE9A8]"
-                    >
-                      <SparkleIcon className="h-1.5 w-1.5" />
-                    </motion.span>
-                  </span>
-
-                  <span
-                    className={cn(
-                      "font-medium text-[13px] tabular-nums transition-colors duration-200",
-                      starHovered ? "text-[#FFE9A8]" : "text-white",
-                    )}
-                  >
+                  <GithubCutoutIcon className="h-4.5 w-4.5 text-white transition-opacity duration-200 group-hover:opacity-80" />
+                  <span className="font-semibold text-[13px] tabular-nums text-white/90">
                     {displayStars}
                   </span>
                 </motion.a>
 
-                {/* X (Twitter) pill */}
+                {/* X (Twitter) pill with custom hover animation */}
                 <motion.a
                   key="right-x"
                   layout={!reduceMotion}
@@ -406,6 +328,10 @@ export default function DynamicIslandNavbar({
                   target="_blank"
                   rel="noreferrer"
                   aria-label="X (Twitter)"
+                  onMouseEnter={() => setXHovered(true)}
+                  onMouseLeave={() => setXHovered(false)}
+                  onFocus={() => setXHovered(true)}
+                  onBlur={() => setXHovered(false)}
                   initial={
                     reduceMotion
                       ? false
@@ -419,12 +345,27 @@ export default function DynamicIslandNavbar({
                   animate={{ opacity: 1, scale: 1, x: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, scale: 0.4, x: 20, filter: "blur(4px)" }}
                   transition={{ ...navSpring, delay: 0.08 }}
-                  whileHover={reduceMotion ? undefined : { scale: 1.06 }}
-                  whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+                  whileHover={
+                    reduceMotion
+                      ? undefined
+                      : {
+                          scale: 1.1,
+                          rotate: 10,
+                        }
+                  }
+                  whileTap={reduceMotion ? undefined : { scale: 0.92 }}
                   style={islandPillStyle}
-                  className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white shadow-lg shadow-black/10"
+                  className="group flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-black/95 text-white shadow-xl shadow-black/20 ring-1 ring-white/15 backdrop-blur-2xl transition-all duration-300 hover:ring-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.25)]"
                 >
-                  <XIcon className="h-4 w-4 text-white" />
+                  <motion.div
+                    animate={{
+                      scale: reduceMotion ? 1 : xHovered ? 1.15 : 1,
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 16 }}
+                    className="flex items-center justify-center"
+                  >
+                    <XIcon className="h-4 w-4 text-white transition-colors duration-200" />
+                  </motion.div>
                 </motion.a>
 
                 {/* theme toggle pill */}
@@ -482,50 +423,22 @@ export default function DynamicIslandNavbar({
                   layout={!reduceMotion}
                   href={GITHUB_URL}
                   target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-                onMouseEnter={() => setStarHovered(true)}
-                onMouseLeave={() => setStarHovered(false)}
-                initial={reduceMotion ? false : { opacity: 0, scale: 0.4 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.4 }}
-                transition={smallSpring}
-                style={islandPillStyle}
-                className="flex h-12 items-center gap-1.5 overflow-hidden bg-black px-3 text-white"
-              >
-                <span className="relative flex h-4 w-4 items-center justify-center">
-                  <motion.span
-                    initial={false}
-                    animate={{
-                      scale: starHovered ? 0.2 : 1,
-                      opacity: starHovered ? 0 : 1,
-                    }}
-                    transition={{ duration: 0.15 }}
-                    className="flex items-center justify-center"
-                  >
-                    <GithubCutoutIcon className="h-4 w-4 text-white" />
-                  </motion.span>
-                  <motion.span
-                    initial={false}
-                    animate={{
-                      scale: starHovered ? 1 : 0.2,
-                      opacity: starHovered ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute inset-0 flex items-center justify-center text-[#FFC83D]"
-                  >
-                    <StarIcon className="h-4 w-4" />
-                  </motion.span>
-                </span>
-                <span
-                  className={cn(
-                    "font-medium text-xs tabular-nums transition-colors duration-200",
-                    starHovered ? "text-[#FFE9A8]" : "text-white",
-                  )}
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                  initial={reduceMotion ? false : { opacity: 0, scale: 0.4 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.4 }}
+                  transition={smallSpring}
+                  whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.96 }}
+                  style={islandPillStyle}
+                  className="flex h-12 items-center gap-1.5 overflow-hidden rounded-full bg-black/95 px-3 text-white ring-1 ring-white/15"
                 >
-                  {displayStars}
-                </span>
-              </motion.a>
+                  <GithubCutoutIcon className="h-4 w-4 text-white" />
+                  <span className="font-semibold text-xs tabular-nums text-white/90">
+                    {displayStars}
+                  </span>
+                </motion.a>
 
               {/* X (Twitter) — mobile */}
               <motion.a
@@ -538,6 +451,8 @@ export default function DynamicIslandNavbar({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.4 }}
                 transition={smallSpring}
+                whileHover={reduceMotion ? undefined : { scale: 1.1, rotate: 10 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.92 }}
                 style={islandPillStyle}
                 className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white"
               >

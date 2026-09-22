@@ -80,7 +80,6 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
       "cryptotvlsparkbarwidget",
       "financialmetricsgrid",
       "gauge",
-      "pricechart",
       "priceticker",
       "progressring",
       "segmentedprogresscard",
@@ -115,9 +114,7 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
     slugs: [
       "actionbox",
       "gooeymenu",
-      "solanapaybutton",
       "uxbutton",
-      "multiplestatebutton",
     ],
   },
   {
@@ -157,7 +154,6 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
       "familypopovermenu",
       "marquee",
       "smoothtabs",
-      "underlayactionsheet",
 
 
     ],
@@ -179,7 +175,6 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
       "runstatsstacks",
       "spinningcounter",
       "steptrackerwidget",
-      "timeline",
 
     ],
   },
@@ -206,7 +201,6 @@ export const GROUP_TAXONOMY: GroupInfo[] = [
       "bankbalancecard",
       "withdrawalcard",
 
-      "floatinglabel",
       "passwordstrength",
       "tasksteps",
       "wizardsteps",

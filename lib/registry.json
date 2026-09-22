@@ -944,22 +944,6 @@
     "href": "/components/popoverslideselector"
   },
   {
-    "id": "62",
-    "slug": "underlayactionsheet",
-    "title": "Action Sheet",
-    "group": "Navigation & Menus",
-    "name": "Action Sheet",
-    "category": "Navigation & Menus",
-    "registry": "Navigation & Menus",
-    "file": "components/ui/underlay-action-sheet.tsx",
-    "thumb": "/thumbs/underlayactionsheet.webp",
-    "description": "An iOS-inspired underlay action sheet with drag-to-resize gesture physics.",
-    "source": "https://github.com/Subhan-code/oxygen_ui/blob/main/components/ui/underlay-action-sheet.tsx",
-    "interaction": "",
-    "usage": "",
-    "href": "/components/underlayactionsheet"
-  },
-  {
     "id": "63",
     "slug": "familydrawer",
     "title": "Family Drawer",

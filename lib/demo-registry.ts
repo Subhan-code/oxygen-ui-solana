@@ -55,7 +55,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "positioncard": () => import("@/app/components/(docs)/positioncard/demo"),
 
   "positiontable": () => import("@/app/components/(docs)/positiontable/demo"),
-  "pricechart": () => import("@/app/components/(docs)/pricechart/demo"),
   "priceticker": () => import("@/app/components/(docs)/priceticker/demo"),
   "priorityfeeselector": () => import("@/app/components/(docs)/priorityfeeselector/demo"),
   "progressring": () => import("@/app/components/(docs)/progressring/demo"),
@@ -73,8 +72,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "smoothtabs": () => import("@/app/components/(docs)/smoothtabs/demo"),
   "solanaidentitycard": () => import("@/app/components/(docs)/solanaidentitycard/demo"),
   "solananftcard": () => import("@/app/components/(docs)/solananftcard/demo"),
-
-  "solanapaybutton": () => import("@/app/components/(docs)/solanapaybutton/demo"),
   "solanatokencard": () => import("@/app/components/(docs)/solanatokencard/demo"),
 
   "solanatransactionstatus": () => import("@/app/components/(docs)/solanatransactionstatus/demo"),
@@ -85,7 +82,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "statcard": () => import("@/app/components/(docs)/statcard/demo"),
   "steptrackerwidget": () => import("@/app/components/(docs)/steptrackerwidget/demo"),
   "successcheck": () => import("@/app/components/(docs)/successcheck/demo"),
-  "timeline": () => import("@/app/components/(docs)/timeline/demo"),
 
   "togglepill": () => import("@/app/components/(docs)/togglepill/demo"),
   "tokencommand": () => import("@/app/components/(docs)/tokencommand/demo"),
@@ -101,7 +97,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "trendbadge": () => import("@/app/components/(docs)/trendbadge/demo"),
   "txntable": () => import("@/app/components/(docs)/txntable/demo"),
   "txntoast": () => import("@/app/components/(docs)/txntoast/demo"),
-  "underlayactionsheet": () => import("@/app/components/(docs)/underlayactionsheet/demo"),
   "walletsheet": () => import("@/app/components/(docs)/walletsheet/demo"),
 
   "animatedswitch": () => import("@/app/components/(docs)/togglepill/demo"),
@@ -110,13 +105,11 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "statusbadgepill": () => import("@/app/components/(docs)/statusbadgepill/demo"),
   "uxbutton": () => import("@/app/components/(docs)/uxbutton/demo"),
   "drawcheckbox": () => import("@/app/components/(docs)/drawcheckbox/demo"),
-  "multiplestatebutton": () => import("@/app/components/(docs)/multiplestatebutton/demo"),
   "metrics01": () => import("@/app/components/(docs)/metrics01/demo"),
   "bankbalancecard": () => import("@/app/components/(docs)/bankbalancecard/demo"),
   "withdrawalcard": () => import("@/app/components/(docs)/withdrawalcard/demo"),
 
   "verificationbadges": () => import("@/app/components/(docs)/verificationbadges/demo"),
-  "floatinglabel": () => import("@/app/components/(docs)/floatinglabel/demo"),
   "passwordstrength": () => import("@/app/components/(docs)/passwordstrength/demo"),
   "tasksteps": () => import("@/app/components/(docs)/tasksteps/demo"),
   "wizardsteps": () => import("@/app/components/(docs)/wizardsteps/demo"),

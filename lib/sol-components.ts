@@ -67,7 +67,6 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
       { name: "Leverage Slider", slug: "leverageslider" },
       { name: "Priority Fee Selector", slug: "priorityfeeselector" },
       { name: "Crypto Checkout Card", slug: "cryptocheckoutcard" },
-      { name: "Solana Pay Button", slug: "solanapaybutton" },
       { name: "Request Withdrawal Card", slug: "withdrawalcard" },
     ],
   },
@@ -90,7 +89,6 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
     name: "Charts & Analytics",
     description: "Candlestick charts, spark bars, metrics grids, gauges, and progress cards.",
     components: [
-      { name: "Price Chart", slug: "pricechart" },
       { name: "Price Ticker", slug: "priceticker" },
       { name: "Crypto Sales Candlestick Chart", slug: "cryptosalescandlestickchart" },
       { name: "Crypto Sales Segmented Bars", slug: "cryptosalessegmentedbars" },
@@ -108,7 +106,6 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
     description: "Activity feeds, transaction timelines, receipts, tables, toasts, batch stacks, and event cards.",
     components: [
       { name: "Activity Feed", slug: "activityfeed" },
-      { name: "Timeline", slug: "timeline" },
       { name: "Txn Table", slug: "txntable" },
       { name: "Transaction Modal", slug: "transactionmodal" },
       { name: "Transaction Receipt", slug: "transactionreceipt" },
@@ -131,7 +128,6 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
       { name: "Family Dialog", slug: "familydialog" },
       { name: "Family Drawer", slug: "familydrawer" },
       { name: "Family Popover Menu", slug: "familypopovermenu" },
-      { name: "Underlay Action Sheet", slug: "underlayactionsheet" },
       { name: "Action Box", slug: "actionbox" },
       { name: "Secret Key Warning Box", slug: "secretkeywarningbox" },
     ],
@@ -142,7 +138,6 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
     description: "Interactive buttons, draw checkboxes, toggles, liquid radio, gooey menus, and tabs.",
     components: [
       { name: "Button", slug: "uxbutton" },
-      { name: "Multi-State Action Button", slug: "multiplestatebutton" },
       { name: "Draw Checkbox", slug: "drawcheckbox" },
       { name: "Toggle Pill", slug: "togglepill" },
       { name: "Liquid Radio", slug: "liquidradio" },
@@ -156,7 +151,6 @@ export const SOL_CATEGORY_DEFINITIONS: Array<{
     name: "Forms & Flows",
     description: "Floating inputs, password strength meters, morph messages, and wizard/task step flows.",
     components: [
-      { name: "Floating Label Input", slug: "floatinglabel" },
       { name: "Password Strength", slug: "passwordstrength" },
       { name: "Input Morph Message", slug: "inputmorphmessage" },
       { name: "Wizard Steps", slug: "wizardsteps" },

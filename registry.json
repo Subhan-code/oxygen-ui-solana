@@ -137,25 +137,6 @@
       ]
     },
     {
-      "name": "underlay-action-sheet",
-      "type": "registry:ui",
-      "title": "Action Sheet",
-      "description": "An iOS-inspired underlay action sheet with drag-to-resize gesture physics.",
-      "dependencies": [
-        "motion",
-        "@radix-ui/react-icons"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/underlay-action-sheet.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "error-state-shake",
 
 
@@ -782,18 +763,6 @@
       ]
     },
     {
-      "name": "timeline",
-      "type": "registry:ui",
-      "title": "Timeline",
-      "description": "Timeline component for Oxygen UI.",
-      "files": [
-        {
-          "path": "components/ui/timeline.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "action-box",
 
       "type": "registry:ui",
@@ -1119,24 +1088,6 @@
       "files": [
         {
           "path": "components/ui/position-card.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "price-chart",
-      "type": "registry:ui",
-      "title": "Price Chart",
-      "description": "An interactive financial price chart component",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/price-chart.tsx",
           "type": "registry:ui"
         }
       ]

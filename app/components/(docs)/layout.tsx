@@ -1,14 +1,11 @@
-import SidebarShell from "@/components/Sidebar/SidebarShell";
-
 export default function ComponentsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen overflow-hidden p-2 bg-background" suppressHydrationWarning>
-      <SidebarShell>{children}</SidebarShell>
+    <div className="h-screen w-full overflow-hidden bg-background" suppressHydrationWarning>
+      {children}
     </div>
   );
 }
-

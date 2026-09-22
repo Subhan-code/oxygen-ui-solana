@@ -1253,22 +1253,6 @@ export const REGISTRY: RegistryItem[] = [
     href: "/components/txntoast"
   },
   {
-    id: "156",
-    slug: "underlayactionsheet",
-    title: "Underlay Action Sheet",
-    group: "Navigation, Layout & Overlays",
-    name: "Underlay Action Sheet",
-    category: "Navigation, Layout & Overlays",
-    registry: "Navigation, Layout & Overlays",
-    file: "components/ui/underlay-action-sheet.tsx",
-    description: "High performance Apple-styled Underlay Action Sheet component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/underlay-action-sheet.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { UnderlayActionSheet } from "@/components/ui/underlay-action-sheet.tsx"`,
-    href: "/components/underlayactionsheet"
-  },
-
-  {
     id: "159",
     slug: "walletsheet",
     title: "Wallet Sheet",
