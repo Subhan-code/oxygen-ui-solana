@@ -7,6 +7,7 @@ import HeroIntro from "@/components/HeroIntro";
 import Footer from "@/components/Footer";
 import FeatureCardsSection from "@/components/FeatureCardsSection";
 import ProjectIntroSection from "@/components/ProjectIntroSection";
+import ComponentMarqueeSection from "@/components/ComponentMarqueeSection";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const dynamic = "force-static";
@@ -136,6 +137,7 @@ export default async function Home() {
       </section>
 
       <ProjectIntroSection />
+      <ComponentMarqueeSection />
       <FeatureCardsSection />
       <ScrollReveal>
         <BackersSection />

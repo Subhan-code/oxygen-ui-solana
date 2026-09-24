@@ -45,6 +45,7 @@ export default function HeroCta({
         className
       )}
     >
+      {/* first button: Explore components (blue) */}
       <motion.div
         initial={false}
         whileHover={hoverSpring}
@@ -56,12 +57,44 @@ export default function HeroCta({
           <div className="absolute inset-0 bg-[#0066FF] shadow-[0_0_24px_rgba(0,102,255,0.4)] transition-all duration-300 ease-out group-hover:bg-[#0055d6] group-hover:shadow-[0_0_36px_rgba(0,102,255,0.7)]" />
         </Squircle>
 
+        <Link
+          href="/sol"
+          className="relative flex h-12 items-center gap-2 px-6 text-sm font-semibold font-runde text-white outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0066FF]"
+        >
+          <span>Explore components</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="size-3.5 text-white/90 transition-transform duration-200 ease-out group-hover:translate-x-1 group-hover:text-white"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </Link>
+      </motion.div>
+
+      {/* second button: GitHub Repo */}
+      <motion.div
+        initial={false}
+        whileHover={hoverSpring}
+        whileTap={tapSpring}
+        transition={springTransition}
+        className="group relative cursor-pointer"
+      >
+        <Squircle asChild cornerRadius={16} cornerSmoothing={1}>
+          <div className="absolute inset-0 bg-black/95 border border-white/20 shadow-lg shadow-black/50 transition-all duration-300 ease-out group-hover:border-white/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.15)]" />
+        </Squircle>
+
         <a
           href="https://github.com/Subhan-code/oxygen-ui-solana"
           target="_blank"
           rel="noreferrer"
           aria-label="Oxygen UI on GitHub"
-          className="relative flex h-12 items-center gap-2.5 px-6 text-sm font-semibold font-runde text-white outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0066FF]"
+          className="relative flex h-12 items-center gap-2.5 px-6 text-sm font-semibold font-runde text-white outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
         >
           <svg
             viewBox="0 0 24 24"
@@ -78,37 +111,6 @@ export default function HeroCta({
             <span className="tabular-nums">{formatStars(displayStars)}</span>
           </span>
         </a>
-      </motion.div>
-
-      <motion.div
-        initial={false}
-        whileHover={hoverSpring}
-        whileTap={tapSpring}
-        transition={springTransition}
-        className="group relative cursor-pointer"
-      >
-        <Squircle asChild cornerRadius={16} cornerSmoothing={1}>
-          <div className="absolute inset-0 bg-black/95 border border-white/20 shadow-lg shadow-black/50 transition-all duration-300 ease-out group-hover:border-white/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.15)]" />
-        </Squircle>
-
-        <Link
-          href="/sol"
-          className="relative flex h-12 items-center gap-2 px-6 text-sm font-semibold font-runde text-white outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-        >
-          <span>Explore components</span>
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="size-3.5 text-white/70 transition-transform duration-200 ease-out group-hover:translate-x-1 group-hover:text-white"
-            aria-hidden="true"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </Link>
       </motion.div>
     </div>
   );

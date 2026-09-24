@@ -468,7 +468,7 @@ export default function DynamicIslandNavbar(props: DynamicIslandNavbarProps = {}
             )}
           </AnimatePresence>
 
-          {/* mobile actions */}
+          {/* mobile actions: only GitHub star pill and hamburger button */}
           <AnimatePresence>
             {expanded && (
               <div className="pointer-events-auto flex items-center gap-2 md:hidden">
@@ -522,76 +522,43 @@ export default function DynamicIslandNavbar(props: DynamicIslandNavbarProps = {}
                   </span>
                 </motion.a>
 
-                {/* X (Twitter) — mobile */}
-              <motion.a
-                layout={!reduceMotion}
-                href="https://x.com/SubhanHQ"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="X (Twitter)"
-                initial={reduceMotion ? false : { opacity: 0, scale: 0.4 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.4 }}
-                transition={smallSpring}
-                whileHover={reduceMotion ? undefined : { scale: 1.1, rotate: 10 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.92 }}
-                style={islandPillStyle}
-                className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white"
-              >
-                <XIcon className="h-4 w-4 text-white" />
-              </motion.a>
-
-              <motion.button
-                layout={!reduceMotion}
-                type="button"
-                onClick={() => setTheme(isDark ? "light" : "dark")}
-                aria-label="Toggle theme"
-                initial={reduceMotion ? false : { opacity: 0, scale: 0.4 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.4 }}
-                transition={themeSpring}
-                style={islandPillStyle}
-                className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white"
-              >
-                <HalfShadedCircleIcon className="h-5 w-5 text-white" />
-              </motion.button>
-
-              <motion.button
-                layout={!reduceMotion}
-                type="button"
-                onClick={() => setMobileMenuOpen((open) => !open)}
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                initial={reduceMotion ? false : { opacity: 0, scale: 0.4 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.4 }}
-                transition={smallSpring}
-                style={islandPillStyle}
-                className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white"
-              >
-                <div className="flex h-3.5 w-4 flex-col justify-between">
-                  <span
-                    className={cn(
-                      "h-0.5 w-full bg-white transition-transform duration-200",
-                      mobileMenuOpen && "translate-y-1.5 rotate-45",
-                    )}
-                  />
-                  <span
-                    className={cn(
-                      "h-0.5 w-full bg-white transition-opacity duration-200",
-                      mobileMenuOpen && "opacity-0",
-                    )}
-                  />
-                  <span
-                    className={cn(
-                      "h-0.5 w-full bg-white transition-transform duration-200",
-                      mobileMenuOpen && "-translate-y-1.5 -rotate-45",
-                    )}
-                  />
-                </div>
-              </motion.button>
-            </div>
-          )}
-        </AnimatePresence>
+                {/* Hamburger menu button */}
+                <motion.button
+                  layout={!reduceMotion}
+                  type="button"
+                  onClick={() => setMobileMenuOpen((open) => !open)}
+                  aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                  initial={reduceMotion ? false : { opacity: 0, scale: 0.4 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.4 }}
+                  transition={smallSpring}
+                  style={islandPillStyle}
+                  className="flex h-12 w-12 items-center justify-center overflow-hidden bg-black text-white shadow-xl shadow-black/20"
+                >
+                  <div className="flex h-3.5 w-4 flex-col justify-between">
+                    <span
+                      className={cn(
+                        "h-0.5 w-full bg-white transition-transform duration-200",
+                        mobileMenuOpen && "translate-y-1.5 rotate-45",
+                      )}
+                    />
+                    <span
+                      className={cn(
+                        "h-0.5 w-full bg-white transition-opacity duration-200",
+                        mobileMenuOpen && "opacity-0",
+                      )}
+                    />
+                    <span
+                      className={cn(
+                        "h-0.5 w-full bg-white transition-transform duration-200",
+                        mobileMenuOpen && "-translate-y-1.5 -rotate-45",
+                      )}
+                    />
+                  </div>
+                </motion.button>
+              </div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.nav>
 
@@ -605,14 +572,14 @@ export default function DynamicIslandNavbar(props: DynamicIslandNavbarProps = {}
             transition={{ type: "spring", stiffness: 320, damping: 24 }}
             className="pointer-events-auto fixed inset-x-4 top-20 z-40 rounded-3xl bg-black/95 p-5 shadow-2xl backdrop-blur-2xl md:hidden"
           >
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               {LINKS.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                    "rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors font-runde",
                     pathname === link.href
                       ? "bg-white/10 text-white font-semibold"
                       : "text-white/70 hover:bg-white/5 hover:text-white",
@@ -621,6 +588,30 @@ export default function DynamicIslandNavbar(props: DynamicIslandNavbarProps = {}
                   {link.label}
                 </Link>
               ))}
+
+              <div className="my-2 h-px w-full bg-white/10" />
+
+              <div className="flex items-center justify-between px-1 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setTheme(isDark ? "light" : "dark")}
+                  className="flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-xs font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-white"
+                >
+                  <HalfShadedCircleIcon className="h-4 w-4 text-white" />
+                  <span>{isDark ? "Light mode" : "Dark mode"}</span>
+                </button>
+
+                <a
+                  href="https://x.com/SubhanHQ"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="X (Twitter)"
+                  className="flex items-center gap-2 rounded-xl px-2.5 py-2 text-xs font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-white"
+                >
+                  <XIcon className="h-3.5 w-3.5 text-white" />
+                  <span>@SubhanHQ</span>
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

@@ -117,31 +117,37 @@ export default function SolPageGallery() {
     <div className="w-full flex flex-col gap-8 sm:gap-10" suppressHydrationWarning>
       {/* header stack */}
       <div className="flex flex-col gap-3 items-center text-center max-w-2xl mx-auto">
-
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white font-runde">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-white font-runde">
           Solana Components
         </h1>
 
-        <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-lg">
+        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-lg">
           Curated Solana components and composite application blocks for dApp engineering.
         </p>
 
-        {/* search filter */}
-        <div className="relative w-full max-w-md mt-2">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-zinc-500 pointer-events-none" />
+        {/* search filter with collapsible/expandable width */}
+        <div
+          className={cn(
+            "group/search relative mt-2 h-10 transition-all duration-300 ease-out",
+            searchQuery
+              ? "w-full max-w-md"
+              : "w-48 sm:w-56 hover:w-full hover:max-w-md focus-within:w-full focus-within:max-w-md"
+          )}
+        >
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-zinc-400 dark:text-zinc-500 pointer-events-none transition-colors group-focus-within/search:text-sky-500" />
           <input
             ref={searchInputRef}
             type="text"
             placeholder="Search Solana components (Press / or ⌘K)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-10 pl-10 pr-9 rounded-xl bg-zinc-900/80 border border-white/10 text-xs text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-sky-500/50"
+            className="w-full h-10 pl-10 pr-9 rounded-xl bg-zinc-100/90 dark:bg-zinc-900/80 border border-black/10 dark:border-white/10 text-xs text-zinc-900 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-sky-500/50 transition-all"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white cursor-pointer"
             >
               <X className="size-3.5" />
             </button>
@@ -149,12 +155,12 @@ export default function SolPageGallery() {
         </div>
       </div>
 
-      <div role="separator" aria-orientation="horizontal" className="h-px w-full bg-white/10" />
+      <div role="separator" aria-orientation="horizontal" className="h-px w-full bg-zinc-200 dark:bg-white/10" />
 
       {/* category sections */}
       <div className="flex flex-col gap-8 sm:gap-10">
         {filteredCategories.length === 0 ? (
-          <div className="py-16 text-center text-xs text-zinc-400">
+          <div className="py-16 text-center text-xs text-zinc-500 dark:text-zinc-400">
             No items match &ldquo;{searchQuery}&rdquo;.
           </div>
         ) : (
@@ -164,12 +170,12 @@ export default function SolPageGallery() {
                 <div
                   role="separator"
                   aria-orientation="horizontal"
-                  className="h-px w-full bg-white/10"
+                  className="h-px w-full bg-zinc-200 dark:bg-white/10"
                 />
               )}
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xs sm:text-sm font-semibold tracking-wide text-zinc-300 uppercase font-runde">
+                  <h2 className="text-xs sm:text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-300 uppercase font-runde">
                     {cat.name} ({cat.items.length})
                   </h2>
                   <span className="text-[11px] font-mono text-zinc-500">
