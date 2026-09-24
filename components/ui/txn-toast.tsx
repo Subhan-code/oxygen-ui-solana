@@ -1,105 +1,161 @@
 "use client";
 
-import {
-  CheckCircle2Icon,
-  ExternalLinkIcon,
-  Loader2Icon,
-  XCircleIcon,
-  XIcon,
-} from "lucide-react";
+import * as React from "react";
 import { toast, Toaster as Sonner, type ToasterProps } from "sonner";
+import { cn } from "@/lib/utils";
 
-export interface TxnToastProps {
+export type TxnToastType = "success" | "pending" | "error";
+
+export interface TxnToastProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
-  description?: string;
   signature?: string;
-  status?: "pending" | "confirmed" | "error";
+  type?: TxnToastType;
+  status?: "pending" | "confirmed" | "error" | "success";
+  description?: string;
   explorerUrl?: string;
+  onDismiss?: () => void;
+  className?: string;
 }
 
-const statusConfig = {
-  pending: {
-    icon: <Loader2Icon className="size-4 animate-spin text-zinc-400" />,
-    defaultTitle: "Transaction pending",
-    defaultDescription: "Waiting for confirmation...",
-  },
-  confirmed: {
-    icon: <CheckCircle2Icon className="size-4 text-emerald-500" />,
-    defaultTitle: "Transaction confirmed",
-    defaultDescription: "Your transaction was successful.",
-  },
-  error: {
-    icon: <XCircleIcon className="size-4 text-red-400" />,
-    defaultTitle: "Transaction failed",
-    defaultDescription: "Something went wrong. Please try again.",
-  },
+const truncate = (sig: string) => {
+  if (sig.length <= 10) return sig;
+  return `${sig.slice(0, 4)}...${sig.slice(-4)}`;
 };
 
-const truncateSignature = (sig: string) => {
-  if (sig.length <= 12) return sig;
-  return `${sig.slice(0, 6)}...${sig.slice(-4)}`;
-};
+export function TxnToast({
+  title = "Transaction sent",
+  signature,
+  type,
+  status,
+  description,
+  explorerUrl,
+  onDismiss,
+  className,
+  ...props
+}: TxnToastProps) {
+  const resolvedType: TxnToastType =
+    type ?? (status === "confirmed" ? "success" : status ?? "success");
 
-const renderToast = (props: TxnToastProps, toastId: string | number) => {
-  const {
-    title,
-    description,
-    signature,
-    status = "confirmed",
-    explorerUrl,
-  } = props;
-  const config = statusConfig[status];
-  const resolvedExplorerUrl =
-    explorerUrl ??
-    (signature ? `https://solscan.io/tx/${signature}` : undefined);
+  const solscanUrl =
+    explorerUrl ?? (signature ? `https://solscan.io/tx/${signature}` : undefined);
 
   return (
-    <div className="flex gap-3 w-[356px] rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 shadow-xl text-zinc-900 dark:text-zinc-100 font-sans">
-      <div className="mt-0.5 shrink-0">{config.icon}</div>
-      <div className="flex flex-1 flex-col gap-1">
-        <span className="text-xs font-bold tracking-tight">
-          {title ?? config.defaultTitle}
-        </span>
-        <span className="text-xs text-zinc-500 dark:text-zinc-400">
-          {description ?? config.defaultDescription}
-        </span>
-        {resolvedExplorerUrl && (
-          <a
-            href={resolvedExplorerUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[11px] font-mono text-sky-500 hover:underline transition-colors mt-0.5"
-          >
-            {signature ? truncateSignature(signature) : "View transaction"}
-            <ExternalLinkIcon className="size-3" />
-          </a>
+    <div
+      data-slot="txn-toast"
+      role="status"
+      className={cn(
+        "flex items-start justify-between gap-3.5 w-full max-w-[420px] rounded-2xl border border-white/[0.1] bg-zinc-950/90 p-4 text-zinc-100 shadow-2xl backdrop-blur-xl transition-all duration-200 select-none font-sans",
+        "animate-in fade-in slide-in-from-top-2 duration-200",
+        className
+      )}
+      {...props}
+    >
+      <div className="flex items-start gap-3 min-w-0">
+        {resolvedType === "pending" ? (
+          <div className="size-5 shrink-0 rounded-full border-2 border-amber-400/30 border-t-amber-400 animate-spin mt-0.5" />
+        ) : resolvedType === "success" ? (
+          <div className="size-5 shrink-0 rounded-full bg-emerald-400/15 border border-emerald-400/40 flex items-center justify-center text-emerald-400 mt-0.5 animate-in zoom-in-75 duration-200">
+            <svg
+              className="size-3 stroke-[2.5]"
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path
+                d="M2.5 6.5L4.5 8.5L9.5 3.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        ) : (
+          <div className="size-5 shrink-0 rounded-full bg-rose-400/15 border border-rose-400/40 flex items-center justify-center text-rose-400 mt-0.5 animate-in zoom-in-75 duration-200">
+            <svg
+              className="size-3 stroke-[2.5]"
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path
+                d="M3 3L9 9M9 3L3 9"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         )}
+
+        <div className="flex flex-col min-w-0">
+          <span className="text-[13px] font-semibold tracking-tight text-white truncate">
+            {title}
+          </span>
+
+          {description && (
+            <span className="text-[12px] text-zinc-400 mt-0.5 line-clamp-2">
+              {description}
+            </span>
+          )}
+
+          <div className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 mt-1">
+            {signature && (
+              <span title={signature} className="truncate">
+                {truncate(signature)}
+              </span>
+            )}
+            {signature && solscanUrl && (
+              <span className="text-zinc-600" aria-hidden="true">
+                ·
+              </span>
+            )}
+            {solscanUrl && (
+              <a
+                href={solscanUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View transaction on Solscan"
+                className="text-sky-400 hover:text-sky-300 hover:underline transition-colors"
+              >
+                View
+              </a>
+            )}
+          </div>
+        </div>
       </div>
-      <button
-        type="button"
-        onClick={() => toast.dismiss(toastId)}
-        className="shrink-0 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer outline-none"
-      >
-        <XIcon className="size-3.5" />
-      </button>
+
+      {onDismiss && (
+        <button
+          type="button"
+          onClick={onDismiss}
+          aria-label="Dismiss notification"
+          className="shrink-0 text-zinc-500 hover:text-zinc-200 text-sm leading-none p-1 rounded-md hover:bg-white/[0.06] transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
+        >
+          ×
+        </button>
+      )}
     </div>
   );
+}
+
+const renderToast = (props: TxnToastProps, toastId: string | number) => {
+  return <TxnToast {...props} onDismiss={() => toast.dismiss(toastId)} />;
 };
 
-const txnToast = (props: TxnToastProps) => {
-  const status = props.status ?? "confirmed";
+export const txnToast = (props: TxnToastProps) => {
+  const resolvedType =
+    props.type ?? (props.status === "confirmed" ? "success" : props.status ?? "success");
 
   return toast.custom((id) => renderToast(props, id), {
-    duration: status === "pending" ? Infinity : 5000,
+    duration: resolvedType === "pending" ? Infinity : 5000,
   });
 };
 
 txnToast.update = (id: string | number, props: TxnToastProps) => {
-  const status = props.status ?? "confirmed";
+  const resolvedType =
+    props.type ?? (props.status === "confirmed" ? "success" : props.status ?? "success");
 
   toast.custom((toastId) => renderToast(props, toastId), {
     id,
-    duration: status === "pending" ? Infinity : 5000,
+    duration: resolvedType === "pending" ? Infinity : 5000,
   });
 };
 
@@ -109,13 +165,7 @@ export const Toaster = ({ ...props }: ToasterProps) => {
       className="toaster group"
       toastOptions={{
         classNames: {
-          toast:
-            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
-          description: "group-[.toast]:text-muted-foreground",
-          actionButton:
-            "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
-          cancelButton:
-            "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
+          toast: "group toast bg-transparent border-0 p-0 shadow-none",
         },
       }}
       {...props}
@@ -124,5 +174,5 @@ export const Toaster = ({ ...props }: ToasterProps) => {
 };
 
 export { toast };
-export { txnToast, txnToast as showTxnToast };
-
+export { txnToast as showTxnToast };
+export default TxnToast;

@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type TogglePillVariant =
@@ -69,7 +68,7 @@ export function TogglePill({
   checked: controlledChecked,
   defaultChecked = false,
   onChange,
-  variant = "apple-ios",
+  variant = "monochrome-dark",
   label,
   description,
   icon,

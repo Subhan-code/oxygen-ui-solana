@@ -8,10 +8,8 @@ export default function Demo() {
 
   return (
     <div className="flex min-h-[460px] w-full flex-col items-center justify-center gap-8 p-6 font-sans select-none">
-      <div className="flex flex-wrap items-center justify-center gap-8">
+      <div className="flex items-center justify-center">
         <ProgressRing value={val} label="Epoch Progress" colorPreset="sky" />
-        <ProgressRing value={88} label="Validator Sync" colorPreset="emerald" />
-        <ProgressRing value={45} label="Staking Quorum" colorPreset="amber" />
       </div>
 
       <div className="flex items-center gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">

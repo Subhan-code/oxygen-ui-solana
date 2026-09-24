@@ -19,7 +19,7 @@ export default function Demo() {
   };
 
   return (
-    <div className="flex min-h-[420px] w-full flex-col items-center justify-center gap-6 rounded-3xl bg-card p-8 text-card-foreground border border-border/50">
+    <div className="flex min-h-[360px] w-full flex-col items-center justify-center gap-6">
       <div className="flex flex-col items-center gap-2">
         <span className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
           Dynamic Value

@@ -20,6 +20,7 @@ export interface TransactionModalProps {
   diffs?: BalanceDiffItem[]
   estimatedFeeSol?: number
   isSimulating?: boolean
+  inline?: boolean
   className?: string
 }
 
@@ -37,6 +38,7 @@ export function TransactionModal({
   diffs = DEFAULT_DIFFS,
   estimatedFeeSol = 0.00005,
   isSimulating = false,
+  inline = false,
   className
 }: TransactionModalProps) {
   const [loading, setLoading] = React.useState(false)
@@ -47,28 +49,21 @@ export function TransactionModal({
     setTimeout(() => {
       setLoading(false)
       if (onConfirm) onConfirm()
-      onClose()
+      if (!inline) onClose()
     }, 1500)
   }
 
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className={cn("fixed inset-0 z-50 flex items-center justify-center p-4", className)} data-slot="transaction-modal">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-black/75 backdrop-blur-md"
-          />
-          <motion.div
-            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 12 }}
-            transition={shouldReduceMotion ? { duration: 0.16 } : { type: "spring", duration: 0.3, bounce: 0 }}
-            className="relative w-full max-w-md overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10 bg-white dark:bg-black p-6 shadow-2xl backdrop-blur-2xl text-left text-zinc-900 dark:text-white select-none"
-          >
+  const modalContent = (
+    <motion.div
+      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 12 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 12 }}
+      transition={shouldReduceMotion ? { duration: 0.16 } : { type: "spring", duration: 0.35, bounce: 0 }}
+      className={cn(
+        "relative w-full max-w-md overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10 bg-white dark:bg-black p-6 shadow-2xl backdrop-blur-2xl text-left text-zinc-900 dark:text-white select-none",
+        className
+      )}
+    >
             <div className="flex items-center justify-between pb-4 border-b border-black/5 dark:border-white/10">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-2xl bg-zinc-100 dark:bg-[#0a0a0a] p-2 border border-black/5 dark:border-white/10 overflow-hidden flex items-center justify-center">
@@ -139,7 +134,25 @@ export function TransactionModal({
                 <span>{loading ? "Confirming..." : "Approve"}</span>
               </motion.button>
             </div>
-          </motion.div>
+    </motion.div>
+  )
+
+  if (inline) {
+    return isOpen ? modalContent : null
+  }
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className={cn("fixed inset-0 z-50 flex items-center justify-center p-4", className)} data-slot="transaction-modal">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-black/75 backdrop-blur-md"
+          />
+          {modalContent}
         </div>
       )}
     </AnimatePresence>

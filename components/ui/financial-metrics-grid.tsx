@@ -1,157 +1,113 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
-import { Hourglass, ArrowUpRight, PieChart, Link as LinkIcon, ChevronRight, Plus } from "lucide-react";
+import React from "react";
+import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import {
-  Metric,
-  MetricLabel,
-  MetricValue,
-} from "@/components/metric";
+export interface MetricItem {
+  id?: string;
+  label: string;
+  value: string;
+  change?: string;
+  isPositive?: boolean;
+}
 
 export interface FinancialMetricsGridProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
+  extends React.HTMLAttributes<HTMLDivElement> {
+  metrics?: MetricItem[];
   onActionClick?: (metricId: string) => void;
 }
 
+const DEFAULT_METRICS: MetricItem[] = [
+  {
+    id: "tvl",
+    label: "Total Value Locked",
+    value: "$1.48B",
+    change: "+4.2%",
+    isPositive: true,
+  },
+  {
+    id: "volume",
+    label: "24h Volume",
+    value: "$384.2M",
+    change: "+12.8%",
+    isPositive: true,
+  },
+  {
+    id: "fees",
+    label: "Protocol Fees (24h)",
+    value: "$412.9K",
+    change: "-1.5%",
+    isPositive: false,
+  },
+  {
+    id: "apy",
+    label: "Network Staking APY",
+    value: "7.84%",
+    change: "+0.15%",
+    isPositive: true,
+  },
+];
+
 export function FinancialMetricsGrid({
+  metrics = DEFAULT_METRICS,
   onActionClick,
   className,
   ...props
 }: FinancialMetricsGridProps) {
-  const reduceMotion = useReducedMotion();
-  const [invoiceCount, setInvoiceCount] = useState(0);
-
   return (
     <div
       data-slot="financial-metrics-grid"
-      className={cn("grid w-full max-w-lg grid-cols-1 sm:grid-cols-2 gap-4 p-2 font-sans select-none mx-auto", className)}
+      className={cn(
+        "grid w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 select-none font-sans",
+        className
+      )}
       {...props}
     >
-      <motion.div
-        whileHover={reduceMotion ? {} : { y: -2 }}
-        className="flex flex-col justify-between rounded-3xl bg-white p-5 shadow-lg border border-zinc-200/80 dark:bg-zinc-950 dark:border-zinc-800/80"
-      >
-        <Metric className="p-0">
-          <MetricLabel>
-            <span className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
-                <Hourglass className="h-4 w-4" />
-              </div>
-              Total hours
-            </span>
-          </MetricLabel>
-          <MetricValue className="mt-2 text-2xl text-zinc-950 dark:text-white font-mono">17.00</MetricValue>
-        </Metric>
+      {metrics.map((item, index) => {
+        const isUp = item.isPositive !== false;
+        const itemId = item.id ?? `metric-${index}`;
 
-        <div className="mt-6 flex flex-col gap-1.5 rounded-2xl bg-zinc-50/80 p-3 border border-zinc-200/60 dark:bg-zinc-900/60 dark:border-zinc-800/60 text-xs font-medium">
-          <div className="flex items-center justify-between text-zinc-700 dark:text-zinc-300">
-            <span>Billable</span>
-            <span className="font-semibold font-mono">17.00</span>
-          </div>
-          <div className="flex items-center justify-between text-zinc-400">
-            <span>Non-billable</span>
-            <span className="font-mono">0.00</span>
-          </div>
-        </div>
-      </motion.div>
+        return (
+          <div
+            key={itemId}
+            onClick={() => onActionClick?.(itemId)}
+            className="flex flex-col justify-between rounded-[24px] bg-zinc-950/60 border border-white/[0.08] p-5 backdrop-blur-2xl shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-200 hover:border-white/[0.14] hover:bg-zinc-950/80"
+          >
+            {/* Top row: label + change pill */}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[12px] font-medium text-zinc-400 tracking-[-0.01em]">
+                {item.label}
+              </span>
 
-      <motion.div
-        whileHover={reduceMotion ? {} : { y: -2 }}
-        className="flex flex-col justify-between rounded-3xl bg-white p-5 shadow-lg border border-zinc-200/80 dark:bg-zinc-950 dark:border-zinc-800/80"
-      >
-        <Metric className="p-0">
-          <MetricLabel>
-            <span className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
-                <ArrowUpRight className="h-4 w-4" />
-              </div>
-              Internal costs
-            </span>
-          </MetricLabel>
-          <MetricValue className="mt-2 text-2xl text-zinc-950 dark:text-white font-mono">
-            <span className="text-base font-semibold mr-0.5">$</span>611.37
-          </MetricValue>
-        </Metric>
+              {item.change && (
+                <span
+                  className={cn(
+                    "inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] font-mono font-medium tabular-nums border",
+                    isUp
+                      ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/20"
+                      : "text-rose-400 bg-rose-500/10 border-rose-500/20"
+                  )}
+                >
+                  {isUp ? (
+                    <ArrowUpRight className="size-3" />
+                  ) : (
+                    <ArrowDownRight className="size-3" />
+                  )}
+                  <span>{item.change}</span>
+                </span>
+              )}
+            </div>
 
-        <div className="mt-6 flex flex-col gap-1.5 rounded-2xl bg-zinc-50/80 p-3 border border-zinc-200/60 dark:bg-zinc-900/60 dark:border-zinc-800/60 text-xs font-medium">
-          <div className="flex items-center justify-between text-zinc-700 dark:text-zinc-300">
-            <span>Time</span>
-            <span className="font-semibold font-mono">$1,190.00</span>
-          </div>
-          <div className="flex items-center justify-between text-blue-600 dark:text-blue-400 cursor-pointer">
-            <span>Non-billable</span>
-            <div className="flex items-center gap-0.5 font-semibold font-mono">
-              <span>$32.75</span>
-              <ChevronRight className="h-3 w-3" />
+            {/* Value */}
+            <div className="mt-4">
+              <span className="font-mono text-2xl sm:text-[28px] font-bold tabular-nums tracking-tight text-zinc-50">
+                {item.value}
+              </span>
             </div>
           </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        whileHover={reduceMotion ? {} : { y: -2 }}
-        className="flex flex-col justify-between rounded-3xl bg-white p-5 shadow-lg border border-zinc-200/80 dark:bg-zinc-950 dark:border-zinc-800/80"
-      >
-        <Metric className="p-0">
-          <MetricLabel>
-            <span className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
-                <PieChart className="h-4 w-4" />
-              </div>
-              Budget remaining
-            </span>
-          </MetricLabel>
-          <div className="mt-2 flex items-baseline gap-2">
-            <MetricValue className="text-2xl text-zinc-950 dark:text-white font-mono">8.00</MetricValue>
-            <span className="text-xs font-bold text-blue-600 dark:text-blue-400 font-mono">32%</span>
-          </div>
-        </Metric>
-
-        <div className="mt-6 flex flex-col gap-2 pt-1">
-          <div className="flex items-center justify-between text-xs font-semibold text-zinc-900 dark:text-white">
-            <span>Total budget</span>
-            <span className="font-mono">25.00</span>
-          </div>
-          <div className="h-1.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
-            <div className="h-full w-[32%] rounded-full bg-blue-600" />
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        whileHover={reduceMotion ? {} : { y: -2 }}
-        className="flex flex-col justify-between rounded-3xl bg-white p-5 shadow-lg border border-zinc-200/80 dark:bg-zinc-950 dark:border-zinc-800/80"
-      >
-        <Metric className="p-0">
-          <MetricLabel>
-            <span className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300">
-                <LinkIcon className="h-4 w-4" />
-              </div>
-              Unvoiced amount
-            </span>
-          </MetricLabel>
-          <MetricValue className="mt-2 text-2xl text-zinc-950 dark:text-white font-mono">
-            <span className="text-base font-semibold mr-0.5">$</span>1,716.37
-          </MetricValue>
-        </Metric>
-
-        <motion.button
-          type="button"
-          whileTap={reduceMotion ? {} : { scale: 0.97 }}
-          onClick={() => {
-            setInvoiceCount((prev) => prev + 1);
-            onActionClick?.("new-invoice");
-          }}
-          className="mt-6 flex w-full items-center justify-center gap-1.5 rounded-2xl bg-blue-50 py-3 text-xs font-semibold text-blue-600 transition-colors hover:bg-blue-100 dark:bg-blue-950/60 dark:text-blue-300 dark:hover:bg-blue-900/60 cursor-pointer"
-        >
-          <Plus className="h-3.5 w-3.5" />
-          <span>{invoiceCount > 0 ? `Invoice Created (${invoiceCount})` : "New invoice"}</span>
-        </motion.button>
-      </motion.div>
+        );
+      })}
     </div>
   );
 }

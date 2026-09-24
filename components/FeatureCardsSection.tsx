@@ -20,14 +20,14 @@ const FEATURES = [
     description: "Engineered with Framer Motion, spring physics, dynamic squircles, and 60 FPS GPU composite performance.",
     cardBg: "bg-[#F1EAFF] dark:bg-[#1E1438]",
     action: "Browse Motion",
-    href: "/components",
+    href: "/sol",
   },
   {
     title: "Primitives Built for Solana",
     description: "Tailored for Web3 dApps: wallet surfaces, swap terminals, order books, QR codes, and transaction feeds.",
     cardBg: "bg-[#E9FBF3] dark:bg-[#0C2A1E]",
     action: "Components",
-    href: "/components",
+    href: "/sol",
   },
 ];
 

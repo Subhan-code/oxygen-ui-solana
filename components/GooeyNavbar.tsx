@@ -2,6 +2,6 @@
 
 import DynamicIslandNavbar from "@/components/DynamicIslandNavbar";
 
-export default function GooeyNavbar({ stars }: { stars?: number | null }) {
-  return <DynamicIslandNavbar stars={stars} />;
+export default function GooeyNavbar(props?: { stars?: number | null }) {
+  return <DynamicIslandNavbar stars={props?.stars} />;
 }

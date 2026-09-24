@@ -56,7 +56,22 @@ const nextConfig = {
     return [
       {
         source: "/sol-components",
-        destination: "/components",
+        destination: "/sol",
+        permanent: false,
+      },
+      {
+        source: "/components",
+        destination: "/sol",
+        permanent: false,
+      },
+      {
+        source: "/blocks",
+        destination: "/sol",
+        permanent: false,
+      },
+      {
+        source: "/blocks/:slug",
+        destination: "/components/:slug",
         permanent: false,
       },
     ];

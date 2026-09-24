@@ -4,6 +4,7 @@
 import React, {
   Component,
   Suspense,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -84,7 +85,11 @@ class LivePreviewErrorBoundary extends Component<
 
 export default function LiveComponentPreview({ item }: { item: ComponentItem }) {
   const [inView, setInView] = useState(false);
+  const [scale, setScale] = useState(1);
+  const [isReady, setIsReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const observedChildRef = useRef<Element | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || inView) return;
@@ -100,6 +105,91 @@ export default function LiveComponentPreview({ item }: { item: ComponentItem }) 
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, [inView]);
+
+  const updateScale = useCallback(() => {
+    const container = containerRef.current;
+    const content = contentRef.current;
+    if (!container || !content) return;
+
+    const cWidth = container.clientWidth;
+    const cHeight = container.clientHeight;
+    if (cWidth <= 0 || cHeight <= 0) return;
+
+    const firstChild = content.firstElementChild as HTMLElement | null;
+    const target = firstChild || content;
+
+    const targetW = Math.max(
+      target.scrollWidth || 0,
+      target.offsetWidth || 0,
+      content.scrollWidth || 0,
+      content.offsetWidth || 0
+    );
+    const targetH = Math.max(
+      target.scrollHeight || 0,
+      target.offsetHeight || 0,
+      content.scrollHeight || 0,
+      content.offsetHeight || 0
+    );
+
+    if (targetW <= 0 || targetH <= 0) return;
+
+    // 16px safe margin prevents clipping against card borders
+    const padX = 16;
+    const padY = 16;
+    const availW = Math.max(cWidth - padX, 20);
+    const availH = Math.max(cHeight - padY, 20);
+
+    const scaleX = availW / targetW;
+    const scaleY = availH / targetH;
+    const fitScale = Math.min(scaleX, scaleY, 1);
+    const rounded = Math.round(fitScale * 1000) / 1000;
+
+    setScale(rounded);
+    setIsReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
+    const container = containerRef.current;
+    const content = contentRef.current;
+    if (!container || !content) return;
+
+    updateScale();
+
+    const ro = new ResizeObserver(() => {
+      updateScale();
+    });
+
+    ro.observe(container);
+    ro.observe(content);
+    if (content.firstElementChild) {
+      observedChildRef.current = content.firstElementChild;
+      ro.observe(content.firstElementChild);
+    }
+
+    const mo = new MutationObserver(() => {
+      updateScale();
+      const currentChild = content.firstElementChild;
+      if (currentChild && currentChild !== observedChildRef.current) {
+        if (observedChildRef.current) {
+          ro.unobserve(observedChildRef.current);
+        }
+        observedChildRef.current = currentChild;
+        ro.observe(currentChild);
+      }
+    });
+    mo.observe(content, { childList: true, subtree: true });
+
+    const rafId = requestAnimationFrame(updateScale);
+    const tId = setTimeout(updateScale, 120);
+
+    return () => {
+      ro.disconnect();
+      mo.disconnect();
+      cancelAnimationFrame(rafId);
+      clearTimeout(tId);
+    };
+  }, [inView, updateScale]);
 
   if (item.image) {
     return (
@@ -135,11 +225,18 @@ export default function LiveComponentPreview({ item }: { item: ComponentItem }) 
   return (
     <div
       ref={containerRef}
-      className="relative flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950/90 p-2 select-none font-sans"
+      className="relative flex h-full w-full items-center justify-center overflow-hidden select-none font-sans"
       suppressHydrationWarning
     >
       <div
-        className="w-full h-full flex items-center justify-center transform scale-[0.68] sm:scale-[0.72] transition-transform duration-300 pointer-events-none origin-center will-change-transform"
+        ref={contentRef}
+        className={`live-preview-content flex items-center justify-center shrink-0 origin-center pointer-events-none will-change-transform ${
+          isReady ? "opacity-100" : "opacity-0"
+        } transition-[transform,opacity] duration-200 ease-out`}
+        style={{
+          transform: `scale(${scale})`,
+          transformOrigin: "center center",
+        }}
         suppressHydrationWarning
       >
         {inView ? (

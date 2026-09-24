@@ -1,10 +1,12 @@
+import React from "react";
+
 export default function ComponentsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen w-full overflow-hidden bg-background" suppressHydrationWarning>
+    <div className="min-h-screen w-full bg-background flex flex-col" suppressHydrationWarning>
       {children}
     </div>
   );

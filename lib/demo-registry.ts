@@ -28,7 +28,6 @@ export const DEMO_LOADERS: Record<string, () => Promise<unknown>> = {
   "cryptowalletdashboard": () => import("@/app/components/(docs)/cryptowalletdashboard/demo"),
   "cryptowalletdrawer": () => import("@/app/components/(docs)/cryptowalletdrawer/demo"),
   "cryptowalletmain": () => import("@/app/components/(docs)/cryptowalletmain/demo"),
-  "cryptowalletmenusheet": () => import("@/app/components/(docs)/cryptowalletmenusheet/demo"),
   "cryptowalletsettings": () => import("@/app/components/(docs)/cryptowalletsettings/demo"),
   "digitswap": () => import("@/app/components/(docs)/digitswap/demo"),
   "errorstateshake": () => import("@/app/components/(docs)/errorstateshake/demo"),

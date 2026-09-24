@@ -391,7 +391,8 @@ html {
   transition-duration: 200ms;
 }
 
-html {
+html, body {
+  font-family: var(--font-open-runde), -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
   scroll-behavior: auto;
 }
 
@@ -453,3 +454,18 @@ html {
 @utility screen-line-bottom {
     @apply relative after:absolute after:bottom-0 after:left-[-100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-line;
 }
+
+/* live preview card autoscaling stage */
+.live-preview-content {
+  width: max-content;
+  height: max-content;
+}
+
+.live-preview-content > div {
+  min-height: unset !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}

@@ -1,85 +1,144 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { ArrowDownRight, Wallet } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Info, ArrowUpDown } from "lucide-react";
 
-export interface WithdrawalCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface WithdrawalCardProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onConfirm"> {
+  maxBalance?: number;
   initialBalance?: number;
-  exchangeRate?: number;
+  estimatedFee?: number | string;
   feePct?: number;
   tokenSymbol?: string;
-  stakedTokenSymbol?: string;
-  onWithdraw?: (amount: number, instant: boolean) => void;
+  tokenPriceUsd?: number;
+  destinationAddress?: string;
+  onConfirm?: (amount: string) => void;
+  onWithdraw?: (amount: number, instant?: boolean) => void;
 }
 
 export function WithdrawalCard({
-  initialBalance = 539.21,
-  exchangeRate = 0.95,
-  feePct = 5,
-  tokenSymbol = "Aztec",
-  stakedTokenSymbol = "stAztec",
+  maxBalance,
+  initialBalance,
+  estimatedFee = "0.0005 SOL",
+  tokenSymbol = "SOL",
+  tokenPriceUsd = 142.5,
+  destinationAddress = "7xKX...gAsU",
+  onConfirm,
   onWithdraw,
   className,
   ...props
 }: WithdrawalCardProps) {
-  const [amount, setAmount] = useState<string>("134.80");
-  const [isInstant, setIsInstant] = useState<boolean>(true);
-  const [selectedPct, setSelectedPct] = useState<number | null>(null);
+  const effectiveMax = maxBalance ?? initialBalance ?? 24.85;
+
+  const [amount, setAmount] = useState<string>("5.00");
+  const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
 
   const parsedAmount = parseFloat(amount) || 0;
-  const usdValue = (parsedAmount * 0.52).toFixed(2);
-  const feeAmount = isInstant ? (parsedAmount * (feePct / 100)) : 0;
-  const receiveAmount = Math.max(0, parsedAmount - feeAmount).toFixed(2);
-  const receiveUsd = (parseFloat(receiveAmount) * 0.52).toFixed(2);
+  const isValid = parsedAmount > 0 && parsedAmount <= effectiveMax;
 
-  const handlePctClick = (pct: number) => {
-    setSelectedPct(pct);
-    const calculated = ((initialBalance * pct) / 100).toFixed(2);
-    setAmount(calculated);
+  const feeNumeric = useMemo(() => {
+    if (typeof estimatedFee === "number") return estimatedFee;
+    const match = String(estimatedFee).match(/[0-9.]+/);
+    return match ? parseFloat(match[0]) : 0.0005;
+  }, [estimatedFee]);
+
+  const receiveAmount = useMemo(() => {
+    if (parsedAmount <= 0) return "0.00";
+    return Math.max(0, parsedAmount - feeNumeric).toFixed(4);
+  }, [parsedAmount, feeNumeric]);
+
+  const fiatEstimate = useMemo(() => {
+    if (parsedAmount <= 0) return "$0.00";
+    return `$${(parsedAmount * tokenPriceUsd).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`;
+  }, [parsedAmount, tokenPriceUsd]);
+
+  const handlePreset = (pct: number) => {
+    setSelectedPreset(pct);
+    if (pct === 100) {
+      const maxNet = Math.max(0, effectiveMax - feeNumeric);
+      setAmount(maxNet.toFixed(4));
+    } else {
+      const calc = (effectiveMax * pct) / 100;
+      setAmount(calc.toFixed(2));
+    }
   };
 
-  const handleWithdrawClick = () => {
-    if (parsedAmount <= 0) return;
-    onWithdraw?.(parsedAmount, isInstant);
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(e.target.value);
+    setSelectedPreset(null);
+  };
+
+  const handleCommitWithdraw = () => {
+    if (!isValid) return;
+    onConfirm?.(amount);
+    onWithdraw?.(parsedAmount, true);
   };
 
   return (
     <div
       data-slot="withdrawal-card"
       className={cn(
-        "relative overflow-hidden rounded-[36px] bg-[#FAF5F0] dark:bg-zinc-900 p-6 sm:p-8 text-zinc-900 dark:text-zinc-100 border border-zinc-200/80 dark:border-zinc-800 shadow-xl max-w-2xl w-full select-none font-sans",
+        "flex flex-col gap-5 rounded-[32px] border border-white/[0.08] bg-zinc-950/80 p-5 sm:p-6 backdrop-blur-2xl shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.55)] select-none text-zinc-100 max-w-md w-full font-sans",
         className
       )}
       {...props}
     >
       {/* Header Row */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight">Request Withdrawal</h2>
-        <div className="inline-flex items-center gap-2 rounded-full bg-zinc-200/70 dark:bg-zinc-800 px-4 py-1.5 text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-          <span>Balance</span>
-          <span className="font-mono font-bold text-zinc-900 dark:text-white">
-            {initialBalance} {tokenSymbol}
+      <div className="flex items-center justify-between">
+        <h2 className="text-[17px] font-semibold tracking-[-0.02em] text-zinc-100">
+          Withdraw
+        </h2>
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.04] border border-white/[0.06] px-3 py-1 text-xs">
+          <span className="text-zinc-500 font-medium">Balance</span>
+          <span className="font-mono font-semibold tabular-nums text-zinc-200">
+            {effectiveMax.toLocaleString()} {tokenSymbol}
           </span>
         </div>
       </div>
 
-      {/* Percentage Preset Chips */}
-      <div className="flex items-center gap-2 mb-6">
+      {/* Hero Amount Input & Ticker */}
+      <div className="flex flex-col items-center justify-center py-2">
+        <div className="flex items-baseline justify-center w-full gap-2">
+          <input
+            type="number"
+            inputMode="decimal"
+            min={0}
+            max={effectiveMax}
+            step="any"
+            value={amount}
+            onChange={handleAmountChange}
+            placeholder="0.00"
+            className="w-full max-w-[240px] bg-transparent text-center font-mono text-4xl sm:text-5xl font-bold tracking-tight text-white outline-none placeholder:text-zinc-700"
+          />
+          <span className="text-lg font-semibold text-zinc-400 font-mono">
+            {tokenSymbol}
+          </span>
+        </div>
+        <span className="text-xs text-zinc-500 font-mono mt-1">
+          ≈ {fiatEstimate}
+        </span>
+      </div>
+
+      {/* Presets: 25 / 50 / 75 / Max */}
+      <div className="grid grid-cols-4 gap-2">
         {[25, 50, 75, 100].map((pct) => {
           const label = pct === 100 ? "Max" : `${pct}%`;
-          const isActive = selectedPct === pct;
+          const isSelected = selectedPreset === pct;
 
           return (
             <button
               key={pct}
               type="button"
-              onClick={() => handlePctClick(pct)}
+              onClick={() => handlePreset(pct)}
               className={cn(
-                "rounded-full px-4 py-1.5 text-xs font-semibold transition-all cursor-pointer",
-                isActive
-                  ? "bg-pink-300 text-pink-950 font-bold shadow-xs"
-                  : "bg-pink-100/70 dark:bg-pink-950/40 text-pink-900 dark:text-pink-300 hover:bg-pink-200/80"
+                "h-8 rounded-full text-xs font-semibold font-mono transition-all duration-150 active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 cursor-pointer",
+                isSelected
+                  ? "bg-white text-zinc-950 shadow-sm"
+                  : "bg-white/[0.04] border border-white/[0.06] text-zinc-400 hover:text-white hover:bg-white/[0.08]"
               )}
             >
               {label}
@@ -88,91 +147,54 @@ export function WithdrawalCard({
         })}
       </div>
 
-      {/* Amount Input Row */}
-      <div className="mb-6">
-        <div className="flex items-baseline justify-between gap-4">
-          <input
-            type="text"
-            value={amount}
-            onChange={(e) => {
-              setAmount(e.target.value);
-              setSelectedPct(null);
-            }}
-            className="w-full bg-transparent font-sans text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white outline-none"
-            placeholder="0.00"
-          />
-          <span className="text-base font-semibold text-zinc-500 shrink-0">{tokenSymbol}</span>
-        </div>
-        <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mt-2">
-          <span>${usdValue}</span>
-          <ArrowUpDown className="size-3.5 cursor-pointer hover:text-zinc-600" />
-        </div>
-      </div>
-
-      {/* Inner Card: You Will Receive */}
-      <div className="rounded-3xl bg-[#F0EADF] dark:bg-zinc-800/70 p-5 sm:p-6 border border-zinc-300/40 dark:border-zinc-700/50">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">You will receive</span>
-
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 text-xs text-zinc-500 font-mono">
-              <span>Instant withdrawal</span>
-              <Info className="size-3.5" />
-              <span className="text-[10px] text-zinc-400 ml-1">Fee ({feePct}%) ~0.0001 {tokenSymbol}</span>
-            </div>
-
-            {/* Toggle Switch */}
-            <button
-              type="button"
-              onClick={() => setIsInstant(!isInstant)}
-              className={cn(
-                "relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out border-2 border-transparent",
-                isInstant ? "bg-pink-400" : "bg-zinc-300 dark:bg-zinc-700"
-              )}
-            >
-              <span
-                className={cn(
-                  "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out",
-                  isInstant ? "translate-x-5" : "translate-x-0"
-                )}
-              />
-            </button>
-          </div>
+      {/* Details Hairline Well */}
+      <div className="flex flex-col gap-2.5 p-3.5 rounded-[20px] bg-white/[0.04] border border-white/[0.06] text-xs">
+        {/* Destination */}
+        <div className="flex items-center justify-between text-zinc-400">
+          <span className="flex items-center gap-1.5">
+            <Wallet className="size-3.5 text-zinc-500" />
+            <span>To connected wallet</span>
+          </span>
+          <span className="font-mono text-zinc-300 text-[11px]">
+            {destinationAddress}
+          </span>
         </div>
 
-        {/* Receive Amount */}
-        <div className="mb-4">
-          <div className="flex items-baseline justify-between gap-4">
-            <span className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">
-              {receiveAmount}
-            </span>
-            <span className="text-base font-semibold text-zinc-500">{tokenSymbol}</span>
-          </div>
-          <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mt-1">
-            <span>${receiveUsd}</span>
-            <ArrowUpDown className="size-3.5 cursor-pointer hover:text-zinc-600" />
-          </div>
+        {/* Network Fee */}
+        <div className="flex items-center justify-between text-zinc-400">
+          <span>Network fee</span>
+          <span className="font-mono text-zinc-300 text-[11px]">
+            {String(estimatedFee)}
+          </span>
         </div>
 
-        {/* Rate & Fee Footer */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-zinc-300/40 dark:border-zinc-700/40 text-[11px] font-mono text-zinc-500">
-          <div className="flex items-center gap-4">
-            <span>Exchange Rate: 1 {tokenSymbol} = {exchangeRate} {stakedTokenSymbol}</span>
-            <span>Transaction Fee: ~0.0001 {tokenSymbol}</span>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleWithdrawClick}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F59CE4] hover:bg-[#F383DD] text-zinc-950 font-bold px-7 py-3 text-sm shadow-md transition-transform active:scale-95 cursor-pointer"
-          >
-            <span>Withdraw</span>
-            <span className="text-xs">▶</span>
-          </button>
+        {/* Receive Row */}
+        <div className="flex items-center justify-between pt-2 border-t border-white/[0.04] text-[13px] font-medium">
+          <span className="text-zinc-200">You will receive</span>
+          <span className="font-mono font-semibold tabular-nums text-emerald-400">
+            {receiveAmount} {tokenSymbol}
+          </span>
         </div>
       </div>
+
+      {/* Full-width Apple White Pill CTA */}
+      <button
+        type="button"
+        disabled={!isValid}
+        onClick={handleCommitWithdraw}
+        className={cn(
+          "w-full h-11 rounded-2xl font-semibold text-sm transition-all duration-150 flex items-center justify-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950",
+          isValid
+            ? "bg-white text-zinc-950 hover:bg-zinc-200 active:scale-[0.98] cursor-pointer shadow-xs"
+            : "bg-white/10 text-zinc-600 cursor-not-allowed"
+        )}
+      >
+        <ArrowDownRight className="size-4" />
+        <span>Withdraw {tokenSymbol}</span>
+      </button>
     </div>
   );
 }
 
+export const RequestWithdrawalCard = WithdrawalCard;
 export default WithdrawalCard;

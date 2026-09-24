@@ -92,7 +92,7 @@ export default function HeroCta({
         </Squircle>
 
         <Link
-          href="/components"
+          href="/sol"
           className="relative flex h-12 items-center gap-2 px-6 text-sm font-semibold font-runde text-white outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
         >
           <span>Explore components</span>

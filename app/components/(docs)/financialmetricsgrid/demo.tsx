@@ -1,11 +1,14 @@
 "use client";
 
+import React from "react";
 import { FinancialMetricsGrid } from "@/components/ui/financial-metrics-grid";
 
-export function Demo() {
+export default function Demo() {
   return (
-    <div className="flex min-h-[460px] w-full flex-col items-center justify-center p-6 bg-zinc-100 dark:bg-zinc-900 rounded-3xl border border-zinc-200/80 dark:border-zinc-800/80 transition-all duration-300">
+    <div className="flex min-h-[380px] w-full items-center justify-center p-4 sm:p-6">
       <FinancialMetricsGrid />
     </div>
   );
 }
+
+export { Demo };

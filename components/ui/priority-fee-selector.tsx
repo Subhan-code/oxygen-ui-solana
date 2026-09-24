@@ -1,71 +1,133 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { motion } from "motion/react"
-import { Zap, Flame, Rocket, Shield, type LucideIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-export type FeeTier = "turbo" | "fast" | "ultra"
+export type FeeTier = "low" | "medium" | "high" | "turbo" | "fast" | "ultra";
 
-export interface PriorityFeeSelectorProps extends React.HTMLAttributes<HTMLDivElement> {
-  selectedTier?: FeeTier
-  onChangeTier?: (tier: FeeTier) => void
+export interface PriorityFeeSelectorProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+  tier?: FeeTier;
+  selectedTier?: FeeTier;
+  onChange?: (tier: FeeTier, microLamports: number) => void;
+  onChangeTier?: (tier: FeeTier) => void;
 }
 
+interface TierConfig {
+  id: "low" | "medium" | "high" | "turbo";
+  label: string;
+  fee: string;
+  microLamports: number;
+}
+
+const TIERS: TierConfig[] = [
+  {
+    id: "low",
+    label: "Economy",
+    fee: "0.00001",
+    microLamports: 10000,
+  },
+  {
+    id: "medium",
+    label: "Standard",
+    fee: "0.00005",
+    microLamports: 50000,
+  },
+  {
+    id: "high",
+    label: "Fast",
+    fee: "0.0002",
+    microLamports: 200000,
+  },
+  {
+    id: "turbo",
+    label: "Priority",
+    fee: "0.001",
+    microLamports: 1000000,
+  },
+];
+
 export function PriorityFeeSelector({
-  selectedTier = "fast",
+  tier,
+  selectedTier,
+  onChange,
   onChangeTier,
   className,
   ...props
 }: PriorityFeeSelectorProps) {
-  const tiers: { id: FeeTier; label: string; icon: LucideIcon; feeSol: string; cuPrice: string; desc: string }[] = [
-    { id: "turbo", label: "Turbo", icon: Zap, feeSol: "0.00005 SOL", cuPrice: "50K micro-lamports", desc: "Standard priority" },
-    { id: "fast", label: "Fast", icon: Flame, feeSol: "0.0002 SOL", cuPrice: "200K micro-lamports", desc: "Recommended for DEX trades" },
-    { id: "ultra", label: "Ultra", icon: Rocket, feeSol: "0.001 SOL", cuPrice: "1M micro-lamports", desc: "Maximum MEV protection" },
-  ]
+  const currentTier = tier ?? selectedTier ?? "medium";
+
+  const normalizeTier = (t: FeeTier): "low" | "medium" | "high" | "turbo" => {
+    if (t === "fast") return "high";
+    if (t === "ultra") return "turbo";
+    return t;
+  };
+
+  const normalized = normalizeTier(currentTier);
+  const selectedConfig = TIERS.find((t) => t.id === normalized) ?? TIERS[1];
+
+  const handleSelect = (item: TierConfig) => {
+    onChange?.(item.id, item.microLamports);
+    onChangeTier?.(item.id);
+  };
 
   return (
     <div
+      data-slot="priority-fee-selector"
       className={cn(
-        "rounded-[28px] border border-black/10 dark:border-white/10 bg-white dark:bg-black p-4 sm:p-5 shadow-2xl backdrop-blur-xl text-zinc-900 dark:text-white select-none",
+        "flex flex-col gap-2.5 w-full rounded-[24px] border border-white/[0.08] bg-zinc-950/80 p-3.5 backdrop-blur-xl shadow-2xl select-none font-sans text-zinc-100",
         className
       )}
-      data-slot="priority-fee-selector"
       {...props}
     >
-      <div className="flex items-center justify-between pb-3 border-b border-black/5 dark:border-white/10 text-xs">
-        <span className="flex items-center gap-1.5 font-runde font-bold text-zinc-900 dark:text-white">
-          <Shield className="h-4 w-4 text-sky-500 dark:text-sky-400" /> Compute Unit Priority Fee
+      <div className="flex items-center justify-between px-0.5">
+        <span className="text-[13px] font-medium text-zinc-400">
+          Priority fee
         </span>
-        <span className="font-mono text-zinc-400 text-[11px]">JITO / Priority Engine</span>
+        <span className="font-mono text-[11px] text-zinc-400 tabular-nums">
+          {selectedConfig.fee} SOL
+        </span>
       </div>
 
-      <div className="mt-3 grid grid-cols-3 gap-2">
-        {tiers.map((t) => {
-          const Icon = t.icon
-          const isSelected = t.id === selectedTier
+      <div
+        role="radiogroup"
+        aria-label="Priority fee tier"
+        className="grid grid-cols-4 gap-1 p-1 rounded-[16px] bg-white/[0.04] border border-white/[0.06]"
+      >
+        {TIERS.map((item) => {
+          const isSelected = item.id === normalized;
+
           return (
             <button
-              key={t.id}
+              key={item.id}
               type="button"
-              onClick={() => onChangeTier?.(t.id)}
+              role="radio"
+              aria-checked={isSelected}
+              onClick={() => handleSelect(item)}
               className={cn(
-                "relative flex flex-col items-start gap-1 rounded-2xl border p-3 text-left motion-safe:transition-colors motion-safe:duration-150 outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 motion-safe:active:scale-[0.97] cursor-pointer",
+                "flex flex-col items-center justify-center py-2 px-1 rounded-[12px] transition-all duration-180 ease-out cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950",
                 isSelected
-                  ? "border-sky-500/50 dark:border-sky-500/50 bg-sky-500/10 text-zinc-900 dark:text-white"
-                  : "border-black/5 dark:border-white/10 bg-zinc-100/80 dark:bg-[#0a0a0a] text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-[#141414] hover:text-zinc-900 dark:hover:text-white"
+                  ? "bg-white text-zinc-950 shadow-xs"
+                  : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]"
               )}
             >
-              <div className="relative z-10 flex items-center gap-1.5 font-runde font-bold text-xs">
-                <Icon className={cn("h-3.5 w-3.5", isSelected ? "text-sky-500 dark:text-sky-400" : "text-zinc-400")} />
-                <span>{t.label}</span>
-              </div>
-              <span className="relative z-10 font-mono text-[11px] font-semibold text-zinc-900 dark:text-zinc-200 mt-1">{t.feeSol}</span>
-              <span className="relative z-10 font-runde text-[10px] text-zinc-500 dark:text-zinc-400">{t.desc}</span>
+              <span className="text-[12px] font-medium leading-tight">
+                {item.label}
+              </span>
+              <span
+                className={cn(
+                  "font-mono text-[10px] tabular-nums mt-0.5",
+                  isSelected ? "text-zinc-600" : "text-zinc-500"
+                )}
+              >
+                {item.fee}
+              </span>
             </button>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
+
+export default PriorityFeeSelector;

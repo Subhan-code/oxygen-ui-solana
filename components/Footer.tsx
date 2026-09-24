@@ -8,7 +8,7 @@ type FooterLink = { label: string; href: string; external?: boolean };
 
 const NAV_LINKS: FooterLink[] = [
   { label: "Home", href: "/" },
-  { label: "Components", href: "/components" },
+  { label: "Solana Components", href: "/sol" },
   { label: "Installation", href: "/docs/installation" },
 ];
 

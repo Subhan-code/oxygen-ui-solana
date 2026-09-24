@@ -2,21 +2,14 @@
 
 import React, { useState, useMemo, useRef } from "react";
 import QRCodePackage from "qrcode";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  useReducedMotion,
-} from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export type ErrorCorrectionLevel = "L" | "M" | "Q" | "H";
-export type TiltEffect = "gravitate" | "evade";
 
 export interface QRCodeProps
   extends Omit<
-    React.SVGAttributes<SVGSVGElement>,
+    React.HTMLAttributes<HTMLDivElement>,
     "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart" | "values"
   > {
   value?: string;
@@ -26,12 +19,7 @@ export interface QRCodeProps
   errorCorrectionLevel?: ErrorCorrectionLevel;
   className?: string;
   interactiveColorChange?: boolean;
-  enableTilt?: boolean;
-  tiltLimit?: number;
   scale?: number;
-  perspective?: number;
-  effect?: TiltEffect;
-  spotlight?: boolean;
   showCenterLogo?: boolean;
 }
 
@@ -190,12 +178,7 @@ export function QRCode({
   errorCorrectionLevel = "M",
   className,
   interactiveColorChange = true,
-  enableTilt = true,
-  tiltLimit = 20,
-  scale = 1.05,
-  perspective = 1000,
-  effect = "evade",
-  spotlight = true,
+  scale = 1.03,
   showCenterLogo = true,
   ...props
 }: QRCodeProps) {
@@ -204,57 +187,10 @@ export function QRCode({
 
   const [colorIndex, setColorIndex] = useState(0);
   const [ripples, setRipples] = useState<GlassRipple[]>([]);
-  const [isHovered, setIsHovered] = useState(false);
   const [logoRotation, setLogoRotation] = useState(0);
 
   const currentTheme = COLOR_PALETTE[colorIndex];
   const activeFgColor = customFgColor || currentTheme.dotColor;
-
-  // Spring physics for smooth Apple 3D card response
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-
-  const springConfig = { stiffness: 300, damping: 26 };
-  const smoothMouseX = useSpring(mouseX, springConfig);
-  const smoothMouseY = useSpring(mouseY, springConfig);
-
-  const rotateX = useTransform(
-    smoothMouseY,
-    [0, 1],
-    [effect === "evade" ? tiltLimit : -tiltLimit, effect === "evade" ? -tiltLimit : tiltLimit]
-  );
-  const rotateY = useTransform(
-    smoothMouseX,
-    [0, 1],
-    [effect === "evade" ? -tiltLimit : tiltLimit, effect === "evade" ? tiltLimit : -tiltLimit]
-  );
-
-  const glareX = useTransform(smoothMouseX, [0, 1], [0, 100]);
-  const glareY = useTransform(smoothMouseY, [0, 1], [0, 100]);
-  const glarePosLeft = useTransform(glareX, [0, 100], ["-30%", "30%"]);
-  const glarePosTop = useTransform(glareY, [0, 100], ["-30%", "30%"]);
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!enableTilt || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    if (rect.width === 0 || rect.height === 0) return;
-    const px = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
-    const py = Math.min(Math.max((e.clientY - rect.top) / rect.height, 0), 1);
-    mouseX.set(px);
-    mouseY.set(py);
-  };
-
-  const handlePointerEnter = () => {
-    if (enableTilt) setIsHovered(true);
-  };
-
-  const handlePointerLeave = () => {
-    if (enableTilt) {
-      setIsHovered(false);
-      mouseX.set(0.5);
-      mouseY.set(0.5);
-    }
-  };
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -333,175 +269,117 @@ export function QRCode({
   if (!qrData) return null;
 
   return (
-    <div
-      style={{ perspective: `${perspective}px` }}
-      className="mx-auto flex items-center justify-center p-4"
-    >
+    <div className="mx-auto flex items-center justify-center p-4">
       <motion.div
         ref={containerRef}
-        onPointerEnter={handlePointerEnter}
-        onPointerMove={handlePointerMove}
-        onPointerLeave={handlePointerLeave}
-        style={
-          enableTilt && !reduceMotion
-            ? {
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-              }
-            : undefined
-        }
-        whileHover={enableTilt && !reduceMotion ? { scale } : {}}
+        data-slot="qr-code"
+        onClick={handleClick}
+        whileHover={reduceMotion ? undefined : { scale }}
+        whileTap={reduceMotion ? undefined : { scale: 0.96 }}
         transition={{ type: "spring", stiffness: 350, damping: 22 }}
-        className="relative flex items-center justify-center rounded-[3.8rem] p-3 cursor-pointer select-none will-change-transform"
+        className={cn(
+          "relative flex items-center justify-center overflow-hidden rounded-[2.8rem] p-7 shadow-2xl border transition-colors duration-300 cursor-pointer select-none",
+          currentTheme.cardBgLight,
+          currentTheme.cardBgDark,
+          currentTheme.borderColor,
+          className
+        )}
+        {...props}
       >
-        <motion.div
-          data-slot="qr-code"
-          onClick={handleClick}
-          whileTap={reduceMotion ? {} : { scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 380, damping: 24 }}
-          style={{ transformStyle: "preserve-3d" }}
-          className={cn(
-            "relative flex items-center justify-center overflow-hidden rounded-[3.8rem] p-7 shadow-2xl border transition-all duration-300 transform-gpu ring-1 ring-white/40 dark:ring-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]",
-            currentTheme.cardBgLight,
-            currentTheme.cardBgDark,
-            currentTheme.borderColor,
-            className
-          )}
-        >
-          {/* Floating 3D QR Matrix Grid Layer */}
-          <div
-            style={
-              enableTilt && !reduceMotion
-                ? { transform: "translateZ(24px)", transformStyle: "preserve-3d" }
-                : undefined
-            }
-            className="transition-transform duration-200 ease-out"
+        <div className="relative">
+          <svg
+            width={size}
+            height={size}
+            viewBox={`0 0 ${size} ${size}`}
+            xmlns="http://www.w3.org/2000/svg"
+            aria-label={`QR code for ${value}`}
+            className="block text-zinc-950 transition-colors dark:text-white"
           >
-            <svg
-              width={size}
-              height={size}
-              viewBox={`0 0 ${size} ${size}`}
-              xmlns="http://www.w3.org/2000/svg"
-              aria-label={`QR code for ${value}`}
-              className="block text-zinc-950 transition-colors dark:text-white"
-              {...props}
-            >
-              <rect width={size} height={size} fill={bgColor} rx="20" ry="20" />
-              {finderPositions.map(([row, col]) => {
-                const x = col * moduleSize;
-                const y = row * moduleSize;
-                return (
-                  <g key={`${row}-${col}`}>
-                    <rect
-                      x={x}
-                      y={y}
-                      width={finderSize}
-                      height={finderSize}
-                      fill={activeFgColor}
-                      rx="12"
-                      ry="12"
-                    />
-                    <rect
-                      x={x + innerPadding}
-                      y={y + innerPadding}
-                      width={innerWhiteSize}
-                      height={innerWhiteSize}
-                      className={cn(
-                        colorIndex === 0
-                          ? "fill-white dark:fill-zinc-950"
-                          : "fill-white/10 dark:fill-black/40"
-                      )}
-                      rx="8"
-                      ry="8"
-                    />
-                    <rect
-                      x={x + innerPadding * 2}
-                      y={y + innerPadding * 2}
-                      width={innerBlackSize}
-                      height={innerBlackSize}
-                      fill={activeFgColor}
-                      rx="4"
-                      ry="4"
-                    />
-                  </g>
-                );
-              })}
-              {circles.map(({ cx, cy }, index) => (
-                <circle
-                  key={`${cx}-${cy}-${index}`}
-                  cx={cx}
-                  cy={cy}
-                  r={circleRadius}
-                  fill={activeFgColor}
-                />
-              ))}
-            </svg>
-          </div>
+            <rect width={size} height={size} fill={bgColor} rx="20" ry="20" />
+            {finderPositions.map(([row, col]) => {
+              const x = col * moduleSize;
+              const y = row * moduleSize;
+              return (
+                <g key={`${row}-${col}`}>
+                  <rect
+                    x={x}
+                    y={y}
+                    width={finderSize}
+                    height={finderSize}
+                    fill={activeFgColor}
+                    rx="12"
+                    ry="12"
+                  />
+                  <rect
+                    x={x + innerPadding}
+                    y={y + innerPadding}
+                    width={innerWhiteSize}
+                    height={innerWhiteSize}
+                    className={cn(
+                      colorIndex === 0
+                        ? "fill-white dark:fill-zinc-950"
+                        : "fill-white/10 dark:fill-black/40"
+                    )}
+                    rx="8"
+                    ry="8"
+                  />
+                  <rect
+                    x={x + innerPadding * 2}
+                    y={y + innerPadding * 2}
+                    width={innerBlackSize}
+                    height={innerBlackSize}
+                    fill={activeFgColor}
+                    rx="4"
+                    ry="4"
+                  />
+                </g>
+              );
+            })}
+            {circles.map(({ cx, cy }, index) => (
+              <circle
+                key={`${cx}-${cy}-${index}`}
+                cx={cx}
+                cy={cy}
+                r={circleRadius}
+                fill={activeFgColor}
+              />
+            ))}
+          </svg>
+        </div>
 
-          {/* Central Oxygen UI Floating 3D Logo Badge */}
-          {showCenterLogo && (
+        {/* Central Oxygen UI Floating Logo Badge */}
+        {showCenterLogo && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
             <div
-              style={
-                enableTilt && !reduceMotion
-                  ? { transform: "translateZ(48px)", transformStyle: "preserve-3d" }
-                  : undefined
-              }
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none transition-transform duration-300 ease-out"
+              className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-950/95 dark:bg-zinc-950/95 p-2 shadow-2xl border border-white/40 dark:border-white/20 backdrop-blur-xl transition-transform duration-700 ease-out"
+              style={{
+                transform: `rotate(${logoRotation}deg)`,
+              }}
             >
-              <div
-                className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-950/95 dark:bg-zinc-950/95 p-2 shadow-2xl border border-white/40 dark:border-white/20 backdrop-blur-xl transition-transform duration-700 ease-out"
-                style={{
-                  transform: `rotateY(${logoRotation}deg)`,
-                  transformStyle: "preserve-3d",
-                }}
-              >
-                <div
-                  style={{ transform: "translateZ(6px)" }}
-                  className="h-full w-full flex items-center justify-center"
-                >
-                  <OxygenLogoSVG className="h-full w-full" />
-                </div>
+              <div className="h-full w-full flex items-center justify-center">
+                <OxygenLogoSVG className="h-full w-full" />
               </div>
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Apple Dynamic Specular Glare Sheen Reflection Layer */}
-          {enableTilt && spotlight && (
-            <motion.div
-              className="pointer-events-none absolute inset-0 z-20 overflow-hidden rounded-[3.8rem] transition-opacity duration-300"
-              style={{ opacity: isHovered ? 1 : 0 }}
-            >
-              <motion.div
-                className="absolute -inset-[100%] transition-transform duration-100 ease-out opacity-80 dark:opacity-60"
-                style={{
-                  background:
-                    "radial-gradient(circle at center, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.12) 35%, transparent 70%)",
-                  left: glarePosLeft,
-                  top: glarePosTop,
-                }}
-              />
-            </motion.div>
-          )}
-
-          {/* Framer Motion Liquid Glass Ripple Overlay */}
-          {ripples.map((ripple) => (
-            <motion.span
-              key={ripple.id}
-              initial={{ scale: 0.05, opacity: 0.9 }}
-              animate={{ scale: 1.6, opacity: 0 }}
-              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              onAnimationComplete={() => removeRipple(ripple.id)}
-              className="pointer-events-none absolute rounded-full backdrop-blur-xl bg-white/30 dark:bg-white/20 border-2 border-white/60 dark:border-white/40 shadow-[inset_0_0_20px_rgba(255,255,255,0.7),0_8px_32px_rgba(0,0,0,0.35)]"
-              style={{
-                width: ripple.size,
-                height: ripple.size,
-                top: ripple.y,
-                left: ripple.x,
-              }}
-            />
-          ))}
-        </motion.div>
+        {/* Liquid Glass Ripple Overlay */}
+        {ripples.map((ripple) => (
+          <motion.span
+            key={ripple.id}
+            initial={{ scale: 0.05, opacity: 0.9 }}
+            animate={{ scale: 1.6, opacity: 0 }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            onAnimationComplete={() => removeRipple(ripple.id)}
+            className="pointer-events-none absolute rounded-full backdrop-blur-xl bg-white/30 dark:bg-white/20 border-2 border-white/60 dark:border-white/40 shadow-[inset_0_0_20px_rgba(255,255,255,0.7),0_8px_32px_rgba(0,0,0,0.35)]"
+            style={{
+              width: ripple.size,
+              height: ripple.size,
+              top: ripple.y,
+              left: ripple.x,
+            }}
+          />
+        ))}
       </motion.div>
     </div>
   );

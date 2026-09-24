@@ -1,14 +1,18 @@
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import ComponentStudio from "@/components/playground/ComponentStudio";
-import { getAllSlugs, getComponentBySlug, REGISTRY } from "@/lib/registry";
+import {
+  getComponentDoc,
+  getAllComponentDocs,
+  KEPT_SLUGS,
+} from "@/lib/component-docs";
 import { componentJsonLd, componentPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-static";
 export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+  return KEPT_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -18,8 +22,19 @@ export async function generateMetadata({
 }) {
   try {
     const { slug } = await params;
+    const doc = getComponentDoc(slug);
+    if (!doc) {
+      return {
+        title: "Component Not Found | Oxygen UI",
+      };
+    }
     const href = `/components/${slug}`;
-    return componentPageMetadata(href);
+    const seo = componentPageMetadata(href);
+    return {
+      ...seo,
+      title: `${doc.title} — Component Studio | Oxygen UI`,
+      description: doc.description,
+    };
   } catch {
     return {
       title: "Component Studio | Oxygen UI",
@@ -37,8 +52,8 @@ export default async function ComponentSlugPage({
     notFound();
   }
 
-  const item = getComponentBySlug(slug);
-  if (!item) {
+  const doc = getComponentDoc(slug);
+  if (!doc) {
     notFound();
   }
 
@@ -47,7 +62,7 @@ export default async function ComponentSlugPage({
   return (
     <>
       <JsonLd data={componentJsonLd(href)} />
-      <ComponentStudio item={item} allComponents={REGISTRY} />
+      <ComponentStudio doc={doc} allDocs={getAllComponentDocs()} />
     </>
   );
 }

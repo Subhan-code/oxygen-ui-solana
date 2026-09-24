@@ -358,24 +358,6 @@
       ]
     },
     {
-      "name": "crypto-wallet-menu-sheet",
-      "type": "registry:ui",
-      "title": "Menu Sheet",
-      "description": "A light navigation menu sheet featuring search bar and Web3 ecosystem links.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "utils"
-      ],
-      "files": [
-        {
-          "path": "components/ui/crypto-wallet-menu-sheet.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "crypto-wallet-settings",
       "type": "registry:ui",
       "title": "Wallet Settings",

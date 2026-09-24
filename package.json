@@ -1,11 +1,11 @@
 {
-  "name": "my-app",
+  "name": "oxygen-ui",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx -y shadcn@latest build && next build",
-    "registry:build": "npx -y shadcn@latest build",
+    "build": "next build",
+    "registry:build": "node -e \"console.log('Registry build removed')\"",
     "start": "next start",
     "lint": "npx eslint ."
   },

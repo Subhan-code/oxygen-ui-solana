@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { UxSolButton, type UxSolButtonVariant, type UxSolButtonSize } from "@/components/uxdotsol/components/button";
 
 export default function Demo() {
-  const [selectedVariant, setSelectedVariant] = useState<UxSolButtonVariant>("destructive");
+  const [selectedVariant, setSelectedVariant] = useState<UxSolButtonVariant>("primary");
   const [size, setSize] = useState<UxSolButtonSize>("md");
 
   const variants: UxSolButtonVariant[] = [

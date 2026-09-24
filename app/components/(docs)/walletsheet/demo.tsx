@@ -35,7 +35,7 @@ export default function Demo() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="flex min-h-[420px] w-full flex-col items-center justify-center p-6 bg-zinc-950 rounded-3xl border border-zinc-800">
+    <div className="flex min-h-[360px] w-full flex-col items-center justify-center p-6">
       <div className="flex flex-col items-center gap-6 max-w-md w-full text-center">
         <div className="space-y-1.5">
           <h3 className="text-base font-bold text-zinc-100">Wallet Sheet & Popup Modal</h3>

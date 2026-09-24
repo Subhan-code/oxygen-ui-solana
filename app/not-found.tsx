@@ -3,10 +3,11 @@ import Link from "next/link";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import Footer from "@/components/Footer";
 import { fetchStarCount } from "@/lib/github";
+import { HangingLightBulb } from "@/components/ui/hanging-light-bulb";
 
 export const metadata: Metadata = {
   title: "404 — Page Not Found | Oxygen UI",
-  description: "Bruh, you're looking for something that doesn't exist.",
+  description: "This page took a wrong turn.",
 };
 
 export default async function NotFound() {
@@ -16,8 +17,13 @@ export default async function NotFound() {
     <>
       <GooeyNavbar stars={stars} />
 
-      <main className="flex min-h-[calc(100vh-140px)] w-full flex-col items-center justify-center px-4 pt-24 pb-16 text-center">
-        <div className="relative mx-auto flex max-w-md flex-col items-center">
+      <main className="relative flex min-h-[calc(100vh-140px)] w-full flex-col items-center justify-start px-4 pt-16 sm:pt-20 pb-16 text-center overflow-hidden">
+        {/* Hanging swinging light bulb animation */}
+        <div className="w-full flex justify-center mb-6 z-20">
+          <HangingLightBulb />
+        </div>
+
+        <div className="relative mx-auto flex max-w-md flex-col items-center z-10">
           {/* 404 Visual */}
           <div className="relative mb-4 flex items-center justify-center">
             <span className="font-mono text-7xl sm:text-8xl font-black tracking-tighter text-zinc-200 dark:text-zinc-800/90 select-none">
@@ -29,7 +35,7 @@ export default async function NotFound() {
           </div>
 
           <h1 className="font-runde text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Bruh, you&apos;re looking for something that doesn&apos;t exist.
+            This page took a wrong turn.
           </h1>
 
           <p className="mt-2 text-sm text-muted-foreground max-w-sm">
@@ -46,17 +52,17 @@ export default async function NotFound() {
             </Link>
 
             <Link
-              href="/components"
+              href="/sol"
               className="inline-flex items-center justify-center rounded-xl border border-black/10 dark:border-white/10 bg-zinc-100/80 dark:bg-zinc-900/80 px-4 py-2.5 text-xs font-semibold text-foreground transition-all hover:border-black/20 dark:hover:border-white/20 active:scale-95"
             >
-              Browse 56+ components
+              Browse Solana Components
             </Link>
           </div>
 
           {/* Quick links footer */}
           <div className="mt-10 pt-8 border-t border-black/5 dark:border-white/10 w-full flex items-center justify-center gap-6 text-xs text-muted-foreground">
-            <Link href="/blocks" className="hover:text-foreground transition-colors">
-              Blocks
+            <Link href="/sol" className="hover:text-foreground transition-colors">
+              Solana Components
             </Link>
             <span className="text-zinc-300 dark:text-zinc-700">•</span>
             <Link href="/docs/installation" className="hover:text-foreground transition-colors">

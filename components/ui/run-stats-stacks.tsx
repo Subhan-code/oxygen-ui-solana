@@ -40,9 +40,9 @@ export function RunStatsStacks({ className }: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={cn("flex h-[500px] w-full flex-col items-center justify-center overflow-hidden select-none", className)}>
+    <div className={cn("relative flex h-[340px] w-full flex-col items-center justify-center select-none font-runde", className)}>
       <div
-        className="relative flex h-full w-full flex-col items-center justify-center cursor-pointer"
+        className="relative flex h-full w-full items-center justify-center cursor-pointer"
         style={{
           perspective: "1000px",
         }}
@@ -59,20 +59,20 @@ export function RunStatsStacks({ className }: { className?: string }) {
               }}
               variants={{
                 open: {
-                  y: i * (CARD_HEIGHT + GAP),
+                  y: (i - 1.5) * (CARD_HEIGHT + GAP),
                   z: 0,
-                  top: `20%`,
+                  opacity: 1,
                 },
                 closed: {
-                  y: i * 10,
-                  z: i * 40,
-                  top: `45%`,
+                  y: (i - 1.5) * 10,
+                  z: i * 35,
+                  opacity: 1,
                 },
               }}
               transition={{
                 type: "spring",
-                stiffness: 200,
-                damping: 30,
+                stiffness: 220,
+                damping: 26,
               }}
             >
               <div className="flex justify-between text-[13px] items-center h-full">

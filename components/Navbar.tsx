@@ -8,8 +8,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { label: "Components", href: "/components" },
-  { label: "Blocks", href: "/blocks" },
+  { label: "Solana Components", href: "/sol" },
   { label: "Sponsors", href: "/#sponsors" },
 ];
 

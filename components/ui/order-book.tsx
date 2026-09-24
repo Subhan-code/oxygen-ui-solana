@@ -73,7 +73,7 @@ const OrderBook = ({ bids, asks, className }: OrderBookProps) => {
           return (
             <div key={`ask-${ask.price}`} className="relative">
               <div
-                className="absolute right-0 top-0 bottom-0 bg-red-400/10"
+                className="absolute right-0 top-0 bottom-0 bg-red-400/10 transition-[width] duration-300 ease-out"
                 style={{ width: `${depth}%` }}
               />
               <div className="relative grid grid-cols-3 px-3 py-1 text-xs">
@@ -113,7 +113,7 @@ const OrderBook = ({ bids, asks, className }: OrderBookProps) => {
           return (
             <div key={`bid-${bid.price}`} className="relative">
               <div
-                className="absolute right-0 top-0 bottom-0 bg-emerald-500/10"
+                className="absolute right-0 top-0 bottom-0 bg-emerald-500/10 transition-[width] duration-300 ease-out"
                 style={{ width: `${depth}%` }}
               />
               <div className="relative grid grid-cols-3 px-3 py-1 text-xs">

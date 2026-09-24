@@ -1,309 +1,224 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useIsomorphicLayoutEffect,
-  useReducedMotion,
-} from "motion/react";
+import React, { useMemo } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
+import {
+  SolanaSvg,
+  BitcoinSvg,
+  EthereumSvg,
+  UsdcSvg,
+  DogecoinSvg,
+} from "./token-svgs";
 
-const SLOT = { type: "spring", stiffness: 520, damping: 34, mass: 0.45 } as const;
-const FADE = { duration: 0.24, ease: [0.23, 1, 0.32, 1] } as const;
-const INSTANT = { duration: 0 } as const;
-
-export type PresencePerson = {
+export interface PresencePerson {
   id: string;
   name: string;
+  symbol?: string;
   src?: string;
-};
-
-export type UsePresenceOptions = {
-  people: PresencePerson[];
-  max?: number;
-  announceAfter?: number;
-};
-
-export type UsePresenceResult = {
-  ordered: PresencePerson[];
-  visible: PresencePerson[];
-  hidden: PresencePerson[];
-  overflow: number;
-  total: number;
-  summary: string;
-  announcement: string;
-};
-
-function initials(name: string): string {
-  const words = name.trim().split(/\s+/).filter(Boolean);
-  if (words.length === 0) return "?";
-  const first = Array.from(words[0])[0] ?? "";
-  const last = words.length > 1 ? (Array.from(words[words.length - 1])[0] ?? "") : "";
-  return (first + last).toUpperCase();
+  icon?: React.ReactNode;
+  online?: boolean;
+  value?: string;
+  allocation?: string;
 }
 
-function describe(names: string[]): string {
-  if (names.length === 0) return "Nobody here";
-  if (names.length === 1) return `${names[0]} is here`;
-  if (names.length === 2) return `${names[0]} and ${names[1]} are here`;
-  const rest = names.length - 2;
-  return `${names[0]}, ${names[1]} and ${rest} ${rest === 1 ? "other" : "others"} are here`;
-}
+export type PortfolioAsset = PresencePerson;
 
-export function usePresence({
-  people,
-  max = 5,
-  announceAfter = 900,
-}: UsePresenceOptions): UsePresenceResult {
-  const seen = useRef(new Map<string, number>());
-  const next = useRef(0);
-
-  const ordered = useMemo(() => {
-    const order = seen.current;
-    for (const person of people) {
-      if (!order.has(person.id)) {
-        order.set(person.id, next.current);
-        next.current += 1;
-      }
-    }
-    return people
-      .slice()
-      .sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));
-  }, [people]);
-
-  const slots = Math.max(1, max);
-  const visible = ordered.slice(0, slots);
-  const hidden = ordered.slice(slots);
-  const summary = describe(ordered.map((person) => person.name));
-
-  const [announcement, setAnnouncement] = useState(summary);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setAnnouncement(summary), announceAfter);
-    return () => clearTimeout(timer);
-  }, [summary, announceAfter]);
-
-  return {
-    ordered,
-    visible,
-    hidden,
-    overflow: hidden.length,
-    total: ordered.length,
-    summary,
-    announcement,
-  };
-}
-
-const TILE =
-  "absolute left-0 top-0 select-none rounded-xl bg-zinc-200 p-[3px] dark:bg-zinc-800 shadow-xs";
-const WELL =
-  "relative grid size-full place-items-center overflow-hidden rounded-lg bg-zinc-100 font-bold leading-none text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300";
-
-type TileProps = {
-  person: PresencePerson;
-  index: number;
-  step: number;
-  size: number;
-  zIndex: number;
-  reduced: boolean;
-};
-
-type FaceStatus = "loading" | "ready" | "error";
-
-function useFace(src?: string) {
-  const ref = useRef<HTMLImageElement>(null);
-  const [state, setState] = useState<{ status: FaceStatus; instant: boolean }>({
-    status: "loading",
-    instant: false,
-  });
-
-  useIsomorphicLayoutEffect(() => {
-    const img = ref.current;
-
-    const set = (status: FaceStatus, instant: boolean) =>
-      setState((prev) =>
-        prev.status === status && prev.instant === instant
-          ? prev
-          : { status, instant }
-      );
-
-    if (!img || !src) {
-      set("loading", false);
-      return;
-    }
-
-    const cached = img.complete && img.naturalWidth > 0;
-    if (img.complete) {
-      set(cached ? "ready" : "error", cached);
-      return;
-    }
-
-    set("loading", false);
-
-    let alive = true;
-    const onLoad = () => {
-      if (alive) set("ready", false);
-    };
-    const onError = () => {
-      if (alive) set("error", false);
-    };
-
-    img.addEventListener("load", onLoad);
-    img.addEventListener("error", onError);
-
-    return () => {
-      alive = false;
-      img.removeEventListener("load", onLoad);
-      img.removeEventListener("error", onError);
-    };
-  }, [src]);
-
-  return { ref, status: state.status, instant: state.instant };
-}
-
-function PresenceTile({ person, index, step, size, zIndex, reduced }: TileProps) {
-  const { ref, status, instant } = useFace(person.src);
-
-  return (
-    <motion.span
-      aria-hidden
-      initial={{ opacity: 0, scale: 0.86, x: index * step }}
-      animate={{ opacity: 1, scale: 1, x: index * step }}
-      exit={{ opacity: 0, scale: 0.86 }}
-      transition={reduced ? INSTANT : SLOT}
-      style={{ width: size, height: size, zIndex, fontSize: Math.round(size * 0.35) }}
-      className={TILE}
-    >
-      <span className={WELL}>
-        {initials(person.name)}
-
-        {person.src ? (
-          <motion.img
-            ref={ref}
-            src={person.src}
-            alt=""
-            width={size}
-            height={size}
-            decoding="async"
-            initial={false}
-            animate={{ opacity: status === "ready" ? 1 : 0 }}
-            transition={reduced || instant ? INSTANT : FADE}
-            className="absolute inset-0 size-full object-cover rounded-lg"
-          />
-        ) : null}
-      </span>
-    </motion.span>
-  );
-}
-
-export type PresenceAvatarsProps = {
-  people: PresencePerson[];
+export interface PresenceAvatarsProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  people?: PresencePerson[];
+  assets?: PresencePerson[];
+  count?: number;
   max?: number;
   size?: number;
   overlap?: number;
   label?: string;
-  announceAfter?: number;
   onOverflowSelect?: (hidden: PresencePerson[]) => void;
-  className?: string;
-};
+}
+
+export const DEFAULT_CRYPTO_ASSETS: PresencePerson[] = [
+  {
+    id: "sol",
+    name: "Solana",
+    symbol: "SOL",
+    icon: <SolanaSvg className="size-full" />,
+    online: true,
+    value: "$142.50",
+    allocation: "45%",
+  },
+  {
+    id: "btc",
+    name: "Bitcoin",
+    symbol: "BTC",
+    icon: <BitcoinSvg className="size-full" />,
+    online: true,
+    value: "$64,280",
+    allocation: "30%",
+  },
+  {
+    id: "eth",
+    name: "Ethereum",
+    symbol: "ETH",
+    icon: <EthereumSvg className="size-full" />,
+    online: true,
+    value: "$3,450",
+    allocation: "15%",
+  },
+  {
+    id: "usdc",
+    name: "USD Coin",
+    symbol: "USDC",
+    icon: <UsdcSvg className="size-full" />,
+    online: true,
+    value: "$1.00",
+    allocation: "8%",
+  },
+  {
+    id: "doge",
+    name: "Dogecoin",
+    symbol: "DOGE",
+    icon: <DogecoinSvg className="size-full" />,
+    online: false,
+    value: "$0.14",
+    allocation: "2%",
+  },
+];
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  const first = parts[0][0] ?? "";
+  const last = parts.length > 1 ? parts[parts.length - 1][0] ?? "" : "";
+  return (first + last).toUpperCase();
+}
 
 export function PresenceAvatars({
   people,
+  assets,
+  count,
   max = 5,
-  size = 32,
+  size = 36,
   overlap = 10,
-  label = "People here",
-  announceAfter,
+  label = "Portfolio assets",
   onOverflowSelect,
-  className = "",
+  className,
+  ...props
 }: PresenceAvatarsProps) {
-  const reduced = useReducedMotion();
-  const { ordered, visible, hidden, overflow, announcement } = usePresence({
-    people,
-    max,
-    announceAfter,
-  });
+  const reduceMotion = useReducedMotion();
+  const sourceList = assets ?? people ?? DEFAULT_CRYPTO_ASSETS;
+
+  const effectiveAssets = useMemo(() => {
+    if (typeof count === "number") {
+      if (count <= sourceList.length) return sourceList.slice(0, count);
+      const generated: PresencePerson[] = [...sourceList];
+      for (let i = sourceList.length; i < count; i++) {
+        generated.push({
+          id: `token-${i}`,
+          name: `Token ${i + 1}`,
+          symbol: `TK${i + 1}`,
+          online: true,
+        });
+      }
+      return generated;
+    }
+    return sourceList;
+  }, [sourceList, count]);
 
   const slots = Math.max(1, max);
-  const step = size - overlap;
-  const chip = size + 8;
+  const visible = effectiveAssets.slice(0, slots);
+  const hidden = effectiveAssets.slice(slots);
+  const overflow = hidden.length;
 
-  const rail =
-    visible.length === 0
-      ? 0
-      : overflow > 0
-        ? visible.length * step + chip
-        : (visible.length - 1) * step + size;
+  const namesSummary = effectiveAssets.map((p) => p.symbol ?? p.name).join(", ");
 
-  const chipCount = `+${Math.min(overflow, 99)}`;
-  const chipMotion = {
-    initial: { opacity: 0, scale: 0.86 },
-    animate: { opacity: 1, scale: 1, x: visible.length * step },
-    exit: { opacity: 0, scale: 0.86 },
-    transition: reduced ? INSTANT : SLOT,
-  };
-  const chipClass =
-    "absolute left-0 top-0 grid place-items-center rounded-xl border border-zinc-200 bg-white font-mono text-xs font-bold leading-none tabular-nums text-zinc-600 outline-none ring-2 ring-white dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:ring-zinc-950 shadow-xs";
+  const transition = reduceMotion
+    ? { duration: 0 }
+    : { duration: 0.22, ease: [0.25, 0.1, 0.25, 1] as const };
 
   return (
-    <div role="group" aria-label={label} className={cn("inline-flex items-center font-sans select-none", className)}>
-      <motion.div
-        className="relative shrink-0"
-        style={{ height: size }}
-        initial={false}
-        animate={{ width: rail }}
-        transition={reduced ? INSTANT : SLOT}
-      >
-        <AnimatePresence initial={false}>
-          {visible.map((person, i) => (
-            <PresenceTile
-              key={person.id}
-              person={person}
-              index={i}
-              step={step}
-              size={size}
-              zIndex={slots - i}
-              reduced={Boolean(reduced)}
-            />
-          ))}
+    <div
+      data-slot="presence-avatars"
+      role="group"
+      aria-label={`${label}: ${namesSummary}`}
+      className={cn("inline-flex items-center select-none font-runde", className)}
+      {...props}
+    >
+      <div className="flex items-center" style={{ marginLeft: 0 }}>
+        <AnimatePresence initial={false} mode="popLayout">
+          {visible.map((asset, index) => {
+            return (
+              <motion.div
+                key={asset.id}
+                layout={!reduceMotion}
+                initial={
+                  reduceMotion
+                    ? false
+                    : { opacity: 0, x: -10, scale: 0.85 }
+                }
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={
+                  reduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, scale: 0.8, x: -10 }
+                }
+                transition={transition}
+                style={{
+                  width: size,
+                  height: size,
+                  marginLeft: index === 0 ? 0 : -overlap,
+                  zIndex: slots - index,
+                }}
+                className="relative shrink-0 rounded-full ring-2 ring-zinc-950 border border-white/[0.12] bg-zinc-900 overflow-hidden shadow-sm"
+              >
+                {/* Token / Avatar Core */}
+                <div className="size-full rounded-full overflow-hidden flex items-center justify-center bg-zinc-800 text-[11px] font-semibold text-zinc-300">
+                  {asset.icon ? (
+                    <div className="size-full flex items-center justify-center">
+                      {asset.icon}
+                    </div>
+                  ) : asset.src ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={asset.src}
+                      alt={asset.name}
+                      className="size-full object-cover rounded-full"
+                    />
+                  ) : (
+                    <span>{asset.symbol ?? getInitials(asset.name)}</span>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
 
-          {overflow > 0 &&
-            (onOverflowSelect ? (
-              <motion.button
-                key="overflow"
-                type="button"
-                onClick={() => onOverflowSelect(hidden)}
-                aria-label={`Show ${overflow} more`}
-                style={{ width: chip, height: size, zIndex: 0 }}
-                className={cn(chipClass, "hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer focus-visible:ring-2 focus-visible:ring-sky-500")}
-                {...chipMotion}
-              >
-                <span aria-hidden>{chipCount}</span>
-              </motion.button>
-            ) : (
-              <motion.span
-                key="overflow"
-                aria-hidden
-                style={{ width: chip, height: size, zIndex: 0 }}
-                className={chipClass}
-                {...chipMotion}
-              >
-                {chipCount}
-              </motion.span>
-            ))}
+          {/* Overflow +N Pill */}
+          {overflow > 0 && (
+            <motion.button
+              key="overflow-pill"
+              layout={!reduceMotion}
+              type="button"
+              onClick={() => onOverflowSelect?.(hidden)}
+              aria-label={`Show ${overflow} more assets`}
+              style={{
+                width: size,
+                height: size,
+                marginLeft: -overlap,
+                zIndex: 0,
+              }}
+              className="relative shrink-0 rounded-full ring-2 ring-zinc-950 border border-white/[0.12] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] font-semibold font-mono flex items-center justify-center transition-colors duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
+            >
+              +{overflow}
+            </motion.button>
+          )}
         </AnimatePresence>
-      </motion.div>
-      <ul className="sr-only">
-        {ordered.map((person) => (
-          <li key={person.id}>{person.name}</li>
-        ))}
-      </ul>
-      <span role="status" aria-live="polite" aria-atomic="true" className="sr-only">
-        {announcement}
+      </div>
+
+      <span className="sr-only" aria-live="polite">
+        {effectiveAssets.length} assets in portfolio: {namesSummary}
       </span>
     </div>
   );
 }
 
+export const PortfolioAssetStack = PresenceAvatars;
 export default PresenceAvatars;

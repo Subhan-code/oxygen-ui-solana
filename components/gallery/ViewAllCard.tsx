@@ -18,7 +18,7 @@ export default function ViewAllCard({
 
   return (
     <MotionLink
-      href="/components"
+      href="/sol"
       whileTap={reduceMotion ? undefined : { scale: 0.97 }}
       transition={SPRING_PRESS}
       className={cn(

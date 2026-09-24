@@ -1,148 +1,208 @@
 "use client";
 
-import React from "react";
-import { AlertCircle, CheckCircle2, Clock, ExternalLink, Loader2 } from "lucide-react";
-import { useReducedMotion } from "motion/react";
+import * as React from "react";
 import { cn } from "@/lib/utils";
 
+export type TransactionStep = "sent" | "confirming" | "finalized" | "failed";
 export type TransactionState = "finalized" | "confirmed" | "processing" | "failed";
 
 export interface SolanaTransactionStatusProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
+  extends React.HTMLAttributes<HTMLDivElement> {
   signature?: string;
+  step?: TransactionStep;
   status?: TransactionState;
   amountSol?: number;
   recipient?: string;
   slotNumber?: number;
+  className?: string;
 }
+
+const STEPS: { id: "sent" | "confirming" | "finalized"; label: string }[] = [
+  { id: "sent", label: "Sent" },
+  { id: "confirming", label: "Confirming" },
+  { id: "finalized", label: "Finalized" },
+];
+
+const truncate = (sig: string) => {
+  if (sig.length <= 10) return sig;
+  return `${sig.slice(0, 4)}...${sig.slice(-4)}`;
+};
 
 export function SolanaTransactionStatus({
   signature = "5Kz3x9vL...mP8yQ1aR",
-  status = "finalized",
-  amountSol = 1.5,
-  recipient = "9aXy...2bCd",
-  slotNumber = 284910234,
+  step,
+  status,
+  amountSol,
+  recipient,
+  slotNumber,
   className,
   ...props
 }: SolanaTransactionStatusProps) {
-  const reduceMotion = useReducedMotion();
+  const resolvedStep: TransactionStep =
+    step ??
+    (status === "processing"
+      ? "confirming"
+      : status === "confirmed"
+      ? "confirming"
+      : status ?? "sent");
 
-  const statusConfigs = {
-    finalized: {
-      label: "Finalized",
-      icon: CheckCircle2,
-      color: "text-blue-500",
-      bg: "bg-blue-500/10 border-blue-500/20",
-      animate: false,
-    },
-    confirmed: {
-      label: "Confirmed",
-      icon: CheckCircle2,
-      color: "text-blue-500",
-      bg: "bg-blue-500/10 border-blue-500/20",
-      animate: false,
-    },
-    processing: {
-      label: "Processing",
-      icon: Loader2,
-      color: "text-amber-500",
-      bg: "bg-amber-500/10 border-amber-500/20",
-      animate: true,
-    },
-    failed: {
-      label: "Failed",
-      icon: AlertCircle,
-      color: "text-rose-500",
-      bg: "bg-rose-500/10 border-rose-500/20",
-      animate: false,
-    },
+  const stepLabels: Record<TransactionStep, string> = {
+    sent: "Sent",
+    confirming: "Confirming",
+    finalized: "Finalized",
+    failed: "Failed",
   };
 
-  const config = statusConfigs[status];
-  const StatusIcon = config.icon;
+  const statusColors: Record<TransactionStep, string> = {
+    sent: "text-sky-400",
+    confirming: "text-amber-400",
+    finalized: "text-emerald-400",
+    failed: "text-rose-400",
+  };
 
+  const getStepIndex = (s: TransactionStep) => {
+    switch (s) {
+      case "sent":
+        return 0;
+      case "confirming":
+        return 1;
+      case "finalized":
+        return 2;
+      case "failed":
+        return 1;
+    }
+  };
+
+  const currentIndex = getStepIndex(resolvedStep);
   const solscanUrl = `https://solscan.io/tx/${signature}`;
+  const hasDetails = amountSol != null || recipient != null || slotNumber != null;
 
   return (
     <div
       data-slot="solana-transaction-status"
+      role="status"
       className={cn(
-        "relative flex w-full max-w-sm flex-col gap-3.5 rounded-[32px] border border-black/10 dark:border-white/10 bg-white dark:bg-black p-5 sm:p-6 shadow-2xl backdrop-blur-xl text-zinc-900 dark:text-white font-sans select-none",
+        "flex flex-col gap-4 w-full max-w-sm rounded-[24px] border border-white/[0.08] bg-zinc-950/80 p-5 text-zinc-100 backdrop-blur-xl shadow-2xl select-none font-runde",
         className
       )}
       {...props}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <div
-            className={cn(
-              "flex h-8 w-8 items-center justify-center rounded-xl border",
-              config.bg
-            )}
-          >
-            <StatusIcon
-              className={cn(
-                "h-4 w-4",
-                config.color,
-                config.animate && !reduceMotion && "animate-spin"
-              )}
-            />
-          </div>
-          <span className="font-runde text-sm font-bold text-zinc-900 dark:text-white">
-            Solana Transaction
-          </span>
-        </div>
-
-        <span
-          className={cn(
-            "rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wide uppercase border",
-            config.bg,
-            config.color
-          )}
-        >
-          {config.label}
+        <span className="text-[15px] font-medium tracking-tight text-zinc-100">
+          Transaction
+        </span>
+        <span className={cn("text-[13px] font-medium", statusColors[resolvedStep])}>
+          {stepLabels[resolvedStep]}
         </span>
       </div>
 
-      <div className="flex flex-col gap-2 rounded-2xl bg-zinc-100/80 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/10 p-3.5">
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-runde text-zinc-500 dark:text-zinc-400">Amount</span>
-          <span className="font-mono font-bold text-zinc-900 dark:text-white">
-            {amountSol} SOL
-          </span>
-        </div>
+      <div className="flex items-start justify-between gap-2 px-1 pt-1">
+        {STEPS.map((s, idx) => {
+          const isCompleted =
+            resolvedStep === "finalized"
+              ? true
+              : resolvedStep !== "failed" && idx < currentIndex;
+          const isCurrent = idx === currentIndex;
+          const isFailed = isCurrent && resolvedStep === "failed";
 
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-runde text-zinc-500 dark:text-zinc-400">Recipient</span>
-          <span className="font-mono text-zinc-700 dark:text-zinc-300">
-            {recipient}
-          </span>
-        </div>
+          return (
+            <React.Fragment key={s.id}>
+              <div className="flex flex-col items-center gap-1.5 shrink-0 z-10">
+                <span
+                  className={cn(
+                    "size-6 rounded-full flex items-center justify-center font-mono text-[11px] font-semibold transition-colors duration-150",
+                    isFailed
+                      ? "border border-rose-500/50 bg-rose-500/15 text-rose-400"
+                      : isCompleted
+                      ? resolvedStep === "finalized"
+                        ? "border border-emerald-500/40 bg-emerald-500/15 text-emerald-400"
+                        : "border border-zinc-600 bg-zinc-800 text-zinc-200"
+                      : isCurrent
+                      ? resolvedStep === "confirming"
+                        ? "border border-amber-500/40 bg-amber-500/15 text-amber-300"
+                        : "border border-zinc-600 bg-zinc-800 text-zinc-100"
+                      : "border border-white/10 bg-white/[0.04] text-zinc-500"
+                  )}
+                  aria-hidden="true"
+                >
+                  {idx + 1}
+                </span>
+                <span
+                  className={cn(
+                    "text-[11px] font-medium transition-colors",
+                    isCurrent || isCompleted ? "text-zinc-200" : "text-zinc-500"
+                  )}
+                >
+                  {s.label}
+                </span>
+              </div>
 
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-runde text-zinc-500 dark:text-zinc-400">Slot</span>
-          <span className="font-mono text-zinc-500 dark:text-zinc-400">
-            #{slotNumber.toLocaleString()}
-          </span>
-        </div>
+              {idx < STEPS.length - 1 && (
+                <div
+                  className={cn(
+                    "h-0.5 flex-1 mt-3 transition-colors duration-150",
+                    isCompleted
+                      ? resolvedStep === "finalized"
+                        ? "bg-emerald-500/40"
+                        : "bg-zinc-600"
+                      : "bg-white/[0.08]"
+                  )}
+                  aria-hidden="true"
+                />
+              )}
+            </React.Fragment>
+          );
+        })}
       </div>
 
-      <div className="flex items-center justify-between text-xs">
-        <div className="flex items-center gap-1.5 text-zinc-400">
-          <Clock className="h-3 w-3" />
-          <span className="font-runde text-[11px]">Just now</span>
+      {hasDetails && (
+        <div className="flex flex-col gap-2 rounded-[16px] bg-white/[0.04] border border-white/[0.06] p-3 text-xs">
+          {amountSol != null && (
+            <div className="flex items-center justify-between">
+              <span className="text-zinc-400 text-[12px]">Amount</span>
+              <span className="font-mono text-[12px] font-medium text-zinc-100">
+                {amountSol} SOL
+              </span>
+            </div>
+          )}
+          {recipient != null && (
+            <div className="flex items-center justify-between">
+              <span className="text-zinc-400 text-[12px]">Recipient</span>
+              <span className="font-mono text-[11px] text-zinc-300">
+                {recipient}
+              </span>
+            </div>
+          )}
+          {slotNumber != null && (
+            <div className="flex items-center justify-between">
+              <span className="text-zinc-400 text-[12px]">Slot</span>
+              <span className="font-mono text-[11px] text-zinc-400">
+                #{slotNumber.toLocaleString()}
+              </span>
+            </div>
+          )}
         </div>
+      )}
 
+      <div className="flex items-center justify-between pt-1 border-t border-white/[0.06] text-[11px]">
+        <span
+          title={signature}
+          className="font-mono text-zinc-500 truncate max-w-[200px]"
+        >
+          {truncate(signature)}
+        </span>
         <a
           href={solscanUrl}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1 font-mono text-[11px] font-semibold text-sky-500 hover:underline dark:text-sky-400"
+          aria-label="View transaction on Solscan"
+          className="font-medium text-sky-400 hover:text-sky-300 hover:underline transition-colors"
         >
-          <span>{signature}</span>
-          <ExternalLink className="h-3 w-3" />
+          View
         </a>
       </div>
     </div>
   );
 }
+
+export default SolanaTransactionStatus;

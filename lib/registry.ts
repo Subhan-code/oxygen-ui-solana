@@ -364,21 +364,6 @@ export const REGISTRY: RegistryItem[] = [
     href: "/components/cryptowalletmain"
   },
   {
-    id: "52",
-    slug: "cryptowalletmenusheet",
-    title: "Crypto Wallet Menu Sheet",
-    group: "Wallet & Identity",
-    name: "Crypto Wallet Menu Sheet",
-    category: "Wallet & Identity",
-    registry: "Wallet & Identity",
-    file: "components/ui/crypto-wallet-menu-sheet.tsx",
-    description: "High performance Apple-styled Crypto Wallet Menu Sheet component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/crypto-wallet-menu-sheet.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { CryptoWalletMenuSheet } from "@/components/ui/crypto-wallet-menu-sheet.tsx"`,
-    href: "/components/cryptowalletmenusheet"
-  },
-  {
     id: "53",
     slug: "cryptowalletsettings",
     title: "Crypto Wallet Settings",
@@ -702,21 +687,6 @@ export const REGISTRY: RegistryItem[] = [
     href: "/components/positiontable"
   },
   {
-    id: "101",
-    slug: "pricechart",
-    title: "Price Chart",
-    group: "Charts & Metrics",
-    name: "Price Chart",
-    category: "Charts & Metrics",
-    registry: "Charts & Metrics",
-    file: "components/ui/price-chart.tsx",
-    description: "High performance Apple-styled Price Chart component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/price-chart.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { PriceChart } from "@/components/ui/price-chart.tsx"`,
-    href: "/components/pricechart"
-  },
-  {
     id: "102",
     slug: "priceticker",
     title: "Price Ticker",
@@ -900,21 +870,6 @@ export const REGISTRY: RegistryItem[] = [
     usage: `import { SolanaNftCard } from "@/components/ui/solana-nft-card.tsx"`,
     href: "/components/solananftcard"
   },
-  {
-    id: "122",
-    slug: "solanapaybutton",
-    title: "Solana Pay Button",
-    group: "Buttons, Actions & Menus",
-    name: "Solana Pay Button",
-    category: "Buttons, Actions & Menus",
-    registry: "Buttons, Actions & Menus",
-    file: "components/ui/solana-pay-button.tsx",
-    description: "High performance Apple-styled Solana Pay Button component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/solana-pay-button.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { SolanaPayButton } from "@/components/ui/solana-pay-button.tsx"`,
-    href: "/components/solanapaybutton"
-  },
 
   {
     id: "124",
@@ -1038,21 +993,6 @@ export const REGISTRY: RegistryItem[] = [
     href: "/components/successcheck"
   },
 
-  {
-    id: "136",
-    slug: "timeline",
-    title: "Timeline",
-    group: "Engagement & Gamification",
-    name: "Timeline",
-    category: "Engagement & Gamification",
-    registry: "Engagement & Gamification",
-    file: "components/ui/timeline.tsx",
-    description: "High performance Apple-styled Timeline component for Solana & Web3 applications.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/timeline.tsx`,
-    interaction: "Interactive component preview.",
-    usage: `import { Timeline } from "@/components/ui/timeline.tsx"`,
-    href: "/components/timeline"
-  },
   {
     id: "138",
     slug: "togglepill",
@@ -1347,21 +1287,6 @@ export const REGISTRY: RegistryItem[] = [
     href: "/components/drawcheckbox"
   },
   {
-    id: "177",
-    slug: "multiplestatebutton",
-    title: "Multi-State Action Button",
-    group: "Buttons, Actions & Menus",
-    name: "Multi-State Action Button",
-    category: "Buttons, Actions & Menus",
-    registry: "Buttons, Actions & Menus",
-    file: "components/ui/multiple-state-button.tsx",
-    description: "A security action button with fluid state machine transitions between idle, loading signatures, and success verification states.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/multiple-state-button.tsx`,
-    interaction: "Click the button to trigger the signature broadcast and vault verification cycle.",
-    usage: `import { MultipleStateButton } from "@/components/ui/multiple-state-button"`,
-    href: "/components/multiplestatebutton"
-  },
-  {
     id: "182",
     slug: "metrics01",
     title: "Metrics 01",
@@ -1422,21 +1347,6 @@ export const REGISTRY: RegistryItem[] = [
     interaction: "Interactive SVG badges with size and color variants.",
     usage: `import { VerificationBadge, VerificationBadges } from "@/components/ui/verification-badge"`,
     href: "/components/verificationbadges"
-  },
-  {
-    id: "192",
-    slug: "floatinglabel",
-    title: "Floating Label Input",
-    group: "Special",
-    name: "Floating Label Input",
-    category: "Special",
-    registry: "Special",
-    file: "components/ui/floating-label.tsx",
-    description: "Input where label makes room smoothly above the field instead of disappearing, featuring spring lift physics, max length counter, and invalid state styling.",
-    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/floating-label.tsx`,
-    interaction: "Interactive spring floating label on focus and text entry.",
-    usage: `import { FloatingLabelInput } from "@/components/ui/floating-label"`,
-    href: "/components/floatinglabel"
   },
   {
     id: "193",
@@ -1507,10 +1417,10 @@ export const REGISTRY: RegistryItem[] = [
     category: "Special",
     registry: "Special",
     file: "components/ui/presence-avatars.tsx",
-    description: "Dynamic presence avatar stack where joining and leaving users trigger real-time spring layout transitions, automatic initials fallback, and overflow counters.",
+    description: "Dynamic crypto portfolio asset stack where adding holdings triggers spring layout transitions, automatic token logos, and live pulse indicators.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/presence-avatars.tsx`,
-    interaction: "Interactive presence join/leave spring animations and overflow selection.",
-    usage: `import { PresenceAvatars, usePresence } from "@/components/ui/presence-avatars"`,
+    interaction: "Interactive portfolio asset expansion with spring transitions and overflow selection.",
+    usage: `import { PresenceAvatars, PortfolioAssetStack } from "@/components/ui/presence-avatars"`,
     href: "/components/presenceavatars"
   },
   {

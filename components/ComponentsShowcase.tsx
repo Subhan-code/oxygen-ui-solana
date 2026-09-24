@@ -391,7 +391,7 @@ export default function ComponentsShowcase() {
         {/* centralized bottom link */}
         <div className="mt-12 flex justify-center">
           <Link
-            href="/components"
+            href="/sol"
             className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-zinc-950 font-bold text-xs sm:text-sm hover:bg-zinc-200 transition-all shadow-xl hover:shadow-2xl active:scale-95"
           >
             <span>Browse all 60+ Solana primitives</span>

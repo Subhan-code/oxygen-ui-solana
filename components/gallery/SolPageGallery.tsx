@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
-import { X, Search } from "lucide-react";
-import type { ComponentItem } from "@/lib/components";
+import { Search, X } from "lucide-react";
+import {
+  getSolCatalogMergedCategories,
+  type SolResolvedItem,
+  type SolResolvedCategory,
+} from "@/lib/sol-catalog";
 import LiveComponentPreview from "./LiveComponentPreview";
 import PreviewVideo from "./PreviewVideo";
 import { cn } from "@/lib/utils";
 
-export interface ComponentsGalleryProps {
-  items: ComponentItem[];
-}
-
-function BlockCard({ item }: { item: ComponentItem }) {
+function CatalogCard({ item }: { item: SolResolvedItem }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -44,21 +44,30 @@ function BlockCard({ item }: { item: ComponentItem }) {
         </div>
       </div>
 
-      <Link
-        href={item.href}
-        className="text-[11px] font-normal text-zinc-400 hover:text-zinc-200 group-hover:text-zinc-200 transition-colors truncate px-0.5 outline-none focus-visible:underline"
-      >
-        {item.title || item.name}
-      </Link>
+      <div className="flex items-center justify-between gap-1.5 px-0.5">
+        <Link
+          href={item.href}
+          className="text-[11px] font-normal text-zinc-400 hover:text-zinc-200 group-hover:text-zinc-200 transition-colors truncate outline-none focus-visible:underline"
+        >
+          {item.title || item.name}
+        </Link>
+
+        {item.ships && (
+          <span className="text-[10px] font-mono text-zinc-500 truncate shrink-0 max-w-[45%] text-right">
+            {item.ships}
+          </span>
+        )}
+      </div>
     </div>
   );
 }
 
-export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
+export default function SolPageGallery() {
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // keyboard shortcut listener
+  const rawCategories = useMemo(() => getSolCatalogMergedCategories(), []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
@@ -77,29 +86,44 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const filteredItems = useMemo(() => {
+  const filteredCategories = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
-    if (!q) return items;
-    return items.filter(
-      (item) =>
-        item.name.toLowerCase().includes(q) ||
-        item.title.toLowerCase().includes(q) ||
-        item.description.toLowerCase().includes(q) ||
-        item.slug.toLowerCase().includes(q) ||
-        (item.group && item.group.toLowerCase().includes(q))
-    );
-  }, [items, searchQuery]);
+
+    return rawCategories
+      .map((cat) => {
+        const matchingItems = cat.items.filter((item) => {
+          const matchesQuery =
+            !q ||
+            item.name.toLowerCase().includes(q) ||
+            item.title.toLowerCase().includes(q) ||
+            item.description.toLowerCase().includes(q) ||
+            item.slug.toLowerCase().includes(q) ||
+            (item.ships && item.ships.toLowerCase().includes(q));
+
+          return Boolean(matchesQuery);
+        });
+
+        if (matchingItems.length === 0) return null;
+        return {
+          id: cat.id,
+          name: cat.name,
+          items: matchingItems,
+        };
+      })
+      .filter((cat): cat is SolResolvedCategory => cat !== null);
+  }, [rawCategories, searchQuery]);
 
   return (
-    <div className="w-full flex flex-col gap-10" suppressHydrationWarning>
+    <div className="w-full flex flex-col gap-8 sm:gap-10" suppressHydrationWarning>
       {/* header stack */}
       <div className="flex flex-col gap-3 items-center text-center max-w-2xl mx-auto">
+
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white font-runde">
-          Turnkey Solana Application Blocks
+          Solana Components
         </h1>
 
         <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-lg">
-          Full-stack layouts ready to ship: wallet connection drawers, perpetual DEX order forms, token swap widgets, and real-time activity feeds.
+          Curated Solana components and composite application blocks for dApp engineering.
         </p>
 
         {/* search filter */}
@@ -108,7 +132,7 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
           <input
             ref={searchInputRef}
             type="text"
-            placeholder="Search Solana blocks (Press / or ⌘K)..."
+            placeholder="Search Solana components (Press / or ⌘K)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full h-10 pl-10 pr-9 rounded-xl bg-zinc-900/80 border border-white/10 text-xs text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-sky-500/50"
@@ -117,7 +141,7 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white cursor-pointer"
             >
               <X className="size-3.5" />
             </button>
@@ -125,21 +149,45 @@ export default function ComponentsGallery({ items }: ComponentsGalleryProps) {
         </div>
       </div>
 
-      {/* divider */}
       <div role="separator" aria-orientation="horizontal" className="h-px w-full bg-white/10" />
 
-      {/* all blocks in one unified grid */}
-      <div>
-        {filteredItems.length === 0 ? (
+      {/* category sections */}
+      <div className="flex flex-col gap-8 sm:gap-10">
+        {filteredCategories.length === 0 ? (
           <div className="py-16 text-center text-xs text-zinc-400">
-            No blocks match &ldquo;{searchQuery}&rdquo;.
+            No items match &ldquo;{searchQuery}&rdquo;.
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 pb-12">
-            {filteredItems.map((item) => (
-              <BlockCard key={item.slug} item={item} />
-            ))}
-          </div>
+          filteredCategories.map((cat, index) => (
+            <React.Fragment key={cat.id}>
+              {index > 0 && (
+                <div
+                  role="separator"
+                  aria-orientation="horizontal"
+                  className="h-px w-full bg-white/10"
+                />
+              )}
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xs sm:text-sm font-semibold tracking-wide text-zinc-300 uppercase font-runde">
+                    {cat.name} ({cat.items.length})
+                  </h2>
+                  <span className="text-[11px] font-mono text-zinc-500">
+                    [{cat.items.length}]
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                  {cat.items.map((item) => (
+                    <CatalogCard
+                      key={`${cat.id}-${item.slug}`}
+                      item={item}
+                    />
+                  ))}
+                </div>
+              </div>
+            </React.Fragment>
+          ))
         )}
       </div>
     </div>
