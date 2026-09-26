@@ -114,6 +114,11 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: ["/ogimage.webp"],
   },
+  verification: {
+    other: {
+      "dmca-site-verification": "d2xxWFFmektvUkxyYWNwaW84dTNjQT090",
+    },
+  },
 };
 
 export default function RootLayout({

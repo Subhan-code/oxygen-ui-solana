@@ -1,9 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
-import { Check, Zap, ShieldCheck, Cpu } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { Check, Zap, ShieldCheck, Cpu, Radio } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const DEFAULT_STEP_ICONS = [
+  { icon: Zap, bg: "bg-blue-500 text-white" },
+  { icon: ShieldCheck, bg: "bg-sky-400 text-white" },
+  { icon: Cpu, bg: "bg-zinc-100 text-zinc-900" },
+  { icon: Radio, bg: "bg-indigo-500 text-white" },
+  { icon: Check, bg: "bg-emerald-400 text-zinc-950" },
+];
 
 export interface StepTrackerWidgetProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> {
@@ -34,6 +42,12 @@ export function StepTrackerWidget({
     setCurrentStep(stepIndex + 1);
   };
 
+  const visibleCount = Math.min(Math.max(currentStep, 0), totalSteps);
+  const visibleIcons = Array.from({ length: visibleCount }).map((_, idx) => ({
+    ...DEFAULT_STEP_ICONS[idx % DEFAULT_STEP_ICONS.length],
+    id: idx,
+  }));
+
   return (
     <motion.div
       data-slot="step-tracker-widget"
@@ -41,7 +55,7 @@ export function StepTrackerWidget({
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 350, damping: 25 }}
       className={cn(
-        "mx-auto w-full max-w-sm rounded-3xl bg-zinc-950 p-6 text-white shadow-2xl border border-zinc-800/80 font-sans select-none",
+        "mx-auto w-full max-w-sm rounded-3xl bg-zinc-950 p-6 text-white border border-zinc-800/80 font-sans select-none",
         className
       )}
       {...props}
@@ -49,15 +63,28 @@ export function StepTrackerWidget({
       <div className="flex items-center justify-between pb-6">
         <h3 className="text-xl font-bold tracking-tight">{title}</h3>
         <div className="flex items-center -space-x-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white shadow-md border-2 border-zinc-950 z-30">
-            <Zap className="h-4 w-4" />
-          </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-400 text-white shadow-md border-2 border-zinc-950 z-20">
-            <ShieldCheck className="h-4 w-4" />
-          </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 shadow-md border-2 border-zinc-950 z-10 font-bold text-xs">
-            <Cpu className="h-4 w-4" />
-          </div>
+          <AnimatePresence initial={false}>
+            {visibleIcons.map((item) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.id}
+                  layout
+                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.4, x: -6 }}
+                  animate={reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, x: 0 }}
+                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.4, x: -6 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  style={{ zIndex: 40 - item.id }}
+                  className={cn(
+                    "flex h-8 w-8 items-center justify-center rounded-full border-2 border-zinc-950 font-bold text-xs shrink-0",
+                    item.bg
+                  )}
+                >
+                  <Icon className="h-4 w-4" />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </div>
 
@@ -79,7 +106,19 @@ export function StepTrackerWidget({
                     : "border-2 border-blue-900 bg-zinc-950 text-blue-900 hover:border-blue-700"
                 )}
               >
-                {isCompleted && <Check className="h-5 w-5 stroke-[3]" />}
+                <AnimatePresence>
+                  {isCompleted && (
+                    <motion.span
+                      initial={reduceMotion ? { opacity: 0 } : { scale: 0, opacity: 0 }}
+                      animate={reduceMotion ? { opacity: 1 } : { scale: 1, opacity: 1 }}
+                      exit={reduceMotion ? { opacity: 0 } : { scale: 0, opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 450, damping: 25 }}
+                      className="flex items-center justify-center"
+                    >
+                      <Check className="h-5 w-5 stroke-[3]" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </motion.button>
 
               {!isLast && (
