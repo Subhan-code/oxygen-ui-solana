@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import Link from "next/link";
+import Script from "next/script";
 
 const GITHUB_URL = "https://github.com/Subhan-code/oxygen-ui-solana";
 const X_URL = "https://x.com/SubhanHQ";
@@ -151,9 +152,9 @@ export default function Footer() {
           suppressHydrationWarning
         >
           <span suppressHydrationWarning>
-            Oxygen-UI &copy; {new Date().getFullYear()} — Open Source
+            Oxygen-UI &copy; {new Date().getFullYear()} : Open Source
           </span>
-          <span className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             {UTILITY_LINKS.map((link, index) => (
               <Fragment key={link.href}>
                 {index > 0 && (
@@ -169,7 +170,28 @@ export default function Footer() {
                 </a>
               </Fragment>
             ))}
-          </span>
+            <span aria-hidden="true" className="text-white/20">
+              &middot;
+            </span>
+            <a
+              href="//www.dmca.com/Protection/Status.aspx?ID=405f3e52-7257-4694-940f-02dc2318328d"
+              title="DMCA.com Protection Status"
+              className="dmca-badge inline-flex items-center opacity-70 transition-opacity hover:opacity-100"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.dmca.com/Badges/dmca-badge-w100-5x1-01.png?ID=405f3e52-7257-4694-940f-02dc2318328d"
+                alt="DMCA.com Protection Status"
+                className="h-5 w-auto"
+              />
+            </a>
+            <Script
+              src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"
+              strategy="lazyOnload"
+            />
+          </div>
         </div>
       </div>
     </footer>
