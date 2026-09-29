@@ -174,16 +174,18 @@ export default function Footer() {
               &middot;
             </span>
             <a
-              href="//www.dmca.com/Protection/Status.aspx?ID=405f3e52-7257-4694-940f-02dc2318328d"
+              href="https://www.dmca.com/r/399lpkd"
               title="DMCA.com Protection Status"
               className="dmca-badge inline-flex items-center opacity-70 transition-opacity hover:opacity-100"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.dmca.com/Badges/dmca-badge-w100-5x1-01.png?ID=405f3e52-7257-4694-940f-02dc2318328d"
+                src="https://images.dmca.com/Badges/dmca-badge-w100-5x1-01.png?ID=7600d232-443a-4873-be41-520304f8931b"
                 alt="DMCA.com Protection Status"
+                width={100}
+                height={20}
                 className="h-5 w-auto"
               />
             </a>

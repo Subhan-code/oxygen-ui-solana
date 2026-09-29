@@ -9,6 +9,7 @@ import FeatureCardsSection from "@/components/FeatureCardsSection";
 import ProjectIntroSection from "@/components/ProjectIntroSection";
 import ComponentMarqueeSection from "@/components/ComponentMarqueeSection";
 import ScrollReveal from "@/components/ScrollReveal";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -24,15 +25,26 @@ export const metadata: Metadata = {
     title: "Oxygen UI — Open Source Solana React Components",
     description:
       "Production-grade React primitives you own: wallet surfaces, swap terminals, dynamic charts, and transaction flows for Solana dApps.",
-    url: "/",
-    images: ["/ogimage.webp"],
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: "en_US",
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1486,
+        height: 867,
+        alt: "Oxygen UI — Open source Solana React components",
+        type: "image/png",
+      },
+    ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Oxygen UI — Open Source Solana React Components",
     description:
       "Production-grade React primitives you own: wallet surfaces, swap terminals, dynamic charts, and transaction flows for Solana dApps.",
-    images: ["/ogimage.webp"],
+    images: [`${SITE_URL}/og-image.png`],
   },
 };
 

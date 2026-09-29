@@ -68,10 +68,11 @@ export function componentPageMetadata(href: string): Metadata {
       type: "website",
       images: [
         {
-          url: "/ogimage.webp",
-          width: 2400,
-          height: 1260,
-          alt: `${item.name} - Oxygen UI Component`,
+          url: `${SITE_URL}/og-image.png`,
+          width: 1486,
+          height: 867,
+          alt: `${item.name} — Oxygen UI Component`,
+          type: "image/png",
         },
       ],
     },
@@ -79,7 +80,7 @@ export function componentPageMetadata(href: string): Metadata {
       card: "summary_large_image",
       title,
       description,
-      images: ["/ogimage.webp"],
+      images: [`${SITE_URL}/og-image.png`],
     },
   };
 }

@@ -94,16 +94,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_TAGLINE,
     description: SITE_DESCRIPTION,
-    url: "/",
+    url: SITE_URL,
     siteName: SITE_NAME,
     locale: "en_US",
     images: [
       {
-        url: "/ogimage.webp",
-        width: 2400,
-        height: 1260,
-        alt: "Oxygen UI: Open-source Solana UI library",
-        type: "image/webp",
+        url: `${SITE_URL}/og-image.png`,
+        width: 1486,
+        height: 867,
+        alt: "Oxygen UI — Open source Solana React components",
+        type: "image/png",
       },
     ],
     type: "website",
@@ -112,7 +112,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TAGLINE,
     description: SITE_DESCRIPTION,
-    images: ["/ogimage.webp"],
+    images: [`${SITE_URL}/og-image.png`],
   },
   verification: {
     other: {
